@@ -1,0 +1,207 @@
+<template>
+	<lightning-layout>
+		<lightning-layout-item padding="around-small" size="7">
+		</lightning-layout-item>
+		<!-- Search Line Items Section -->
+		<lightning-layout-item padding="around-small" size="5">
+			<div class="header-column">
+				<div class="slds-form_horizontal slds-form">
+					<div>
+						<lightning-input name="enter-search" label="" type="search" class="searchBox"
+							placeholder="Search for items.." pattern="/^[ A-Za-z0-9_@./#&+-]*$/.+"
+							onchange={handleSearchItems}>
+						</lightning-input>
+					</div>
+				</div>
+			</div>
+		</lightning-layout-item>
+	</lightning-layout>
+	<div style="overflow-x:auto;" for:each={returnOrders} for:item="order" for:index="oIndex" key={order.orderId} data-id={order.orderId}>
+		<div class="border">
+			<div class="slds-box slds-theme_shade" style="overflow-x: auto;">
+				<table class="slds-theme_shade slds-table slds-table_cell-buffer slds-table_header-hidden" aria-label="Tracking Details">
+					<tbody>
+						<tr class="slds-hint-parent" style="--lwc-spacingLarge: -0.75rem;">
+							<th data-label="Payment d" id={order.orderId}>
+								<div class="slds-truncate"><strong class="deliveryDetails">Returned </strong>On <strong></strong>
+									<strong>{order.formattedOrderDate}</strong>
+								</div>
+							</th>
+						</tr>
+						<tr class="slds-hint-parent">
+							<td data-label="Blank Line for spacing"></td>
+							<td></td>
+						</tr>
+						<tr class="slds-hint-parent" style="--lwc-spacingLarge: -0.75rem;">
+							<td data-label="Fulfillment Center">
+								<div>
+									<lightning-icon icon-name="utility:target" alternative-text="target" title="target" size="x-small"></lightning-icon>
+									&nbsp; {orderWrapper.fulfillmentService}
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table> 
+				<div class="headerButtonsClass">
+					<!-- Select All Button -->
+					<lightning-input class="selectAll" label="Select All" type="checkbox" onchange={selectall} 
+					data-index={oIndex} disabled={order.disableReceiveButton}></lightning-input>
+					<!-- Multi customer action button section -->
+					<lightning-button variant="Neutral" label="Receive" title="Receive" class="slds-var-m-left_xxx-small olReceive"
+						onclick={handleMultiReceive} data-index={oIndex} disabled={order.disableReceiveButton}>
+					</lightning-button>
+					<div style="float: right; margin-right: 15px; margin-left: auto;">
+						<div>
+							<strong> {order.orderId} </strong> | <strong> Source:</strong> {order.source}
+						</div>
+					</div>
+				</div>
+			</div>
+			<br/>
+			<div style="overflow-x: auto;">
+				<table class="slds-table slds-table_bordered" aria-describedby="refundedItems-Table">
+					<!-- Line Items headers Section -->
+					<thead>
+						<tr class="slds-line-height_reset">
+							<th class="" scope="col">
+								<div class="slds-truncate" title="Select Item"></div>
+							</th>
+							<th class="" scope="col">
+								<div class="slds-var-m-left_xx-large slds-truncate" title="Possible actions">Possible actions</div>
+							</th>
+							<th class="slds-size_1.5-of-12" scope="col">
+								<div class="slds-truncate" title="Item id">Item id</div>
+							</th>
+							<th class="slds-size_3-of-12 slds-truncate" scope="col">
+								<div class="slds-truncate" title="Item name">Item name</div>
+							</th>
+							<th class="slds-size_2-of-12" scope="col">
+								<div class="slds-truncate" title="Return reason">Return reason</div>
+							</th>
+							<th class="slds-size_2-of-12" scope="col">
+								<div class="slds-truncate ordItmStatus" title="Status">Status</div>
+							</th>
+							<th class="slds-size_2-of-12" scope="col">
+								<div class="slds-truncate slds-float_right" title="Returned qty">Returned qty</div>
+							</th>
+							<th class="slds-size_2-of-12" scope="col">
+								<div class="slds-truncate slds-float_right" title="Refunded amount">Refunded amount</div>
+							</th>
+							<th class="slds-size_2-of-12" scope="col">
+								<div class="slds-truncate slds-var-m-left_x-large" title="Return type">Return type</div>
+							</th>
+							<th class="slds-size_2-of-12" scope="col">
+								<div class="slds-truncate" title="Update user">Update user</div>
+							</th>
+							<th class="slds-size_2-of-12" scope="col">
+								<div class="slds-truncate" title="Date time received">Date time received</div>
+							</th>
+						</tr>
+					</thead>
+					<!-- Line Items details Section -->
+					<tbody>
+						<template for:each={order.orderItems} for:item="refundItm" for:index="index">
+							<tr key={refundItm.productId}>
+								<td>
+									<div class="slds-truncate slds-var-m-left_small">
+										<lightning-input data-id="toggle" data-index={index} type="checkbox"
+											id={refundItm.productId} name="input1" value={refundItm.productId}>
+										</lightning-input>
+									</div>
+								</td>
+								<!-- Individual Line Items operations buttons Section -->
+								<td>
+									<div class="slds-var-m-left_xx-large slds-truncate" style="padding-left: 10%;">
+											<lightning-button value={refundItm.productId} data-value={order.orderId} variant="brand" id={refundItm.productId}
+												label="Receive" title="Receive" disabled={refundItm.isRecieveDisabled} onclick={handleReceive}
+												class="slds-var-m-left_xxx-small liReceive" data-order-index={oIndex} data-index={index}>
+											</lightning-button>
+									</div>
+								</td>
+								<!-- Line Items details Section -->
+								<td>
+									<div class="slds-truncate"><a href={refundItm.productLink} target="_blank" rel="noopener">{refundItm.productId}</a></div>
+								</td>
+								<td>
+									<div class="slds-truncate">{refundItm.productDescription}</div>
+								</td>
+								<td>
+									<div class="slds-truncate">{refundItm.returnReason}</div>
+								</td>
+								<td>
+									<div class="slds-truncate">{refundItm.lineStatus}</div>
+								</td>
+								<td>
+									<div class="slds-float_right slds-truncate">{refundItm.quantity}</div>
+								</td>
+								<td>
+									<div class ="slds-float_right slds-truncate">
+										<template if:false={refundItm.isCreatedFromExchange}>
+											<div class ="slds-float_right">{orderWrapper.currencyISOCode}
+												<lightning-formatted-number value={refundItm.lineTotal} minimum-fraction-digits="2"></lightning-formatted-number>
+											</div>
+										</template>
+									</div>
+								</td>
+								<td>
+									<div class="slds-truncate slds-var-m-left_x-large">{refundItm.returnType}</div>
+								</td>
+								<td>
+									<div class="slds-truncate">{refundItm.receiptedUserName}</div>
+								</td>
+								<td>
+									<div class="slds-truncate">{refundItm.formattedDateTimeReceived}</div>
+								</td>
+							</tr>
+						</template>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<template if:true={orderItemsSearchNotFound}>
+		<table class="slds-table slds-table_bordered" aria-describedby="refundedItems-Table">
+			<!-- Line Items headers Section -->
+			<thead>
+				<tr class="slds-line-height_reset">
+					<th scope="col">
+						<div class="slds-truncate" title="Select Item"></div>
+					</th>
+					<th scope="col">
+						<div class="slds-var-m-left_xx-large slds-truncate" title="Possible actions">Possible actions</div>
+					</th>
+					<th scope="col">
+						<div class="slds-truncate" title="Item id">Item id</div>
+					</th>
+					<th scope="col">
+						<div class="slds-truncate" title="Item name">Item name</div>
+					</th>
+					<th scope="col">
+						<div class="slds-truncate" title="Return reason">Return reason</div>
+					</th>
+					<th scope="col">
+						<div class="slds-truncate ordItmStatus" title="Status">Status</div>
+					</th>
+					<th scope="col">
+						<div class="slds-truncate slds-float_right" title="Returned qty">Returned qty</div>
+					</th>
+					<th scope="col">
+						<div class="slds-truncate slds-float_right" title="Refunded amount">Refunded amount</div>
+					</th>
+					<th scope="col">
+						<div class="slds-truncate slds-var-m-left_x-large" title="Return type">Return type</div>
+					</th>
+					<th scope="col">
+						<div class="slds-truncate" title="Update user">Update user</div>
+					</th>
+					<th scope="col">
+						<div class="slds-truncate" title="Date time received">Date time received</div>
+					</th>
+				</tr>
+			</thead>
+			</table>
+	</template>
+	<template if:true={isReceiveClicked}>
+		<c-asdac-return-receive-cmp return-receive-list={itemsToReceive} return-order-id={returnOrderId} customer-name={customerName} onclose={handleClose}></c-asdac-return-receive-cmp>
+	</template>
+</template>

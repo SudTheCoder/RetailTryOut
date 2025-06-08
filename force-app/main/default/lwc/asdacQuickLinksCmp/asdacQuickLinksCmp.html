@@ -1,0 +1,18 @@
+<template>
+    <lightning-tabset>
+        <template lwc:if={availablelinks}>
+            <template for:each={availablelinks} for:item="category">
+                <lightning-tab key={category.metadataCategory} label={category.metadataCategory} value={category.metadataCategory} >
+                    <template for:each={category.quickLinks} for:item="link">
+                        <table key={link.Label} aria-describedby="quicklink-table">
+                            <tr>
+                                <th class="slds-p-horizontal_small slds-p-top_x-small"><a href={link.URL__c} target="_blank" rel="noopener">{link.Label}</a></th>
+                            </tr>
+                        </table>  
+                    </template>
+                </lightning-tab>
+            </template>
+        </template>        
+    </lightning-tabset>
+
+</template>

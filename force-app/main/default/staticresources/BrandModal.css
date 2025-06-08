@@ -1,0 +1,22 @@
+@media (min-width: 480px) and (max-width: 1023px) {
+    .slds-modal_small .slds-modal__container{
+        width: 408px !important;
+	min-width:408px !important;
+	margin: 0 auto;
+        --slds-c-modal-radius-border: 8px; 
+    }
+}
+
+@media (max-width: 479px) {
+    .slds-modal_small .slds-modal__container {
+        --slds-c-modal-radius-border: 8px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .slds-modal_small .slds-modal__container {
+        width: 536px !important;
+		min-width:536px !important;
+        --slds-c-modal-radius-border: 8px;
+    }
+}

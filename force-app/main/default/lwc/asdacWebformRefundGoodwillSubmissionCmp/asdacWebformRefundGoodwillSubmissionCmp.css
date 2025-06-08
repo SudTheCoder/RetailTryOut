@@ -1,0 +1,32 @@
+.webfrom-btn-brand {
+    color:white;
+}
+.order-container {    
+    border: rgb(161, 161, 161) 1px dashed;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(244, 244, 244);
+    margin-bottom: 30px;
+    width: 100%;   
+}
+.order-item-container {
+    border-radius: 4px;
+    background-color: white;
+    padding: 10px;
+    border: gray 1px dashed;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    z-index:7000;
+    position: relative;
+}
+.orders-container td {
+    vertical-align: top;
+}
+:host {  
+    --slds-c-input-color-border:var(--sds-c-input-color-border, var(--dxp-s-form-element-color-border, var(--dxp-g-neutral-3)));
+    --slds-g-color-error-base-40: var(--dxp-g-destructive);
+}
+button.slds-button[disabled]:hover {
+    background-color: #c9c7c5;
+    border: #c9c7c5;
+}

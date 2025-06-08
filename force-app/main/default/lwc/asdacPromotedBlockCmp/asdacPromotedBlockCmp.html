@@ -1,0 +1,9 @@
+<template>
+    <template if:true={isPromotedImagePresent}>
+        <div class="slds-card card-style promoted">     
+            <a href={imageLink} onclick={trackData}> 
+                <img src={url} alt={altText} width=100% />
+            </a>         
+        </div>
+   </template>
+</template>

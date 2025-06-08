@@ -1,0 +1,109 @@
+.feedbackbox {
+  background: #eef3e8;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.font-header {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.feedback-button {
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid #538316;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.custom-text {
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 24px;
+  text-align: center;
+  color: #538316;
+}
+
+.feedbacktext {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  color: #3d3d3d;
+}
+
+.feedbackresult {
+  align-items: center;
+  padding: 40px 0px;
+  gap: 10px;
+  background: #f6f6f6;
+}
+
+.chip-button {
+  align-items: center;
+  padding: 7px 8px;
+  gap: 4px;
+  height: 32px;
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 50px;
+  --slds-c-button-brand-color-background-active: #f1f7e6;
+  --slds-c-button-color-background-active: #f1f7e6;
+}
+
+.chip-text {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  color: #3d3d3d;
+}
+
+.feedbacklabel {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #3d3d3d;
+  text-align: left;
+  padding: 16px;
+}
+
+.cta-title {
+  font-size: 1.375rem;
+  font-weight: 600;
+  line-height: 1.75rem;
+  letter-spacing: 0em;
+  text-align: left;
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+.button-brand {
+  --sds-c-button-line-height: 24px;
+  --sds-c-button-brand-text-color: #ffffff;
+  --dxp-s-button-font-weight: 900;
+  --dxp-s-button-font-size: 19px;
+  --dxp-s-button-letter-spacing: 0.002em;
+}
+
+.button:active {
+  background-color: #f1f7e6;
+}
+
+.button-grid {
+  padding: 10px;
+}

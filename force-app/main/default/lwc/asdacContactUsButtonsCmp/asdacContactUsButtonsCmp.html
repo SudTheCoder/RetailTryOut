@@ -1,0 +1,38 @@
+<template>
+  <template for:each={labels.phone.combinedData} for:item="item" for:index="index">
+  <div key={item.note}>
+   <div class={containerClass}>
+    <div if:true={showCallChannel}>
+      
+        <button class="slds-button slds-button_outline-brand cta-button" data-title={item.label} data-label ={item.number} onclick={trackData}>
+          <lightning-layout vertical-align="center">
+            <lightning-layout-item class="slds-var-p-right_medium">
+              <c-asdac-svg-utility-cmp svgname="phoneIcon"></c-asdac-svg-utility-cmp>
+            </lightning-layout-item>
+            <lightning-layout-item class={item.customCss}>
+              <div class="cta-note">{item.note}</div>
+              <div class="cta-link" onclick={callPhoneNumber}>{item.number}</div>
+              <template if:true={item.showMore}>
+              <div style="display: flex">
+                <div class="more-container" onclick={showMore}>
+                  <div class="cta-link">More</div>
+                  <lightning-icon icon-name={moreIcon} size="x-small" class="slds-var-m-left_xx-small"></lightning-icon>
+                </div>
+              </div>
+              </template>
+            </lightning-layout-item>
+          </lightning-layout>
+        </button>
+        <div if:true={item.showMore}>
+      <div if:true={more} class={moreDropdownClass}>
+        <p for:each={labels.phone.moreNotes} for:item="note" key={note}>
+          {note}
+          <br />
+        </p>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+  </template>
+</template>

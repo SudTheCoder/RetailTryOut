@@ -1,0 +1,37 @@
+<apex:component controller="ASDAC_DownloadVatReceiptController">
+    <table id="theGrid" style="width:100%; ">
+        <tbody>
+            <tr>
+                <td style="width: 25%;"> <img src="{!URLFOR($Resource.asdaLogoImg)}" width="90px" height="27px" alt="Company Logo" style="float: left;"/>
+                </td>
+                <td style="width: 30%;">
+                    <div style="text-align:right; line-height: 12px;">
+                        <apex:outputText value="{!$Label.ASDAC_VatReceiptStoreAddress}" escape="false"></apex:outputText>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <div>
+                    <span style="width: 45%; text-align: left; font-weight: bold; font-size:large;">VAT Invoice</span>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="margin-top: 20px;">
+        <span class="detailsBlock">Date: <strong>{!orderDetails.formattedVatOrderDate}</strong></span><br />
+        <span class="detailsBlock">Date invoice created: <strong>{!orderDetails.vatDate}</strong></span><br />
+        <span class="detailsBlock">ASDA VAT Registration number: <strong>{!orderDetails.vatRegistrationNumber}</strong></span><br />
+        <span class="detailsBlock">Invoice number: <strong>{!orderDetails.orderId}</strong></span><br />
+        <span class="detailsBlock">Order number: <strong>{!orderDetails.orderId}</strong></span><br />
+    </div>
+    <div style="margin-top: 8px; font-size: small;">
+        <span class="detailsBlock">
+        <apex:outputText rendered="{!NOT(orderDetails.billToContact.Name == '')}">{!orderDetails.billToContact.Name}<br /></apex:outputText>
+        <apex:outputText rendered="{!NOT(orderDetails.shipToAddress.addressLine1 == '' && orderDetails.shipToAddress.addressLine2 == '')}">{!orderDetails.shipToAddress.addressLine1} {!orderDetails.shipToAddress.addressLine2}<br /></apex:outputText>
+        <apex:outputText rendered="{!NOT(orderDetails.shipToAddress.city == '' && orderDetails.shipToAddress.state == '')}">{!orderDetails.shipToAddress.city} {!orderDetails.shipToAddress.state}<br /></apex:outputText>
+        <apex:outputText rendered="{!NOT(orderDetails.shipToAddress.zipCode == '')}">{!orderDetails.shipToAddress.zipCode}<br /></apex:outputText>
+        </span>
+    </div>    
+</apex:component>

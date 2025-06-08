@@ -1,0 +1,32 @@
+<template>
+  
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </template>
+     
+    <lightning-record-edit-form object-api-name="Case" onkeypress={handleEnter}>
+        
+       <lightning-layout multiple-rows>
+            <lightning-layout-item size="2" class="slds-var-p-around_medium">
+                <h1 class="search_address">{label.ASDAC_SearchYourPostcodeLabel}</h1>
+            </lightning-layout-item>
+            <lightning-layout-item size="2" class="slds-var-p-around_medium">
+                <lightning-input data-name="PostalCode__pc" value={searchedPostalCodeValue} variant="label-hidden" data-ref="postcodeLookup" class="pc-input" oninput={onPostalCodeChange} ></lightning-input>
+                <template if:true={showPostcodeError}>
+                    <div class="asdac-postcode-err slds-has-error">
+                        <span class="slds-text-color_error">Search Postcode and select address.</span>
+                    </div>
+                </template>
+            </lightning-layout-item>
+            <lightning-layout-item size="2" class="slds-var-p-around_medium">
+                <lightning-button label={label.ASDAC_SearchYourPostcodeButtonLabel} class="pc-button" variant="brand"
+                    id="button" data-ref="button" disabled={isAddressLookupButtonDisabled}></lightning-button>
+            </lightning-layout-item>
+			 <lightning-layout-item size="2" class="slds-var-p-around_medium">
+                <div id="selectContainer" data-ref="selectContainer" class="pc-select-container"></div>
+            </lightning-layout-item>
+          
+        </lightning-layout>
+    </lightning-record-edit-form>
+	
+</template>

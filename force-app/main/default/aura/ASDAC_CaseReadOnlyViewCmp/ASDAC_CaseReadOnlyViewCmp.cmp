@@ -1,0 +1,4 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="recordId" type="String"/>
+    <force:recordView recordId="{!v.recordId}" />
+</aura:component>

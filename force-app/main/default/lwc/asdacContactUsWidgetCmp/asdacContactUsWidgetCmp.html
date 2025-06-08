@@ -1,0 +1,29 @@
+<template>
+  <div class="widget-group slds-grid_align-left slds-p-around_small">
+    <lightning-layout multiple-rows>
+      <lightning-layout-item size="12" large-device-size="9">
+        <div class="slds-grid">
+          <c-asdac-svg-utility-cmp svgname="contactUS"></c-asdac-svg-utility-cmp>
+          <div class="custom-text">
+            <h3 class="label-header">{labels.subject}</h3>
+            <p class="label-description slds-p-top_small">
+              {labels.description}
+            </p>
+            <div class="slds-p-top_medium slds-size_1-of-2 slds-show_medium" onclick={trackData}>
+              <c-asdac-help-navigation-cmp page-api-name="Contact_us__c" button="true">
+                <div class="slds-button slds-button_brand slds-button_stretch custom-button">{labels.buttonLabel}
+                </div>
+              </c-asdac-help-navigation-cmp>
+            </div>
+          </div>
+        </div>
+      </lightning-layout-item>
+    </lightning-layout>
+    <div class="slds-size_1-of-1 slds-p-top_small slds-hide_medium" onclick={trackData}>
+      <c-asdac-help-navigation-cmp page-api-name="Contact_us__c" button="true">
+        <div class="slds-button slds-button_brand slds-button_stretch custom-button">{labels.buttonLabel}
+        </div>
+      </c-asdac-help-navigation-cmp>
+    </div>
+  </div>
+</template>

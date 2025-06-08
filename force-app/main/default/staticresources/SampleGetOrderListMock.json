@@ -1,0 +1,20 @@
+{
+    "totalCount": 60,
+    "count": 20,
+    "startIndex": 0,
+    "data": [
+      {
+        "customerId": "0038E00001LQpMtQAL",
+        "orderId": "AD-20220526003",
+        "orderDate": "2023-02-01T08:14:49.000+0000",
+        "updateTime": "2023-02-02T12:53:22.000+0000",
+        "sellingChannel": "GEORGE.COM",
+        "numberOfItems": 5,
+        "orderStatus": "SHIPPED",
+        "orderFulfilmentType": "DELIVERY",
+        "storeAddress": "4401-Leeds HSC",
+        "totalAmount": 20.87,
+        "deliveryDate": "2023-11-30T05:34:44.000Z"
+      }
+    ]
+  }

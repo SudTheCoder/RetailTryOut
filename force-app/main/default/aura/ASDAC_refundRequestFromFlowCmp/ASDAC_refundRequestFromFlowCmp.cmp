@@ -1,0 +1,13 @@
+<aura:component implements="force:lightningQuickAction,lightning:availableForFlowActions" controller="ASDAC_RefundRequestController">
+    <aura:attribute name="caseId" type="String" />
+    <aura:attribute name="recordsToCreate" type="String" />
+    <aura:attribute name="requestType" type="String" />
+	<aura:attribute name="totalRefundAmt" type="String" />
+    <aura:attribute name="caseCommentAction" type="String" />
+    <aura:attribute name="escalatedAmt" type="String" />
+    <aura:attribute name="ApproverList" type="String" />
+    <aura:attribute name="isCancelRequesttoStore" type="Boolean" />
+    <aura:attribute name="customerId" type="String" />
+    <aura:attribute name="actionName" type="String" />
+    <aura:attribute name="isGeorge" type="Boolean" />
+</aura:component>

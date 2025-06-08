@@ -1,0 +1,10 @@
+<template>
+  <template if:true={showHelp}>
+    <h3 class="title">Related help</h3>
+    <div class="slds-var-p-bottom_x-small">
+      <div class="slds-var-p-top_small slds-var-p-left_x-small" for:each={actions} for:item="action" key={action.label}>
+        <c-asdac-action-link-cmp label={action.label} url={action.actionValue} content-type = "faq" record-id={action.recordId}></c-asdac-action-link-cmp>
+      </div>
+    </div>
+  </template>
+</template>

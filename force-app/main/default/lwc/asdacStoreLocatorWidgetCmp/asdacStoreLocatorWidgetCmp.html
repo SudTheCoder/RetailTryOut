@@ -1,0 +1,24 @@
+<template>
+  <div class="slds-card card-style slds-p-vertical_large slds-p-horizontal_medium">
+    <lightning-layout multiple-rows>
+      <lightning-layout-item size="12" medium-device-size="6" large-device-size="12" class="layout-item-style">
+        <h3 class="title-style">{labels.title}</h3>
+        <p class="description-style slds-p-top_small slds-p-right_xx-small">{labels.description}</p>
+      </lightning-layout-item>
+      <lightning-layout-item size="12" medium-device-size="5" large-device-size="12">
+        <lightning-layout class="slds-p-top_large">
+          <lightning-layout-item>
+            <lightning-input type="text" name="searchString" class="searchString" value={searchValue}
+              variant="label-hidden" required placeholder="City, town or postcode" message-when-value-missing={ErrorMessage} onchange={handleChange} onkeypress={handleEnter}>
+            </lightning-input>
+          </lightning-layout-item>
+          <lightning-layout-item>
+            <lightning-button-icon class="slds-m-top_xx-small buttonIcon" icon-name="utility:search" size="medium"
+              onclick={handleSearch} variant="container" aria-label="submit search">
+            </lightning-button-icon>
+          </lightning-layout-item>
+        </lightning-layout>
+      </lightning-layout-item>
+    </lightning-layout>
+  </div>
+</template>

@@ -1,0 +1,22 @@
+<template>
+    <lightning-input
+      name={name}
+      class="slds-is-editing"
+      variant="label-stacked"
+      label={label}
+      files={attachments}
+      type="file"
+      multiple={multiple}
+      accept={accept}
+      required={required}
+      disabled={disabled}
+      field-level-help={helpLabel}
+      onchange={handleFileAdd}
+    ></lightning-input>
+    <div class="slds-p-bottom_x-small">{attachmentUploadDisclaimer}</div>
+    <template if:true={filePills}>
+      <div class="slds-var-p-bottom_x-small">
+        <lightning-pill-container items={filePills} onitemremove={handleFileRemove}></lightning-pill-container>
+      </div>
+    </template>
+  </template>

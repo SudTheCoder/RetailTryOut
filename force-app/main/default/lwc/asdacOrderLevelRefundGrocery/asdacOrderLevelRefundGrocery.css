@@ -1,0 +1,15 @@
+.input-wrapper {
+    position: relative;
+  }
+  
+  .icon {
+    position: absolute;
+    top: 70%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+.slds-modal__container {
+    width: 100% !important;
+}

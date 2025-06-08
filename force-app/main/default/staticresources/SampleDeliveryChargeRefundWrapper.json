@@ -1,0 +1,16 @@
+{
+        "orgId": "ASDA", 
+        "sellingChannel": "GEORGE.COM", 
+        "orderId": "ASDA-AD-FEB-887", 
+        "orderType": "SalesOrder", 
+        "shippingTax": 0.58,
+        "orderLines": [
+            {
+                "orderLineId": "1"
+            }
+        ],
+		"discount": 2.0,
+		"reason": "sample reason",
+		"notes":"sample notes"
+}
+

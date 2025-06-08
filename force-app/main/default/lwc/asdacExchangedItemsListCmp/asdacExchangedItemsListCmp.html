@@ -1,0 +1,211 @@
+<template>
+  <lightning-layout>
+    <lightning-layout-item
+      padding="around-small"
+      size="7"
+    ></lightning-layout-item>
+    <!-- Search Line Items Section -->
+    <lightning-layout-item padding="around-small" size="5">
+      <div class="header-column">
+        <div class="slds-form_horizontal slds-form">
+          <div>
+            <lightning-input
+              name="enter-search"
+              label=""
+              type="search"
+              class="searchItemCls"
+              placeholder="Search for items.."
+              pattern="/^[ A-Za-z0-9_@./#&+-]*$/.+"
+              message-when-pattern-mismatch="Special Characters not allowed"
+              onchange={handleSearchItems}
+            >
+            </lightning-input>
+          </div>
+        </div>
+      </div>
+    </lightning-layout-item>
+  </lightning-layout>
+
+	<div for:each={exchangeOrders} for:item="order" for:index="oIndex" key={order.orderId}>
+	    <div class="border">
+		<div class="slds-box slds-theme_shade" style="overflow-x: auto;" key={order.orderId}>
+			<table class="slds-theme_shade slds-table slds-table_cell-buffer slds-table_header-hidden" aria-label="Tracking Details">
+				<thead class="slds-hide">
+					<th>Exchange order</th>
+				</thead>
+				<tbody>
+					<tr class="slds-hint-parent" style="--lwc-spacingLarge: 0.25rem;">
+						<td data-label="Exchange date" id={order.orderId}>
+							<template if:true={order.isReship}>
+							<div class="slds-truncate">
+								<strong class="deliveryDetails">Reshipped</strong> On <strong>{order.formattedOrderDate}</strong>
+							</div>
+							</template>
+							<template if:false={order.isReship}>
+								<div class="slds-truncate">
+									<strong class="deliveryDetails">Exchanged</strong> On <strong>{order.formattedOrderDate}</strong>
+								</div>
+							</template>
+						</td>
+						<td data-label="Exchange order">
+							<div style="float: right;">
+								<div>
+									<strong>{order.orderId}</strong> | <strong>Source:</strong> {order.createUser}
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table> 
+		</div>
+		<br/>
+		<div style="overflow-x: auto;">
+			<table
+				class="slds-table slds-table_cell-buffer slds-table_bordered"
+				aria-describedby="exchange-orderItem-Table"
+			>
+				<!-- Line Items headers Section -->
+				<thead>
+					<tr class="slds-line-height_reset">
+						<th class="slds-size_1-of-12" scope="col">
+							<div class="slds-truncate" title="Item id">Item id</div>
+						</th>
+						<th class="slds-size_3-of-12" scope="col">
+							<div class="slds-truncate" title="Item name">Item name</div>
+						</th>
+						<th class="slds-size_2-of-12" scope="col">
+							<div class="slds-truncate ordItmStatus" title="Promised delivery date">
+								Promised delivery date
+							</div>
+						</th>
+						<th class="slds-size_1.5-of-12" scope="col">
+							<div class="slds-truncate" title="Replacement reason">
+								Replacement reason
+							</div>
+						</th>
+						<th class="slds-size_1-of-12" scope="col">
+							<div class="slds-truncate" title="Status">Status</div>
+						</th>
+						<th class="slds-size_1-of-12" scope="col">
+							<div class="slds-truncate slds-float_right" title="Replaced qty">Replaced qty</div>
+						</th>
+						<th class="slds-size_1-of-12" scope="col">
+							<div class="slds-truncate slds-float_right" title="Line total amount">
+								Line total amount
+							</div>
+						</th>
+						<th class="slds-size_1.5-of-12" scope="col">
+							<div class="slds-truncate" title="Tracking">Tracking</div>
+						</th>
+					</tr>
+				</thead>
+				<!-- Line Items details Section -->
+				<tbody>
+					<template for:each={order.orderItems} for:item="ordItm" for:index="index">
+						<!-- Individual Line Items operations buttons Section -->
+						<tr key={ordItm.productId}>
+							<th scope="col">
+								<div class="slds-truncate slds-cell-wrap">
+									<a href={ordItm.productLink} target="_blank" rel="noopener">{ordItm.productId}</a>
+								</div>
+							</th>
+							<th scope="col">
+								<div class="slds-truncate slds-cell-wrap">{ordItm.productDescription}</div>
+							</th>
+							<th scope="col">
+								<div class="slds-truncate slds-cell-wrap">{ordItm.promiseDeliveryDate}</div>
+							</th>
+							<th scope="col">
+								<div class="slds-truncate slds-cell-wrap">{ordItm.exchangeReason}</div>
+							</th>
+							<th scope="col">
+								<div class="slds-truncate slds-cell-wrap">{ordItm.lineStatus}</div>
+							</th>
+							<th scope="col">
+								<div class="slds-float_right">{ordItm.quantity}</div>
+							</th>
+							<th scope="col">
+								<div class="slds-float_right slds-truncate slds-cell-wrap">
+									{orderWrapper.currencyISOCode}
+									<lightning-formatted-number
+										value={ordItm.lineTotal}
+										minimum-fraction-digits="2"
+									></lightning-formatted-number>
+								</div>
+							</th>
+							<th scope="col">
+								<div class="">
+									<lightning-button
+										value={ordItm.lineId}
+										variant="brand"
+										id={ordItm.lineId}
+										data-order-index={oIndex}
+										data-index={index}
+										label="Tracking Details"
+										title="Tracking Details"
+										onclick={handleTrackingDetailsModal}
+										class="slds-p-right_xx-large tracking_details"
+										disabled={ordItm.isNotTrackable}
+									>
+									</lightning-button>
+								</div>
+							</th>
+						</tr>
+					</template>
+				</tbody>
+			</table>
+		</div>
+	    </div>
+	</div>
+
+	<template if:true={orderItemsSearchNotFound}>
+		<table class="slds-table slds-table_bordered" aria-describedby="exchange-orderItem-Table">
+		<thead>
+			<tr class="slds-line-height_reset">
+				<th scope="col">
+					<div class="slds-truncate" title="Item id">Item id</div>
+				</th>
+				<th scope="col">
+					<div class="slds-truncate" title="Item name">Item name</div>
+				</th>
+				<th scope="col">
+					<div class="slds-truncate ordItmStatus" title="Promised delivery date">
+						Promised delivery date
+					</div>
+				</th>
+				<th scope="col">
+					<div class="slds-truncate" title="Replacement reason">
+						Replacement reason
+					</div>
+				</th>
+				<th scope="col">
+					<div class="slds-truncate" title="Status">Status</div>
+				</th>
+				<th scope="col">
+					<div class="slds-truncate slds-float_right" title="Replaced qty">Replaced qty</div>
+				</th>
+				<th scope="col">
+					<div class="slds-truncate slds-float_right" title="Line total amount">
+						Line total amount
+					</div>
+				</th>
+				<th scope="col">
+					<div class="slds-truncate" title="Tracking">Tracking</div>
+				</th>
+			</tr>
+		</thead>
+	</table>
+	</template>
+
+  <template if:true={isModalOpen}>
+    <c-asdac-tracking-details-modal-cmp
+      lstshipmentdetails={lstshipmentrecords}
+	  shippingaddress={shippingAddressForTrackingDetail} 
+	  lineitemname={lineItemNameForTrackingDetail}
+      onclosetrackingdetailsmodal={handleCloseTrackingDetailsModal}
+      isgeorge={isGeorge}
+      isexchangeorder={isexchangeorder}
+      class="trackingModal"
+    ></c-asdac-tracking-details-modal-cmp>
+  </template>
+</template>

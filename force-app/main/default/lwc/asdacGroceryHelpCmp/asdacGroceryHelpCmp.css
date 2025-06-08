@@ -1,0 +1,13 @@
+.custom-button {
+  --sds-c-button-line-height: 24px;
+  --sds-c-button-brand-text-color: #ffffff;
+  --dxp-s-button-font-weight: 900;
+  --dxp-s-button-font-size: 19px;
+  --dxp-s-button-letter-spacing: 0.002em;
+}
+
+@media screen and (min-width: 1025px) {
+  .custom-button {
+    width: 400px !important;
+  }
+}

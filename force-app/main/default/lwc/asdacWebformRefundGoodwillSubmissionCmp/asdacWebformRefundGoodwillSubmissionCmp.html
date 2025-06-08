@@ -1,0 +1,118 @@
+<template>
+	<div class="orders-container">	
+		<template for:each={_orders} for:item="order" for:index="index">
+			<div key={order.id} class="order-container">
+				<table  class="table-order" aria-describedby="order">
+					<thead>
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<lightning-input label={labels.orderId} type="text" name="orderId" data-index={index} value={order.orderId} onchange={handleChange} class="" required></lightning-input>
+							</td>						
+							<td>
+								<lightning-input label={labels.customerName} type="text" name="customerName" data-index={index} value={order.customerName} onchange={handleChange} pattern="[a-zA-Z ]*$"  message-when-pattern-mismatch={labels.namePatternMismatch} class="" required ></lightning-input>
+							</td>
+							<td>
+								<lightning-input label={labels.deliveryDate} type="date" name="deliveryDate" max={todaysDate} data-index={index} value={order.deliveryDate} onchange={handleChange} date-style="short"  class="" required></lightning-input>
+							</td>					
+						</tr>
+						<tr>
+							<td colspan="3">
+								<template for:each={order.items} for:item="product"  for:index="productid">
+									<div key={product.id} class="order-item-container">
+										<table class="table-order-item slds-table--fixed-layout" aria-describedby="orderItem">
+											<thead>
+												<tr>
+													<th></th>
+													<th></th>
+													<th></th>
+													<th style="width:25%"></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>
+														<lightning-input label={labels.cin} type="text" name="cin" data-index={index} data-item={productid} value={product.cin} onchange={handleChange} class="" required></lightning-input>
+													</td>
+													
+													<td>
+														<lightning-input label={labels.units} type="number" name="qty" data-index={index} min="1" data-item={productid} value={product.qty} onchange={handleChange} class="" required></lightning-input>
+													</td>
+													<td>
+														<lightning-input label={labels.refundValue} type="number" formatter="currency" step="0.01" min="0.01" name="value" data-index={index} data-item={productid} value={product.value} onchange={handleChange} class="" required></lightning-input>
+													</td>
+													<td>
+														<lightning-combobox
+															name="reason"
+															value={product.reason}
+															placeholder="Please select"
+															options={refundReasons}
+															onchange={handleChange} 
+															data-index={index}
+															data-item={productid}	
+															label={labels.refundReason}
+															required 									
+														>
+														</lightning-combobox>
+													</td>					
+												</tr>
+												<tr>
+													<td colspan="4" class="slds-text-align_right">
+														<div class="slds-p-top_xx-small" if:true={product.removable}>
+															<lightning-button class="remove-item-btn" variant="destructive" label={labels.removeItemBtn} data-index={index} data-item={productid}
+																onclick={removeItem}>
+															</lightning-button>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>									
+								</template>		
+							</td>				
+						</tr>
+						<tr>
+							<td colspan="3">
+								<lightning-formatted-rich-text
+									value={reasonText}
+								></lightning-formatted-rich-text>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								<div class="slds-p-top_small">
+									<lightning-textarea name="comment" required={order.commentRequired} data-index={index} value={order.comment} onchange={handleChange} class=""></lightning-textarea>
+								</div>								
+							</td>						
+						</tr>
+						<tr class="slds-m-top_small">
+							<td>
+								<div class="slds-p-top_small">
+									<button class="add-item-btn webfrom-btn-brand slds-button slds-button_brand" data-index={index} onclick={addItem} disabled={order.disableAddItem}>
+										{labels.addItemBtn}
+									</button>
+								</div>
+							</td>
+							<td colspan="2" class="slds-text-align_right">
+								<div class="slds-p-top_small" if:true={order.removable}>
+									<lightning-button class="remove-order-btn" variant="destructive" label={labels.removeOrderBtn} data-index={index} onclick={removeOrder}></lightning-button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>			
+		</template>		
+	</div>  
+	<div class="slds-p-around_small">
+		<button class="add-order-btn webfrom-btn-brand slds-button slds-button_brand" data-index={index} onclick={addOrder} disabled={disableAddOrders}>
+			{labels.addOrderBtn}
+		</button>
+	</div>      
+</template>

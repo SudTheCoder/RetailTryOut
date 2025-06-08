@@ -1,0 +1,25 @@
+<template>
+    <lightning-layout>
+        <lightning-layout-item>
+        <input class="file-input" type="file" multiple oninput={openfileUpload} accept=".png,.jpg,.jpeg"/>
+        <a onclick={uploadFile}>
+            <c-asdac-svg-utility-cmp svgname="cameraIcon"></c-asdac-svg-utility-cmp>
+            {uploadAttachmentLabel}
+        </a>
+       </lightning-layout-item>
+       <lightning-layout-item class="slds-p-left_x-small slds-p-top_xx-small">(optional)</lightning-layout-item>
+    </lightning-layout>
+    <div class="slds-p-bottom_x-small">{attachmentUploadDisclaimer}</div>
+    <div if:true={fileData} class="preview-container">
+        <lightning-card>
+            <img id="preview-selected-image" src={imageSrc} alt={imageTitle} />
+            <a class="deleteLink" onclick={openDeleteModal}>
+                <c-asdac-svg-utility-cmp svgname="deleteAttachmentIcon"></c-asdac-svg-utility-cmp>
+            </a>
+        </lightning-card>
+        <c-asdac-webform-delete-attachment-modal-cmp if:true={showDeleteAttachmentModal}
+            show-modal={showDeleteAttachmentModal} delete-button-label={deleteButtonLabel}
+            attachment-modal-text={attachmentModalText} cancel-button-label={cancelButtonLabel}
+            onattachmentmodalaction={handleAttachmentModalEvent}></c-asdac-webform-delete-attachment-modal-cmp>
+    </div>
+</template>

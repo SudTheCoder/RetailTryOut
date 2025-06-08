@@ -1,0 +1,32 @@
+<template>
+    <lightning-card>
+        <lightning-layout if:true={isContactsPresent} multiple-rows="true" vertical-align="end">
+            <lightning-layout-item size="12" padding="around-small">
+                <lightning-input type="text" label={searchbarLabel} value={searchKey} onchange={handleSearch}>
+                </lightning-input>
+            </lightning-layout-item>
+        <lightning-layout-item size="12" padding="around-small">
+        <lightning-tabset>
+            <lightning-tab label="DSV">
+                <lightning-datatable class="customDataTable" key-field="Id" data={dataDSV} columns={dsvcolumns}
+                    onsort={handleSortDSV} sorted-by={sortBy} sorted-direction={sortDirection} hide-checkbox-column="true">
+                </lightning-datatable>
+            </lightning-tab>
+            <lightning-tab label="Fulfilment centre">
+                <lightning-datatable class="customDataTable" key-field="Id" data={dataFC} columns={fccolumns}
+                    onsort={handleSortFC} sorted-by={sortBy} sorted-direction={sortDirection} hide-checkbox-column="true">
+                </lightning-datatable>
+            </lightning-tab>
+            <lightning-tab label="Toyou">
+                <lightning-datatable class="customDataTable" key-field="Id" data={dataToYou} columns={toyoucolumns}
+                    hide-checkbox-column="true">
+                </lightning-datatable>
+            </lightning-tab>
+        </lightning-tabset>
+        </lightning-layout-item>
+        </lightning-layout>
+        <div if:false={isContactsPresent} class="slds-align_absolute-center no-contact-records">
+            {noRecordsFoundMessage}
+        </div>
+    </lightning-card>
+    </template>

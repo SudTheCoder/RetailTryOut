@@ -1,0 +1,125 @@
+<template>
+    <template if:true={loading}>
+        <div class="comms-loading">
+            <lightning-spinner alternative-text={label.loadingSpinnerAlternateText} variant="brand" size="small"></lightning-spinner>
+        </div>
+    </template>
+    <template if:false={loading}>
+        <template if:true={showCommsList}>
+            <div class="slds-scrollable_x" tabindex="0" style="width:100rem; outline:none;">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered "  aria-labelledby="element-with-table-label other-element-with-table-label">
+                <thead>
+                    <tr>
+                        <template for:each={columns} for:item="col">
+                            <th class="slds-text-align_center" key={col.label}>{col.label}</th>
+                        </template>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th><lightning-input type="text" data-id="channel" onchange={handleFilter}></lightning-input></th>
+                        <th><lightning-input type="text" data-id="subject" onchange={handleFilter}></lightning-input></th>
+                        <th class="slds-text-align_left">
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item size="12">
+                                    <lightning-input label={label.fromDateFilterLabel} type="date" data-id="timeStampFrom" onchange={handleFilter}></lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12">
+                                    <lightning-input label={label.toDateFilterLabel} type="date" data-id="timeStampTo" onchange={handleFilter}></lightning-input>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </th>
+                        <th><lightning-input type="text" data-id="recipientstatus" onchange={handleFilter}></lightning-input></th>
+                        <th><lightning-input type="text" data-id="sender" onchange={handleFilter}></lightning-input></th>
+                        <th></th>
+                        <th><lightning-input type="text" data-id="businessline" onchange={handleFilter}></lightning-input></th>
+                        <th><lightning-input type="text" data-id="failreasoncode" onchange={handleFilter}></lightning-input></th>
+                        <th class="slds-text-align_left">
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item size="12">
+                                    <lightning-input label={label.fromDateFilterLabel} type="date" data-id="openTimeStampFrom" onchange={handleFilter}></lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12">
+                                    <lightning-input label={label.toDateFilterLabel} type="date" data-id="openTimeStampTo" onchange={handleFilter}></lightning-input>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </th>
+                        <th class="slds-text-align_left">
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item size="12">
+                                    <lightning-input label={label.fromDateFilterLabel} type="date" data-id="clickTimeStampFrom" onchange={handleFilter}></lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12">
+                                    <lightning-input label={label.toDateFilterLabel} type="date" data-id="clickTimeStampTo" onchange={handleFilter}></lightning-input>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </th>
+                        <th class="slds-text-align_left">
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item size="12">
+                                    <lightning-input label={label.fromDateFilterLabel} type="date" data-id="bounceTimeStampFrom" onchange={handleFilter}></lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12">
+                                    <lightning-input label={label.toDateFilterLabel} type="date" data-id="bounceTimeStampTo" onchange={handleFilter}></lightning-input>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </th>
+                    </tr>
+                    <template for:each={paginationList} for:item="data">
+                        <tr key={data.id}>
+                            <td><div class="slds-truncate">{data.channel}</div></td>
+                            <td><div class="slds-truncate">{data.subject}</div></td>
+                            <td><div class="slds-truncate">
+                                <template if:true={data.timestamp}>
+                                    <div class="slds-truncate">{data.timestamp}</div>
+                                </template>
+                            </div></td>
+                            <td><div class="slds-truncate">{data.recipientstatus}</div></td>
+                            <td><div class="slds-truncate">{data.sender}</div></td>
+                            <template if:true={data.ischannelemail}>
+                                <td><div class="slds-truncate"><lightning-formatted-url value={data.messagepreview} label="Preview Email" target="_blank"></lightning-formatted-url></div></td>
+                            </template>
+                            <template if:false={data.ischannelemail}>
+                                <td><div class="slds-truncate">{data.messagepreview}</div></td>
+                            </template> 
+                            <td><div class="slds-truncate">{data.businessline}</div></td>
+                            <td><div class="slds-truncate">{data.failreasoncode}</div></td>
+                            <td><div class="slds-truncate">
+                                <template if:true={data.opentimestamp}>
+                                    <div class="slds-truncate">{data.opentimestamp}</div>
+                                </template>
+                            </div></td>
+                            <td><div class="slds-truncate">
+                                <template if:true={data.clicktimestamp}>
+                                    <div class="slds-truncate">{data.clicktimestamp}</div>
+                                </template>
+                            </div></td>
+                            <td><div class="slds-truncate">
+                                <template if:true={data.bouncetimestamp}>
+                                    <div class="slds-truncate">{data.bouncetimestamp}</div>
+                                </template>
+                            </div></td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+            </div>
+            <lightning-layout multiple-rows>
+                <lightning-layout-item size="4" class="slds-var-p-around_medium">
+                    <lightning-button style="float:left" variant="brand" class="previous" label={label.previousButtonLabel}
+                        disabled={isPreviousDisabled} onclick={handlePrevious}> </lightning-button>
+                </lightning-layout-item>
+                <lightning-layout-item size="4" class="slds-var-p-around_medium">
+                    <p class="slds-text-align_center"> Showing {startPosition} to {endPosition} of {totalSize} </p>
+                </lightning-layout-item>
+                <lightning-layout-item size="4" class="slds-var-p-around_medium">
+                    <lightning-button style="float:right" variant="brand" label={label.nextButtonLabel} class="next" disabled={isNextDisabled}
+                        onclick={handleNext}> </lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+        <template if:false={showCommsList}>
+            {label.commsNotFoundMessage}
+        </template>
+    </template>    
+</template>

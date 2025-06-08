@@ -1,0 +1,337 @@
+{
+    "customerId": "0038E00001NKS3IQAX",
+    "orderType": "SalesOrder",
+    "orderId": "B000002001",
+    "orderFulfilmentType": "ClickNCollect",
+    "totalAmount": 69.64,
+    "originalOrderTotal": 69.64,
+    "orderDate": "2023-11-21T07:19:56Z",
+    "sellingChannel": "GEORGE.COM",
+    "hasColleagueDiscount": false,
+    "colleagueDiscounts": 0.0,
+    "source": "Desktop",
+    "fraudStatus": "ACCEPT",
+    "createUser": "sfcc_user",
+    "storeNumber": "4391",
+    "orderSubTotal": 0.0,
+    "originalOrderDiscount": 0.0,
+    "fulfillmentService": "Click & Collect",
+    "billingCurrency": "GBP",
+    "originalVAT": 23.57,
+    "originalDeliveryCharge": 0.00,
+    "promotionCodes": null,
+    "promotionalDiscount": 0.0,
+    "productRefund": 0.0,
+    "partialRefund": 0.0,
+    "goodwillRefund": 0.0,
+    "refundTotal": 0.0,
+    "isDeliveryChargeRefunded": false,
+    "deliveryChargeRefund": 0.0,
+    "giftCardAmount": 0.0,
+    "voucherAmount": 0.0,
+    "billToContact": {
+        "firstName": "Mohit",
+        "lastName": "Gupta",
+        "middleName": null,
+        "phone": "11234567890",
+        "email": "examplecompany.com"
+    },
+    "billToAddress": {
+        "addressLine1": "1234 Spicy Street",
+        "addressLine2": "yza",
+        "city": "Winnipeg",
+        "state": "GB",
+        "country": "GB",
+        "zipCode": "R3B 0P4",
+        "latitude": 49.898498728223224,
+        "longitude": 97.13560152293131
+    },
+    "orderLines": [
+        {
+            "orderLineId": 1,
+            "productId": "050156090",
+            "productLink": "https://development-direct.asda.com/george/women/knickers/entice-burgundy-lace-brazilian-knickers/G006219883,default,pd.html",
+            "productDescription": "Entice Burgundy Lace Brazilian Knickers",
+            "upc": "5057796681437",
+            "orderLineType": "Delivery",
+            "uom": "EACH",
+            "productType": "VENDOR",
+            "size": "32",
+            "colour": "32",
+            "lastUpdatedTime": "",
+            "warrantyInfo": "350.0",
+            "isPartiallyRefunded": false,
+            "refundedAmountSoFar": 0.0,
+            "status": "DELIVERED",
+            "unitPrice": 16.83,
+            "unitDiscount": 0.0,
+            "exchangeReason": null,
+            "discountText": null,
+            "unitTax": 0.0,
+            "stateToQty": [
+                {
+                    "state": "DELIVERED",
+                    "quantity": 1
+                },
+                {
+                    "state": "RETURN_CREATED",
+                    "quantity": 1
+                },
+                {
+                    "state": "EXCHANGE_CREATED",
+                    "quantity": 1
+                }
+            ],
+            "shipments": [
+                {
+                    "promisedDeliveryDate": "2023-11-05T14:19:56Z",
+                    "currentEstimatedDeliveryDate": "2022-09-30T05:34:44Z",
+                    "actualShipDate": "2022-09-30T05:34:44Z",
+                    "carrierService": "Ervi",
+                    "carrierName": "Ervi",
+                    "trackingId": "12345",
+                    "trackingUrl": "http://abc.com",
+                    "shipmentQuantity": 3,
+                    "poNumber": "",
+                    "fulfillmentCentre": "60722",
+                    "fulfilledBy": "VENDOR/DSV"
+                }
+            ],
+            "storeNumber": "4391",
+            "shipToContact": {
+                "firstName": "Llantrisant",
+                "lastName": "Store",
+                "middleName": null,
+                "phone": "01443 236540",
+                "email": null
+            },
+            "shipToAddress": {
+                "addressLine1": "Unit 4",
+                "addressLine2": null,
+                "city": "Glamorgan",
+                "state": null,
+                "country": "GB",
+                "zipCode": "CF72 8RP",
+                "latitude": 0.0,
+                "longitude": 0.0
+            }
+        },
+        {
+            "orderLineId": 2,
+            "productId": "050156090",
+            "productLink": "https://development-direct.asda.com/george/women/dresses/pink-floral-wrap-tie-mini-dress/G007377198,default,pd.html",
+            "productDescription": "Pink Floral Wrap Tie Mini Dress",
+            "upc": "0005059191315597",
+            "orderLineType": "Delivery",
+            "uom": "EACH",
+            "productType": "VENDOR",
+            "size": "32",
+            "colour": "32",
+            "lastUpdatedTime": "",
+            "warrantyInfo": "100.0",
+            "isPartiallyRefunded": false,
+            "refundedAmountSoFar": 0.0,
+            "status": "DERIVED_ORDER_CREATED",
+            "unitPrice": 2.5,
+            "unitDiscount": 0.0,
+            "exchangeReason": null,
+            "discountText": null,
+            "unitTax": 0.5,
+            "stateToQty": [
+                {
+                    "state": "DERIVED_ORDER_CREATED",
+                    "quantity": 3
+                }
+            ],
+            "shipments": [
+                {
+                    "promisedDeliveryDate": "2023-11-05T14:19:56Z",
+                    "currentEstimatedDeliveryDate": "",
+                    "actualShipDate": null,
+                    "carrierService": null,
+                    "carrierName": null,
+                    "trackingId": null,
+                    "trackingUrl": null,
+                    "shipmentQuantity": 0,
+                    "poNumber": "",
+                    "fulfillmentCentre": null,
+                    "fulfilledBy": "VENDOR/DSV"
+                }
+            ],
+            "storeNumber": "4391",
+            "shipToContact": {
+                "firstName": "Llantrisant",
+                "lastName": "Store",
+                "middleName": null,
+                "phone": "01443 236540",
+                "email": null
+            },
+            "shipToAddress": {
+                "addressLine1": "Unit 4",
+                "addressLine2": null,
+                "city": "Glamorgan",
+                "state": null,
+                "country": "GB",
+                "zipCode": "CF72 8RP",
+                "latitude": 0.0,
+                "longitude": 0.0
+            }
+        }
+    ],
+    "paymentDetails": [
+        {
+            "paymentMethodId": 1,
+            "paymentType": "CREDIT_CARD",
+            "cardType": "VISA",
+            "cardNumber": "XXXX-XXXX-XXXX-1091",
+            "piHash": "PIH.volt.VISA.CREDITCARD.4000000343711091.1091",
+            "cardHolder": null,
+            "tokenizedCard": "PIH.volt.VISA.CREDITCARD.4000000343711091.1091",
+            "expirationMonth": "11",
+            "expirationYear": "2030",
+            "totalInvoiced": 60.64,
+            "authorizationId": "9c80882d-766f-49e5-b04d-7cbacee1e0c2",
+            "paypalId": null,
+            "transactionsDetails": [
+                {
+                    "processType": "AUTHORIZATION",
+                    "amount": 69.64,
+                    "transactionId": null,
+                    "updatedTime": "2023-11-24T11:30:15Z",
+                    "approvalCode": "SUCCESS",
+                    "arnNumber": null
+                },
+                {
+                    "processType": "SETTLEMENT",
+                    "amount": 69.64,
+                    "transactionId": null,
+                    "updatedTime": "2023-11-24T11:31:15Z",
+                    "approvalCode": "SUCCESS",
+                    "arnNumber": null
+                },
+                {
+                    "processType": null,
+                    "amount": 0.0,
+                    "transactionId": null,
+                    "updatedTime": "2023-11-24T11:32:34Z",
+                    "approvalCode": null,
+                    "arnNumber": null
+                }
+            ]
+        }
+    ],
+    "returnOrders": [
+        {
+            "orderDate": "2023-11-24T11:51:53Z",
+            "orderId": "R000010788",
+            "source": "SFSC",
+            "returnAddress": null,
+            "sellingChannel": "GEORGE.COM",
+            "orderLines": [
+                {
+                    "orderLineId": 1,
+                    "productId": "050156090",
+                    "productDescription": "Entice Burgundy Lace Brazilian Knickers",
+                    "productLink": "https://development-direct.asda.com/george/women/knickers/entice-burgundy-lace-brazilian-knickers/G006219883,default,pd.html",
+                    "returnReason": null,
+                    "refundedAmount": 0.0,
+                    "isCreatedFromExchange": true,
+                    "returnType": null,
+                    "receiptedUserName": null,
+                    "dateTimeReceived": null,
+                    "unitPrice": 20.2,
+                    "unitDiscount": 0.0,
+                    "unitTax": 0.0,
+                    "stateToQty": [
+                        {
+                            "state": "CREATED",
+                            "quantity": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "orderDate": "2023-12-08T11:46:06Z",
+            "orderId": "R000011881",
+            "source": "SFSC",
+            "returnAddress": null,
+            "sellingChannel": "GEORGE.COM",
+            "orderLines": [
+                {
+                    "orderLineId": 1,
+                    "productId": "050156090",
+                    "productDescription": "Entice Burgundy Lace Brazilian Knickers",
+                    "productLink": "https://development-direct.asda.com/george/women/knickers/entice-burgundy-lace-brazilian-knickers/G006219883,default,pd.html",
+                    "returnReason": null,
+                    "refundedAmount": 0.0,
+                    "isCreatedFromExchange": false,
+                    "returnType": null,
+                    "receiptedUserName": null,
+                    "dateTimeReceived": null,
+                    "unitPrice": 20.2,
+                    "unitDiscount": 0.0,
+                    "unitTax": 3.37,
+                    "stateToQty": [
+                        {
+                            "state": "CREATED",
+                            "quantity": 1
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "exchangeOrders": [
+        {
+            "createUser": "SFSC",
+            "orderId": "B000001576",
+            "orderDate": "2023-11-24T11:51:53Z",
+            "sellingChannel": "GEORGE.COM",
+            "orderLines": [
+                {
+                    "productId": "050156090",
+                    "productLink": "https://development-direct.asda.com/george/women/knickers/entice-burgundy-lace-brazilian-knickers/G006219883,default,pd.html",
+                    "productDescription": "Entice Burgundy Lace Brazilian Knickers",
+                    "exchangeReason": "Lost in transit",
+                    "quantity": 1,
+                    "totalAmount": 20.2,
+                    "unitPrice": "20.2",
+                    "unitDiscount": "0.0",
+                    "unitTax": 0.0,
+                    "shipToAddress": {
+                        "addressLine1": "Unit 4",
+                        "addressLine2": null,
+                        "city": "Glamorgan",
+                        "state": null,
+                        "country": "GB",
+                        "zipCode": "CF72 8RP",
+                        "latitude": 0.0,
+                        "longitude": 0.0
+                    },
+                    "shipments": [
+                        {
+                            "promisedDeliveryDate": "",
+                            "currentEstimatedDeliveryDate": "",
+                            "actualShipDate": "",
+                            "carrierService": null,
+                            "carrierName": null,
+                            "trackingId": "",
+                            "trackingUrl": null,
+                            "shipmentQuantity": 0,
+                            "poNumber": "",
+                            "fulfilledBy": "VENDOR/DSV",
+                            "fulfillmentCentre": null
+                        }
+                    ],
+                    "stateToQty": [
+                        {
+                            "state": "CREATED",
+                            "quantity": 1
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

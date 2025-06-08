@@ -1,0 +1,28 @@
+<!--**************************************************************************
+Name: ASDAC_CustomerSearchCmp
+===============================================================================
+Req: 
+ASDAC-895 No Results Returned from Search / Create New Customer Account
+ASDAC-892 Customer Account Creation Duplication Checks
+===============================================================================
+Purpose: This Lightning Component is used to show Modal popup when "Create New
+		 Customer" button is clicked from asdacCustomerSearch LWC. 
+		 lightning:overlayLibrary is not supported in LWC. So Aura is used and 
+		 LWC is embedded in it.     
+===============================================================================
+History                                                                                                                       
+VERSION   AUTHOR                DATE         	DETAIL
+1.0       Nitish Yadav    		06 July 2022    Initial Development
+******************************************************************************-->
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable,lightning:isUrlAddressable,lightning:utilityItem" access="global">
+    <aura:attribute name="overlayLibAttr" type="Aura.Component"/>
+    <aura:attribute name="newCustomerTab" type="String"/>
+    <aura:attribute name="isOpenedFromListViewBtn" type="Boolean"/>
+    <aura:attribute name="components" type="Aura.Component[]"/>
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <lightning:workspaceAPI aura:id="workspace"/>
+    <lightning:utilityBarAPI aura:id="utilitybar" />
+    <aura:attribute name="supportsPopOut" type="Boolean" default="false" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <c:asdacCustomerSearch newCustomerTab="{!v.isOpenedFromListViewBtn}" onopennewcustomer="{!c.handleNewCustomer}" onclear="{!c.handleClear}" onminimizetab="{!c.handleMinimizeTab}" onopenorderdetail="{!c.handleOpenOrderDetailEvent}"/>
+</aura:component>

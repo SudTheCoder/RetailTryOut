@@ -1,0 +1,49 @@
+<template>
+    <template if:true={isLoaded}>
+        <div class="slds-grid slds-wrap ">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-grid slds-m-left_small slds-m-right_small slds-border_bottom">
+                    <div class="slds-col slds-size_1-of-3 slds-text-body_small">
+                        <span>Created By</span>
+                    </div>
+                    <div class="slds-col slds-size_2-of-3">
+                        <img src={createdByImgUrl} class="slds-avatar slds-avatar--circle slds-m-right_x-small CustomProfilePhoto" alt="created by image">
+                        <a class="slds-m-right_x-small" onclick={handleCreatedByIdClick}>{createdByNameValue},</a>
+                        <lightning-formatted-date-time 
+                            value={createdDateValue} 
+                            year="numeric" 
+                            month="numeric" 
+                            day="numeric" 
+                            hour="2-digit"
+                            minute="2-digit" 
+                            time-zone={userTimeZoneValue} 
+                        ></lightning-formatted-date-time>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-grid slds-m-left_large slds-border_bottom">
+                    <div class="slds-col slds-size_1-of-3 slds-text-body_small">
+                        <span>Last Modified By</span>
+                    </div>
+                    <div class="slds-col slds-size_2-of-3">
+                        <img src={modifiedByImgUrl} class="slds-avatar slds-avatar--circle slds-m-right_x-small CustomProfilePhoto" alt="modified by image">
+                        <a class="slds-m-right_x-small" onclick={handleModifiedByIdClick}>{modifiedByNameValue},</a>
+                        <lightning-formatted-date-time 
+                            value={modifiedDateValue} 
+                            year="numeric" 
+                            month="numeric" 
+                            day="numeric" 
+                            hour="2-digit"
+                            minute="2-digit" 
+                            time-zone={userTimeZoneValue} 
+                        ></lightning-formatted-date-time>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </template>
+   <template if:true={error}>
+        <div id="error">{error}</div>
+   </template>
+</template>

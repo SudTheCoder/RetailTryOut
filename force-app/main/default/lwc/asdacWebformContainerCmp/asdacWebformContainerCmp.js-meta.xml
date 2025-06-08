@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Webform Container</masterLabel>
+    <description>This component shows ability to expose public property to Lightning App Builder, App Manager.</description>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="formType" type="String" label="Webform type" default="George - Refund" datasource="George - Refund,George - VAT Request,George - General Enquiry,George - International Orders" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

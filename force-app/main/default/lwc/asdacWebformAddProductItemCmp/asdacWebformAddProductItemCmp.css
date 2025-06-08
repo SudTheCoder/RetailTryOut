@@ -1,0 +1,30 @@
+.orderDetailBorder {
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    font-size: 16px;
+}
+
+.orderCartStyle {
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    font-size: 18px;
+}
+
+.asdaLovedProductMark {
+    font-weight: 400;
+}
+
+.button-label {
+    --sds-c-button-line-height: 24px;
+    --dxp-s-button-font-weight: 900;
+    --dxp-s-button-font-size: 19px;
+    --dxp-s-button-letter-spacing: 0.002em;
+}
+
+.required:before {
+    content: " *";
+    color: red;
+    padding-right: 0.2em;
+}

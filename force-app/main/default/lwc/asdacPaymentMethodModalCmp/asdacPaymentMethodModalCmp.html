@@ -1,0 +1,164 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </template>
+    <div class="slds-var-p-around_large">
+        <template if:false={isLoading}>
+            <lightning-card>
+				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+					aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <!-- sldsValidatorIgnoreNextLine -->
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-border-filled" onclick={handleCloseModal}>
+                            <lightning-icon icon-name="utility:close"
+                               alternative-text="close"
+                               size="small" ></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                          </button>
+                        <div class="slds-modal__header">
+                            <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Payment methods
+                            </h1>
+                        </div>
+						<div class="slds-modal__content slds-var-p-horizontal_medium slds-b-bottom_none" id="modal-content-id-1">
+                            <!-- Customer Information-->
+                            <div  class="slds-border_bottom slds-var-m-around_small">
+                            <strong class="slds-var-m-bottom_x-small slds-text-heading_small">{orderWrapper.billToContact.name}</strong>
+                                <p class="slds-var-m-bottom_small">
+                                    <lightning-icon icon-name="utility:email" alternative-text="Email" size="x-small" class="slds-var-m-right_xx-small"></lightning-icon>
+                                    {orderWrapper.billToContact.email}
+                                    <lightning-icon icon-name="utility:call" alternative-text="Phone" size="x-small" class="slds-var-m-right_xx-small slds-var-m-left_medium"></lightning-icon>
+                                    {orderWrapper.billToContact.phone}
+                                </p>
+                            </div>
+                            <br />
+
+                            <!-- sorted payment methods based on amount-->
+                            <template for:each={paymentMethodsList} for:item="item">
+                                <template if:true={isGeorge}>                                            
+                                <template if:true={item.isPaypal}>
+                                    <strong class="slds-var-m-bottom_medium slds-text-heading_small slds-m-left_small" key={item.paymentMethodId}>Paypal</strong>
+                                    <div class="slds-var-m-around_xxx-small" key={item.paymentMethodId}>
+                                      <div class="slds-grid slds-wrap slds-box slds-box_small slds-m-bottom_none ">
+                                          <div class="slds-col slds-col slds-p-right_medium slds-size_3-of-12 slds-var-m-bottom_small">
+                                              <span>Paypal ID</span> 
+                                          </div>
+                                          <div class="slds-col slds-size_8-of-12 slds-var-m-bottom_small slds-m-left_x-large">
+                                              <span>{item.paypalId}</span>
+                                          </div>                                          
+                                          <div class="slds-col slds-size_3-of-12 slds-var-m-bottom_x-small">
+                                              <span>Billing address</span>
+                                          </div>
+                                          <div class="slds-col slds-size_8-of-12 slds-var-m-bottom_x-small slds-m-left_x-large">
+                                              <span>{orderWrapper.billToAddress.addressLine1}</span><br>
+                                              <span>{orderWrapper.billToAddress.addressLine2}</span><br>
+                                              <span>{orderWrapper.billToAddress.city}</span><br>
+                                              <template if:true={orderWrapper.billToAddress.state}>
+                                                  <span>{orderWrapper.billToAddress.state}</span><br>
+                                              </template>
+                                              <span>{orderWrapper.billToAddress.country}</span><br>
+                                              <span>{orderWrapper.billToAddress.zipCode}</span><br>
+                                          </div>
+                                          <div class="slds-col slds-size_3-of-12 slds-var-m-bottom_x-small">
+                                            <span>PI hash</span>
+                                          </div><br>
+                                          <div class="slds-col slds-size_8-of-12 slds-var-m-bottom_x-small slds-m-left_x-large">
+                                              <span>{item.piHash}</span>
+                                          </div>       
+                                      </div>
+                                      <br />
+                                    </div>
+
+                                </template>
+                            </template>    
+                                <template if:true={item.isGiftCard} >
+                                    <strong class="slds-var-m-bottom_medium slds-text-heading_small slds-m-left_x-small" key={item.paymentMethodId}>Gift card</strong>
+
+                                    <div class="slds-var-m-around_small" key={item.paymentMethodId}>
+                                        <div class="slds-grid slds-wrap slds-box slds-box_small slds-var-m-bottom_x-small">
+                                            <div class="slds-col slds-size_3-of-12 slds-var-m-bottom_x-small">
+                                                <span>Gift card number</span>
+                                            </div>
+                                            <div class="slds-col slds-size_8-of-12 slds-var-m-bottom_x-small slds-m-left_x-large">
+                                                <span>{item.cardNumber}</span>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </template>
+
+                                <template if:true={item.isCreditCard} >
+                                    <strong class="slds-var-m-bottom_medium slds-text-heading_small slds-m-left_small" key={item.paymentMethodId}>Payment card</strong>
+
+                                    <div class="slds-var-m-around_xxx-small" key={item.paymentMethodId}>
+                                        <div class="slds-grid slds-wrap slds-box slds-box_small slds-m-bottom_none ">
+                                            <div class="slds-col slds-col slds-p-right_medium slds-size_3-of-12 slds-var-m-bottom_small">
+                                                                                            <span>Card ending in</span> 
+                                            </div>
+                                            <div class="slds-col slds-size_8-of-12 slds-var-m-bottom_small slds-m-left_x-large">
+                                              <span>{item.cardNumber}</span>
+                                            </div>
+                                            <div class="slds-col slds-size_3-of-12 slds-var-m-bottom_x-small">
+                                                <span>Expires</span>
+                                            </div>
+                                            <div class="slds-col slds-size_8-of-12 slds-var-m-bottom_x-small slds-m-left_x-large">
+                                                <span>{item.cardExpiry}</span>
+                                            </div>
+                                            <div class="slds-col slds-size_3-of-12 slds-var-m-bottom_x-small">
+                                                <span>Name on card</span>
+                                            </div>
+                                            <div class="slds-col slds-size_8-of-12 slds-var-m-bottom_x-small slds-m-left_x-large">
+                                                <span>{item.cardHolder}</span>
+                                            </div>
+                                            <div class="slds-col slds-size_3-of-12 slds-var-m-bottom_x-small">
+                                              <span>Billing address</span>
+                                            </div>
+                                            <div class="slds-col slds-size_8-of-12 slds-var-m-bottom_x-small slds-m-left_x-large">
+                                                <template if:true={item.billToAddress.addressLine1}>
+                                                    <span>{item.billToAddress.addressLine1}</span><br>
+                                                </template>
+                                                <template if:true={item.billToAddress.addressLine2}>
+                                                    <span>{item.billToAddress.addressLine2}</span><br>
+                                                </template>
+                                                <template if:true={item.billToAddress.city}>
+                                                    <span>{item.billToAddress.city}</span><br>
+                                                </template>
+                                                <template if:true={item.billToAddress.state}>
+                                                    <span>{item.billToAddress.state}</span><br>
+                                                </template>
+                                                <template if:true={item.billToAddress.country}> 
+                                                    <span>{item.billToAddress.country}</span><br>
+                                                </template>
+                                                <template if:true={item.billToAddress.zipCode}> 
+                                                    <span>{item.billToAddress.zipCode}</span><br>
+                                                </template>
+                                            </div>
+                                            <div class="slds-col slds-size_3-of-12 slds-var-m-bottom_x-small">
+                                                <span>Billing phone</span>
+                                            </div>
+                                            <div class="slds-col slds-size_8-of-12 slds-var-m-bottom_x-small slds-m-left_x-large">
+                                                <span>{item.billToContact.phone}</span>
+                                            </div>
+                                            <div class="slds-col slds-size_3-of-12 slds-var-m-bottom_x-small">
+                                                <span>PI hash</span>
+                                            </div>
+                                            <div class="slds-col slds-size_8-of-12 slds-var-m-bottom_x-small slds-m-left_x-large">
+                                                <span>{item.piHash}</span>
+                                            </div>
+                                          </div>
+                                          <br />
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+                        <footer class="slds-modal__footer">
+							<lightning-button variant="neutral" name="cancel" label="Close" title="Close"
+								onclick={handleCloseModal} class="slds-var-m-left_x-small cancelModalCls"></lightning-button>
+						</footer>
+                    </div>
+                </section>
+            </lightning-card>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+    </div>
+    </template>

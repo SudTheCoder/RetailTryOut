@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen"> 
+            <property name="caseRecTypeId" type="String" label="Pass Case Record Id (Deprecated)" /> 
+            <property name="picklistLevel1Value" type="String" label="Pass default Contact Level 1 value" /> 
+            <property name="picklistLevel2Value" type="String" label="Pass default Contact Level 2 value" /> 
+            <property name="picklistLevel3Value" type="String" label="Pass default Contact Level 3 value" /> 
+            <property name="newLevel1Value" type="String" role="outputOnly"/>
+            <property name="newLevel2Value" type="String" role="outputOnly"/>
+            <property name="newLevel3Value" type="String" role="outputOnly"/>
+            <property name="isPicklistValid" type="Boolean" label="isPicklist1Valid"/>
+            <property name="contactRecordId" type="String" label="Id of the Contact Record"></property>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

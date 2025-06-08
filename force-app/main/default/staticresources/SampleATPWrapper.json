@@ -1,0 +1,13 @@
+{
+  "orgId": "ASDA",
+  "sellingChannel": "GEORGE.COM",
+  "transactionType": "eComm",
+  "segment": "DEFAULT",
+  "products": [
+      {
+          "productId": "test_future_5",
+          "quantity": 1,
+          "uom": "EACH"
+      }
+  ]
+} 

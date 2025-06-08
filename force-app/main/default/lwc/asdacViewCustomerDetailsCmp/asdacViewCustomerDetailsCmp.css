@@ -1,0 +1,59 @@
+.pillCls {
+	font-style: normal;
+	font-size: 12px;
+	line-height: 26px;
+	align-items: center;
+	padding: 2px 8px;
+	gap: 10px;
+	width: 62px;
+	height: 22px;
+	color: hsl(0, 0%, 100%);
+	
+	border-radius: 23px;
+}
+
+.customerHeaderCls{
+	display: inline-block;
+    margin-left: 10px;
+}
+
+.customerDetailsCls{
+	display: inline-block;
+    margin-left: 40px;
+}
+
+.highRiskCls{
+	background: #e80918;
+}
+
+.mediumRiskCls{
+	background: #ff9305;
+}
+
+.lowRiskCls{
+	background: #04844B;
+}
+.textColor{
+	color:black;
+}
+.customerClick{
+	display: inline;
+	top: 4px;
+    position: relative;
+}
+
+.suspended-reason {
+	font-size: 36px;
+	color: rgb(255, 0, 0);
+	 background-color: rgb(255, 255, 255);
+	 font-weight: bold;
+}
+.suspension-date {
+   font-size: 14px;
+   color: rgb(0, 0, 0);
+   text-align: center;
+   display: block;
+}
+.suspended-reason-container{
+  text-align: center;
+}

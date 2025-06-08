@@ -1,0 +1,79 @@
+<template>
+    <template if:true={isLoading}>
+		<lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+	</template>
+    <template if:false={isLoading}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+        class="slds-modal slds-fade-in-open slds-modal_large">
+        <div class="slds-modal__container">
+            <!-- sldsValidatorIgnoreNextLine -->
+            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-border-filled clsModalCls"
+                onclick={handleCancel}>
+                <lightning-icon icon-name="utility:close" alternative-text="close"
+                    size="small"></lightning-icon>
+                <span class="slds-assistive-text">Close</span>
+            </button>
+            <div class="slds-modal__header">
+                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Receive Return</h1>
+            </div>
+            <div class="slds-modal__content slds-p-around_medium dropdownOverflow" id="modal-content-id-1">
+                <table
+                    class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-table_fixed-layout"
+                    aria-label="Return Receive Items">
+                    <thead>
+                        <tr class="slds-hint-parent">
+                            <th scope="Return Order No" class="slds-size_1-of-4 ">
+                                <div >
+                                    <strong><label class="slds-form-element__label">Return Order No</label></strong>
+                                </div>
+                            </th>
+                            <th scope="SKU Id" class="slds-size_1-of-4 ">
+                                <div >
+                                    <strong><label class="slds-form-element__label">Item Id</label></strong>
+                                </div>
+                            </th>
+                            <th scope="Name" class="slds-size_1-of-4 ">
+                                <div >
+                                    <strong><label class="slds-form-element__label">Item Name</label></strong>
+                                        </div>
+                            </th>
+                            <th scope="Quantity" class="slds-size_1-of-4 ">
+                                <div>
+                                    <strong><label class="slds-form-element__label">Quantity</label></strong>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                        <tbody>
+                        <template for:each={returnReceiveList} for:item="returnItem" for:index="index" >
+                            <tr key={returnItem.lineId} data-id={returnItem.lineId}>
+                                <td>
+                                    <div class="slds-truncate">{returnOrderId}</div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate">{returnItem.productId}</div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate slds-cell-wrap">{returnItem.productDescription}</div>
+                                </td>
+                                <td>
+                                  <lightning-combobox variant="label-hidden" class="oiQuantity" name="oiQuantity" 
+                                        options={quantityOptions}  data-value={returnItem.quantity} data-index={index} dropdown-alignment="auto" 
+                                        data-id={returnItem.lineId} disabled=false>
+                                    </lightning-combobox>   
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+            <div class="slds-modal__footer">
+                <button class="slds-button slds-button_brand yes" onclick={handleSubmit}>Submit</button>
+                <button class="slds-button slds-button_neutral cancel" onclick={handleCancel}>Cancel</button>
+            </div>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+    
+</template>

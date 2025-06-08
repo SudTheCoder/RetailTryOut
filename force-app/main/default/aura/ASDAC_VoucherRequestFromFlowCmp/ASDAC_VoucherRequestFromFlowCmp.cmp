@@ -1,0 +1,6 @@
+<aura:component implements="force:lightningQuickAction,lightning:availableForFlowActions">
+    <aura:attribute name="accountId" type="String" />
+    <aura:attribute name="caseId" type="String" />
+    <aura:attribute name="recordsToCreate" type="String" /> 
+    <aura:attribute name="customerName" type="String" /> 
+</aura:component>

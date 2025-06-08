@@ -1,0 +1,36 @@
+<apex:page standardController="Account" extensions="ASDAC_AccountBanner">   
+    <style>
+        html {
+        overflow:hidden;
+        }
+        .underaudit-reason {
+            font-size: 36px;
+            color: rgb(255, 0, 0);
+             background-color: rgb(255, 255, 255);
+	         font-weight: bold;
+        }
+        .underaudit-date {
+           font-size: 14px;
+           color: rgb(0, 0, 0);
+	       text-align: center;
+           display: block;
+        }
+        .underaudit-reason-container{
+          text-align: center;
+        }
+        
+    </style>    
+    
+    
+    <div class="underaudit-reason-container">
+        <span class="underaudit-reason">{!$Label.UnderAuditLabel}
+        </span>
+     </div>
+     <br/>
+    <apex:outputPanel rendered="{!NOT(ISBLANK(UnderAuditDateFormatted))}">
+        <span class="underaudit-date">
+        {!$Label.UnderAuditDateLabel} {!UnderAuditDateFormatted} due to {!Account.Under_Audit_Info__c}
+        </span>
+    </apex:outputPanel>
+    
+</apex:page>

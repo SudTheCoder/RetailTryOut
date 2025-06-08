@@ -1,0 +1,89 @@
+<template>
+  <lightning-layout>
+    <lightning-layout-item padding="around-small" size="6"></lightning-layout-item>
+    <lightning-layout-item alignment-bump="right" size="6">
+      <div class="slds-form_horizontal slds-form">
+        <lightning-input
+          name="enter-search"
+          label=""
+          type="search"
+          class="searchItemCls"
+          placeholder="Search for items.."
+          pattern="/^[ A-Za-z0-9_@./#&+-]*$/.+"
+          message-when-pattern-mismatch="Special Characters not allowed"
+          onchange={handleSearch}
+        >
+        </lightning-input>
+      </div>
+    </lightning-layout-item>
+  </lightning-layout>
+  <table class="slds-table slds-table_fixed-layout slds-table_cell-buffer slds-table_bordered" aria-describedby="ghs-orderItem-details">
+    <thead>
+      <tr class="slds-line-height_reset">
+        <th class="slds-size_1-of-8" scope="col">
+          <div class="slds-truncate" title="Item Id">Item id</div>
+        </th>
+        <th class="slds-size_3-of-8" scope="col">
+          <div class="slds-truncate" title="Item name">Item name</div>
+        </th>
+        <th class="slds-size_1-of-8" scope="col">
+          <div class="slds-truncate" title="Rejection reason">Rejection reason</div>
+        </th>
+        <th class="slds-size_1-of-12" scope="col" style="text-align: right">
+          <div class="slds-truncate" title="Qty">Qty</div>
+        </th>
+        <th class="slds-size_1-of-12" scope="col" style="text-align: right">
+          <div class="slds-truncate" title="Unit price">Unit price</div>
+        </th>
+        <th class="slds-size_1-of-12" scope="col" style="text-align: right">
+          <div class="slds-truncate" title="Total price">Total price</div>
+        </th>
+        <th class="slds-size_1-of-8" scope="col">
+          <div class="slds-truncate" title="Date and time">Date and time</div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <template for:each={data} for:item="rejectedItem">
+        <tr key={rejectedItem.orderLineId}>
+          <th scope="col">
+            <div class="slds-cell-wrap">
+              <a href={rejectedItem.productLink} target="_blank" rel="noopener">{rejectedItem.productId}</a>
+            </div>
+          </th>
+          <th scope="col">
+            <div class="slds-cell-wrap inline-container">
+              <template if:true={rejectedItem.isPersonalisedPromotion}>
+              <div class="ItemNameRightSapce">
+                  <span class="promopillColorBox">PROMO</span>
+              </div>
+              </template>
+              <div class="ItemNameStyle">{rejectedItem.productDescription}</div>
+            </div>
+          </th>
+          <th scope="col">
+            <div class="slds-cell-wrap">{rejectedItem.rejectionReason}</div>
+          </th>
+          <th scope="col" style="text-align: right">
+            <div class="slds-cell-wrap">{rejectedItem.rejectedQty}</div>
+          </th>
+          <th scope="col" class="slds-truncate" style="text-align: right">
+            <div class="slds-cell-wrap">
+              {orderWrapper.currencyISOCode}
+              <lightning-formatted-number value={rejectedItem.unitPrice} minimum-fraction-digits="2"></lightning-formatted-number>
+            </div>
+          </th>
+          <th scope="col">
+            <div class="slds-cell-wrap" style="text-align: right">
+              {orderWrapper.currencyISOCode}
+              <lightning-formatted-number value={rejectedItem.rejectedTotal} minimum-fraction-digits="2"></lightning-formatted-number>
+            </div>
+          </th>
+          <th scope="col">
+            <div class="slds-cell-wrap">{rejectedItem.formattedRejectionDate}</div>
+          </th>
+        </tr>
+      </template>
+    </tbody>
+  </table>
+</template>

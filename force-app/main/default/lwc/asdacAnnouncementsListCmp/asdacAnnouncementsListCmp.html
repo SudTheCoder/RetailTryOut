@@ -1,0 +1,18 @@
+<template>
+    <div if:true={isAnnouncementPresent} class="slds-card slds-p-around_small card-style">
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12">
+                <h3 class="title-style slds-p-bottom_medium"> Announcements</h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12">
+                <div class="content">
+                        <div for:each={newsCMSContentList} for:item="content" class="rndBorder slds-p-vertical_small" key={content.managedContentId}>
+                            <a href="" style="color:white;" content-type={content.type} content-title={content.title}
+                                content-id={content.contentKey} content-url={content.contentUrlName} onclick={handleNavigateToRecord}
+                                slot="title" aria-label={content.contentNodes.title.value} id={content.contentKey}>{content.contentNodes.title.value}</a>
+                        </div>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

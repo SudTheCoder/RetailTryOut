@@ -1,0 +1,55 @@
+<!--/*************************************************************************
+Name: asdacOrderManagementCmp
+===============================================================================
+Req: 
+ASDAC-1641 George - Payments & Refunds - Fields
+ASDAC-1642 Order Management - Fields
+ASDAC-1860 George - Product / Technical Support - Fields
+===============================================================================
+Purpose: This LWC Component is built to show UI for Order Management as
+         Contact Reason Level 1.
+===============================================================================
+History                                                                                                                       
+VERSION   AUTHOR                DATE         	DETAIL
+1.0       Nitish Yadav    		15 July 2022    Initial Development
+******************************************************************************/-->
+<template>
+    <lightning-card>
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12" class="slds-var-p-around_medium">
+                <lightning-textarea label="Postcode/House Number" value={caseRecord.customerAddress} disabled read-only></lightning-textarea>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-var-p-around_medium">
+                <lightning-input type="text" label="Loyalty ID" disabled read-only></lightning-input>
+            </lightning-layout-item>
+            <template if:true={panelRenderObj.isGeorge}>
+                <lightning-layout-item size="12" class="slds-var-p-around_medium">
+                    <lightning-input type="text" label="Order Number" disabled read-only></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="slds-var-p-around_medium">
+                    <lightning-input type="text" label="Purchase Order Number (Y Number)" disabled read-only></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="slds-var-p-around_medium">
+                    <lightning-input type="text" label="Tracking Number" disabled read-only></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="slds-var-p-around_medium">
+                    <lightning-input type="text" label="Returns Number"  disabled read-only></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="slds-var-p-around_medium">
+                    <lightning-input label="Drop Ship Vendor" disabled read-only></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="slds-var-p-around_medium">
+                    <lightning-input label="Fulfilment Depot (FC)" disabled read-only></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="slds-var-p-around_medium">
+                    <lightning-combobox label="Delivery" placeholder="Select Progress" options={options} ></lightning-combobox>
+                </lightning-layout-item>
+            </template>
+            <template if:true={panelRenderObj.isGrocery}>
+                <lightning-layout-item size="12" class="slds-var-p-around_medium">
+                    <lightning-input type="text" label="Order Number" disabled read-only></lightning-input>
+                </lightning-layout-item>
+            </template>
+        </lightning-layout>
+    </lightning-card>
+</template>

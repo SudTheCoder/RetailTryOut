@@ -1,0 +1,5 @@
+<aura:component implements="force:lightningQuickAction,lightning:availableForFlowActions">
+    <aura:attribute name="title" type="String" />
+    <aura:attribute name="type" type="String" />
+	<aura:attribute name="toastMessage" type="String" />
+</aura:component>

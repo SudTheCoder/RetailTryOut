@@ -1,0 +1,14 @@
+.featureArticleText {
+    font-weight: 400;
+    font-size: 16px;
+    color: #3D3D3D;
+}
+
+.featureArticleTitle {
+    font-weight: 600;
+    font-size: 16px;
+    --dxp-c-link-text-color: #3D3D3D;
+    --dxp-c-link-text-color-hover: #3D3D3D;
+    --dxp-c-link-text-color-focus: #3D3D3D;
+    text-decoration: underline;
+}

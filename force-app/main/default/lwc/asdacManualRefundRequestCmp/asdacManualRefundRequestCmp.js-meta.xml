@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">   
+            <property name="recordId" type="String" label="Record Id" description="Selected Account Record Id" role="inputOnly"/>  
+            <property name="exitButtonClicked" type="Boolean" role="outputOnly"/> 
+            <property name="hasTechnicalErrorOccurred" type="Boolean" label="hasTechnicalErrorOccurred" role="outputOnly"/> 
+            <property name="reasonCode" type="String" label="Reason Code" role="outputOnly"/>  
+            <property name="manualRefundAmount" type="String" label="Manual Refund Amount" role="outputOnly"/>  
+            <property name="notes" type="String" label="Notes" role="outputOnly"/> 
+            <property name="businessArea" type="String" label="Business Area" role="outputOnly" />
+            <property name="transactionId" type="String" label="Payout Id" role="outputOnly" />
+            <property name="transactionStatus" type="String" label="Payout Status" role="outputOnly" />            
+        </targetConfig>  
+    </targetConfigs> 
+</LightningComponentBundle>

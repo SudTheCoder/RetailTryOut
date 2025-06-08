@@ -1,0 +1,28 @@
+.warning-container{
+
+    max-width: 50%;
+    overflow:hidden;
+    margin-top: 10px;
+    padding: 5x;
+    border: 1px solid #ccc;
+    }
+    
+    .Warning-message{
+    
+    font-weight:bold;
+    color: #721c24;
+    margin:0;
+    padding:0;
+    white-space:nowwrap;
+    font-size: 24px;
+    animation:moveRight 10s linear infinite;
+    }
+    @keyframes moveRight{
+    
+        0% {
+            transform: translateX(-50%);
+        }
+        100%{
+            transform: translateX(100%);
+        }
+    }

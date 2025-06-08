@@ -1,0 +1,23 @@
+<template>
+    <section data-f6-region class="slds-p-horizontal_medium">
+        <lightning-layout multiple-rows="true" class="slds-gutters_direct-x-small">
+            <lightning-layout-item size="12" medium-device-size="6">
+                <section data-f6-region class='slds-col_padded slds-p-vertical_small'>
+                    <slot name="leftsidebar">
+                    </slot>
+                </section>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" medium-device-size="6">
+                <section data-f6-region class='slds-col_padded slds-p-vertical_small'>
+                    <slot name="rightsidebar">
+                    </slot>
+                </section>
+            </lightning-layout-item>
+            <lightning-layout-item size="12">
+                <section data-f6-region class="slds-p-horizontal_small slds-p-vertical_medium">
+                    <slot name="relatedHelpSection"></slot>
+                </section>
+            </lightning-layout-item>
+        </lightning-layout>
+    </section>
+</template>

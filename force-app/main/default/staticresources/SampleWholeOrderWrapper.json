@@ -1,0 +1,86 @@
+{
+  "createUser": "SFSC",
+  "updateUser": "SFSC", 
+  "orgId": "ASDA",
+  "sellingChannel": "ASDA_GROCERIES",
+  "orderType": "ReturnOrder",
+  "orderDate": "2023-05-16T05:34:44Z",
+  "orderCategory": "ReturnOrder",
+  "customerId": "8860077588",
+  "partialFillAllowed": true,
+  "billingCurrency": "GBP",
+  "associationDetails": [
+    {
+      "orgId": "ASDA",
+      "associationType": "SalesOrder",
+      "sellingChannel": "ASDA_GROCERIES",
+      "orderId": "ASDA-GHS-202306191516838"
+    }
+  ],
+  "charges": [
+    {
+      "name": "Shipping Charge",
+      "accountingType": "FLAT_CHARGE",
+      "category": "Charge",
+      "referenceId": "bookedSlotPriceAdjustment",
+      "referenceType": "ShippingCharge",
+      "amount": 10, 
+      "appliesToLines": [1, 2]
+    },
+    {
+      "name": "Minimum Basket Charge",
+      "accountingType": "FLAT_CHARGE",
+      "category": "Charge",
+      "referenceId": "minBasketPriceAdjustment",
+      "referenceType": "BasketCharge",
+      "amount": 20,
+      "appliesToLines": [1, 2]
+    }
+  ],
+  "orderLines": [
+    {
+      "orderLineId": 1,
+      "orderLineType": "DELIVERY",
+      "fulfillmentType": "DELIVERY",
+      "fulfillmentService": "STANDARD",
+      "quantity": 5,
+      "productId": "PROD_2389_1",
+      "uom": "EACH",
+      "productDescription": "ASDA Grower's selection strawberries 400g",
+	  "refundableQuantity": 1,
+	  "isCharitableProduct": false,
+      "associationDetails": [
+        {
+          "associationType": "SalesOrder",
+          "associatedLineId": 1
+        }
+      ],
+        "returnType": "Original", 
+        "reason": "Customer Changed Mind GR",
+        "notes": "Customer did not like item",
+      "reasonCode": "Customer Changed Mind GR" 
+    },
+    {
+      "orderLineId": "2",
+      "orderLineType": "CHARITY",
+      "fulfillmentType": "DELIVERY",
+      "fulfillmentService": "STANDARD",
+      "quantity": 1,
+      "productId": "PROD-CHARITY",
+      "uom": "EACH",
+      "productDescription": "Charitable Donation",
+	  "refundableQuantity": 1,
+	  "isCharitableProduct": true,
+      "associationDetails": [
+        {
+          "associationType": "SalesOrder",
+          "associatedLineId": 2
+        }
+      ],
+       "returnType": "Original", 
+        "reason": "Customer Changed Mind GR",
+        "notes": "Customer did not like item",
+      "reasonCode": "Customer Changed Mind GR" 
+    }
+  ]
+}

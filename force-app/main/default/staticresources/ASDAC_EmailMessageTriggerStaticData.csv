@@ -1,0 +1,4 @@
+Id,CreatedDate,LastModifiedDate,ClosedDate,Status,Subject,Origin,CaseClosedReason__c
+5008E00000L1BHpQAN,2022-05-23T09:12:33.000Z,2022-06-14T09:08:00.000Z,2022-05-28T09:08:00.000Z,Closed,Case Closed before 7 days,Email,Resolved
+5008E00000L1An0QAF,2022-05-23T09:12:33.000Z,2022-06-14T09:07:07.000Z,2022-06-13T09:07:07.000Z,Closed,Case Closed Within 7 days,Email,Resolved
+5008E00000L16eyQAB,2022-05-23T09:12:33.000Z,2022-06-14T09:07:07.000Z,,Assigned,Not Closed Case,Email,

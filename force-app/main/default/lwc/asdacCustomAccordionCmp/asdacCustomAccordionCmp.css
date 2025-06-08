@@ -1,0 +1,23 @@
+.title-style{
+    font-family:Source Sans Pro, sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #3D3D3D;
+  }
+
+  .accordion-title{
+    font-family:Source Sans Pro, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  
+  .slds-section__content{
+    margin-left:-11px;
+  }
+
+  .menu-style{
+    font-family:Source Sans Pro, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #3D3D3D;
+  }

@@ -1,0 +1,22 @@
+.preview-container {
+    position: relative;
+    width: 100%;
+    max-width: 210px;
+}
+
+.preview-container img {
+    width: 192px;
+    height: 140px;
+}
+
+.preview-container .deleteLink {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+.file-input {
+    display: none;
+}

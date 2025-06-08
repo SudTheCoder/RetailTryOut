@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="Unlink Order" icon-name="Standard:order_item">
+        <div class="slds-p-around_medium">
+        <h2>Would you really like to unlink the order?</h2>
+        <div class ="slds-m-top_medium">
+        <lightning-button variant="neutral" name="cancel" label="Cancel" onclick={handleClick}></lightning-button>
+        <lightning-button variant="destructive" name="unlinkOrder" label="Unlink Order" onclick={handleClick}></lightning-button>
+ </div>
+    </div>
+        
+    </lightning-card>
+    
+</template>

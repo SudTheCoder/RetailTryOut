@@ -1,0 +1,45 @@
+<template>
+    <div class="slds-grid slds-grid_vertical-align-center header">
+        <div class="slds-col slds-grid slds-grid_vertical-align-center">
+            <div class="slds-hide_medium slds-var-p-right_x-small">
+                <a href={href} onclick={handleBurgerMenuToggle}>
+                    <c-asdac-svg-utility-cmp svgname="burgerMenu"></c-asdac-svg-utility-cmp>
+                </a>
+            </div>
+            <span>
+                <c-asdac-help-navigation-cmp external-link= {asdaSiteUrl}>
+                    <img src={asdaLogoIcon} alt="ASDA" style="height: 32px" class="slds-var-m-vertical_xx-small" onclick={trackData}/>
+                </c-asdac-help-navigation-cmp>
+            </span>
+        </div>
+    </div>
+    <!-- Vertical Navigation List for Mobile -->
+    <template if:true={showBurgerMenu}>
+        <div class="slds-grid burger-menu-container">
+            <div class="slds-col burger-menu">
+                <div class="slds-grid slds-var-p-left_small slds-var-p-top_small slds-grid_vertical">
+                    <div class="slds-col">
+                        <span>
+                            <nav role="navigation" class="slds-nav-vertical">
+                                <ul class="slds-has-block-links_space">
+                                    <template for:each={menuItems} for:item="item">
+                                        <li key={item.id}>
+                                            <c-asdac-navigation-menu-item item={item} onnavigation={handleNavigation} header-metadata-data-layer ={headerMetadataDataLayer}>
+                                            </c-asdac-navigation-menu-item>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </nav>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-6">
+                <a href={href} onclick={handleBurgerMenuToggle}>
+                    <lightning-icon class="slds-var-p-left_small slds-var-p-top_small" icon-name="utility:close"
+                        alternative-text="Utility close" title="Close"></lightning-icon>
+                </a>
+            </div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,44 @@
+:host {
+    --lwc-spacingXxSmall: 0;
+}
+
+.spaceCls{
+    margin-top: 2%;
+}
+
+.progressSteps{
+    display: flex;
+    justify-items: stretch;
+    gap: 19px;
+    font-size: x-small;
+}
+
+[data-parent-id] {
+    padding-left: 0.75rem;
+}
+
+
+/*
+.progressSteps3{
+    white-space: pre-wrap;
+    font-size: x-small;
+    margin-left: 1px;
+    margin-right: 20px;
+    width: 25%; 
+}
+
+.progressSteps2{
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+    align-items: center;
+    font-size: x-small;
+}
+
+.slds-progress ol li {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+    align-items: center;
+}
+*/

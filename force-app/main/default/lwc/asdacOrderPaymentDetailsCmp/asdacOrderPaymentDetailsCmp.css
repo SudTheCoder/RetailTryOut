@@ -1,0 +1,50 @@
+.subPayType {
+	padding-left: 13% !important;
+}
+
+.totalTop{
+	border-bottom: groove;
+}
+.customPill {
+	background-color: orange;
+	border: none;
+	color: black;
+	padding: 5px 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	margin: var(--lwc-varSpacingXxSmall, spacingXxSmall) var(--lwc-varSpacingXxxSmall, spacingXxxSmall);
+	cursor: pointer;
+	border-radius: var(--lwc-spacingMedium, 1rem);
+  }
+ 
+.success-container {
+	display: inline-flex;
+	align-items: center;
+	background-color: green; 
+	border-radius: 5px;
+	padding: 2px;
+}
+.success-text {
+	font-weight: bold;
+	color: white; 
+}
+
+.fail-container {
+	display: inline-flex;
+	align-items: center;
+	background-color: red; 
+	border-radius: 5px;
+	padding: 3px;
+}
+.fail-text {
+	font-weight: bold;
+	color: white; 
+}
+.pending-container {
+	display: inline-flex;
+	align-items: center;
+	background-color: #fcba03; 
+	border-radius: 5px;
+	padding: 3px;
+}

@@ -1,0 +1,15 @@
+<template>
+    <div if:true={item.imageUrl}>
+        <a href={href} target={item.target} onclick={handleNavigation}><img src={item.imageUrl} alt={item.label} data-label={item.label} data-url={href}></a>
+    </div>
+    <div if:false={item.imageUrl}>
+     <div if:true={isExternalURL}>
+        <a href={item.actionValue}  class="menu-style" 
+           style="text-decoration:none;color: #3D3D3D;"
+           target={item.target} onclick={handleNavigation} data-label={item.label} data-url={item.actionValue}>{item.label}</a> 
+     </div>   
+     <div if:false={isExternalURL}>
+       <c-asdac-custom-accordion-cmp menu-item={item} onnavigation={handleNavigation} header-metadata-data-layer ={headerMetadataDataLayer}></c-asdac-custom-accordion-cmp>
+     </div>    
+    </div>  
+</template>

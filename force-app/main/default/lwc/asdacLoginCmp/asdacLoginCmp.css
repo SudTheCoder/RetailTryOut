@@ -1,0 +1,28 @@
+:host{
+    --slds-c-button-sizing-border: 1px;
+    --slds-c-button-spacing-block-start: 0.4375rem;
+    --slds-c-button-spacing-block-end: 0.4375rem;
+    --dxp-s-button-font-size: 1.25rem;
+    --dxp-s-button-font-weight: 700;
+    --dxp-s-button-line-height: 1.5rem;
+}
+
+.logged-user-info{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    color: #3d3d3d;
+}
+
+.login-button-style{
+    --sds-c-button-brand-color-background : #0073B1;
+    --sds-c-button-brand-text-color: #FFFFFF;
+    --sds-c-button-brand-color-border: #0073B1;
+    --sds-c-button-brand-color-background-hover: #0073B1;
+    --sds-c-button-brand-color-border-hover: #0073B1;
+    --sds-c-button-brand-color-background-focus: #0073B1;
+    --sds-c-button-brand-color-border-focus: #0073B1;
+    --sds-c-button-brand-color-background-active: #0073B1;
+    --sds-c-button-brand-color-border-active: #0073B1;
+    --dxp-s-button-color:#0073B1;
+}

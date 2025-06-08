@@ -1,0 +1,58 @@
+<!--/**************************************************************************
+Name: ASDAC_CloseBulkCases
+===============================================================================
+Req: 
+ASDAC-1360 Bulk Close Cases.
+===============================================================================
+Purpose: This visual force page is being called from List View Button -
+         Case.ASDAC_CloseCases. It has LWC Component embed in it to show 
+         Case Closed Reason and Comment field.      
+===============================================================================
+History                                                                                                                       
+VERSION   AUTHOR                DATE         	DETAIL
+1.0       Nitish Yadav    		03 June 2022    Initial Development
+******************************************************************************/-->
+<apex:page standardController="Case" recordSetVar="cases" extensions="ASDAC_CloseBulkCasesController">
+    <apex:includeLightning />
+    <!-- isSuccess is false when non permitted profiles will click Close Cases button
+		 or close cases button is clicked without selecting records from list view -->
+    <apex:outputPanel rendered="{!!resWrap.isSuccess}"> 
+    	<apex:pageMessages ></apex:pageMessages>
+        <script>
+        	let encodedMsg = '{!JSENCODE(resWrap.message)}';
+            sforce.one.showToast({
+                "title": 'Error',
+                "message": encodedMsg.replace(/\"/g, ""),
+                "type": "error",
+                "mode" : "sticky"
+            });
+            history.back();
+        </script>
+	</apex:outputPanel>
+    <apex:outputPanel rendered="{!resWrap.isSuccess}">
+    	<div id="LightningAppDivId"/>
+        <script>
+            document.addEventListener("resultdetailevent", function(event){
+                let resultObj = event.detail;
+                let title = resultObj.isSuccess ? 'Success' : 'Error';
+                //Showing a toast message
+                sforce.one.showToast({
+                    "title": title,
+                    "message":resultObj.message,
+                    "type": title //supported types are error, success, info, warning
+                });
+                history.back();
+            });
+            document.addEventListener("cancelclicked", function(event){
+                history.back();
+            });
+             $Lightning.use( "c:ASDAC_CloseCasesLightningOutApp", function() {
+                 $Lightning.createComponent("c:asdacBulkCloseCasesCmp",
+                                            { "openCases" : "{!JSENCODE(openCaseIdsWithCaseNumbers)}",
+                                              "closedCaseNumbers" : "{!JSENCODE(closedCaseNumbers)}"}, // attribute parameters
+                                              "LightningAppDivId" // Id of the element where Lightning Component will be rendered.
+                );
+            });
+         </script>
+	</apex:outputPanel>
+</apex:page>

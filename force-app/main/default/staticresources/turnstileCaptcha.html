@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-US">    
+    <head>
+        <title>Turnstile for Webforms</title>
+        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback" async="" defer=""></script>
+        <script>
+            var targetPageURL = "*";
+            var sitekey = '';
+            var widgetId = '';
+            // Reads the URL query parameters
+            function getUrlVars() {
+                var vars = {};
+                window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+                function(m,key,value) {
+                    vars[key] = value;
+                });
+                return vars;
+            }
+
+            sitekey = getUrlVars()["sitekey"] ? getUrlVars()["sitekey"] : '';
+
+            var verifyCallback = function getToken(e) {
+                parent.postMessage(["token", e],targetPageURL); 
+            }
+            var expiredTokenCallback = function expiredToken(e){            
+                parent.postMessage(["tokenExpired", e], targetPageURL); 
+            }
+            var onloadTurnstileCallback = function() {
+                this.widgetId = turnstile.render('#cf-turnstile', {
+                    sitekey: sitekey,
+                    retry: 'auto',
+                    'refresh-expired':'auto',
+                    callback: verifyCallback,
+                    'error-callback': expiredTokenCallback,
+                    'expired-callback':expiredTokenCallback,
+                });
+            };
+        </script>
+    </head>
+    <body>
+        <div id="cf-turnstile"></div>
+    </body> 
+</html>

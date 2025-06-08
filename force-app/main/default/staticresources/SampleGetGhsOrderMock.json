@@ -1,0 +1,425 @@
+{
+    "customerId": "0033L00000c3TT9QAM",
+    "orderId": "10000000014369",
+    "originalOrderTotal": 23.0,
+    "totalAmount": 11.0,
+    "sellingChannel": "ASDA_GROCERIES",
+    "refundableAmount": 23.0,
+    "orderStatus": "SETTLED",
+    "orderDate": "2024-03-27T11:03:15Z",
+    "fulfillmentType": "GHS_CNC",
+    "fulfillmentService": "EXPRESS",
+    "hasColleagueDiscount": false,
+    "colleagueDiscount": 0.0,
+    "isDeliveryPassUsed": false,
+    "storeNumber": "5502",
+    "deliveryNote": "",
+    "cutOffDate": "2024-03-27T11:03:15Z",
+    "shipToAddress": {
+        "addressLine1": "Forty Lane",
+        "addressLine2": "",
+        "city": "Wembley",
+        "state": "GB",
+        "country": "GB",
+        "zipCode": "HA99EX",
+        "latitude": 51.56491994042657,
+        "longitude": -0.27573775529479816
+    },
+    "fulfilmentStore": "Forty Lane, , Wembley, , GB, HA99EX",
+    "addressInfo": [
+        {
+            "id": "82ad8b9d-bdde-4f9d-946c-a45bc40d7d13",
+            "isDefault": false,
+            "contact": {
+                "firstName": "Asda Wembley Superstore Dummy Store",
+                "lastName": "5502",
+                "middleName": "",
+                "phone": "07700900000",
+                "email": ""
+            },
+            "address": {
+                "addressLine1": "Forty Lane",
+                "addressLine2": "",
+                "city": "Wembley",
+                "state": "GB",
+                "country": "GB",
+                "zipCode": "HA99EX",
+                "latitude": 51.56491994042657,
+                "longitude": -0.27573775529479816
+            },
+            "isActive": true,
+            "type": "pickUp"
+        },
+        {
+            "id": "ad969b5d-8b27-4ff0-927d-5c7832c5f872",
+            "isDefault": false,
+            "contact": {
+                "firstName": "Jayaram",
+                "lastName": "M",
+                "middleName": "Mr",
+                "phone": "",
+                "email": "sittestingmerkeljp34@yopmail.com"
+            },
+            "address": {
+                "addressLine1": "Asda Stores Ltd",
+                "addressLine2": "Forty Lane",
+                "city": "Brent",
+                "state": "",
+                "country": "GB",
+                "zipCode": "HA99EX",
+                "latitude": null,
+                "longitude": null
+            },
+            "isActive": true,
+            "type": "billTo"
+        },
+        {
+            "id": "0e18bc70-afc7-4877-9e20-3af76882495d",
+            "isDefault": false,
+            "contact": {
+                "firstName": "Asda Wembley Superstore Dummy Store",
+                "lastName": "5502",
+                "middleName": "",
+                "phone": "",
+                "email": ""
+            },
+            "address": {
+                "addressLine1": "Forty Lane",
+                "addressLine2": "",
+                "city": "Wembley",
+                "state": "",
+                "country": "GB",
+                "zipCode": "HA99EX",
+                "latitude": null,
+                "longitude": null
+            },
+            "isActive": true,
+            "type": "fulFill"
+        }
+    ],
+    "deliveryWindow": "16:00 - 16:30",
+    "plannedArrivalTime": "2024-03-27T16:00:00Z",
+    "isPersonalisedPromotion": false,
+    "actualArrivalTime": "2024-03-27T14:50:33Z",
+    "departureTime": null,
+    "orderCancelledBy": null,
+    "orderCancelledOn": null,
+    "cancellationReasonCode": null,
+    "cancellationReason": null,
+    "billingCurrency": "GBP",
+    "multisaveDiscount": 0.0,
+    "refundAmount": 12.0,
+    "charitableDonation": 0.0,
+    "currentCharitableDonation": 0.0,
+    "asdaRewardDiscount": 0.0,
+    "giftcardAmount": 9.0,
+    "marketingCouponAmount": 0.0,
+    "eVoucherAmount": 14.0,
+    "originalDeliveryCharge": 9.0,
+    "deliveryChargeRefund": 0.0,
+    "deliveryChargeReferenceId": "bookedSlotPriceAdjustment",
+    "deliveryChargeReferenceType": "bookedSlotPriceAdjustment",
+    "minimumBasketCharge": 0.0,
+    "currentMinimumBasketCharge": 0.0,
+    "minimumBasketChargeReferenceId": null,
+    "minimumBasketChargeReferenceType": null,
+    "subTotal": 14.0,
+    "currentSubtotal": 2.0,
+    "wismoURL": "",
+    "orderFulfilledDate": "2024-03-27T14:50:33Z",
+    "rewardVouchers": [
+    {
+      "rewardVoucherId": "19348055590",
+      "amountUsed": 10.25
+    }
+  ],
+    "vatRegistrationNumber": "GB929209",
+    "vatAmount": 0.0,
+    "vatExTotalPrice": 23.0,
+    "vatRateDeliveryCharge": 0.0,
+    "vatAmountDeliveryCharge": 0.0,
+    "vatExDeliveryCharge": 9.0,
+    "orderLines": [
+        {
+            "orderLineId": 1,
+            "orderLineType": "ASDACollect",
+            "fulfillmentType": "COLLECTION",
+            "fulfillmentService": "EXPRESS",
+            "productId": "5453244",
+            "productLink": "https://www-test.nonprod.asda.com/groceries/product/5453244",
+            "productDescription": "Original Tablets Paracetamol 12 Tablets",
+            "quantity": 2,
+            "refundableQuantity": 0,
+            "uom": "EACH",
+            "unitPrice": 1.0,
+            "totalPrice": 2.0,
+            "vatExTotalPrice": 2.0,
+            "productType": "Pain Relief",
+            "isPersonalisedPromotion": false,
+            "discountedPrice": 2.0,
+            "status": "SETTLED",
+            "isSubstitutedLine": false,
+            "parentOrderLineId": null,
+            "nilPickQty": 0,
+            "isNilPick": false,
+            "rejectedQty": 0,
+            "rejectionDate": null,
+            "rejectionReason": null,
+            "isCharitableProduct": false,
+            "hasSubstitute": false,
+            "discountAmount": 0.0,
+            "vatRate": 0.2,
+            "vatAmount": 0.0,
+            "stateToQty": [
+                {
+                    "state": "RETURN_CREATED",
+                    "quantity": 2
+                }
+            ]
+        },
+        {
+            "orderLineId": 2,
+            "orderLineType": "ASDACollect",
+            "fulfillmentType": "COLLECTION",
+            "fulfillmentService": "EXPRESS",
+            "productId": "9017740",
+            "productLink": "https://www-test.nonprod.asda.com/groceries/product/9017740",
+            "productDescription": "Max C Batteries, Alkaline, 2 Pack",
+            "quantity": 3,
+            "refundableQuantity": 0,
+            "uom": "EACH",
+            "unitPrice": 4.0,
+            "totalPrice": 12.0,
+            "vatExTotalPrice": 11.98,
+            "productType": "Batteries & Light Bulbs",
+            "isPersonalisedPromotion": false,
+            "discountedPrice": 12.0,
+            "status": "SETTLED",
+            "isSubstitutedLine": false,
+            "parentOrderLineId": null,
+            "nilPickQty": 0,
+            "isNilPick": false,
+            "rejectedQty": 0,
+            "rejectionDate": null,
+            "rejectionReason": null,
+            "isCharitableProduct": false,
+            "hasSubstitute": false,
+            "discountAmount": 0.0,
+            "vatRate": 0.2,
+            "vatAmount": 0.02,
+            "stateToQty": [
+                {
+                    "state": "RETURN_INVOICED",
+                    "quantity": 3
+                }
+            ]
+        }
+    ],
+    "billToContact": {
+        "firstName": "Jayaram",
+        "lastName": "M",
+        "middleName": null,
+        "phone": "",
+        "email": "sittestingmerkeljp34@yopmail.com"
+    },
+    "billToAddress": {
+        "addressLine1": "Asda Stores Ltd",
+        "addressLine2": "Forty Lane",
+        "city": "Brent",
+        "state": "",
+        "country": "GB",
+        "zipCode": "HA99EX",
+        "latitude": null,
+        "longitude": null
+    },
+    "paymentDetails": [
+        {
+            "paymentMethodId": 2,
+            "paymentType": "GIFT_CARD",
+            "cardType": "GIFT_CARD",
+            "tokenizedCard": "7777369686809529",
+            "expirationMonth": 12,
+            "expirationYear": 2029,
+            "totalInvoiced": 0.0,
+            "cardNumber": "7777369686809529",
+            "cardHolder": " Jayaram M",
+            "transactionsDetails": [
+                {
+                    "transactionId": "001094",
+                    "updatedTime": "2024-03-27T11:06:19Z",
+                    "processType": "GC auth - settled",
+                    "amount": 9.0,
+                    "status": "Success"
+                },
+                {
+                    "transactionId": "007534",
+                    "updatedTime": "2024-04-02T10:17:36Z",
+                    "processType": "Gift card refund - refund",
+                    "amount": 9.0,
+                    "status": "Success"
+                }
+            ]
+        },
+        {
+            "paymentMethodId": 1,
+            "paymentType": "CREDIT_CARD",
+            "cardType": "AMEX",
+            "tokenizedCard": "cc566720-f9aa-4bb7-bef6-c9d0ac3698fd",
+            "expirationMonth": 1,
+            "expirationYear": 2032,
+            "totalInvoiced": 0.0,
+            "cardNumber": "************7346",
+            "piHash": "cc566720-f9aa-4bb7-bef6-c9d0ac3698fd",
+            "cardHolder": " Jayaram M",
+            "transactionsDetails": [
+                {
+                    "transactionId": "9000004001615770000",
+                    "updatedTime": "2024-03-27T11:03:00Z",
+                    "processType": "Authorisation - auth",
+                    "amount": 0.0,
+                    "status": "Success"
+                }
+            ]
+        }
+    ],
+    "returnOrders": [
+        {
+            "orderDate": "2024-04-01T13:40:46Z",
+            "orderId": "R-240401014047447399",
+            "sellingChannel": "ASDA_GROCERIES",
+            "createUser": "SFSC",
+            "actualArrivalTime": "2024-03-27T14:50:33Z",
+            "orderLines": [
+                {
+                    "orderLineId": 1,
+                    "productId": "5453244",
+                    "productLink": "https://www-test.nonprod.asda.com/groceries/product/5453244",
+                    "productDescription": "Original Tablets Paracetamol 12 Tablets",
+                    "productType": "Pain Relief",
+                    "isPersonalisedPromotion": false,
+                    "stateToQty": [
+                        {
+                            "state": "CREATED",
+                            "quantity": 1
+                        }
+                    ],
+                    "refundMode": "Original",
+                    "refundSource": "SFSC",
+                    "fulfillmentType": "DELIVERY",
+                    "fulfillmentService": "STANDARD",
+                    "orderLineType": "Delivery",
+                    "reasonCode": null,
+                    "dateTime": "2024-04-01T13:40:47Z",
+                    "status": "CREATED",
+                    "quantity": 1,
+                    "uom": "EACH",
+                    "unitPrice": 1.0,
+                    "returnReason": "Product Quality - GNR",
+                    "refundAmount": 1.0,
+                    "vatRate": 0.0,
+                    "vatExRefundAmount": 1.0,
+                    "vatAmount": 0.0,
+                    "associationDetails": [
+                        {
+                            "associationType": "SalesOrder",
+                            "associatedLineId": 1
+                        }
+                    ],
+                    "canOverride": true
+                }
+            ]
+        },
+        {
+            "orderDate": "2024-04-02T09:37:05Z",
+            "orderId": "R-240402093706406963",
+            "sellingChannel": "ASDA_GROCERIES",
+            "createUser": "SFSC",
+            "actualArrivalTime": "2024-03-27T14:50:33Z",
+            "orderLines": [
+                {
+                    "orderLineId": 1,
+                    "productId": "5453244",
+                    "productLink": "https://www-test.nonprod.asda.com/groceries/product/5453244",
+                    "productDescription": "Original Tablets Paracetamol 12 Tablets",
+                    "productType": "Pain Relief",
+                    "isPersonalisedPromotion": false,
+                    "stateToQty": [
+                        {
+                            "state": "CREATED",
+                            "quantity": 1
+                        }
+                    ],
+                    "refundMode": "Original",
+                    "refundSource": "SFSC",
+                    "fulfillmentType": "DELIVERY",
+                    "fulfillmentService": "STANDARD",
+                    "orderLineType": "Delivery",
+                    "reasonCode": null,
+                    "dateTime": "2024-04-02T09:37:06Z",
+                    "status": "CREATED",
+                    "quantity": 1,
+                    "uom": "EACH",
+                    "unitPrice": 1.0,
+                    "returnReason": "Damaged - GNR",
+                    "refundAmount": 1.0,
+                    "vatRate": 0.0,
+                    "vatExRefundAmount": 1.0,
+                    "vatAmount": 0.0,
+                    "associationDetails": [
+                        {
+                            "associationType": "SalesOrder",
+                            "associatedLineId": 1
+                        }
+                    ],
+                    "canOverride": true
+                }
+            ]
+        },
+        {
+            "orderDate": "2024-04-02T10:17:26Z",
+            "orderId": "R-240402101726426727",
+            "sellingChannel": "ASDA_GROCERIES",
+            "createUser": "SFSC",
+            "actualArrivalTime": "2024-03-27T14:50:33Z",
+            "orderLines": [
+                {
+                    "orderLineId": 1,
+                    "productId": "9017740",
+                    "productLink": "https://www-test.nonprod.asda.com/groceries/product/9017740",
+                    "productDescription": "Max C Batteries, Alkaline, 2 Pack",
+                    "productType": "Batteries & Light Bulbs",
+                    "isPersonalisedPromotion": false,
+                    "stateToQty": [
+                        {
+                            "state": "INVOICED",
+                            "quantity": 3
+                        }
+                    ],
+                    "refundMode": "Original",
+                    "refundSource": "SFSC",
+                    "fulfillmentType": "COLLECTION",
+                    "fulfillmentService": "EXPRESS",
+                    "orderLineType": "ASDACollect",
+                    "reasonCode": null,
+                    "dateTime": "2024-04-02T10:17:27Z",
+                    "status": "INVOICED",
+                    "quantity": 3,
+                    "uom": "EACH",
+                    "unitPrice": 4.0,
+                    "returnReason": "Customer charged but did not collect - RCNC Good returned",
+                    "refundAmount": 12.0,
+                    "vatRate": 0.0,
+                    "vatExRefundAmount": 12.0,
+                    "vatAmount": 0.0,
+                    "associationDetails": [
+                        {
+                            "associationType": "SalesOrder",
+                            "associatedLineId": 2
+                        }
+                    ],
+                    "canOverride": true
+                }
+            ]
+        }
+    ]
+}

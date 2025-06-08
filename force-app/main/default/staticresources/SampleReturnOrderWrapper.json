@@ -1,0 +1,165 @@
+{
+    "updateTime": "2023-03-14T04:40:38.060Z",
+    "updateUser": "SFSC",
+    "orgId": "ASDA",
+    "sellingChannel": "GEORGE.COM",
+    "orderId": "RETURN_FCA-1702-208_vo1X0UQu",
+    "orderType": "ReturnOrder",
+    "orderCategory": "ReturnOrder",
+    "orderDate": "2023-03-13T19:00:35Z",
+    "billingCurrency": "GBP",
+    "charges": [],
+    "discounts": [],
+    "taxes": [],
+    "orderTotals": {
+        "subtotal": 22.00,
+        "tax": 0.00,
+        "charges": 0.00,
+        "discounts": 0.00,
+        "totalAmount": 22.00
+    },
+    "associationDetails": [
+        {
+            "orgId": "ASDA",
+            "sellingChannel": "GEORGE.COM",
+            "associationType": "SalesOrder",
+            "orderId": "FCA-1702-208"
+        }
+    ],
+    "orderLines": [
+        {
+            "updateTime": "2023-03-14T04:40:38.060Z",
+            "updateUser": "SFSC",
+            "orderLineId": 1,
+            "orderLineType": "Delivery",
+            "quantity": 1.0,
+            "productId": "testfc7",
+            "uom": "EACH",
+            "prices": [
+                {
+                    "value": 20,
+                    "name": "Unit Price"
+                }
+            ],
+            "charges": [
+                {
+                    "name": "Shipping Charge",
+                    "accountingType": "FLAT_CHARGE",
+                    "category": "Charge",
+                    "amount": 0.00,
+                    "coefficient": 1,
+                    "isRefundable": true,
+                    "useForTotals": true
+                }
+            ],
+            "discounts": [
+                {
+                    "name": "Product_Promotion",
+                    "accountingType": "PER_UNIT",
+                    "category": "Discount",
+                    "amount": 0.00,
+                    "coefficient": 1,
+                    "isRefundable": true
+                },
+                {
+                    "name": "Shipping Discount",
+                    "accountingType": "FLAT_CHARGE",
+                    "category": "Discount",
+                    "amount": 0.00,
+                    "coefficient": 1,
+                    "isRefundable": true
+                }
+            ],
+            "taxes": [
+                {
+                    "name": "Sales Tax",
+                    "category": "Tax",
+                    "taxPercentage": 10.0,
+                    "accountingType": "PER_UNIT",
+                    "amount": 2.00,
+                    "isRefundable": true,
+                    "coefficient": 1
+                },
+                {
+                    "name": "Shipping Tax",
+                    "category": "Tax",
+                    "taxPercentage": 0.0,
+                    "accountingType": "FLAT_CHARGE",
+                    "amount": 0.00,
+                    "isRefundable": true,
+                    "coefficient": 1
+                }
+            ],
+            "lineTotals": {
+                "subtotal": 20.00,
+                "tax": 2.00,
+                "charges": 0.00,
+                "discounts": 0.00,
+                "totalAmount": 22.00
+            },
+            "associationDetails": [
+                {
+                    "associationType": "SalesOrder",
+                    "associatedLineId": 7
+                }
+            ],
+            "reasonCode": "202"
+        },
+        {
+            "updateTime": "2023-03-14T04:40:38.060Z",
+            "updateUser": "SFSC",
+            "orderLineId": 2,
+            "orderLineType": "Delivery",
+            "quantity": 1.0,
+            "productId": "Bun1",
+            "isBundle": true,
+            "uom": "EACH",
+            "lineTotals": {
+                "subtotal": 0.00,
+                "tax": 0.00,
+                "charges": 0.00,
+                "discounts": 0.00,
+                "totalAmount": 0.00
+            },
+            "associationDetails": [
+                {
+                    "associationType": "SalesOrder",
+                    "associatedLineId": 1
+                }
+            ],
+            "reasonCode": "202"
+        },
+        {
+            "updateTime": "2023-03-14T04:40:38.060Z",
+            "updateUser": "SFSC",
+            "orderLineId": 3,
+            "orderLineType": "Delivery",
+            "quantity": 4.0,
+            "productId": "Bun_Ch1",
+            "parentId": 2,
+            "uom": "EACH",
+            "prices": [
+                {
+                    "value": 20,
+                    "name": "Unit Price"
+                }
+            ],
+            "lineTotals": {
+                "subtotal": 20.00,
+                "tax": 2.00,
+                "charges": 0.00,
+                "discounts": 0.00,
+                "totalAmount": 22.00
+            },
+            "associationDetails": [
+                {
+                    "associationType": "SalesOrder",
+                    "associatedLineId": 2
+                }
+            ],
+            "reasonCode": "202"
+        }
+    ],
+    "refundStatus": "LATER",
+    "refundPaymentMethod": "ORIGINAL"
+}

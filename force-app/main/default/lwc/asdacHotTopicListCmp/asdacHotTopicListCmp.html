@@ -1,0 +1,13 @@
+<!-- sldsValidatorIgnore -->
+<template>
+	<lightning-card title={label.Hot_Topic_Title} icon-name="standard:topic">
+		<div class="slds-var-m-around_medium">
+			<template if:true={dataFound}>
+				<lightning-datatable key-field="id" data={hotTopics} columns={columns} hide-checkbox-column></lightning-datatable>
+			</template>
+			<template if:false={dataFound}>
+				<div class="slds-truncate errorMsg">{displayMessage}</div>
+			</template>
+		</div>
+	</lightning-card>
+</template>

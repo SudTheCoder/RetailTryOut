@@ -1,0 +1,57 @@
+<template>
+    <div>
+        <div class="footer-container">
+            <div class="slds-order_1 slds-medium-order_2 slds-p-top_small">
+                <c-asdac-svg-utility-cmp class=" slds-p-top_medium slds-p-bottom_medium" svgname="footerLogo">
+                </c-asdac-svg-utility-cmp>
+            </div>
+            <div class="slds-order_2 slds-medium-order_1">
+                <lightning-layout multiple-rows class="link-container">
+                    <lightning-layout-item size="12">
+                        <lightning-layout multiple-rows="true" vertical-align="center"
+                            class="link-container">
+                            <p class="slds-p-vertical_medium"><span class="text-style text-bold">{copyrightInfo}</span></p>
+                            <p class="slds-p-vertical_medium" for:each={menuItemData}
+                                for:item="menuItem" key={menuItem.label}>
+                                <a class="text-style" href={menuItem.actionValue} target="_blank" rel="noopener" onclick={trackData} data-title={menuItem.label} data-url={menuItem.actionValue} >{menuItem.label}</a>
+                            </p>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                    <p>
+                        <lightning-layout multiple-rows="true" horizontal-align="center" vertical-align="center" class="icon-container">
+                            <lightning-layout-item class="slds-p-bottom_small slds-p-top_small">
+                                <lightning-layout-item class="text-style slds-var-p-right_small text-bold">Payment Methods</lightning-layout-item>
+                                <lightning-layout-item class="slds-p-around_xx-small">
+                                    <c-asdac-svg-utility-cmp svgname="VerifiedLogo"></c-asdac-svg-utility-cmp>
+                                </lightning-layout-item>
+                                <lightning-layout-item class="slds-p-around_xx-small">
+                                    <c-asdac-svg-utility-cmp svgname="mastercard"></c-asdac-svg-utility-cmp>
+                                </lightning-layout-item>
+                                <lightning-layout-item class="slds-p-vertical_xx-small slds-p-left_xx-small">
+                                    <c-asdac-svg-utility-cmp svgname="safeKeyLogo"></c-asdac-svg-utility-cmp>
+                                </lightning-layout-item>
+                            </lightning-layout-item>
+                            <lightning-layout-item>
+                                <lightning-layout-item class="slds-p-around_x-small">
+                                    <c-asdac-svg-utility-cmp svgname="amexLogo"></c-asdac-svg-utility-cmp>
+                                </lightning-layout-item>
+                                <lightning-layout-item class="slds-p-around_x-small">
+                                    <c-asdac-svg-utility-cmp svgname="footercard1"></c-asdac-svg-utility-cmp>
+                                </lightning-layout-item>
+                                <lightning-layout-item class="slds-p-around_x-small">
+                                    <c-asdac-svg-utility-cmp svgname="footercard2"></c-asdac-svg-utility-cmp>
+                                </lightning-layout-item>
+                                <lightning-layout-item class="slds-p-around_x-small">
+                                    <c-asdac-svg-utility-cmp svgname="footercard3"></c-asdac-svg-utility-cmp>
+                                </lightning-layout-item>
+                                <lightning-layout-item class="slds-p-around_x-small">
+                                    <c-asdac-svg-utility-cmp svgname="visaLogo"></c-asdac-svg-utility-cmp>
+                                </lightning-layout-item>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </p>
+                </lightning-layout>
+            </div>
+        </div>
+    </div>
+</template>

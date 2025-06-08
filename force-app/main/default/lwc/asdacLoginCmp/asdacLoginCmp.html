@@ -1,0 +1,12 @@
+<template>
+  <div>
+    <template if:false={isLoggedIn}>
+      <div class="slds-grid slds-grid_align-spread slds-global-actions">
+        <button class="slds-button slds-button_brand login-button-style slds-p-horizontal_medium" name="Sign in" role="link" onclick={handleClick}>Sign in</button>
+      </div>
+    </template>
+    <template if:true={isLoggedIn}>
+      <div class="logged-user-info">Hello {userName}</div>
+    </template>
+  </div>
+</template>

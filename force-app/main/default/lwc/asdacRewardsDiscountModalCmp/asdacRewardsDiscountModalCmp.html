@@ -1,0 +1,61 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </template>
+    <div class="slds-var-p-around_large">
+        <template if:false={isLoading}>
+            <lightning-card>
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                    aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <!-- sldsValidatorIgnoreNextLine -->
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-border-filled"
+                            onclick={handleCloseModal}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" 
+                                size="small"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <div class="slds-modal__header">
+                            <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">ASDA rewards discount
+                                details
+                            </h1>
+                        </div>
+                        <div class="slds-modal__content" id="modal-content-id-1">
+                            <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-no-row-hover slds-p-bottom_x-small"
+                                aria-label="Rewards Discount">
+                                <tbody>
+                                    <tr class="slds-hint-parent">
+                                        <th style="height: 35px">S.No</th>
+                                        <th>Rewards voucher id</th>
+                                        <th>Amount used</th>
+                                    </tr>
+                                    <template for:each={rewardVoucherWrapper} for:item="voucher" for:index="index">
+                                        <tr key={voucher.rewardVoucherId}>
+                                            <td>{voucher.serialNumber}</td>
+                                            <td>{voucher.rewardVoucherId}</td>
+                                            <td>{orderwrapper.currencyISOCode}<lightning-formatted-number value={voucher.amountUsed} minimum-fraction-digits="2"></lightning-formatted-number></td>
+                                        </tr>
+                                    </template>
+                                    <tr class="">
+                                        <td>Total</td>
+                                        <td></td>
+                                        <td>{orderwrapper.currencyISOCode}<lightning-formatted-number value={orderwrapper.asdaRewardDiscount} minimum-fraction-digits="2"></lightning-formatted-number></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <lightning-button variant="neutral" name="close" label="Close" title="Close"
+                                onclick={handleCloseModal}
+                                class="slds-var-m-left_x-small closeModalCls"></lightning-button>
+                        </footer>
+                    </div>
+                </section>
+            </lightning-card>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </div>
+
+
+
+</template>

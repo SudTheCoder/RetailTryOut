@@ -1,0 +1,13 @@
+<design:component>
+	<design:attribute name="caseId" label="Case ID" />
+    <design:attribute name="recordsToCreate" label="Refund Records to Create" />
+    <design:attribute name="requestType" label="Refund Request Type" />
+    <design:attribute name="totalRefundAmt" label="Total Refund Amount" />
+    <design:attribute name="caseCommentAction" label="Case Comment Action Name" />
+    <design:attribute name="escalatedAmt" label="Escalated Amt for Discount " />
+    <design:attribute name="ApproverList" label="Approver List for Discount" />
+    <design:attribute name="customerId" label="customerId" />
+    <design:attribute name="isCancelRequesttoStore" label="isCancelRequesttoStore" />
+    <design:attribute name="actionName" label="Action Name" />
+    <design:attribute name="isGeorge" label="Is George Flag" />
+</design:component>

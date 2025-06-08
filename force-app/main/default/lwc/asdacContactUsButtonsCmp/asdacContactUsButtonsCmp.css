@@ -1,0 +1,90 @@
+:host {
+  --sds-c-button-text-color: #3d3d3d;
+  --sds-c-button-text-color-hover: #3d3d3d;
+  --sds-c-button-text-color-focus: #3d3d3d;
+  --sds-c-button-text-color-active: #3d3d3d;
+  --sds-c-button-outline-brand-color-background-hover: #f4f4f4;
+  --sds-c-button-outline-brand-color-background-focus: #f4f4f4;
+  --sds-c-button-outline-brand-color-background-active: #f4f4f4;
+  --sds-c-button-outline-brand-color-border: #cccccc;
+  --sds-c-button-outline-brand-color-border-hover: #cccccc;
+  --sds-c-button-outline-brand-color-border-focus: #cccccc;
+  --sds-c-button-outline-brand-color-border-active: #cccccc;
+  --dxp-s-button-color-focus: transparent;
+  --dxp-s-button-font-size: 1rem;
+  --dxp-s-button-line-height: 1.25rem;
+  --sds-c-button-radius-border: 0.25rem;
+  --slds-c-button-spacing-block-start: 1rem;
+  --slds-c-button-spacing-block-end: 1rem;
+  --slds-c-button-outline-brand-spacing-inline-start: 1rem;
+  --slds-c-button-outline-brand-spacing-inline-end: 1rem;
+
+  --slds-c-icon-color-foreground-default: #3d3d3d;
+
+  --dxp-s-link-text-decoration-hover: "none";
+  --dxp-s-link-text-decoration-focus: "hover";
+}
+
+.cta-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.cta-container > div {
+  margin-bottom: 1rem; 
+}
+
+.cta-container-feedback {
+  flex-direction: column-reverse;
+}
+
+.cta-button {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.cta-label {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.cta-link {
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.25rem;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #0073b1;
+}
+
+.cta-note {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.375rem;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.more-container {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.more-dropdown {
+  background: #f6f6f6;
+  padding: 1rem;
+  margin-top: -0.25rem;
+}
+
+.more-dropdown-feedback {
+  border: 1px solid var(--sds-c-button-outline-brand-color-border);
+  border-radius: var(--sds-c-button-radius-border);
+}
+
+.second-container{
+  padding-bottom: 2rem;
+}

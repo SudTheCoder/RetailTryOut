@@ -1,0 +1,17 @@
+<template>
+  <lightning-modal-body>
+    <lightning-layout multiple-rows>
+      <lightning-layout-item size="12">
+        <lightning-layout horizontal-align="spread">
+          <lightning-layout-item>
+            <div class="brand-title slds-p-around_x-small" tabindex="0">Which brand?</div>
+          </lightning-layout-item>
+        </lightning-layout>
+      </lightning-layout-item>
+      <lightning-layout-item class="slds-p-around_x-small" size="12" medium-device-size="12" large-device-size="6"
+        for:each={brandSelectionItems} for:item="option" key={option.id}>
+        <button class={option.selectedClass} onclick={trackData} role="link" data-button>{option.label}</button>
+      </lightning-layout-item>
+    </lightning-layout>
+  </lightning-modal-body>
+</template>

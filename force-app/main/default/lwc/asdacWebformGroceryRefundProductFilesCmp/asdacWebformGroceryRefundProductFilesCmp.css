@@ -1,0 +1,13 @@
+.borderOutline {
+    border: 2px solid rgb(219 218 218);
+    padding: 10px;
+}
+
+.add-product {
+    --sds-c-button-brand-color-background: #68a51c;
+    --sds-c-button-brand-color-background-hover: #538316;
+    --sds-c-button-brand-color-background-active: #538316;
+    --sds-c-button-brand-color-border-focus: #538316;
+    --sds-c-button-brand-color-border-active: #538316;
+    --sds-c-button-brand-color-border: #68a51c;
+}

@@ -1,0 +1,52 @@
+<template>
+  <form if:false={success} onsubmit={handleSubmit} autocomplete="off">
+    <div class="slds-var-p-bottom_medium slds-text-heading_large">{labels.title}</div>
+    <lightning-input name="firstName" label={labels.firstName} value={firstName} type="text" required onchange={handleChange}> </lightning-input>
+    <lightning-input name="lastName" label={labels.lastName} value={lastName} type="text" required onchange={handleChange}> </lightning-input>
+    <lightning-input name="email" label={labels.email} value={email} type="email" required onchange={handleChange}> </lightning-input>
+    <lightning-input
+      class="confirmEmailSelector"
+      name="confirmEmail"
+      label={labels.confirmEmail}
+      value={confirmEmail}
+      type="email"
+      required
+      autocomplete="off"
+      onchange={handleChange}
+      onblur={validateEmail}
+      oncontextmenu={disableEvent}
+      onpaste={disableEvent}
+    >
+    </lightning-input>
+    <lightning-input name="phone" label={labels.phone} value={phone} type="tel" required onchange={handleChange}> </lightning-input>
+    <lightning-input name="postcode" label={labels.postcode} value={postcode} type="text" onchange={handleChange}> </lightning-input>
+    <c-asdac-date-input-cmp name="orderDate" label={labels.orderDate} value={orderDate} max={maxOrderDate} required onchange={handleChange}>
+    </c-asdac-date-input-cmp>
+    <lightning-input
+      name="orderTotal"
+      label={labels.orderTotal}
+      value={orderTotal}
+      type="number"
+      formatter="currency"
+      step="0.01"
+      min="0"
+      required
+      onchange={handleChange}
+    >
+    </lightning-input>
+    <lightning-input name="orderId" label={labels.orderId} value={orderId} type="text" required onchange={handleChange}> </lightning-input>
+    <div class="slds-var-m-top_medium">
+      <lightning-button variant="brand" type="submit" label={labels.sendRequest}></lightning-button>
+    </div>
+  </form>
+  <div if:true={error}>Error: {error}</div>
+  <c-asdac-webform-success-cmp
+    if:true={success}
+    success-response={labels.successResponse}
+    new-request-label={labels.startNewRequest}
+    onnewrequest={handleNewRequest}
+  ></c-asdac-webform-success-cmp>
+  <template if:true={loading}>
+    <lightning-spinner size="medium" variant="brand" alternative-text="Loading Webform"> </lightning-spinner>
+  </template>
+</template>

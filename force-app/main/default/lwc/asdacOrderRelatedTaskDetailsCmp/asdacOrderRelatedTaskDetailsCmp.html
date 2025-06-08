@@ -1,0 +1,15 @@
+<template>
+    <div if:true={isRelatedActionsPresent}>
+        <lightning-datatable data={taskList}
+                             hide-checkbox-column="true"
+                             columns={cols}
+                             key-field="Id"
+                             sorted-by={sortBy}
+                             sorted-direction={sortDirection}
+                             onsort={doSorting}>
+        </lightning-datatable>
+    </div>
+    <div if:false={isRelatedActionsPresent} class="slds-align_absolute-center no-action-records">
+        {noRecordsFoundMessage}
+    </div>
+</template>

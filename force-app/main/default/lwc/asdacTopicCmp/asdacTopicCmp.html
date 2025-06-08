@@ -1,0 +1,36 @@
+<template>
+<h1 class="topic">{topicHeader}</h1>
+<div if:true={dataCategoryArray} for:each={dataCategoryArray} class="category" for:item="category" key={category.index}>
+  <div if:true={category.isArticle}>
+    <div if:true={category.showArticle} for:each={category.articles} for:item="article" for:index="index" key={article.UrlName} class="slds-p-left_large articleSection">
+      <div class="articleCls" onclick={trackData}>
+      <c-asdac-help-navigation-cmp button="true" aria-label={article.Title} data-title={article.Title} data-index={index} data-url-alias={article.UrlName} content-type="faq" record-id={article.Id} url-alias={article.UrlName}>
+        <c-asdac-menu-item-cmp aria-label={article.Title} label={article.Title} data-title={article.Title} data-index={index} data-url-alias={article.UrlName} no-border="true"></c-asdac-menu-item-cmp>
+      </c-asdac-help-navigation-cmp>
+      </div>
+      </div>
+      <div if:false={category.showArticle} class="slds-p-left_large slds-p-vertical_medium">
+        {noFAQFoundMessage}
+      </div>
+  </div>
+<div if:false={category.isArticle}>
+  <div class="categoryCls" data-val={category.name} data-label={category.label} onclick={handleClick} onkeydown={handleKeyPress}>
+    <div role="link" tabindex="0" aria-label={category.label} aria-hidden="false">
+    <c-asdac-menu-item-cmp aria-label={category.label} label={category.label} data-index={category.index}  no-border="true"></c-asdac-menu-item-cmp>
+    </div>
+    <div if:true={category.expanded}>
+      <div if:true={category.showArticle} for:each={category.articles} for:item="article" for:index="index" key={article.UrlName} class="slds-p-left_large">
+      <div onclick={trackData}>
+      <c-asdac-help-navigation-cmp button="true" aria-label={article.Title} data-title={article.Title} data-category={category.label} data-index={index} data-url-alias={article.UrlName} content-type="faq" record-id={article.Id} url-alias={article.UrlName}>
+        <c-asdac-menu-item-cmp aria-label={article.Title} label={article.Title} data-title={article.Title} data-category={category.label} data-index={index} data-url-alias={article.UrlName} no-border="true"></c-asdac-menu-item-cmp>
+      </c-asdac-help-navigation-cmp>
+      </div>
+    </div>
+    <div if:false={category.showArticle} class="slds-p-left_large slds-p-vertical_medium">
+      {noFAQFoundMessage}
+    </div>
+  </div>
+  </div>
+  </div>
+</div>
+</template>

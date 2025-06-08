@@ -1,0 +1,12 @@
+.OkButton{
+    padding: 10px;
+}
+
+.header{
+    background-color: #fe9339;
+    color: #080707;
+}
+
+.error-message {
+    color: #ba0517;
+}

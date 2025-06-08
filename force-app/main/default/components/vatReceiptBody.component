@@ -1,0 +1,136 @@
+<apex:component controller="ASDAC_DownloadVatReceiptController">
+  <div>
+    <p style="width:44%; font-weight: bold ; font-size: 15px">Your order</p>
+  </div>
+    <div>
+        <apex:repeat value="{!orderDetails.categoryList}" var="mapKey">
+        <table id="category" style="width:100%; margin-top: 10px;" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr>
+                <th style="width:44%; font-weight: bold; padding-left:5px;">{!mapKey}</th>
+                <th class="numberColumn " style="width:8%; text-align:left;font-weight: bold;">
+                    <apex:outputText value="Quantity" rendered="{!NOT(mapKey == 'Delivery cost')}" />
+                </th>
+                <th class="numberColumn " style="font-weight: bold;">
+                    <apex:outputText value="Unit price" rendered="{!NOT(mapKey == 'Delivery cost')}" />
+                </th>
+                
+                <th class="numberColumn " style="width:11%; font-weight: bold;">
+                    <apex:outputText value="Total price" rendered="{!(mapKey != 'Refunds')}" />
+                    <apex:outputText value="Total refund" rendered="{!(mapKey == 'Refunds')}" />
+                </th>
+                <th class="numberColumn " style="font-weight: bold;">VAT rate</th>
+                <th class="numberColumn " style="width:11%; padding-right:5px; font-weight: bold;">VAT amount</th>
+              </tr>
+            </thead>
+            <tbody style="margin-top:5px;">
+                <apex:repeat value="{!orderDetails.categoryMap[mapKey]}" var="obj">
+                <tr>
+                  <td style="padding-left:5px; font-size: 12px;">
+                    <apex:outputText value="{!obj.productDescription}" rendered="{!NOT(mapKey == 'Delivery cost')}" />
+                  </td>
+                  <td class="numberColumn " style="width:8%; text-align:center;">
+                    <apex:outputText value="{!obj.quantityFormatted}" rendered="{!NOT(mapKey == 'Delivery cost')}" />
+                  </td>
+                  <td class="numberColumn ">
+                    <apex:outputText value="{!obj.unitPriceFormatted}" rendered="{!NOT(mapKey == 'Delivery cost')}" />
+                  </td>
+                  <td class="numberColumn " style="width:11%;">
+                    <apex:outputText value="{!obj.discountedPriceFormatted}" rendered="{!(mapKey != 'Delivery cost' && mapKey != 'Refunds')}"/>
+                    <apex:outputText value="{!obj.refundAmountFormatted}" rendered="{!(mapKey == 'Refunds')}"/>
+                    <apex:outputText value="{!orderDetails.formattedcurrentDeliveryCharge}" rendered="{!(mapKey == 'Delivery cost')}"/>
+                  </td>
+                  <td class="numberColumn ">
+                    <apex:outputText value="{!(TEXT(obj.vatRate*100) & '%')}" rendered="{!NOT(mapKey == 'Delivery cost')}" />
+                    <apex:outputText value="{!(TEXT(orderDetails.vatRateDeliveryCharge*100) & '%')}" rendered="{!(mapKey == 'Delivery cost')}" />
+                  </td>
+                  <td class="numberColumn " style="width:11%; padding-right:5px">
+                    <apex:outputText value="{!obj.vatAmountFormatted}" rendered="{!NOT(mapKey == 'Delivery cost')}" />
+                    <apex:outputText value="{!orderDetails.formattedvatAmountDeliveryCharge}" rendered="{!(mapKey == 'Delivery cost')}" />
+                  </td>
+                </tr>
+              </apex:repeat>
+            </tbody>
+          </table>
+    </apex:repeat>
+    </div>
+    <div style="border-top: 0.8pt solid rgb(235, 233, 233); margin-top: 20px;">
+      <table id="totals" style="width:100%; margin-top: 10px;font-weight: bold;">
+        <tbody>
+          <tr>
+            <td style="width:75%; margin-top: 40px;font-weight: bold; text-align:right;">
+              <apex:outputText value="{!orderDetails.formattedvatTotalPrice}" />
+            </td>
+            <td style="width:20%; margin-top: 40px; text-align:right; font-weight: bold;">
+              <apex:outputText value="{!orderDetails.formattedvatAmount}" />
+            </td>
+          </tr>
+        </tbody>
+      </table>   
+    </div>
+    <div style=" border-top: 0.8pt solid rgb(235, 233, 233); margin-top: 20px;">
+        <table id="discounts" style="width:100%; margin-top: 30px;" cellspacing="0" cellpadding="0">
+          <thead>
+            <tr>
+              <th style="width:70%; font-weight: bold; padding-left:5px;">                   
+                Discounts
+              </th>
+              <th style="width:30%">
+              </th>
+            </tr>
+          </thead>
+            <tbody> 
+              <tr>
+              <td style="width:78%; font-size: 12px;">
+              <apex:outputText rendered="{!NOT(orderDetails.formattedmultisaveDiscount == '£0.00')}">
+                <apex:outputText style="padding-left:5px" value="Multibuy"></apex:outputText>
+                <apex:outputText style="float:right; text-align:right" value="{!orderDetails.formattedmultisaveDiscount}"></apex:outputText>
+              </apex:outputText>
+              </td>
+              <td style=" width:40%;">
+              </td>
+            </tr>
+            <tr>
+            <td style=" width:78%; font-size: 12px;">
+            <apex:outputText rendered="{!NOT(orderDetails.formattedasdaRewardDiscount == '£0.00')}">
+              <apex:outputText style="padding-left:5px" value="Rewards voucher"></apex:outputText>
+              <apex:outputText style="float:right; text-align:right" value="{!orderDetails.formattedasdaRewardDiscount}"></apex:outputText>
+            </apex:outputText>
+            </td>
+            <td style=" width:40%;">
+            </td>
+          </tr>
+          <tr>
+          <td style=" width:78%; font-size: 12px;">
+          <apex:outputText rendered="{!NOT(orderDetails.formattedcolleagueDiscount == '£0.00')}">
+            <apex:outputText style="padding-left:5px" value="Colleague discount"></apex:outputText>
+            <apex:outputText style="float:right; text-align:right" value="{!orderDetails.formattedcolleagueDiscount}"></apex:outputText>
+          </apex:outputText>
+          </td>
+          <td style=" width:40%;">
+          </td>
+        </tr>
+        <tr>
+        <td style=" width:78%; font-size: 12px;">
+        <apex:outputText rendered="{!NOT(orderDetails.formattedmarketingCouponAmount == '£0.00')}">
+          <apex:outputText style="padding-left:5px" value="Marketing coupon"></apex:outputText>
+          <apex:outputText style="float:right; text-align:right" value="{!orderDetails.formattedmarketingCouponAmount}"></apex:outputText>
+        </apex:outputText>
+        </td>
+        <td style=" width:40%;">
+        </td>
+      </tr>
+      <tr>
+      <td style=" width:78%; font-size: 12px;">
+      <apex:outputText rendered="{!NOT(orderDetails.formattedeVoucherAmount == '£0.00')}">
+        <apex:outputText style="padding-left:5px" value="eVoucher"></apex:outputText>
+        <apex:outputText style="float:right; text-align:right" value="{!orderDetails.formattedeVoucherAmount}"></apex:outputText>
+      </apex:outputText>
+      </td>
+      <td style=" width:40%;">
+      </td>
+    </tr>                                           
+            </tbody>
+        </table>
+    </div>
+</apex:component>

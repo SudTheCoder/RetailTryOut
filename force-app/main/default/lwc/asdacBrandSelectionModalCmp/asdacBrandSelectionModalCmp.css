@@ -1,0 +1,46 @@
+.button-grocery {
+    height: 40px;
+    --sds-c-button-line-height: 24px;
+    --slds-c-button-color-background: rgb(83, 131, 22);
+    --sds-c-button-text-color-active: #ffffff;
+    --sds-c-button-text-color-hover: #ffffff;
+    --sds-c-button-brand-color-border: #538316;
+    --sds-c-button-brand-color-background-hover: #538316;
+    --sds-c-button-brand-color-border-focus: #538316;
+    --sds-c-button-brand-color-background-active: #538316;
+    --sds-c-button-brand-color-border-active: #538316;
+    --dxp-s-button-font-weight: 700;
+    --dxp-s-button-font-size: 19px;
+    --dxp-s-button-letter-spacing: 0.002em;
+    --sds-c-button-brand-text-color: #ffffff;
+    --slds-c-button-radius-border: 4px;
+}
+
+.button-george {
+    height: 40px;
+    --sds-c-button-line-height: 24px;
+    --slds-c-button-color-background: rgba(66, 66, 66, 0.984856);
+    --sds-c-button-brand-text-color: #ffffff;
+    --sds-c-button-text-color-active: #ffffff;
+    --sds-c-button-text-color-hover: #ffffff;
+    --sds-c-button-brand-color-border: rgba(66, 66, 66, 0.984856);
+    --sds-c-button-brand-color-background-hover: rgba(66, 66, 66, 0.984856);
+    --sds-c-button-brand-color-border-hover: rgba(66, 66, 66, 0.984856);
+    --sds-c-button-brand-color-background-focus: rgba(66, 66, 66, 0.984856);
+    --sds-c-button-brand-color-border-focus: rgba(66, 66, 66, 0.984856);
+    --sds-c-button-brand-color-background-active: rgba(66, 66, 66, 0.984856);
+    --sds-c-button-brand-color-border-active: rgba(66, 66, 66, 0.984856);
+    --dxp-s-button-color: rgba(66, 66, 66, 0.984856);
+    --dxp-s-button-font-weight: 700;
+    --dxp-s-button-font-size: 19px;
+    --dxp-s-button-letter-spacing: 0.002em;
+    --slds-c-button-radius-border: 4px;
+}
+
+.brand-title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 28px;
+    color: #3D3D3D;
+}

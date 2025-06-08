@@ -1,0 +1,111 @@
+<template>
+    <div style="overflow-x:auto;">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+            aria-describedby="george-orderItem-Table">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Select Item"></div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Possible Actions">Possible Actions
+                        </div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Item Id">Item Id</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Item Name">Item Name</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate ordItmStatus" title="Status">Status</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Qty/Wt">Qty/Wt</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Unit Price">Unit Price</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Taxes">Taxes</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Discount">Discount</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Total Price">Total Price</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={orderWrapper.partialRefundItems} for:item="ordItm">
+                    <tr key={ordItm.productId}>
+                        <th scope="col">
+                            <div>
+                                <lightning-input data-id="toggle" data-value={ordItm.lineId}
+                                    type="checkbox" id={ordItm.lineId} name="input1"
+                                    value={ordItm.lineId} class="oiCheckCls">
+                                </lightning-input>
+                            </div>
+                        </th>
+                        <th scope="col" style="overflow: auto">
+                            <div>
+                                <lightning-button value={ordItm.lineId} variant="brand"
+                                    id={ordItm.lineId} label="Refund" title="Refund"
+                                    onclick={handleRefundGeorge}
+                                    class="slds-var-m-left_x-small refundGCls"
+                                    disabled={ordItm.isDisableRefund}>
+                                </lightning-button>
+                                <lightning-helptext if:true={ordItm.isDisableRefund} content="Customer must return item before refund is possible"></lightning-helptext>
+                                <br/>
+                                <div class="spaceCls"></div>
+                                <lightning-button value={ordItm.lineId} variant="brand"
+                                    id={ordItm.lineId} label="Exchange" title="Exchange"
+                                    onclick={handleExchange}
+                                    class="slds-var-m-left_x-small exchangeCls"
+                                    disabled={ordItm.isDisableExchange}>
+                                </lightning-button>
+                                <lightning-helptext  if:true={ordItm.isDisableExchange} content="Customer must return item before exchange is possible"></lightning-helptext>
+                                <span if:false={ordItm.isDisableExchange} style="margin-right: 16px;"></span>
+                                <lightning-button value={ordItm.lineId} variant="brand"
+                                    id={ordItm.lineId} label="Partial Refund"
+                                    title="Partial Refund" onclick={handleDiscount}
+                                    class="slds-var-m-left_x-small discountCls"
+                                    disabled={ordItm.isDisableDiscount} >
+                                </lightning-button>
+                                <lightning-helptext if:true={ordItm.isDisableDiscount} content="Customer must Discount is possible"></lightning-helptext>
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div><a href={ordItm.productLink}
+                                    target="_blank" rel="noopener">{ordItm.productId}</a></div>
+                        </th>
+                        <th scope="col">
+                            <div>{ordItm.itemName}</div>
+                        </th>
+                        <th scope="col">
+                            <div>{ordItm.lineStatus}
+                                <lightning-helptext content="Last Updated Date 12/05/2022 04:55PM"></lightning-helptext>
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div>{ordItm.quantity}</div>
+                        </th>
+                        <th scope="col">
+                            <div>{orderWrapper.currencyISOCode} {ordItm.unitPrice}</div>
+                        </th>
+                        <th scope="col">
+                            <div>{orderWrapper.currencyISOCode} {ordItm.taxes}</div>
+                        </th>
+                        <th scope="col">
+                            <div>{orderWrapper.currencyISOCode} {ordItm.discount}</div>
+                        </th>
+                        <th scope="col">
+                            <div>{orderWrapper.currencyISOCode} {ordItm.lineTotal}</div>
+                        </th>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+</template>

@@ -1,0 +1,18 @@
+<template>
+    <div if:true={showFeaturedResult}>
+        <div for:each={featuredArticles} for:item="article" key={article.Id}>
+            <lightning-formatted-rich-text class="slds-var-p-bottom_medium featureArticleTitle"
+                value={article.Feature_Result_Title__c}></lightning-formatted-rich-text>
+            <lightning-layout>
+                <lightning-layout-item class="slds-var-p-top_small slds-var-p-right_small">
+                    <lightning-formatted-rich-text value={article.Upload_Feature_Result_Image__c}>
+                    </lightning-formatted-rich-text>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-var-p-top_xxx-small">
+                    <lightning-formatted-rich-text class="featureArticleText" value={article.Feature_Result_Text__c}>
+                    </lightning-formatted-rich-text>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </div>
+</template>

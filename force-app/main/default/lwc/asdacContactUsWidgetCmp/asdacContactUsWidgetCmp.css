@@ -1,0 +1,48 @@
+.widget-group {
+  background: #eef3e8;
+  border-radius: 8px;
+}
+
+.custom-text {
+  padding-left: 24px;
+}
+
+@media screen and (min-width: 479px) {
+  .custom-text {
+    padding: 24px;
+  }
+}
+
+.label-header {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #3d3d3d;
+}
+
+.label-description {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #3d3d3d;
+  padding: auto;
+}
+
+.custom-button {
+  --dxp-s-button-font-weight: 700;
+  --dxp-s-button-line-height: 40px;
+  --dxp-s-button-font-size: 19px;
+  --dxp-s-button-font-style: Normal;
+  --slds-c-button-radius-border: 4px;
+  --slds-c-button-color-background: rgb(83, 131, 22);
+  --sds-c-button-text-color-active: #ffffff;
+  --sds-c-button-text-color-hover: #ffffff;
+  --sds-c-button-brand-color-border: #538316;
+  --sds-c-button-brand-color-border-focus: #538316;
+  --sds-c-button-brand-color-background-active: #538316;
+  --sds-c-button-brand-color-border-active: #538316;
+ --sds-c-button-brand-text-color: #ffffff;
+
+}

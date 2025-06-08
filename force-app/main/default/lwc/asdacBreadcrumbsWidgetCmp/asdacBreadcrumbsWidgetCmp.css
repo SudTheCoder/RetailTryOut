@@ -1,0 +1,22 @@
+ul.breadcrumb {
+  list-style: none;
+}
+
+/* Display list items side by side */
+ul.breadcrumb li {
+  display: inline;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Add a slash symbol (/) before/behind each list item */
+ul.breadcrumb li + li:before {
+  padding: 2px;
+  color: #3d3d3d;
+  content: "/\00a0";
+}
+
+:host {
+  --dxp-c-link-text-color: #3d3d3d;
+}

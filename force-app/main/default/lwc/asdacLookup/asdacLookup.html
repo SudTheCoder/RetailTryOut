@@ -1,0 +1,77 @@
+<template>
+  <div class="slds-form-element">
+    <div class="slds-combobox_container slds-has-selection">
+      <label class="slds-form-element__label" for="combobox-id-1"></label>
+      <div
+        class="lookupInputContainer slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click"
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        onfocusout={toggleResult}
+      >
+        <div class="slds-combobox__form-element slds-input-has-icon" role="none" onfocus={bubbleEvent}>
+          <div class="searchBoxWrapper slds-show">
+            <input
+              class="searchtext slds-input"
+              type="text"
+              oninput={handleKeyChange}
+              onfocus={toggleResult}
+              onkeydown={handleKeyPress}
+              value={searchKey}
+              placeholder="Search for..."
+            />
+            <lightning-button-icon
+              class="search-button"
+              icon-name="utility:search"
+              size="large"
+              alternative-text="submit search"
+              title="submit search"
+              variant="container"
+              onclick={handleSearchClick}
+            ></lightning-button-icon>
+          </div>
+        </div>
+
+        <!-- lookup search result part start-->
+        <div
+          if:true={showSearchKey}
+          style="margin-top: 0px"
+          id="listbox-id-5"
+          class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid"
+          role="listbox"
+        >
+          <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+            <template if:true={showSearchKey}>
+              <li role="presentation" class="slds-listbox__item">
+                <button
+                  class="lookup-option-button slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                  role="option"
+                >
+                  <span class="searchresult">{searchKey}</span>
+                </button>
+              </li>
+            </template>
+
+            <template for:each={lstResult} for:item="obj" for:index="index">
+              <li key={obj.Id} role="presentation" class={obj.selectedClass}>
+                <div role="button" tabindex="0" onkeydown={handleSearchClick} onclick={handleSearchClick}>
+                <c-asdac-help-navigation-cmp button="true" content-type="faq" record-id={obj.Id} url-alias={obj.UrlName} data-index={index}>
+                  <div class="lookup-option-button slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option" data-index={index}>
+                    <span style="pointer-events: none" class="slds-media__figure slds-listbox__option-icon">
+                      <span class="slds-icon_container">
+                        <lightning-icon icon-name="utility:search" size="xx-small" alternative-text="icon"></lightning-icon>
+                      </span>
+                    </span>
+                    <span style="pointer-events: none" class="slds-media__body">
+                      <span class="slds-listbox__option-text slds-listbox__option-text_entity">{obj.Title}</span>
+                    </span>
+                  </div>
+                </c-asdac-help-navigation-cmp>
+                </div>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

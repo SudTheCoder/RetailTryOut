@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+     <masterLabel>Webform:Success Message</masterLabel>
+     <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+        <property name="successResponse" type="String" label="Success Message Body" role="inputOnly"></property>
+        <property name="newRequestLabel" type="String" label="Button Label" role="inputOnly"></property>
+        <property name="thanksMessageLabel" type="String" label="Thanks Message" role="inputOnly"></property>
+    </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Webform Close Account</masterLabel>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+        <property name="closeAccountModalText" type="String" label="Close Account Popup Text" role="inputOnly"></property>
+        <property name="sendRequestButtonLabel" type="String" label="Send Request Button" role="inputOnly"></property>
+        <property name="cancelButtonLabel" type="String" label="Cancel Button Label" role="inputOnly"></property>
+        <property name="sendButtonLabel" type="String" label="Send Button Label" role="inputOnly"></property>
+    </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

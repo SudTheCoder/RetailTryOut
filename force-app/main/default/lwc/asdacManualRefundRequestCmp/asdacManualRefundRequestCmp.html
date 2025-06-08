@@ -1,0 +1,75 @@
+<template>
+    <template if:true={isLimitExceeded}>
+        <div style="border-style: none; background-color: #d69c9c" class="slds-var-p-around_medium">
+            <lightning-icon icon-name="utility:warning" alternative-text="Warning!" variant="error"></lightning-icon>{label.approvalLimitExceedMessage}
+        </div>
+    </template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" variant="brand"></lightning-spinner>
+	</template>
+    <template if:false={isLoading}>
+        <p class="slds-var-m-top_x-small slds-p-bottom_x-small slds-text-align_center slds-border_bottom">{label.fillRequiredFieldsMessage}</p>
+        <div class="slds-card__body slds-var-p-around_medium" id="card-content-id-1">
+            <template if:true={hasError}>
+                <div style="border-style: none; background-color: #d69c9c" class="slds-var-p-around_medium">
+                    <lightning-icon icon-name="utility:warning" alternative-text="Warning!" variant="error"></lightning-icon> "Please make sure the refund values match."
+                </div>
+            </template>
+            <lightning-radio-group name="businessArea"
+                label={label.businessAreaLabel}
+                options={businessAreaOptions}
+                onchange={handleBusinessAreaChange}
+                class="businessAreaCls"
+                value = {businessArea}
+                required
+                type="radio">
+            </lightning-radio-group>
+            <div style="width:400px;" class="slds-p-bottom_small slds-p-top_medium">
+                <lightning-combobox
+                    label={label.reasonCodeLabel}
+                    placeholder="Choose"
+                    value={reasonCode}
+                    options={reasonCodeOptions}
+                    onchange={handleReasonCodeChange}
+                    class="reasonCls"
+                    required="true"
+                ></lightning-combobox>
+            </div>
+            <div>
+                <label class="slds-form-element__label">{maxAmountMessage}</label></strong>
+            </div> 
+            <div style="width:400px; ">
+                <lightning-input type="number" formatter="currency" step = "any" label={label.manualRefundAmountLabel} data-name="amount" data-id='payout-amount' max-length="16" required placeholder="£0.00" class="refundAmtCls slds-p-bottom_medium" onchange={handleAmtChange}></lightning-input>
+                <lightning-input type="number" formatter="currency" step = "any" label={label.confirmManualRefundAmountLabel} data-name="confirm amount" max-length="16" required placeholder="£0.00" class ="confirmAmount" onchange={handleAmtChange}></lightning-input>
+            </div>
+            <div style="width:400px; ">
+                <lightning-input
+                    label={label.notesLabel}
+                    value={notes}
+                    placeholder="For example, add a reference number"
+                    onchange={handleNotesChange}
+                    class="notesCls slds-p-top_medium"
+                ></lightning-input>
+            </div>
+            <div >
+                <label class="slds-p-top_medium slds-form-element__label">{label.emailAddressLabel}</label>
+            </div>
+            <div class="slds-p-bottom_medium">
+                <label class="slds-form-element__label"  style="color:#006DCC;">{email}</label>
+            </div>
+            <!-- Genric Error -->
+            <div class="slds-p-bottom_medium asdac-manualrefund-err slds-has-error">
+                <span class="slds-text-color_error">{errorMessage}</span>
+            </div>            
+            <!-- Modal/Popup Footer -->
+            <footer class=" slds-m-top_large slds-clearfix  slds-box slds-box_small slds-theme_shade">
+                <div class="slds-float_right">
+                    <lightning-button variant="neutral" name="cancel" label={label.cancelButtonLabel} title="Cancel"
+                    onclick={handleCancel} class="slds-var-m-left_x-small"></lightning-button>
+                    <lightning-button variant="brand" name="submit" label={label.submitButtonLabel} title="Submit"
+                        class="slds-var-m-left_x-small" onclick={handleSubmit} disabled={isManualRefundDisabled}></lightning-button>
+                </div>
+            </footer>
+        </div>
+    </template>
+</template>

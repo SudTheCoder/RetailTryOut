@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>George Help</masterLabel>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="georgeOrdersURL" type="String" label="George Go To Orders URL" default="{georgeOrdersURL}" />
+            <property name="internationalOrderPageURL" type="String" label="International Order Page URL" default="{internationalOrderPageURL}" />
+            <property name="returnAndExChangeFAQUrlAlias" type="String" label="returns and exchanges FAQ URL Alias" default="{returnAndExChangeFAQUrlAlias}" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

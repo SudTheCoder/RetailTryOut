@@ -1,0 +1,25 @@
+.slds-modal__container {
+    max-width: 150rem !important;
+    width: 100% !important;
+}
+
+.slds-modal__content {
+	overflow: visible;
+	overflow-y: visible;
+}
+
+.outOfStockCls{
+    padding: 0.1rem;
+}
+
+.removeIcon{
+    --lwc-colorTextIconDefault:#0476d4;
+}
+
+.custom-modal {
+    width: 100%;
+    overflow: auto;
+}
+.notesCls{
+    min-width:150px;
+}

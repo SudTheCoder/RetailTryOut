@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>51.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>ASDA Quick Actions Menu</masterLabel>
+    <description>ASDA Quick Actions Menu</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property
+                name="menuName"
+                type="String"
+                datasource="apex://ASDAC_NavigationLinkSetPickList"
+                label="Navigation Menu Name"
+                description="The name of the Navigation Menu Linkset"
+            />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

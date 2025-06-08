@@ -1,0 +1,21 @@
+:host {
+  --c-font-family: Source Sans Pro, sans-serif;
+  --dxp-s-form-element-label-font-size: 0.85rem;
+  --dxp-s-button-font-family: var(--c-font-family);
+  --dxp-s-button-font-weight: 700;
+  --dxp-s-button-letter-spacing: 0.03em;
+  --sds-c-button-brand-text-color: white;
+  --slds-c-input-color-border: var(--dxp-s-form-element-color-border);
+
+  --dxp-s-text-heading-large-font-size: 1.375rem;
+  --dxp-s-text-heading-large-font-style: normal;
+  --dxp-s-text-heading-large-font-family: var(--c-font-family);
+  --dxp-s-text-heading-large-font-weight: 600;
+  --dxp-s-text-heading-large-line-height: 1.75rem;
+
+  --dxp-s-text-heading-medium-font-size: 1.125rem;
+  --dxp-s-text-heading-medium-font-style: normal;
+  --dxp-s-text-heading-medium-font-family: var(--c-font-family);
+  --dxp-s-text-heading-medium-font-weight: 400;
+  --dxp-s-text-heading-medium-line-height: 1.5rem;
+}

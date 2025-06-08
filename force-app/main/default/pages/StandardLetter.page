@@ -1,0 +1,105 @@
+<apex:page renderAs="pdf" standardController="Case" extensions="ASDAC_StandardLetterCmp" showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false"  docType="html-5.0">
+   <html>
+      <head>
+         <style>
+            @page {
+            margin-top: 0cm;                
+            }
+         </style>
+      </head>
+      <body>
+         <div style="margin-bottom:3.246cm;">
+         </div>
+         <div style="font-family:Arial Unicode MS; text-align: left; font-size: 11pt;">
+            <p>
+               Reference:&nbsp;
+               <apex:outputText value="{!Case.CaseNumber}"/>
+            </p>
+         </div>
+         <div style="font-family:Arial Unicode MS;text-align:left;font-size:11pt;">
+            <p>
+			 <apex:outputText rendered="{!NOT(Case.Contact.Name=='Whitemail Account')}">
+               {!Case.Contact.Name}
+			     </apex:outputText>
+               <br/>
+			   <apex:outputText rendered="{!Case.Contact.Name=='Whitemail Account'}">
+			   {!Case.First_Name__c} {!Case.Last_Name__c}
+			    </apex:outputText>
+               <br/>
+               <apex:outputText rendered="{!AND(NOT(Case.Contact.AddressLine1__c == ''), NOT(Case.Contact.Name=='Whitemail Account'))}">
+                  {!Case.Contact.AddressLine1__c}
+                  <br/>
+               </apex:outputText>
+			     <apex:outputText rendered="{!AND(NOT(Case.Address_Line_1__c == ''), (Case.Contact.Name=='Whitemail Account'))}">
+                  {!Case.Address_Line_1__c}
+                  <br/>
+               </apex:outputText>
+               <apex:outputText rendered="{!AND(NOT(Case.Contact.AddressLine2__c == ''), NOT(Case.Contact.Name=='Whitemail Account'))}">
+                  {!Case.Contact.AddressLine2__c}
+                  <br/>
+               </apex:outputText>
+			    <apex:outputText rendered="{!AND(NOT(Case.Address_Line_2__c == ''), (Case.Contact.Name=='Whitemail Account'))}">
+                  {!Case.Address_Line_2__c}
+                  <br/>
+               </apex:outputText>
+               <apex:outputText rendered="{!AND(NOT(Case.Contact.AddressLine3__c == ''), NOT(Case.Contact.Name=='Whitemail Account'))}">
+                  {!Case.Contact.AddressLine3__c}
+                  <br/>
+               </apex:outputText>
+			   <apex:outputText rendered="{!AND(NOT(Case.Address_Line_3__c == ''), (Case.Contact.Name=='Whitemail Account'))}">
+                  {!Case.Address_Line_3__c}
+                  <br/>
+               </apex:outputText>
+               <apex:outputText rendered="{!AND(NOT(Case.Contact.City__c == ''), NOT(Case.Contact.Name=='Whitemail Account'))}">
+                  {!Case.Contact.City__c}
+                  <br/>
+               </apex:outputText>
+			    <apex:outputText rendered="{!AND(NOT(Case.City__c == ''), (Case.Contact.Name=='Whitemail Account'))}">
+                  {!Case.City__c}
+                  <br/>
+               </apex:outputText>
+               <apex:outputText rendered="{!AND(NOT(Case.Contact.State__c == ''), NOT(Case.Contact.Name=='Whitemail Account'))}">
+                  {!Case.Contact.State__c}
+                  <br/>
+               </apex:outputText>
+			    <apex:outputText rendered="{!AND(NOT(Case.Post_Code__c	 == ''), (Case.Contact.Name=='Whitemail Account'))}">
+                  {!Case.Post_Code__c}
+                  <br/>
+               </apex:outputText>
+              <apex:outputText rendered="{!AND(NOT(Case.Contact.PostalCode__c == ''), NOT(Case.Contact.Name=='Whitemail Account'))}">
+                  {!Case.Contact.PostalCode__c}
+                  <br/>
+               </apex:outputText>
+            </p>
+         </div>
+         <div style="font-family:Arial Unicode MS;text-align:left;font-size:11pt;padding: 30px 0;">
+            <apex:outputText value="{0} {1, date, MMMM yyyy}">
+               <apex:param value="{!DAY(TODAY())}" />
+               <apex:param value="{!TODAY()}" />
+            </apex:outputText>
+         </div>
+         <div style="font-family:Arial Unicode MS;text-align:left;font-size:11pt;">
+            <p>
+               Hi 
+			    <apex:outputText rendered="{!NOT(Case.Contact.Name=='Whitemail Account')}">
+                  {!Case.Contact.FirstName}
+                 
+               </apex:outputText>
+			    <apex:outputText rendered="{!Case.Contact.Name=='Whitemail Account'}">
+                  {!Case.First_Name__c}
+                  
+               </apex:outputText>,<br/><br/>
+               <apex:outputText value="{!latestComment.CommentBody}">
+                  <apex:param value="{!latestComment.CreatedDate}" />
+               </apex:outputText>
+            </p>
+         </div>
+         <div style="font-family:Arial Unicode MS;text-align:left;font-size:11pt;">
+            <p>
+               Many Thanks,<br/>
+               <apex:outputText value="{!$Label.ASDAC_ServiceTeam}" />
+            </p>
+         </div>
+      </body>
+   </html>
+</apex:page>

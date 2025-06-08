@@ -1,0 +1,50 @@
+<!--**************************************************************************
+Name: ASDAC_LocateOrderForCaseCmp
+===============================================================================
+Req: 
+ASDAC-2024 OMS Integration - Link Order Number to Case
+===============================================================================
+Purpose: This Lightning Component is used to locate Orders for case in modal
+         popup.
+===============================================================================
+History                                                                                                                       
+VERSION   AUTHOR                DATE         	DETAIL
+1.0       Amey Priolkar    		25 Aug 2022     Initial Development
+******************************************************************************-->
+<template>
+	<template if:true={isLoading}>
+		<lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+	</template>
+	<template if:false={isLoading}>
+			<div class="slds-modal__container">
+				<div class="slds-modal__header">
+					<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{label.linkOrderTitle}</h2>
+				</div>
+				<table class="slds-table slds-table_cell-buffer slds-table_header-hidden  slds-no-row-hover .slds-no-cell-focus" aria-describedby="enter-orderid">
+					<tbody>
+						<tr class="slds-hint-parent modalContent">
+							<th data-label="Order Search" style="padding-left: 5%;" class="slds-size_4-of-12">
+								<label class="slds-form-element__label"><abbr class="slds-required">*</abbr>{label.enterOrderNumberLabel}</label>
+							</th>
+							<td data-label="Order Search" style="padding-right: 5%; padding-left: 2%;" class="slds-size_8-of-12">
+								<template if:true={isGeorge}>
+								<lightning-input type="text" label="" name="orderId" class="orderId" maxlength={maxLengthGeorge}  
+													onblur={handleOrderOnBlur} onchange={handleOrderOnChange} variant="label-hidden" required></lightning-input>
+								</template>
+								<template if:false={isGeorge}>
+									<lightning-input type="text" label="" name="orderId" class="orderId" maxlength={maxLengthGrocery} 
+									onblur={handleOrderOnBlurGrocery} onchange={handleOrderOnChangeGrocery} variant="label-hidden" required></lightning-input>
+								</template>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<footer class="slds-modal__footer">
+				<lightning-button variant="neutral" name="cancel" label={label.cancelButtonLabel} title="Cancel" onclick={handleClick}
+					class="slds-var-m-left_x-small"></lightning-button>
+				<lightning-button variant="brand" name="search" label={label.searchOrderButtonLabel} title="Search Order" 
+					onclick={handleClick} class="slds-var-m-left_x-small" disabled={isSearchDisabled}></lightning-button>
+			</footer>
+	</template>
+</template>

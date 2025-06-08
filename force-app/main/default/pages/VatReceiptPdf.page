@@ -1,0 +1,49 @@
+<apex:page renderAs="pdf" controller="ASDAC_DownloadVatReceiptController" showHeader="false" sidebar="false"  applyHtmlTag="false" applyBodyTag="false">
+      
+    <html>
+          <head>
+            <style>
+                .pageStyle{
+                  font-family:"Arial Narrow", Arial, sans-serif;
+                  font-size:small;
+                }
+                .numberColumn {
+                    width: 9%;
+                    text-align: right;
+                    font-weight: normal;  
+                    font-size: 12px;
+                }
+                thead {
+                    background-color: #ececec;
+                    font-weight: normal;
+                    line-height: 28px;
+                    width: 100%;
+                }
+                .orderTotalBody{
+                    font-weight:bold; 
+                    text-align: right;
+                }
+                .subtotalBlock{
+                  width: 9%;
+                    text-align: right;
+                    font-weight: normal;  
+                    font-size: x-small;;
+                }
+                .detailsBlock{
+                    margin-top: 8px;
+                }
+                tbody::before{
+                display: block;
+                content: '-';
+                color: white;
+                line-height: 5px;
+            }
+            </style>
+          </head>
+        <body class="pageStyle">
+            <c:VatReceiptHeader />
+            <c:vatReceiptBody />            
+           </body>
+    </html>
+
+</apex:page>

@@ -1,0 +1,19 @@
+<!--
+  @description       : Webform captcha LWC component
+  @author            : Sapient - Arjun Singh
+  @last modified on  : 06-12-2023
+  @last modified by  : Sapient - Arjun Singh
+-->
+<template>	
+	<!-- RELEASE C PERMISSION REQUIRED AS THIS IS RELEASE C FEATURE -->
+	<template if:true={isCaptchaEnabled}>  
+		<!-- IF CAPTCHA IS ENABLED IN CUSTOM METADATA RECORD-->
+		<template if:true={isAllowedUrl}>  
+			<!-- IF ALLOWED URLS ARE FETCHED SUCCESFULLY | RENDER CAPTCHA IFRAME USING STATIC RESOURCE -->
+			<div class="slds-has-error">
+				<span class="slds-text-color_error">{captchaErrors}</span>
+			</div>
+			<iframe title="Bot protection" src={captchaResource} name="captchaFrame" onload={captchaLoaded}  height="100px" width="100%" style="border:0px; overflow:hidden;"></iframe> 
+		</template>    
+	</template>	
+</template>

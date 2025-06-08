@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Topic</masterLabel>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="topic" type="String" label="Data Category Unique Name" required="true" description="Please use the unique name of Data category"/>
+            <property name="topicHeader" type="String" label="Data Category Section header" description="Please use the title to be shown on the Data category section"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

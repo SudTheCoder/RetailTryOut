@@ -1,0 +1,27 @@
+<template>
+    <lightning-layout multiple-rows>
+        <lightning-layout-item size="4" class="slds-var-p-around_medium">
+            <lightning-input type="text" data-name="caseNumber" label={label.CaseNumberLabel} value={caseNumber} required pattern="[0-9]+" message-when-pattern-mismatch={label.CaseErrorLabel} onchange={handleChange} 
+            max-length="8" onkeypress={handleEnter}></lightning-input>
+        </lightning-layout-item>
+    </lightning-layout>
+    <lightning-layout horizontal-align="center">
+        <lightning-button label={label.ASDAC_Search} variant="brand" type="submit" class="search slds-var-p-around_medium"
+            onclick={handleSearch}> </lightning-button>
+        <lightning-button label={label.ASDAC_Clear} onclick={hancleClear} variant="brand" class="clear slds-var-p-around_medium">
+        </lightning-button>
+    </lightning-layout>
+    <template if:true={showSpinner}>
+        <lightning-spinner variant="brand"></lightning-spinner>
+    </template>
+    <div class="slds-var-p-around_medium">
+        <template if:true={isExecutionDone}>
+            <template if:true={caseList.length}>
+                <lightning-datatable key-field="Id" style="word-break: break-word" data={caseList} columns={columns} hide-checkbox-column="true" onrowaction={viewRecord}></lightning-datatable>
+            </template>
+            <template if:false={caseList.length}>
+                <c-asdac-error-message-banners-cmp error-message-to-display={label.CaseNotFoundLabel}></c-asdac-error-message-banners-cmp>
+            </template>
+        </template>
+    </div>
+</template>

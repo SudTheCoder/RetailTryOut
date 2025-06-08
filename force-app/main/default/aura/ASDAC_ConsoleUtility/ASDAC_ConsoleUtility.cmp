@@ -1,0 +1,17 @@
+<!--**************************************************************************
+Name: ASDAC_ConsoleUtility
+===============================================================================
+Req: 
+ASDAC-4952 Auto refresh on "Assign to Me" action 
+===============================================================================
+Purpose: Auto-Refresh the record view  
+===============================================================================
+History                                                                                                                       
+VERSION   AUTHOR                DATE         	DETAIL
+1.0       Nitish Yadav  		20 Oct 2022     Initial Development
+******************************************************************************-->
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="recordId" type="String"/>
+    <lightning:workspaceAPI aura:id="myworkspace"/>
+	<lightning:messageChannel type="consoleMessageChannel__c" onMessage="{!c.handleMessage}" scope="APPLICATION"/>
+</aura:component>

@@ -1,0 +1,33 @@
+.custom-combobox {
+  width: 150px; 
+} 
+
+.reason-width {
+  width: 150px;
+}
+
+.notesCls{
+  width:150px;
+}
+
+.custom-modal {
+  width: 100%;
+  overflow: auto;
+}
+
+.item-width{
+  width: 260px;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.total-refund{
+  position:absolute;
+  right:0;
+}
+
+/* Css to add scroll on refund modal AESR-175*/
+.scrollable-content{
+  overflow-y: auto;
+  max-height: 100vh;
+}

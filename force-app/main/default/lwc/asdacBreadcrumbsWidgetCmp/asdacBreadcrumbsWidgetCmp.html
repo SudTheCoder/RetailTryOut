@@ -1,0 +1,10 @@
+<template>
+  <ul if:true={showBreadcrumbs} class="slds-clearfix  breadcrumb slds-p-left_medium">
+    <li for:each={breadCrumbList} for:item="crumbs" key={crumbs.id} data-title={crumbs.pageName} onclick={trackDataOnClick}>
+      <c-asdac-help-navigation-cmp content-type={crumbs.contentType} record-id={crumbs.recordId} url-alias={crumbs.urlProperty}
+        page-api-name={crumbs.pageApiName} internal-link={crumbs.internalLink} data-title={crumbs.pageName} button="false">
+        {crumbs.label}
+      </c-asdac-help-navigation-cmp>
+    </li>
+  </ul>
+</template>

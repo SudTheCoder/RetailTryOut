@@ -1,0 +1,17 @@
+<template>
+  <div class="giftcards-container">
+    <div class="giftcard-container borderOutline slds-var-m-vertical_x-small" for:each={_giftcards} for:item="giftcard"
+      for:index="index" key={giftcard.id}>
+      <lightning-input type="string" pattern="[0-9]*" label={giftCardNumberLabel} name="giftcard-giftcardnumber" data-id="giftcardnumber" required data-index={index}
+        value={giftcard.giftcardnumber} message-when-pattern-mismatch= "Only Numbers are allowed" onchange={handleChange}></lightning-input>
+        <div class="slds-var-m-vertical_x-small" if:true={giftcard.removable}>
+          <lightning-button label="Remove Gift Card" variant="destructive" data-index={index} onclick={removeGiftcard}>
+          </lightning-button>
+        </div>
+    </div>
+    <div class="slds-var-m-vertical_x-small">
+      <lightning-button label="Add Gift Card" variant="brand" class="add-giftcard" onclick={addGiftcard}
+      disabled={disableAddGiftcard}></lightning-button>
+    </div>  
+  </div>
+</template>

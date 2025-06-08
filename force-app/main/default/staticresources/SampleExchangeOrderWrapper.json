@@ -1,0 +1,41 @@
+{
+    "orgId": "ASDA",
+    "sellingChannel": "GEORGE.COM",
+    "orderId": "FCA-1702-207",
+    "customerId": "0038E00001LQpMtQAL",
+    "orderLines": [
+        {
+            "orderLineId": 3,
+            "orderLineType": "Delivery",
+            "fulfillmentType": "DELIVERY",
+            "fulfillmentService": "STANDARD",
+            "isBundle": false,
+            "parentId": null,
+            "productId": "testfc1",
+            "productDescription": "T-Shirt",
+            "productType": "REGULAR",
+            "productLink": "https://abc.com",
+            "uom": "EACH",
+            "quantity": 1,
+            "actionType": "Return",
+            "reason": "Exchange Reason",
+            "notes": "Exchange Notes",
+            "promisedDeliveryDate": "2023-3-14T12:08:44",
+            "shipToContact": {
+                "firstName": "John",
+                "middleName": null,
+                "lastName": "Smith",
+                "phone": "11234567890",
+                "email": "examplecompany.com"
+            },
+            "shipToAddress": {
+                "addressLine1": "1234 Spicy Street",
+                "addressLine2": "yza",
+                "city": "Winnipeg",
+                "state": "GB",
+                "country": "GB",
+                "zipCode": "R3B 0P4"
+            }
+        }
+    ]
+}

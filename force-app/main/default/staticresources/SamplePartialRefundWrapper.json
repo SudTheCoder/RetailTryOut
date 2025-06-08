@@ -1,0 +1,27 @@
+{
+    "orgId": "ASDA",
+    "sellingChannel": "GEORGE.COM",
+    "orderId": "ASDA-AD-FEB-887",
+    "orderLines": [
+        {
+            "orderLineId": 1,
+            "comments": [
+            {
+                "comment": "Applied a new promotion", 
+                "commentedBy": "Applied a new promotion", 
+                "commentType": "system" 
+            }
+            ],
+            "discounts": [
+                {
+                    "name": "AppeasemtPromotion7645",
+                    "accountingType": "FLAT_CHARGE",
+                    "category": "Appeasement",
+
+                    "reasonCode" : "test",
+                    "amount": 5
+                }
+            ]
+        }
+    ]
+}

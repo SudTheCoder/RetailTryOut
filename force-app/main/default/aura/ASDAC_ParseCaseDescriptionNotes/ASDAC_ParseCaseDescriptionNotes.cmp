@@ -1,0 +1,6 @@
+<aura:component implements="force:lightningQuickAction,lightning:availableForFlowActions" >
+	<aura:attribute name="refundToCreateStr" type="String" />
+	<aura:attribute name="itemReason" type="String" />
+    <aura:attribute name="itemDescription" type="String" />
+    <aura:attribute name="actionName" type="String" />
+</aura:component>

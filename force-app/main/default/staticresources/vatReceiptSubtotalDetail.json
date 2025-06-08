@@ -1,0 +1,72 @@
+[
+	{
+		"type":"Subtotal",
+		"totalPrice":1.5,
+		"vatRate": 20,
+		"exVat":-2.40,
+		"vatAmount": -0.2
+	},
+	{
+		"type":"Multibuy",
+		"totalPrice":1.5,
+		"vatRate": 20,
+		"exVat":-2.40,
+		"vatAmount": -0.2
+	},
+	{
+		"type":"Rollback, Dropped and locked, Sale",
+		"totalPrice":1.5,
+		"vatRate": 20,
+		"exVat":-2.40,
+		"vatAmount": -0.2
+	},
+	{
+		"type":"Colleague Discount",
+		"totalPrice":1.5,
+		"vatRate": 20,
+		"exVat":-2.40,
+		"vatAmount": -0.2
+	},
+	{
+		"type":"Goodwill voucher",
+		"totalPrice":1.5,
+		"vatRate": 20,
+		"exVat":-2.40,
+		"vatAmount": -0.2
+	},
+	{
+		"type":"Rewards voucher",
+		"totalPrice":1.5,
+		"vatRate": 20,
+		"exVat":-2.40,
+		"vatAmount": -0.2
+	},
+	{
+		"type":"Marketing coupon",
+		"totalPrice":1.5,
+		"vatRate": 20,
+		"exVat":-2.40,
+		"vatAmount": -0.2
+	},
+	{
+		"type":"Promotions",
+		"totalPrice":1.5,
+		"vatRate": 20,
+		"exVat":-2.40,
+		"vatAmount": -0.2
+	},
+	{
+		"type":"Refunds",
+		"totalPrice":1.5,
+		"vatRate": 20,
+		"exVat":-2.40,
+		"vatAmount": -0.2
+	},
+	{
+		"type":"Order Total",
+		"totalPrice":1.5,
+		"vatRate": 20,
+		"exVat":-2.40,
+		"vatAmount": -0.2
+	}
+]

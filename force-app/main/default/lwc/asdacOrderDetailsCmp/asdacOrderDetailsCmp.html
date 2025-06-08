@@ -1,0 +1,96 @@
+<template>
+	<lightning-tabset>
+		<lightning-tab label="Order details" value="orderDetails">
+			<template if:true={isGeorge}>
+				<div style="margin: 0 0.2% 0 0.2%;">
+					<lightning-tabset variant="scoped" style="margin: 0 0.2% 0 0.2%;">
+						<lightning-tab label={allItemsLabel} value="allItems" class="allItemTab" onactive={tabChangeHandler}>
+							<template if:true={isAllItemsShown}>
+								<c-asdac-all-items-list-cmp order-wrapper={orderWrapper} case-id={caseId} ></c-asdac-all-items-list-cmp>
+							</template>
+						</lightning-tab>
+						<lightning-tab label={refundedItemsLabel} value="refundItems" class="refundTab" onactive={tabChangeHandler}>
+							<template if:true={isRefundItemsShown}>
+								<template if:false={isReturnedItemsPresent}>
+                                    {label.noRefundItemPresent}
+								</template>
+								<template if:true={isReturnedItemsPresent}>
+									<c-asdac-refund-items-related-list-cmp order-wrapper={orderWrapper} return-orders-list={returnOrders}>
+									</c-asdac-refund-items-related-list-cmp>
+								</template>
+							</template>
+						</lightning-tab>
+						<template if:false={orderWrapper.isExchangeOrder}>
+							<lightning-tab label={exchangedItemsLabel} value="exchangeItems" class="exchangeTab" onactive={tabChangeHandler}>
+								<template if:true={isExchangeItemsShown}>
+									<template if:false={isExchangedItemsPresent}>
+										 {label.noExchangeItemPresent}
+									</template>
+									<template if:true={isExchangedItemsPresent}>
+										<c-asdac-exchanged-items-list-cmp order-wrapper={orderWrapper}></c-asdac-exchanged-items-list-cmp>
+									</template>
+								</template>
+							</lightning-tab>
+						</template>
+					</lightning-tabset>
+				</div>
+			</template>
+			<template if:false={isGeorge}>
+				<div style="margin: 0 0.2% 0 0.2%;">
+					<lightning-tabset variant="scoped">
+						<lightning-tab  label={allItemsLabel}>
+							<c-asdac-all-items-list-grocery-cmp order-wrapper={orderWrapper}>
+							</c-asdac-all-items-list-grocery-cmp>
+						</lightning-tab>	
+						<lightning-tab label={allSubstitutedItemsLabel} class= "substituteTab">
+							<template if:false={isSubstituteItemsPresent}>
+								 {label.noSubstituteItemPresent}
+							</template>
+							<template if:true={isSubstituteItemsPresent}>
+								<c-asdac-substituted-items-list-cmp order-wrapper={orderWrapper} order-substituted-items={substitutedItemList}></c-asdac-substituted-items-list-cmp>
+							</template>
+						</lightning-tab>
+						<lightning-tab label={allRefundedItemsGroceryLabel}>
+							<template if:false={isGroceryRefundItemsPresent}>
+								 {label.noGhsRefundItemPresent}
+							</template>
+							<template if:true={isGroceryRefundItemsPresent}>
+								<c-asdac-refunded-items-list-grocery-cmp order-wrapper={orderWrapper} ></c-asdac-refunded-items-list-grocery-cmp>
+							</template>
+						</lightning-tab>
+						<lightning-tab label={allRejectedItemsLabel} class="rejectedTab">
+							<template if:false={isRejectedItemsPresent}>
+								 {label.noRejectedItemPresent}
+							</template>
+							<template if:true={isRejectedItemsPresent}>
+								<c-asdac-rejected-items-list-cmp order-wrapper={orderWrapper} rejected-items={rejectedItemList}></c-asdac-rejected-items-list-cmp>
+							</template>
+						</lightning-tab>
+						<lightning-tab label={allUnavailableItemsLabel} class="unavailableTab">
+							<template if:false={isUnavailableItemsPresent}>
+								 {label.noUnavailableItemPresent}
+							</template>
+							<template if:true={isUnavailableItemsPresent}>
+								<c-asdac-unavailable-items-list-cmp order-wrapper={orderWrapper} unavailable-item-list={unavailableItemList}></c-asdac-unavailable-items-list-cmp>
+							</template>
+						</lightning-tab>
+					</lightning-tabset>
+				</div>
+			</template>
+			<template if:true={error}>
+				{error}
+			</template>
+		</lightning-tab>
+			<lightning-tab label="Payment details" value="paymentDetails">
+				<c-asdac-order-payment-details-cmp order-wrapper={orderWrapper} is-george={isGeorge}></c-asdac-order-payment-details-cmp>
+			</lightning-tab>			
+		<lightning-tab label="Related cases" value="Related cases">
+			<c-asdac-order-related-case-details-cmp order-wrapper={orderWrapper}>
+			</c-asdac-order-related-case-details-cmp>
+		</lightning-tab>
+		<lightning-tab label="Related actions" value="Related actions">
+			<c-asdac-order-related-task-details-cmp order-wrapper={orderWrapper}>
+			</c-asdac-order-related-task-details-cmp>
+		</lightning-tab>
+	</lightning-tabset>
+</template>

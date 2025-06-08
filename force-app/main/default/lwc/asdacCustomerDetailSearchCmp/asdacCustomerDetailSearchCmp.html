@@ -1,0 +1,89 @@
+<template>
+    <lightning-layout multiple-rows onkeypress={handleEnter}>
+        <lightning-layout-item size="4" class="slds-var-p-around_medium">            
+            <lightning-input type="text" class="postCode" label={label.ASDAC_Postcode} data-field-name="PostalCode__pc" data-id="postalCode" name="postalCode"
+                onchange={onChangeHandler} value={searchDetails.postalCode} onblur={checkPostCodeValidations}></lightning-input>
+        </lightning-layout-item>
+        <lightning-layout-item size="4" class="slds-var-p-around_medium">
+            <lightning-input type="text" label={label.ASDAC_LastName} data-field-name="LastName" name="lastName" max-length="80" onchange={onChangeHandler}
+                value={searchDetails.lastName}></lightning-input>
+        </lightning-layout-item>
+        <lightning-layout-item size="4" class="slds-var-p-around_medium">
+            <lightning-input type="text" label={label.ASDAC_FirstName} data-field-name="FirstName" name="firstName" max-length="40" onchange={onChangeHandler}
+                value={searchDetails.firstName}></lightning-input>
+        </lightning-layout-item>
+        <lightning-layout-item size="4" class="slds-var-p-around_medium">
+            <lightning-input type="text" label={label.ASDAC_HouseNameNumber}  data-field-name="AddressLine1__pc" name="address" onchange={onChangeHandler}
+                value={searchDetails.address}></lightning-input>
+        </lightning-layout-item>
+        <lightning-layout-item size="4" class="slds-var-p-around_medium">
+            <lightning-layout multiple-rows>
+                <lightning-layout-item size="12" class="slds-form-element__label slds-no-flex">
+                    <label>{label.ASDAC_ContactNumber}</label>
+                </lightning-layout-item>
+                <lightning-layout-item size="4" class="slds-form-element">
+                    <lightning-combobox variant="label-hidden" data-field-name="CountryCode__c" class="countryCodeClass" name="countryCode" placeholder=""
+                        options={countryCodeOptions} value={searchDetails.countryCode} onchange={onChangeHandler} 
+                        onblur={checkPhoneNumberFormats}>                        
+                    </lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item size="1">
+                </lightning-layout-item>
+                <lightning-layout-item size="7" class="slds-form-element">
+                    <lightning-input type="tel" pattern="[0-9]+" variant="label-hidden" data-field-name="phone" class="phone" name="phone" onchange={onChangeHandler}
+                    message-when-pattern-mismatch="Only Numbers are allowed" value={searchDetails.phone}></lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-layout-item>
+        <lightning-layout-item size="4" class="slds-var-p-around_medium">
+            <lightning-input type="email" label={label.ASDAC_Email} data-field-name="LoginId__c" name="email" onchange={onChangeHandler}
+                value={searchDetails.email}></lightning-input>
+        </lightning-layout-item>
+    </lightning-layout>
+    <lightning-layout horizontal-align="center">
+        <lightning-button label={label.ASDAC_Search} variant="brand" type="submit" class="search slds-var-p-around_medium"
+            onclick={handleSearch}> </lightning-button>
+        <lightning-button label={label.ASDAC_Clear} onclick={handleClear} variant="brand" class="clear slds-var-p-around_medium">
+        </lightning-button>
+        <template if:true={showNewCustomer}>
+            <lightning-button label={label.ASDAC_CreateNewCustomer} onclick={createCustomer} variant="brand"
+                class="slds-var-p-around_medium"> </lightning-button>
+        </template>
+    </lightning-layout>
+
+    <div class="slds-var-p-around_medium">
+        <template if:true={customers}>
+            <template if:true={customersExist}>
+        <strong>{customers.length} Customer(s) Found</strong><br />
+
+        <lightning-datatable style="word-break: break-word" key-field="Id" data={paginationList} columns={columns}
+          onrowaction={viewCustomer} hide-checkbox-column="true">
+                </lightning-datatable>
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="4" class="slds-var-p-around_medium">
+            <lightning-button style="float: left" variant="brand" class="previous" label={label.ASDAC_Previous}
+              disabled={isPreviousDisabled} onclick={handlePrevious}>
+            </lightning-button>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="4" class="slds-var-p-around_medium">
+            <p class="slds-text-align_center">
+              Showing {startPosition} to {endPosition} of {totalSize}
+            </p>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="4" class="slds-var-p-around_medium">
+            <lightning-button style="float: right" variant="brand" label={label.ASDAC_Next} class="next" disabled={isNextDisabled}
+              onclick={handleNext}>
+            </lightning-button>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+            <template if:false={customersExist}>
+        <c-asdac-error-message-banners-cmp
+          error-message-to-display={label.Customers_Not_Found}></c-asdac-error-message-banners-cmp>
+            </template>
+        </template>
+        <template if:true={loading}>
+            <lightning-spinner variant="brand"></lightning-spinner>
+        </template>
+    </div>
+</template>

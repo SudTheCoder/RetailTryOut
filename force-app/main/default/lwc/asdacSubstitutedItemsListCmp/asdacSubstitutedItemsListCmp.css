@@ -1,0 +1,39 @@
+.rectangle-box {
+  display: inline-block;
+  width: 25px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0);
+  text-align: center;
+  background-color: #e8ac4a;
+  border-radius: 4px 4px 4px 4px;
+}
+
+.crossed-out {
+  color: red;
+  text-decoration: line-through;
+}
+.inline-container {
+  display: flex;
+  align-items: center;
+}
+
+.ItemNameRightSapce{
+  padding-right: 10px;
+}
+
+.ItemNameStyle{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.promopillColorBox{
+	background-color: #007335 !important;
+	color: #ffffff;
+  font-size: 12px;
+	display: inline-block;
+	width: 50px;
+	height: 20px;
+	border: 1px solid rgba(0, 0, 0, 0);
+	text-align: center;
+  border-radius: 4px 4px 4px 4px;
+}

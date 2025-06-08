@@ -1,0 +1,31 @@
+.inline-container {
+    display: flex;
+    align-items: center;
+}    
+.promopillColorBox{
+    background-color: #007335 !important;
+    color: #ffffff;
+    font-size: 12px;
+    display: inline-block;
+    width: 50px;
+    height: 20px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    text-align: center;
+    border-radius: 4px 4px 4px 4px;
+}
+
+.ItemNameRightSapce{
+    padding-right: 10px;
+}
+  
+.ItemNameStyle{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.searchItm{
+    width: 100%;
+    max-width: 50%;
+	margin-left: auto;
+	padding-right: 10px;
+}

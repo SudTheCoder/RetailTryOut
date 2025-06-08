@@ -1,0 +1,36 @@
+<template>
+  <lightning-layout multiple-rows horizontal-align="center">
+    <lightning-layout-item size="4" small-device-size="3" padding="around-small" class="slds-text-align_center">
+      <svg width="67" height="72" viewBox="0 0 67 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="26.4902" width="59.2157" height="35.2941" rx="2" fill="#FFBC00" stroke="#190D3A"
+          stroke-width="2" />
+        <path d="M22.1765 45.3142L1 26.8828" stroke="#190D3A" stroke-width="2" stroke-linejoin="round" />
+        <path d="M39.0393 45.3142L60.2158 26.8828" stroke="#190D3A" stroke-width="2" stroke-linejoin="round" />
+        <path
+          d="M37.7267 44.6898L57.8627 61.7837H3.35291L23.4889 44.6898C27.5949 41.2042 33.6208 41.2042 37.7267 44.6898Z"
+          stroke="#190D3A" stroke-width="2" stroke-linejoin="round" />
+        <path
+          d="M8.05887 4C8.05887 2.34314 9.40201 1 11.0589 1H50.1569C51.8138 1 53.1569 2.34315 53.1569 4V26.4902H8.05887V4Z"
+          fill="white" stroke="#190D3A" stroke-width="2" />
+        <path d="M16.7141 8.84375H44.274" stroke="#190D3A" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+        <path d="M16.7141 13.7461H44.274" stroke="#190D3A" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+        <path d="M16.7141 18.6465H44.274" stroke="#190D3A" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+        <circle cx="54.9216" cy="60.216" r="10.7843" fill="#68A51C" stroke="#190D3A" stroke-width="2" />
+        <path d="M49.5295 60.7551L53.0344 64.26L60.8531 56.4414" stroke="#190D3A" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </lightning-layout-item>
+    <lightning-layout-item class="slds-text-heading_large slds-text-align_center" size="12" padding="horizontal-small">
+      {labels.success}</lightning-layout-item>
+    <lightning-layout-item class="slds-text-heading_medium slds-text-align_center slds-var-p-vertical_large" size="12">
+      {successResponse}</lightning-layout-item>
+    <lightning-layout-item size="12" if:false={accessedFromExternalSite}>
+      <lightning-layout horizontal-align="center">
+        <lightning-button label={newRequestLabel} variant="brand-outline" onclick={handleNewRequest}></lightning-button>
+      </lightning-layout>
+    </lightning-layout-item>
+  </lightning-layout>
+</template>

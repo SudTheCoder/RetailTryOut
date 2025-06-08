@@ -1,0 +1,549 @@
+{
+   "sellingChannel": "ASDA_GROCERIES",
+   "customerId": "0038E00001NKS3IQAX",
+   "orderId": "0800000002052",
+   "originalOrderTotal": 230.0,
+   "totalAmount": 2.7,
+   "refundableAmount": 2.7,
+   "orderStatus": "SETTLED",
+   "orderDate": "2023-11-29T04:39:22.000",
+   "vatDate": "2023-11-29T04:39:22.000",
+   "fulfillmentType": "GHS_DELIVERY",
+   "fulfillmentService": "STANDARD",
+   "hasColleagueDiscount": false,
+   "exchangedItemsCount":0,
+   "colleagueDiscount": 0.0,
+   "isDeliveryPassUsed": false,
+   "storeNumber": "<StoreId>",
+   "deliveryNote": "Driver will be wearing a blue shirt",
+   "cutOffDate": "2023-02-20T11:30:00.000",
+   "shipToAddress": {
+       "addressLine1": "1234 Spicy Street",
+       "addressLine2": "yza",
+       "city": "Winnipeg",
+       "state": "GB",
+       "country": "GB",
+       "zipCode": "R3B 0P4",
+       "latitude": 49.898498728223224,
+       "longitude": -97.13560152293131
+   },
+   "fulfilmentStore": "1234 Spicy Street, yza, Winnipeg, GB, GB, R3B 0P4",
+   "addressInfo": [
+       {
+           "id": "e6318623-ec6c-4a84-9f4d-6fa72a290743",
+           "isDefault": false,
+           "contact": {
+               "firstName": "John",
+               "lastName": "Smith",
+               "middleName": "Mr.",
+               "phone": "11234567890",
+               "email": "example@company.com"
+           },
+           "address": {
+               "addressLine1": "1234 Spicy Street",
+               "addressLine2": "yza",
+               "city": "Winnipeg",
+               "state": "GB",
+               "country": "GB",
+               "zipCode": "R3B 0P4",
+               "latitude": 49.898498728223224,
+               "longitude": -97.13560152293131
+           },
+           "isActive": true,
+           "type": "billTo"
+       },
+       {
+           "id": "7dfda0b7-d3ab-48e3-b311-860f1af49fea",
+           "isDefault": false,
+           "contact": {
+               "firstName": "<StoreName>",
+               "lastName": "<StoreId>",
+               "middleName": "",
+               "phone": "<Store PhNO>",
+               "email": "example@company.com"
+           },
+           "address": {
+               "addressLine1": "1234 Spicy Street",
+               "addressLine2": "yza",
+               "city": "Winnipeg",
+               "state": "GB",
+               "country": "GB",
+               "zipCode": "R3B 0P4",
+               "latitude": 49.898498728223224,
+               "longitude": -97.13560152293131
+           },
+           "isActive": true,
+           "type": "fulFill"
+       },
+       {
+           "id": "e6318623-ec6c-4a84-9f4d-6fa72a290743",
+           "isDefault": false,
+           "contact": {
+               "firstName": "John",
+               "lastName": "Smith",
+               "middleName": "Mr.",
+               "phone": "11234567890",
+               "email": "example@company.com"
+           },
+           "address": {
+               "addressLine1": "1234 Spicy Street",
+               "addressLine2": "yza",
+               "city": "Winnipeg",
+               "state": "GB",
+               "country": "GB",
+               "zipCode": "R3B 0P4",
+               "latitude": 49.898498728223224,
+               "longitude": -97.13560152293131
+           },
+           "isActive": true,
+           "type": "shipTo"
+       }
+   ],
+   "deliveryWindow": "17:30 To 17:30",
+   "plannedArrivalTime": "2023-11-28T17:30:00.000",
+   "isPersonalisedPromotion": false,
+   "actualArrivalTime": "2023-11-06T10:40:22.000",
+   "departureTime": null,
+   "orderCancelledBy": null,
+   "orderCancelledOn": null,
+   "orderCancelledByStore": null,
+   "cancellationReason": null,
+   "billingCurrency": "GBP",
+   "multisaveDiscount": 0.0,
+   "refundAmount": 0.0,
+   "charitableDonation": 0.0,
+   "currentCharitableDonation": 0.0,
+   "asdaRewardDiscount": 95.0,
+   "giftcardAmount": 0.0,
+   "marketingCouponAmount": 0.0,
+   "eVoucherAmount": 0.0,
+   "originalDeliveryCharge": 2.0,
+   "deliveryChargeRefund": 0.0,
+   "deliveryChargeReferenceId": "bookedSlotPriceAdjustment",
+   "deliveryChargeReferenceType": "bookedSlotPriceAdjustment",
+   "minimumBasketCharge": 0.0,
+   "currentMinimumBasketCharge": -5.0,
+   "minimumBasketChargeReferenceId": "minBasketPriceAdjustment",
+   "minimumBasketChargeReferenceType": "minBasketPriceAdjustment",
+   "subTotal": 0.0,
+   "wismoURL": "",
+   "orderFulfilledDate": "2023-11-06T10:40:22.000",
+   "rewardVouchers": [
+       {
+           "rewardVoucherId": "1767822858",
+           "amountUsed": 95.0
+       }
+   ],
+   "charges": [
+       {
+           "name": "Shipping Price Adjustment",
+           "accountingType": "FLAT_CHARGE",
+           "category": "Charge",
+           "referenceId": "bookedSlotPriceAdjustment",
+           "referenceType": "bookedSlotPriceAdjustment",
+           "amount": 5.0,
+           "coefficient": 1,
+           "invoicedAmount": 0.0,
+           "isRefundable": true,
+           "appliesToLines": [
+               "1",
+               "3"
+           ]
+       },
+       {
+           "name": "Minimum Basket Price Adjustment",
+           "accountingType": "FLAT_CHARGE",
+           "category": "Charge",
+           "referenceId": "minBasketPriceAdjustment",
+           "referenceType": "minBasketPriceAdjustment",
+           "amount": 5.0,
+           "coefficient": 1,
+           "invoicedAmount": 0.0,
+           "isRefundable": true,
+           "appliesToLines": [
+               "1",
+               "3"
+           ]
+       }
+   ],
+   "vatRegistrationNumber": "",
+   "vatAmount": 0.0,
+   "vatExTotalPrice": 2.7,
+   "vatRateDeliveryCharge": 0.0,
+   "vatAmountDeliveryCharge": 0.0,
+   "vatExDeliveryCharge": 0.0,
+   "hasRefundedItem": false,
+   "orderLines": [
+       {
+           "orderLineId": 1,
+           "orderLineType": "ASDADelivery",
+           "fulfillmentType": "DELIVERY",
+           "fulfillmentService": "STANDARD",
+           "productId": "ASDAF-PDCT-16-06",
+           "productLink": "https://groceries.asda.com/product/ASDAF-PDCT-16-06",
+           "productDescription": "ASDA Growers selection strawberries 400g",
+           "typicalLife": "",
+           "quantity": 0,
+           "refundableQuantity": 0,
+           "uom": "EACH",
+           "unitPrice": 30.0,
+           "totalPrice": 0.0,
+           "vatExTotalPrice": 0.0,
+           "productType": "GROCERY",
+           "isPersonalisedPromotion": false,
+           "discountedPrice": 0.0,
+           "status": "SUBSTITUTED",
+           "refundedAmountSoFar": 0.0,
+           "isSubstitutedLine": false,
+           "parentOrderLineId": null,
+           "isNilPick": false,
+           "isRejected": false,
+           "cancellationReasonCode": "",
+           "rejectionDate": null,
+           "isCharitableProduct": false,
+           "hasSubstitute": true,
+           "discountAmount": 0.0,
+           "vatRate": 0.0,
+           "vatAmount": 0.0,
+           "stateToQty": [
+               {
+                   "state": "SUBSTITUTED",
+                   "quantity": 5
+               },
+               {
+                   "state": "RECEIVED_AT_STORE",
+                   "quantity": 5
+               },
+               {
+                   "state": "SENT_TO_STORE",
+                   "quantity": 5
+               },
+               {
+                   "state": "ROUTEID_ACCEPTED",
+                   "quantity": 5
+               },
+               {
+                   "state": "CREATED",
+                   "quantity": 5
+               }
+           ]
+       },
+       {
+           "orderLineId": 2,
+           "orderLineType": "ASDADelivery",
+           "fulfillmentType": "DELIVERY",
+           "fulfillmentService": "STANDARD",
+           "productId": "ASDAF-PDCT-16-07",
+           "productLink": "https://groceries.asda.com/product/ASDAF-PDCT-16-07",
+           "productDescription": "ASDA Growers selection strawberries 400g",
+           "typicalLife": "",
+           "quantity": 0,
+           "refundableQuantity": 0,
+           "uom": "EACH",
+           "unitPrice": 20.0,
+           "totalPrice": 0.0,
+           "vatExTotalPrice": 0.0,
+           "productType": "GROCERY",
+           "isPersonalisedPromotion": false,
+           "discountedPrice": 0.0,
+           "status": "SUBSTITUTED",
+           "refundedAmountSoFar": 0.0,
+           "isSubstitutedLine": false,
+           "parentOrderLineId": null,
+           "isNilPick": false,
+           "isRejected": false,
+           "cancellationReasonCode": "",
+           "rejectionDate": null,
+           "isCharitableProduct": false,
+           "hasSubstitute": true,
+           "discountAmount": 0.0,
+           "vatRate": 0.0,
+           "vatAmount": 0.0,
+           "stateToQty": [
+               {
+                   "state": "SUBSTITUTED",
+                   "quantity": 4
+               },
+               {
+                   "state": "RECEIVED_AT_STORE",
+                   "quantity": 4
+               },
+               {
+                   "state": "SENT_TO_STORE",
+                   "quantity": 4
+               },
+               {
+                   "state": "ROUTEID_ACCEPTED",
+                   "quantity": 4
+               },
+               {
+                   "state": "CREATED",
+                   "quantity": 4
+               }
+           ]
+       },
+       {
+           "orderLineId": 3,
+           "orderLineType": "ASDADelivery",
+           "fulfillmentType": "DELIVERY",
+           "fulfillmentService": "STANDARD",
+           "productId": "MILK-2L-B130",
+           "productLink": "https://groceries.asda.com/product/MILK-2L-B130",
+           "productDescription": "ASDA Growers selection strawberries 400g",
+           "typicalLife": "",
+           "quantity": 2,
+           "refundableQuantity": 1,
+           "uom": "abc",
+           "unitPrice": 0.9,
+           "totalPrice": 1.8,
+           "vatExTotalPrice": 0.0,
+           "productType": "GROCERY",
+           "isPersonalisedPromotion": false,
+           "discountedPrice": 1.8,
+           "status": "SETTLED",
+           "refundedAmountSoFar": 0.0,
+           "isSubstitutedLine": true,
+           "parentOrderLineId": 1,
+           "isNilPick": false,
+           "isRejected": false,
+           "cancellationReasonCode": "",
+           "rejectionDate": null,
+           "isCharitableProduct": false,
+           "hasSubstitute": false,
+           "discountAmount": 0.0,
+           "vatRate": 0.0,
+           "vatAmount": 0.0,
+           "stateToQty": [
+               {
+                   "state": "RETURN_CREATED",
+                   "quantity": 1
+               },
+               {
+                   "state": "SETTLED",
+                   "quantity": 2
+               },
+               {
+                   "state": "DELIVERED_AND_INVOICED",
+                   "quantity": 2
+               },
+               {
+                   "state": "DELIVERED",
+                   "quantity": 2
+               },
+               {
+                   "state": "DRIVER_ON_WAY",
+                   "quantity": 2
+               },
+               {
+                   "state": "LOADED",
+                   "quantity": 2
+               },
+               {
+                   "state": "PICK_COMPLETED",
+                   "quantity": 2
+               },
+               {
+                   "state": "CREATED",
+                   "quantity": 2
+               }
+           ]
+       },
+       {
+           "orderLineId": 4,
+           "orderLineType": "ASDADelivery",
+           "fulfillmentType": "DELIVERY",
+           "fulfillmentService": "STANDARD",
+           "productId": "MILK-2L-B130",
+           "productLink": "https://groceries.asda.com/product/MILK-2L-B130",
+           "productDescription": "ASDA Growers selection strawberries 400g",
+           "typicalLife": "",
+           "quantity": 1,
+           "refundableQuantity": 0,
+           "uom": "abc",
+           "unitPrice": 0.9,
+           "totalPrice": 0.9,
+           "vatExTotalPrice": 0.0,
+           "productType": "GROCERY",
+           "isPersonalisedPromotion": false,
+           "discountedPrice": 0.9,
+           "status": "SETTLED",
+           "refundedAmountSoFar": 0.0,
+           "isSubstitutedLine": true,
+           "parentOrderLineId": 2,
+           "isNilPick": false,
+           "isRejected": false,
+           "cancellationReasonCode": "",
+           "rejectionDate": null,
+           "isCharitableProduct": false,
+           "hasSubstitute": false,
+           "discountAmount": 0.0,
+           "vatRate": 0.0,
+           "vatAmount": 0.0,
+           "stateToQty": [
+               {
+                   "state": "RETURN_CREATED",
+                   "quantity": 1
+               },
+               {
+                   "state": "SETTLED",
+                   "quantity": 1
+               },
+               {
+                   "state": "DELIVERED_AND_INVOICED",
+                   "quantity": 1
+               },
+               {
+                   "state": "DELIVERED",
+                   "quantity": 1
+               },
+               {
+                   "state": "DRIVER_ON_WAY",
+                   "quantity": 1
+               },
+               {
+                   "state": "LOADED",
+                   "quantity": 1
+               },
+               {
+                   "state": "PICK_COMPLETED",
+                   "quantity": 1
+               },
+               {
+                   "state": "CREATED",
+                   "quantity": 1
+               }
+           ]
+       }
+   ],
+   "paymentDetails": [
+       {
+           "transactionsDetails": [
+               {
+                   "transactionId": "827589",
+                   "updatedTime": "2023-11-29T09:54:04.000",
+                   "avsResponse": null,
+                   "processType": "AUTHORIZATION",
+                   "amount": 230.0,
+                   "approvalCode": "",
+                   "arnNumber": null
+               },
+               {
+                   "transactionId": "936362968",
+                   "updatedTime": "2023-11-29T10:12:16.000",
+                   "avsResponse": null,
+                   "processType": "REVERSAL",
+                   "amount": 230.0,
+                   "approvalCode": "",
+                   "arnNumber": null
+               }
+           ],
+           "cardNumber": "************2022",
+           "expirationMonth": 12,
+           "expirationYear": 2025,
+           "paymentMethodId": 1,
+           "paymentType": "CREDIT_CARD",
+           "cardType": "VISA",
+           "tokenizedCard": "c671b2d2-35d0-4b1b-ac98-d081c8aaea68",
+           "cardHolder": "first name test",
+           "totalInvoiced": 2.7,
+           "authorizationId": "3639050515_0",
+           "piHash": "3639050515_0"
+       }
+   ],
+   "billToContact": {
+       "firstName": "John",
+       "lastName": "Smith",
+       "middleName": null,
+       "phone": "11234567890",
+       "email": "example@company.com"
+   },
+   "billToAddress": {
+       "addressLine1": "1234 Spicy Street",
+       "addressLine2": "yza",
+       "city": "Winnipeg",
+       "state": "GB",
+       "country": "GB",
+       "zipCode": "R3B 0P4",
+       "latitude": 49.898498728223224,
+       "longitude": -97.13560152293131
+   },
+   "returnOrders": [
+       {
+           "sellingChannel": "ASDA_GROCERIES",
+           "orderDate": "2023-12-06T06:27:42.000",
+           "orderId": "R-2312060627421242252",
+           "createUser": "SFSC",
+           "actualArrivalTime": "2023-11-06T10:40:22.000",
+           "orderLines": [
+               {
+                   "productId": "MILK-2L-B130",
+                   "productLink": "https://groceries.asda.com/product/MILK-2L-B130",
+                   "productDescription": "ASDA Growers selection strawberries 400g",
+                   "productType": "GROCERY",
+                   "stateToQty": [
+                       {
+                           "state": "CREATED",
+                           "quantity": 1
+                       }
+                   ],
+                   "refundMode": "",
+                   "refundSource": "SFSC",
+                   "fulfillmentType": "DELIVERY",
+                   "fulfillmentService": "STANDARD",
+                   "isCharitableProduct": false,
+                   "dateTime": null,
+                   "quantity": 1,
+                   "uom": "abc",
+                   "unitPrice": 0.9,
+                   "returnReason": "Out Of Date - GNR",
+				   "status": "CREATED",
+                   "refundAmount": 0.0,
+                   "vatRate": 0.0,
+                   "vatExRefundAmount": 0.0,
+                   "vatAmount": 0.0,
+                   "associationDetails": [
+                       {
+                           "associationType": "SalesOrder",
+                           "associatedLineId": 3
+                       }
+                   ],
+                   "canOverride": true
+               },
+               {
+                   "productId": "MILK-2L-B130",
+                   "productLink": "https://groceries.asda.com/product/MILK-2L-B130",
+                   "productDescription": "ASDA Growers selection strawberries 400g",
+                   "productType": "GROCERY",
+                   "stateToQty": [
+                       {
+                           "state": "INVOICED",
+                           "quantity": 1
+                       }
+                   ],
+                   "refundMode": "",
+                   "refundSource": "SFSC",
+                   "fulfillmentType": "DELIVERY",
+                   "fulfillmentService": "STANDARD",
+                   "isCharitableProduct": false,
+                   "dateTime": null,
+                   "quantity": 1,
+                   "uom": "abc",
+                   "unitPrice": 0.9,
+                   "returnReason": "Out Of Date - GNR",
+				   "status": "INVOICED",
+                   "refundAmount": 0.0,
+                   "vatRate": 0.0,
+                   "vatExRefundAmount": 0.0,
+                   "vatAmount": 0.0,
+                   "associationDetails": [
+                       {
+                           "associationType": "SalesOrder",
+                           "associatedLineId": 4
+                       }
+                   ],
+                   "canOverride": true
+               }
+           ]
+       }
+   ]
+}

@@ -1,0 +1,275 @@
+<template>
+    <!-- Header Section: Select All, Multi-Action Buttons, and Search -->
+    <lightning-layout>
+        <!-- Select All Button -->
+        <lightning-layout-item class="slds-p-top_medium">
+            <div class="header-column">
+                <lightning-input label="Select All" type="checkbox" onchange={selectall}
+                    class="selectAllCls" disabled={isOrderCancelled}>
+                </lightning-input>
+            </div>
+        </lightning-layout-item>
+        <!-- Multi Customer Action Buttons -->
+        <lightning-layout-item class="slds-p-top_small" alignment-bump="right" size="4">
+            <div class="header-column">
+                <lightning-button variant="Neutral" label="Return/Refund" title="Return/Refund"
+                    class="slds-var-m-left_xx-small multiRefundGCls" onclick={handleMultiRefund}
+                    disabled={isAllItemsRefundable}>
+                </lightning-button>
+                <template if:false={orderWrapper.isExchangeOrder}>
+                    <lightning-button variant="Neutral" label="Exchange" title="Exchange"
+                        class="slds-var-m-left_xx-small multiExchangeCls" onclick={handleMultiExchange}
+                        disabled={isAllItemsExchangable}>
+                    </lightning-button>
+                    <lightning-button variant="Neutral" label="Partial Refund" title="Partial Refund"
+                        class="slds-var-m-left_xx-small multiDiscountGCls" onclick={handleMultiDiscount}
+                        disabled={isAllItemsDiscountable}>
+                    </lightning-button>
+                </template>
+            </div>
+        </lightning-layout-item>
+        <!-- Search Line Items Section -->
+        <lightning-layout-item padding="around-small" size="5">
+            <div class="header-column">
+                <div class="slds-form_horizontal slds-form">
+                    <div>
+                        <lightning-input name="enter-search" label="" type="search" class="searchItemCls"
+                            placeholder="Search for items.." pattern="/^[ A-Za-z0-9_@./#&+-]*$/.+"
+                            message-when-pattern-mismatch="Special Characters not allowed" onchange={handleSearchItems}>
+                        </lightning-input>
+                    </div>
+                </div>
+            </div>
+        </lightning-layout-item>
+    </lightning-layout>
+
+    <!-- Grouped Items by Category -->
+    <template for:each={categoryMap} for:item="catItem">
+        <div class="slds-m-top_large" key={catItem.key}>
+            <!-- Category Header -->
+            <div class="slds-box slds-box_x-small slds-theme_shade categoryBox" key={catItem.key}>
+                <strong>{catItem.key}</strong>
+            </div>
+            <!-- Table for Items in This Category -->
+            <div style="overflow-x:auto;" key={catItem.key}>
+                <table class="slds-table slds-table_bordered" aria-describedby="george-orderItem-Table"
+                    style="border-collapse: collapse">
+                    <!-- Table Headers -->
+                    <thead>
+                        <tr class="slds-line-height_reset">
+						<th class="" scope="col">
+                                <div class="slds-truncate" title="Select Item"></div>
+                            </th>
+						<th class="" scope="col">
+							<div class="slds-truncate" title="Possible Actions">Possible actions
+							</div>
+                            </th>
+						<th class="" scope="col">
+                                <div class="slds-truncate" title="Item Id">Item id</div>
+                            </th>
+						<th class="" scope="col">
+							<div class="slds-truncate" title="Item Name">Item name </div>
+                            </th>
+						<th class="" scope="col">
+                                <div class="slds-truncate ordItmStatus" title="Status">Status</div>
+                            </th>
+                            <template if:true={orderWrapper.isExchangeOrder}>
+						<th class="" scope="col">
+                                    <div class="slds-truncate ordItmStatus" title="Status">Replacement reason</div>
+                                </th>
+                            </template>
+						<th class="" scope="col">
+                                <div class="slds-truncate slds-float_right" title="Qty/Wt">Qty/Wt</div>
+                            </th>
+						<th class="" scope="col">
+                                <div class="slds-truncate slds-float_right" title="Unit Price">Unit price</div>
+                            </th>
+						<th class="" scope="col">
+                                <div class="slds-truncate slds-float_right" title="VAT">VAT</div>
+                            </th>
+						<th class="" scope="col">
+                                <div class="slds-truncate slds-float_right" title="Discount">Discount</div>
+                            </th>
+						<th class="" scope="col">
+                                <div class="slds-truncate slds-float_right" title="Total Price">Total price</div>
+                            </th>
+						<th class="" scope="col">
+                                <div class="slds-truncate slds-var-m-left_x-small" title="Tracking">Tracking</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <!-- Table Body: List Items in This Category -->
+                    <tbody>
+                        <template for:each={catItem.value} for:item="ordItm">
+                            <tr style={ordItm.style} key={ordItm.lineId}>
+                                <!-- If the item is not a bundle child, show selection checkbox and action buttons -->
+                                <template if:false={ordItm.parentId}>
+                                    <th scope="col">
+                                        <div>
+                                            <lightning-input data-id="toggle" data-value={ordItm.lineId} type="checkbox"
+                                                id={ordItm.lineId} name="input1" onclick={handleItemLevelCheckbox}
+                                                value={ordItm.lineId} class="oiCheckCls" disabled={isOrderCancelled}>
+                                            </lightning-input>
+                                        </div>
+                                    </th>
+                                    <th scope="col" style="overflow: auto">
+                                        <div>
+                                            <lightning-button value={ordItm.lineId} data-value={ordItm.lineId} variant="brand"
+                                                id={ordItm.lineId} label="Return/Refund" title="Return/Refund" onclick={handleRefund}
+                                                class="slds-var-m-left_x-small refundGCls" disabled={ordItm.isRefundDisabled}>
+                                            </lightning-button>
+                                            <lightning-helptext if:true={ordItm.isDisableRefund}
+                                                content="Customer must return item before refund is possible">
+                                            </lightning-helptext>
+                                            <br />
+                                            <div class="spaceCls"></div>
+                                            <template if:false={orderWrapper.isExchangeOrder}>
+                                                <template if:false={ordItm.isOutofStock}>
+                                                    <lightning-button value={ordItm.lineId} data-value={ordItm.lineId} variant="brand"
+                                                        id={ordItm.lineId} label="Exchange" title="Exchange" onclick={handleExchange}
+                                                        class="slds-var-m-left_x-small exchangeCls" disabled={ordItm.isExchangeDisabled}>
+                                                    </lightning-button>
+                                                </template>
+                                                <template if:true={ordItm.isOutofStock}>
+                                                    <lightning-button value={ordItm.lineId} data-value={ordItm.lineId} variant="brand"
+                                                        id={ordItm.lineId} label="Exchange" title="Exchange" onclick={handleExchange}
+                                                        class="slds-var-m-left_x-small exchangeCls" disabled={ordItm.isOutofStock}>
+                                                    </lightning-button>
+                                                </template>
+                                                <lightning-helptext if:true={ordItm.isDisableExchange}
+                                                    content="Customer must return item before exchange is possible">
+                                                </lightning-helptext>
+                                                <span if:false={ordItm.isDisableExchange} style="margin-right: 16px;"></span>
+                                                <template if:false={ordItm.isBundle}>
+                                                    <lightning-button value={ordItm.lineId} data-value={ordItm.lineId} variant="brand"
+                                                        id={ordItm.lineId} label="Partial Refund" title="Partial Refund" onclick={handleDiscount}
+                                                        class="slds-var-m-left_x-small discountCls" disabled={ordItm.isDiscountDisabled}>
+                                                    </lightning-button>
+                                                    <lightning-helptext if:true={ordItm.isDisableDiscount}
+                                                        content="Customer must Discount is possible">
+                                                    </lightning-helptext>
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </th>
+                                </template>
+                                <template if:true={ordItm.parentId}>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                </template>
+                                <!-- Item Detail Columns -->
+                                <th scope="col">
+                                    <div>
+                                        <a href={ordItm.productLink} target="_blank" rel="noopener">{ordItm.productId}</a>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate slds-cell-wrap" data-parent-id={ordItm.parentId}>
+                                        <template if:true={ordItm.parentId}>
+                                            <lightning-badge label="Bun" class="slds-badge_inverse"></lightning-badge>&nbsp;
+                                        </template>
+                                        {ordItm.productDescription}
+                                        <lightning-helptext content={ordItm.itemNameHelpText}
+                                            class="--slds-c-tooltip-sizing-max-width-small">
+                                        </lightning-helptext>
+                                    </div>
+                                    <!-- Out-of-Stock Message (wrapped in a template) -->
+                                    <template if:true={ordItm.showOutOfStock}>
+                                        <div style="color: red">
+                                          <lightning-icon icon-name="utility:error" size="xx-small" alternative-text="Out Of Stock"
+                                            title="Out Of Stock" class="slds-icon-text-error outOfStockCls"
+                                            style="--lwc-colorTextIconDefault: #F62217;">
+                                          </lightning-icon> Out of Stock
+                                        </div>
+                                      </template>
+                                      
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate slds-cell-wrap" if:false={ordItm.isBundle}>
+                                        {ordItm.lineStatus}
+                                        <lightning-helptext content={ordItm.formattedstateUpdatedTime}>
+                                        </lightning-helptext>
+                                    </div>
+                                </th>
+                                <template if:true={orderWrapper.isExchangeOrder}>
+                                    <th scope="col">
+                                        <div>{ordItm.exchangeReason}</div>
+                                    </th>
+                                </template>
+                                <th scope="col">
+                                    <div class="slds-float_right">{ordItm.quantity}</div>
+                                </th>
+                                <th scope="col">
+                                    <div if:false={ordItm.isBundle} class="slds-float_right">
+                                        {orderWrapper.currencyISOCode}
+                                        <lightning-formatted-number value={ordItm.unitPrice} minimum-fraction-digits="2">
+                                        </lightning-formatted-number>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div if:false={ordItm.isBundle} class="slds-float_right">
+                                        {orderWrapper.currencyISOCode}
+                                        <lightning-formatted-number value={ordItm.tax} minimum-fraction-digits="2">
+                                        </lightning-formatted-number>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div if:false={ordItm.isBundle} class="slds-float_right">
+                                        {orderWrapper.currencyISOCode}
+                                        <lightning-formatted-number value={ordItm.discount} minimum-fraction-digits="2">
+                                        </lightning-formatted-number>
+                                        <lightning-helptext content={ordItm.promotionAmountType}
+                                            class="--slds-c-tooltip-sizing-max-width-small">
+                                        </lightning-helptext>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div if:false={ordItm.isBundle} class="slds-float_right">
+                                        {orderWrapper.currencyISOCode}
+                                        <lightning-formatted-number value={ordItm.lineTotal} minimum-fraction-digits="2">
+                                        </lightning-formatted-number>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <lightning-button value={ordItm.lineId} variant="brand" id={ordItm.lineId}
+                                        data-value={ordItm.lineId} label="Tracking Details" title="Tracking Details"
+                                        onclick={handleTrackingDetailsModal} class="slds-var-m-left_x-small discountCls"
+                                        disabled={ordItm.isNotTrackable}>
+                                    </lightning-button>
+                                </th>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </template>
+    <hr/>
+
+    <!-- Quick Case Logging Modal Section -->
+    <template if:true={showRefundGeorgeModal}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+            class="slds-modal slds-fade-in-open slds-modal_large">
+            <div class="slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-border-filled clsModalCls"
+                    onclick={handleCloseModal}>
+                    <lightning-icon icon-name="utility:close" alternative-text="close" size="small">
+                    </lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <lightning-flow flow-api-name={flowApiName} flow-input-variables={flowInputVariables}
+                    onstatuschange={handleFlowStatusChange}>
+                </lightning-flow>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+
+    <!-- Tracking Details Modal Section -->
+    <template if:true={isModalOpen}>
+        <c-asdac-tracking-details-modal-cmp isgeorge={isGeorge} lstshipmentdetails={lstshipmentrecords}
+            isexchangeorder={orderWrapper.isExchangeOrder} shippingaddress={shippingAddressForTrackingDetail}
+            lineitemname={lineItemNameForTrackingDetail} onclosetrackingdetailsmodal={handleCloseTrackingDetailsModal}>
+        </c-asdac-tracking-details-modal-cmp>
+    </template>
+</template>

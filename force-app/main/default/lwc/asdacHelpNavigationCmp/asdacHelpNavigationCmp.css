@@ -1,0 +1,8 @@
+.link {
+  --dxp-s-link-text-decoration-hover: "underline";
+}
+
+.button {
+  --dxp-s-link-text-decoration-hover: "none";
+  --dxp-s-link-text-decoration-focus: "hover";
+}

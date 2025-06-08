@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="Daily Bulk API" icon-name="custom:custom19" if:true={dataLoaded}>
+            <lightning-datatable
+                key-field="label"
+                data={dailyBulkLimit}
+                columns={columns}
+                hide-checkbox-column
+                >
+            </lightning-datatable>
+    </lightning-card>
+</template>

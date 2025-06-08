@@ -1,0 +1,48 @@
+<template>
+	<template if:true={isLoading}>
+		<lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+	</template>
+	<section tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+		class="slds-modal slds-fade-in-open">
+		<div class="slds-modal__container">
+			<div class="slds-modal__header">
+				<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{label.changeOwner}</h2>
+			</div>
+			<div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+				<table class="slds-table slds-table_cell-buffer slds-table_header-hidden  slds-no-row-hover .slds-no-cell-focus" aria-describedby="change-owner" >
+					<tbody>
+						<tr class="slds-hint-parent">
+							<th data-label="Owner Label">
+								<label class="slds-form-element__label"><abbr class="slds-required">*</abbr>{label.selectOwnerLabel}</label>
+							</th>
+							<td data-label="Select Owner">
+								<lightning-combobox name="progress" value={queueValue} placeholder="Select Owner"
+									options={queues} onchange={selectedQueue} class="validate" variant="label-hidden"
+									required>
+								</lightning-combobox>
+							</td>
+						</tr>
+						<tr class="slds-hint-parent">
+							<th data-label="Owner Label">
+								<label class="slds-form-element__label">{label.commentsLabel}</label>
+							</th>
+							<td data-label="Select Owner">
+								<lightning-textarea name="CaseComment" class="caseComm"></lightning-textarea>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<footer class="slds-modal__footer">
+				<lightning-button variant="neutral" name="cancel" label={label.cancelButtonLabel} title="Cancel" onclick={handleClick}
+					class="slds-var-m-left_x-small"></lightning-button>
+				<lightning-button variant="brand" name="save" label={label.changeOwner} title="Change Owner"
+					onclick={handleClick} class="slds-var-m-left_x-small"></lightning-button>
+			</footer>
+		</div>
+	</section>
+	<template if:true={isLoading}>
+		<div class="slds-backdrop .slds-backdrop_open" role="presentation"></div>
+	</template>
+</template>

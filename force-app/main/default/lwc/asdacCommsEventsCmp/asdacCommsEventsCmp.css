@@ -1,0 +1,18 @@
+table {
+    overflow: auto;
+}
+td {
+    text-align: center;
+}
+.slds-table_cell-buffer tr>th, .slds-table_cell-buffer tr>td, .slds-table--cell-buffer tr>th, .slds-table--cell-buffer tr>td {
+    padding-left: var(--lwc-spacingLarge,1.5rem);
+    max-width: 15rem;
+}
+.slds-truncate:hover{
+    overflow: visible;
+    white-space: normal;
+    word-break: break-word;
+} 
+.comms-loading {
+    padding:50px;
+}

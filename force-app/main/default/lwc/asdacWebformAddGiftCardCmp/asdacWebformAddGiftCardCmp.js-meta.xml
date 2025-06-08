@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Webform: Add GiftCard</masterLabel>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="maxGiftCards" label="Gift Cards Limit" role="inputOnly" type="Integer" default="10" />
+            <property name="giftCardNumberLabel" type="String" label="Gift Card Number Label" role="inputOnly"></property>
+            <property name="giftcards" type="String" />
+            <property name="giftcardsCaseDescription" type="String" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Search Results</masterLabel>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="searchTerm" type="String" label="Search Term" />
+            <property name="maxResults" type="Integer" label="Max Search Results" default="200" />
+            <property name="maxCharacters" type="Integer" label="Search Result Character Limit" default="200" />
+            <property name="maxKeywords" type="Integer" label="Max Keywords" default="3" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

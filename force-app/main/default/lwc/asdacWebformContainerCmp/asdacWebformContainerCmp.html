@@ -1,0 +1,21 @@
+<template>
+  <div class="slds-var-p-vertical_medium">
+    <lightning-layout horizontal-align="center">
+      <lightning-layout-item size="11" large-device-size="7" medium-device-size="8" small-device-size="10">
+        <template if:true={isGeorgeRefund}>
+          <c-asdac-webform-george-refund-cmp></c-asdac-webform-george-refund-cmp>
+        </template>
+        <template if:true={isGeorgeVatRequest}>
+          <c-asdac-webform-george-vat-request-cmp></c-asdac-webform-george-vat-request-cmp>
+        </template>
+        <template if:true={isGeorgeGeneralEnquiry}>
+          <c-asdac-webform-george-general-enquiry-cmp></c-asdac-webform-george-general-enquiry-cmp>
+        </template>
+        <template if:true={isGeorgeInternationalOrders}>
+          <c-asdac-webform-george-international-order-cmp></c-asdac-webform-george-international-order-cmp>
+        </template>
+      </lightning-layout-item>
+    </lightning-layout>
+  </div>
+  <div class="style-section" lwc:dom="manual"></div>
+</template>

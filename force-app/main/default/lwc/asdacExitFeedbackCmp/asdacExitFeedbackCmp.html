@@ -1,0 +1,89 @@
+<template>
+  <div class="slds-var-p-horizontal_x-small" aria-live="assertive">
+    <lightning-layout if:true={feedBack} class="feedbackbox slds-gutters_direct-x-small" multiple-rows="true">
+      <lightning-layout-item class="slds-var-p-around_x-small" size="12">
+        <h3 class="font-header" tabindex="0">{labels.header}</h3>
+      </lightning-layout-item>
+      <lightning-layout-item size="12" large-device-size="6" class="upvote slds-var-p-around_x-small">
+        <button class={upvoteClass} onclick={handleUpvote}>
+          <p class="custom-text">
+            {labels.upvote.label}
+            <svg class="slds-m-left_small" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M3.75 11.9556C3.75 12.8306 3.75 13.7056 3.75 14.5806C3.75 15.4556 3.75 16.3306 3.75 17.2056C3.75 18.034 4.42157 18.7056 5.25 18.7056H7.5L7.53108 18.7059C7.93285 18.7147 8.16929 18.7992 9.43446 19.347C10.7751 19.9274 11.8037 20.2056 13.125 20.2056H16.6875C17.9084 20.2056 18.8704 19.2641 19.0817 18.0738C19.0963 17.9915 19.1084 17.8741 19.118 17.7217L19.1181 17.7217C19.1232 17.6405 19.1545 17.5632 19.2074 17.5015C19.3079 17.3841 19.3818 17.2895 19.4292 17.2175C19.7161 16.7817 19.875 16.2555 19.875 15.7056C19.875 15.6401 19.8694 15.5496 19.8583 15.4342L19.8583 15.4342C19.8514 15.3624 19.8654 15.2901 19.8985 15.2261C19.976 15.076 20.031 14.9576 20.0635 14.8707C20.1859 14.5438 20.25 14.1923 20.25 13.8306C20.25 13.5307 20.2053 13.2375 20.1195 12.9593C20.0906 12.8656 20.0397 12.7381 19.9668 12.5768L19.9667 12.5768C19.9321 12.5004 19.9242 12.4146 19.9441 12.3332C20.023 12.0104 20.0625 11.7596 20.0625 11.5806C20.0625 10.0873 18.7615 8.95557 17.25 8.95557H15.375C15.1679 8.95557 15 8.78767 15 8.58057V5.95557C15 4.66852 14.1975 3.70557 12.75 3.70557C11.6124 3.70557 10.8484 4.4695 10.5224 5.77366C10.2079 6.84273 9.96561 7.56961 9.81753 7.89455C9.33369 8.95627 8.60918 9.78065 7.49997 10.4556H5.25C4.42157 10.4556 3.75 11.1271 3.75 11.9556ZM16.6875 18.7056H13.125C12.0462 18.7056 11.1996 18.4766 10.0304 17.9704C8.53282 17.3221 8.25101 17.2214 7.56404 17.2063C7.53207 17.2057 7.53207 17.2057 7.5 17.2056H5.625C5.41789 17.2056 5.25 17.0377 5.25 16.8306C5.25 16.0806 5.25 15.3306 5.25 14.5806C5.25 13.8306 5.25 13.0806 5.25 12.3306C5.25 12.1235 5.41789 11.9556 5.625 11.9556H7.90538L8.079 11.8557C9.55649 11.0059 10.5451 9.9153 11.1825 8.51658C11.3696 8.10587 11.6273 7.33275 11.9696 6.16683C12.1516 5.44163 12.3876 5.20557 12.75 5.20557C13.3025 5.20557 13.5 5.44262 13.5 5.95557V8.95557C13.5 9.78399 14.1716 10.4556 15 10.4556H17.25C17.976 10.4556 18.5625 10.9658 18.5625 11.5806C18.5625 11.7743 18.5092 11.9721 18.3975 12.2024L18.2978 12.4079C18.2366 12.534 18.2509 12.6838 18.3349 12.7961L18.4716 12.979C18.6511 13.219 18.75 13.5144 18.75 13.8306C18.75 14.1598 18.646 14.4635 18.4575 14.7052L18.3421 14.8531C18.2695 14.9462 18.2449 15.0681 18.2759 15.1821L18.3251 15.3631C18.3583 15.4854 18.375 15.5991 18.375 15.7056C18.375 16.1158 18.1892 16.4812 17.8981 16.6768L17.7031 16.8079C17.5838 16.888 17.5208 17.0293 17.5409 17.1716L17.5738 17.4042C17.585 17.4836 17.5973 17.5328 17.6234 17.6228C17.6041 18.2321 17.1813 18.7056 16.6875 18.7056Z"
+                fill="#3D3D3D"></path>
+            </svg>
+          </p>
+        </button>
+      </lightning-layout-item>
+      <lightning-layout-item size="12" large-device-size="6" class="downvote slds-var-p-around_x-small">
+        <button class={downvoteClass} onclick={handleDownvote}>
+          <p class="custom-text">
+            {labels.downvote.label}
+            <svg class="slds-m-left_small" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M3.75 11.9556V6.70555C3.75 5.87713 4.42158 5.20557 5.25 5.20557H7.5L7.53108 5.20522C7.93285 5.19639 8.16929 5.11188 9.43446 4.56417C10.7751 3.98377 11.8037 3.70557 13.125 3.70557H16.6875C17.9084 3.70557 18.8704 4.64699 19.0817 5.83736C19.0963 5.91968 19.1084 6.03703 19.118 6.18943L19.1181 6.18942C19.1232 6.27059 19.1545 6.34789 19.2074 6.40967C19.3079 6.527 19.3818 6.62166 19.4292 6.69365C19.7161 7.12943 19.875 7.65567 19.875 8.20557C19.875 8.27108 19.8694 8.36154 19.8583 8.47696L19.8583 8.47696C19.8514 8.54874 19.8654 8.621 19.8985 8.68506C19.976 8.83514 20.031 8.95358 20.0635 9.04039C20.1859 9.3673 20.25 9.71881 20.25 10.0806C20.25 10.3805 20.2053 10.6737 20.1195 10.9518C20.0906 11.0456 20.0397 11.1731 19.9668 11.3343L19.9667 11.3343C19.9321 11.4107 19.9242 11.4965 19.9441 11.578C20.023 11.9007 20.0625 12.1516 20.0625 12.3306C20.0625 13.8238 18.7615 14.9556 17.25 14.9556H15.375C15.1679 14.9556 15 15.1235 15 15.3306V17.9556C15 19.2426 14.1975 20.2056 12.75 20.2056C11.6124 20.2056 10.8484 19.4416 10.5224 18.1375C10.2079 17.0684 9.96561 16.3415 9.81753 16.0166C9.33369 14.9549 8.60918 14.1305 7.49997 13.4556L5.24998 13.4556C4.42157 13.4556 3.75 12.784 3.75 11.9556ZM16.6875 5.20557H13.125C12.0462 5.20557 11.1996 5.43454 10.0304 5.94071C8.53282 6.58904 8.25101 6.68976 7.56404 6.70486C7.53207 6.70545 7.53207 6.70545 7.5 6.70557L5.62502 6.70554C5.4179 6.70554 5.24996 6.87345 5.24996 7.08057C5.24996 7.9316 5.24996 8.6816 5.24996 9.33057C5.24996 9.97952 5.24996 10.7295 5.24996 11.5805C5.24996 11.7877 5.41787 11.9556 5.625 11.9556H7.90538L8.079 12.0554C9.55649 12.9052 10.5451 13.9958 11.1825 15.3946C11.3696 15.8053 11.6273 16.5784 11.9696 17.7443C12.1516 18.4695 12.3876 18.7056 12.75 18.7056C13.3025 18.7056 13.5 18.4685 13.5 17.9556V14.9556C13.5 14.1271 14.1716 13.4556 15 13.4556H17.25C17.976 13.4556 18.5625 12.9453 18.5625 12.3306C18.5625 12.1368 18.5092 11.9391 18.3975 11.7087L18.2978 11.5033C18.2366 11.3771 18.2509 11.2273 18.3349 11.115L18.4716 10.9322C18.6511 10.6922 18.75 10.3967 18.75 10.0806C18.75 9.75128 18.646 9.44759 18.4575 9.20592L18.3421 9.058C18.2695 8.96489 18.2449 8.84301 18.2759 8.72905L18.3251 8.54801C18.3583 8.42573 18.375 8.31199 18.375 8.20557C18.375 7.79529 18.1892 7.42998 17.8981 7.2343L17.7031 7.10326C17.5838 7.02311 17.5208 6.88186 17.5409 6.73958L17.5738 6.50695C17.585 6.4275 17.5973 6.37831 17.6234 6.28837C17.6041 5.67902 17.1813 5.20557 16.6875 5.20557Z"
+                fill="#3D3D3D"></path>
+            </svg>
+          </p>
+        </button>
+      </lightning-layout-item>
+    </lightning-layout>
+    <lightning-layout if:false={feedBack} class="slds-gutters_direct-x-small" multiple-rows="true">
+      <lightning-layout-item if:true={clickedUpvote} size="12"
+        class="feedbackresult slds-text-align_center slds-var-p-around_x-small" padding="around-small">
+        <c-asdac-svg-utility-cmp svgname="FeedbackPositive"></c-asdac-svg-utility-cmp>
+        <p class="feedbacktext" role="status">{labels.upvote.submissionText}</p>
+      </lightning-layout-item>
+      <lightning-layout-item if:false={clickedUpvote}
+        class="feedbackresult slds-text-align_center slds-var-p-around_x-small slds-p-around_small slds-size_1-of-1">
+        <template if:false={clickedSendFeedback}>
+          <c-asdac-svg-utility-cmp svgname="FeedbackNegative"></c-asdac-svg-utility-cmp>
+        </template>
+        <div if:false={clickedSendFeedback}>
+          <p class="feedbacktext" role="status">{labels.downvote.negativeFeedback.header}</p>
+          <p class="feedbacklabel slds-p-top_small slds-p-bottom_large slds-p-left_medium" role="status">
+            {labels.downvote.negativeFeedback.improveText}
+          </p>
+          <div aria-live="off" class="slds-grid slds-col slds-wrap">
+            <div for:each={labels.downvote.negativeFeedback.chipButtons} for:item="chipButtonLabel"
+              key={chipButtonLabel} class="button-grid slds-p-around_small">
+              <button data-id={chipButtonLabel} class="button slds-button slds-button_brand chip-button chip-text"
+                onclick={handleClick}>
+                {chipButtonLabel}
+              </button>
+            </div>
+            <div class="slds-grid button-grid slds-p-top_medium slds-col slds-p-around_small">
+              <button class="button slds-button slds-button_brand chip-button slds-p-top_medium chip-text other-text"
+                onclick={handleButton}>
+                {labels.downvote.negativeFeedback.otherButton.label}
+              </button>
+            </div>
+          </div>
+          <div aria-live="off" class="other-button-section slds-p-around_medium" if:true={clickedButton}>
+            <lightning-input type="text" placeholder={freeTextPlaceholder} onchange={handleInputChange} required
+              message-when-value-missing={labels.downvote.negativeFeedback.otherButton.freeTextValidationMessage}
+              onfocus={togglePlaceholder} onfocusout={togglePlaceholder} variant="label-hidden">
+            </lightning-input>
+            <button class="slds-button slds-button_stretch slds-button_brand button-brand" disabled={disabled} onclick={handleClick}>
+              {labels.downvote.negativeFeedback.otherButton.sendFeedbackButtonLabel}
+            </button>
+          </div>
+        </div>
+        <div if:true={clickedSendFeedback}
+          class="feedbackresult slds-text-align_center slds-var-p-around_small slds-size_1-of-1">
+          <c-asdac-svg-utility-cmp svgname="FeedbackPositive"></c-asdac-svg-utility-cmp>
+          <p class="feedbacktext" role="status">{labels.downvote.submissionText}</p>
+        </div>
+        <div aria-live="off" if:true={getMoreHelp} class="cta-title slds-var-p-horizontal_small">
+          {labels.downvote.negativeFeedback.contactus.header}
+        </div>
+        <c-asdac-contact-us-buttons-cmp aria-live="off" is-feedback="true" show-call-channel-component={showCallChannelComponent}
+          show-message-channel-component={showMessageChannelComponent}>
+        </c-asdac-contact-us-buttons-cmp>
+      </lightning-layout-item>
+    </lightning-layout>
+  </div>
+</template>

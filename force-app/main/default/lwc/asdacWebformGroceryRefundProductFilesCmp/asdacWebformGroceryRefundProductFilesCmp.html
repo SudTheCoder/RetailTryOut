@@ -1,0 +1,39 @@
+<template>
+  <div class="products-container">
+    <div class="product-container borderOutline slds-var-m-vertical_x-small" for:each={_products} for:item="product"
+      for:index="index" key={product.id}>
+      <lightning-input type="text" label={productNameLabel}  name="product-name" required data-index={index}
+        value={product.name} onchange={handleChange}></lightning-input>       
+        <lightning-input type= "number" label={productPriceLabel} if:true={isProductQueryFlow} name="product-price" required data-index={index}
+        value={product.price} onchange={handleChange} min="0.1" step="any"></lightning-input>
+        <lightning-input type="text" label={productDescriptionLabel} if:true={isProductQueryFlow} name="product-description" required data-index={index}
+        value={product.description} onchange={handleChange}></lightning-input>     
+    <template if:false={isProductQueryFlow}>        
+      <lightning-combobox if:false={isForSecurityTag} name="refundRequestReason" label={refundRequestReasonLabel}
+        value={product.refundRequestReason} placeholder="--" required data-index={index}
+        options={refundRequestReasonOptions} onchange={handleChange}></lightning-combobox>
+      <lightning-input if:true={isForSecurityTag} type="text" label={productSizeLabel} name="product-size" required data-index={index}
+        value={product.size} onchange={handleChange}></lightning-input>
+      <lightning-input type="number" label={ProductQuantityLabel} name="product-quantity" required data-index={index}
+        value={product.quantity} onchange={handleChange} min="1" max={maxProductQuantity}
+        message-when-range-overflow={quantityValidation} message-when-range-underflow={quantityValidation}>
+      </lightning-input>
+    </template>				
+      <div class="slds-var-m-vertical_x-small" if:true={product.removable}>
+        <lightning-button label="Remove Item" variant="destructive" data-index={index} onclick={removeProduct}>
+        </lightning-button>
+      </div>
+    </div>
+    <div class="slds-var-m-vertical_x-small">
+      <lightning-button class="add-product" label="Add Product" variant="brand" onclick={addProduct}
+        disabled={disableAddProduct}></lightning-button>
+    </div>
+  </div>
+  <div>
+    <lightning-spinner if:true={loading} variant="brand" size="medium" alternative-text="Uploading Files">
+    </lightning-spinner>
+    <c-asdac-file-input-cmp if:false={isProductQueryFlow} name="attachments" label={uploadAttachmentLabel} value={attachments} multiple
+      accept={accept} onchange={handleAttachments}></c-asdac-file-input-cmp>
+    <div if:false={isProductQueryFlow}>{attachmentUploadDisclaimer}</div>
+  </div>
+</template>

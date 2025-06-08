@@ -1,0 +1,17 @@
+<template>
+	<lightning-card>
+		<lightning-tabset>
+			<template if:true={hasBFeatureAccess}>
+				<lightning-tab if:false={newCustomerTab} label={label.OrderSearchLabel}>
+					<c-asdac-order-search-cmp></c-asdac-order-search-cmp>
+				</lightning-tab>
+			</template>
+			<lightning-tab label={label.CustomerSearchLabel}>
+				<c-asdac-customer-detail-search-cmp></c-asdac-customer-detail-search-cmp>
+			</lightning-tab>
+			<lightning-tab if:false={newCustomerTab} label={label.CaseSearchLabel}>
+				<c-asdac-case-search-cmp></c-asdac-case-search-cmp>
+			</lightning-tab>
+		</lightning-tabset>
+	</lightning-card>
+</template>

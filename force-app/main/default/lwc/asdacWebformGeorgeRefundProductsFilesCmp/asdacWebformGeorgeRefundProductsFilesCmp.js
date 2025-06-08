@@ -1,0 +1,191 @@
+import { LightningElement, api, track } from "lwc";
+import { FlowAttributeChangeEvent } from "lightning/flowSupport";
+import ASDAC_WebformAttachmentUploadDisclaimerText from "@salesforce/label/c.ASDAC_WebformAttachmentUploadDisclaimerText";
+import ASDAC_AttachmentFileSizeLimit from "@salesforce/label/c.ASDAC_AttachmentFileSizeLimit";
+import ASDAC_AttachmentsTotalFileSizeLimit from "@salesforce/label/c.ASDAC_AttachmentsTotalFileSizeLimit";
+import ASDAC_AttachmentFileSizeLimitExceededErrorMessage from "@salesforce/label/c.ASDAC_AttachmentFileSizeLimitExceededErrorMessage";
+import ASDAC_AttachmentsTotalFileSizeLimitExceededErrorMessage from "@salesforce/label/c.ASDAC_AttachmentsTotalFileSizeLimitExceededErrorMessage";
+import ASDAC_AttachmentFileAllowedFormats from "@salesforce/label/c.ASDAC_AttachmentFileAllowedFormats";
+import ASDAC_FileNameRestriction from "@salesforce/label/c.ASDAC_FileNameRestriction";
+
+export default class AsdacWebformGeorgeRefundProductsFilesCmp extends LightningElement {
+  @api maxProducts = 10;
+  @api maxProductQuantity = 999;
+  @track _products = [];
+  attachments = [];
+  _contentVersions = [];
+  loading = false;
+  errorMessage = [];
+  validity = true;
+  fileAttachmentAcceptedFormats = ASDAC_AttachmentFileAllowedFormats
+
+  get quantityValidation() {
+    return `Item Quantity can't be greater than ${this.maxProductQuantity} or less than 1`;
+  }
+
+  get attachmentUploadDisclaimer(){
+    return ASDAC_WebformAttachmentUploadDisclaimerText;
+  }
+
+  connectedCallback() {
+    this.dispatchEvent(new CustomEvent("webformload", { bubbles: true }));
+    if (this._products.length === 0) {
+      this.addProduct();
+    }
+  }
+ @api
+ get productsDescription() {
+  let result = "";
+  for (const product of this._products) {
+    result += `Item Name: ${product.name},\nItem Quantity: ${product.quantity}\n\n`;
+  }
+  return result;
+}
+@api
+get products() {
+  const products = this._products.map(({ name, quantity }) => ({ name, quantity  }));
+  return JSON.stringify(products);
+}
+
+  set products(productsJson) {
+    const products = JSON.parse(productsJson);
+    const addProduct = (product) => this.addProduct(product.name, product.quantity);
+    this._products = [];
+    (products || []).forEach(addProduct);
+    setTimeout(() => {
+      this.template.querySelectorAll("lightning-input").forEach((el) => el.reportValidity());
+    }, 100);
+  }
+
+  @api
+  get files() {
+    return this._contentVersions;
+  }
+
+  set files(contentVersions) {
+    this._contentVersions = contentVersions;
+    this.validity = true;
+    this.errorMessage = [];
+    let emptyFileNames = '';
+    this.attachments = contentVersions.map((cv) => {
+      if (!cv.VersionData) {
+        // add error
+        this.validity = false;
+        emptyFileNames += ', '+cv.Title;
+      }
+      return { 
+        name: cv.Title, contentVersion: cv 
+      };
+    });
+    emptyFileNames && this.errorMessage.push('Empty file(s) - '+emptyFileNames.replace(',',''));
+  }
+  get disableAddProduct() {
+    return this._products.length >= this.maxProducts;
+  }
+
+  addProduct(name = "", quantity = "") {
+    if (this.disableAddProduct) {
+      return;
+    }
+    const product = {
+      id: window.crypto.randomUUID(),
+      name,
+      quantity,
+      removable: this._products.length !== 0
+    };
+    this._products.push(product);
+  }
+
+  removeProduct(evt) {
+    const index = evt.target.dataset.index;
+    this._products.splice(index, 1);
+  }
+
+  handleChange(evt) {
+    const index = evt.target.dataset.index;
+    const field = evt.target.name.replace("product-", "");
+    let value = evt.detail.value;
+    if (evt.target.type === "number") {
+      value = Number(value);
+    }
+    this._products[index][field] = value;
+  }
+
+  async handleAttachments(evt) {
+    this.loading = true;
+    this.attachments = evt.detail.value;
+
+    try {
+      this.errorMessage = [];
+      let emptyFileNames = '';
+      this.validity = true;
+      let thisThis = this;
+      const files = await Promise.all(
+        this.attachments.map(async function (file) {
+          if (file.contentVersion) {
+            return file.contentVersion;
+          }
+          let versionDataString = window.btoa(new Uint8Array(await file.arrayBuffer()).reduce((data, byte) => data + String.fromCharCode(byte), ""));
+          if (!versionDataString) {
+            // add error
+            thisThis.validity = false;
+            emptyFileNames += ', '+file.name;
+          }
+          return {
+            FirstPublishLocationId: "",
+            ContentLocation: "S",
+            PathOnClient: file.name,
+            Title: file.name,
+            VersionData: versionDataString,
+            ContentSize: file.size
+          };
+        })
+      );
+      emptyFileNames && thisThis.errorMessage.push('Empty file(s) - '+emptyFileNames.replace(',',''));
+      this._contentVersions = files;
+      const attributeChangeEvent = new FlowAttributeChangeEvent("files", files);
+      this.dispatchEvent(attributeChangeEvent);
+      this.loading = false;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  @api validate() {
+    let totalFileSize = 0;
+    let isAttachmentFileSizeLimitExceeded = false;
+    let fileSizeLimitExceededAttachmentNames = '';
+    let invalidFileNames = '';
+    let isInvalidAttachmentTitleFlag = false;
+    const attachmentNamePattern = /^[a-zA-Z0-9\s\-\.]+$/;
+    for (let product of this._products) {
+      if (!(product.name && product.quantity > 0 && product.quantity <= this.maxProductQuantity)) {
+        this.validity = false;
+      }
+    }
+
+    for (let cv of this._contentVersions) {
+      if(!attachmentNamePattern.test(cv.Title)){
+        this.validity = false;
+        invalidFileNames += ', '+cv.Title;
+        isInvalidAttachmentTitleFlag=true;
+      }
+      if (cv.ContentSize > ASDAC_AttachmentFileSizeLimit) {
+        this.validity = false;
+        isAttachmentFileSizeLimitExceeded = true;
+        fileSizeLimitExceededAttachmentNames += ', '+cv.Title;
+      }
+      totalFileSize = totalFileSize + cv.ContentSize;
+    }
+
+    isInvalidAttachmentTitleFlag && this.errorMessage.push(isInvalidAttachmentTitleFlag ? ASDAC_FileNameRestriction.replace('{}',invalidFileNames.replace(',','')) : '');
+
+    isAttachmentFileSizeLimitExceeded && this.errorMessage.push(isAttachmentFileSizeLimitExceeded ? (ASDAC_AttachmentFileSizeLimitExceededErrorMessage+' -'+fileSizeLimitExceededAttachmentNames.replace(',',''))+'. ' : '');
+
+    if (totalFileSize > ASDAC_AttachmentsTotalFileSizeLimit && this._contentVersions.length > 1) {
+      this.validity = false;
+      this.errorMessage.push(ASDAC_AttachmentsTotalFileSizeLimitExceededErrorMessage);
+    }
+    return { isValid: this.validity, errorMessage: this.errorMessage.join('<br>') };  
+  }
+}

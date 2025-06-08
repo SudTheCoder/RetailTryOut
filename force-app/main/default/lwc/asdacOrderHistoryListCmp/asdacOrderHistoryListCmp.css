@@ -1,0 +1,27 @@
+.showIcon {
+  display: none;
+}
+.link:hover .showIcon {
+  display: block;
+  color: blue;
+  margin-left: -25px;
+}
+
+.link:hover {
+  background-color: white;
+  margin-left: 20px;
+}
+
+.th {
+  border: 12px solid black;
+}
+
+.span {
+  border: 3px solid transparent;
+}
+
+
+
+.cTable.slds-table_fixed-layout tbody {
+  transform: none !important;
+}

@@ -1,0 +1,23 @@
+<template>
+  <div class={containerClass}>
+    <label class="slds-form-element__label slds-no-flex" for="input">
+      <abbr if:true={required} class="slds-required" title="required">*</abbr>
+      {label}
+    </label>
+    <div class="slds-form-element__control slds-grow">
+      <input
+        id="input"
+        class="slds-input"
+        name={name}
+        type="date"
+        value={value}
+        required={required}
+        min={min}
+        max={max}
+        onchange={handleChange}
+        onblur={reportValidity}
+      />
+    </div>
+    <div if:false={valid} class="slds-form-element__help" id="error-message" data-error-message="" aria-live="assertive">{errorMessage}</div>
+  </div>
+</template>

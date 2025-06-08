@@ -1,0 +1,79 @@
+<template>
+  <lightning-layout if:true={showCommonElement} vertical-align="center" class="slds-border_bottom">
+    <lightning-layout-item>
+      <c-asdac-svg-utility-cmp svgname="orderIcon"></c-asdac-svg-utility-cmp>
+    </lightning-layout-item>
+    <lightning-layout-item class="slds-var-m-left_medium orderDetailBorder slds-var-m-vertical_medium">{orderDetail}
+    </lightning-layout-item>
+  </lightning-layout>
+  <lightning-layout horizontal-align="spread" for:each={_products} for:item="product" for:index="index" key={product.id}
+    class="product-container">
+    <lightning-layout-item if:true={showCommonElement} class="orderCartStyle slds-var-m-vertical_small">
+      {product.quantity} x {product.name}
+      <div if:true={product.itemRefundReturned} class="asdaLovedProductMark">
+        {product.itemRefundReturned}
+      </div>
+    </lightning-layout-item>
+    <lightning-layout-item if:true={showBrandProductScreen} class="orderCartStyle slds-var-m-vertical_small">
+      {product.name}
+      <div if:true={product.asdaLoveMeFlag} class="asdaLovedProductMark">
+        {asdaLovedProductMark}
+      </div>
+    </lightning-layout-item>
+    <lightning-layout-item class="slds-var-m-vertical_small">
+      <lightning-button-icon size="x-small" icon-name="utility:close" variant="container" data-index={index}
+        onclick={removeProduct} class="removeProduct">
+      </lightning-button-icon>
+    </lightning-layout-item>
+  </lightning-layout>
+  <lightning-input type="text" class="slds-var-m-vertical_medium" label={label.productName} name="productName" required
+    value={productName} onchange={handleChange}>
+  </lightning-input>
+  <lightning-input if:true={showCommonElement} type="number" label={label.productQuantity} name="productQuantity"
+    required value={productQuantity} min="1" max={maxProductQuantity} message-when-range-overflow={quantityValidation}
+    message-when-range-underflow={quantityValidation} onchange={handleChange} class="slds-var-m-vertical_medium">
+  </lightning-input>
+  <lightning-input if:true={isSecurityonTagItemScreen} type="number" label={label.securityOnTagItemQuantity}
+    name="securityOnTagItemQuantity" required value={securityOnTagItemQuantity} min="1" max={maxProductQuantity}
+    message-when-range-overflow={quantityValidation} message-when-range-underflow={quantityValidation}
+    onchange={handleChange}>
+  </lightning-input>
+  <div if:true={isRefundRequestScreen}>
+    <lightning-input type="number" class="slds-var-m-vertical_medium" label={label.itemPrice} name="itemPrice"
+      value={itemPrice} onchange={handleChange} formatter="currency" step="0.01">
+    </lightning-input>
+    <lightning-combobox name="itemRefundReturned" class="slds-var-m-vertical_medium" label={label.itemRefundReturned}
+      value={itemRefundReturned} options={returnItemOptions} onchange={handleChange}></lightning-combobox>
+    <lightning-input type="text" class="slds-var-m-vertical_medium" label={label.itemReasonForReturn}
+      name="itemReasonForReturn" value={itemReasonForReturn} onchange={handleChange}>
+    </lightning-input>
+    <lightning-input type="text" class="slds-var-m-vertical_medium" label={label.itemReturnCode} name="itemReturnCode"
+      value={itemReturnCode} onchange={handleChange}>
+    </lightning-input>
+    <lightning-input type="checkbox" class="slds-var-m-vertical_medium" label={label.itemLostReturnsReceipt}
+      name="itemLostReturnsReceipt" checked={itemLostReturnsReceipt} onchange={handleChange}>
+    </lightning-input>
+  </div>
+  <div if:true={showBrandProductScreen}>
+    <div>
+      <label class="slds-form-element__label required slds-var-m-top_medium">{label.brandType}</label>
+      <lightning-radio-group name="brandType" variant="label-hidden" options={brandOptions} value={brandType}
+        type="radio" required class="slds-var-m-top_medium radio-style" onchange={handleChange}>
+      </lightning-radio-group>
+    </div>
+    <lightning-input if:true={showASDAProductDetail} type="checkbox" class="slds-var-m-top_medium"
+      label={label.asdaLoveMeFlag} name="asdaLoveMeFlag" checked={asdaLoveMeFlag} onchange={handleChange}>
+    </lightning-input>
+  </div>
+  <div if:true={isSecurityonTagItemScreen}>
+    <label class="slds-form-element__label required slds-var-m-top_medium">{label.isSecurityonTagItemReturned}</label>
+    <lightning-radio-group name="isSecurityonTagItemReturned" variant="label-hidden" options={securityOnTagItemOptions}
+      value={isSecurityonTagItemReturned} type="radio" required onchange={handleChange}>
+    </lightning-radio-group>
+  </div>
+  <div class="slds-align_absolute-center slds-var-m-vertical_medium">
+    <lightning-button label={label.addItemButtonLabel} variant="brand-outline" class="button-label" onclick={addItem}
+      disabled={disableAddItem}>Add item
+    </lightning-button>
+  </div>
+</template>

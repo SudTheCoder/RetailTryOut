@@ -1,0 +1,18 @@
+<!--**************************************************************************
+Name: ASDAC_LocateOrderForCaseCmp
+===============================================================================
+Req: 
+ASDAC-2024 OMS Integration - Link Order Number to Case
+===============================================================================
+Purpose: This Lightning Component is used to locate Orders for case in modal
+         popup.
+===============================================================================
+History                                                                                                                       
+VERSION   AUTHOR                DATE         	DETAIL
+1.0       Amey Priolkar    		25 Aug 2022     Initial Development
+******************************************************************************-->
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,lightning:isUrlAddressable" access="global" >
+    <aura:attribute name="recordId" type="String"/>
+    <lightning:workspaceAPI aura:id="workspace" />
+    <c:asdacLocateOrderForCaseCmp onopencaseorder="{!c.openOrderTab}" recordId="{!v.recordId}" onclosemodal="{!c.closeModal}"></c:asdacLocateOrderForCaseCmp>
+</aura:component>

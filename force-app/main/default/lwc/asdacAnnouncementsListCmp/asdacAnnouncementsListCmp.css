@@ -1,0 +1,27 @@
+.card-style{
+    background-color: #538316;  
+    color: #FFFFFF;
+}
+.title-style{
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+    font-size: 22px;
+    color: #FFFFFF;
+}
+.rndBorder {
+    border-bottom: 1px solid #FFFFFF;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    font-size: 18px;
+}
+.content div:last-child {
+    border-bottom: none;
+  }
+
+  .content div:after {
+    padding: 8px;
+    color: #FFFFFF;
+    content: ">\00a0";
+  }

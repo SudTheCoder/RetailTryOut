@@ -1,0 +1,39 @@
+<template>
+  <div class="products-container">
+    <div class="product-container slds-box slds-m-around_small" for:each={_products} for:item="product" for:index="index" key={product.id}>
+      <lightning-input
+        type="text"
+        label="Item Name"
+        name="product-name"
+        required
+        data-index={index}
+        value={product.name}
+        onchange={handleChange}
+      ></lightning-input>
+      <lightning-input
+        type="number"
+        label="Item Quantity"
+        name="product-quantity"
+        required
+        data-index={index}
+        value={product.quantity}
+        onchange={handleChange}
+        min="1"
+        max={maxProductQuantity}
+        message-when-range-overflow={quantityValidation}
+        message-when-range-underflow={quantityValidation}
+      ></lightning-input>
+      <div class="slds-var-m-vertical_x-small" if:true={product.removable}>
+        <lightning-button label="Remove Item" variant="destructive" data-index={index} onclick={removeProduct}></lightning-button>
+      </div>
+    </div>
+    <div class="slds-var-m-vertical_x-small">
+      <lightning-button class="add-product" label="Add Item" variant="brand" onclick={addProduct} disabled={disableAddProduct}></lightning-button>
+    </div>
+  </div>
+  <div>
+    <lightning-spinner if:true={loading} variant="brand" size="medium" alternative-text="Uploading Files"></lightning-spinner>
+    <c-asdac-file-input-cmp name="attachments" label="Attach Documents" accept={fileAttachmentAcceptedFormats} value={attachments} multiple onchange={handleAttachments}></c-asdac-file-input-cmp>
+    <div>{attachmentUploadDisclaimer}</div>
+  </div>
+</template>

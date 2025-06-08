@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Webform: George - Refund (Products and Files)</masterLabel>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="maxProducts" label="Products Limit" role="inputOnly" type="Integer" default="10" />
+            <property name="maxProductQuantity" label="Product Quantity Limit" role="inputOnly" type="Integer" default="999" />
+            <property name="products" type="String"  />
+            <property name="productsDescription" type="String" role="outputOnly"/>
+            <property name="files" type="@salesforce/schema/ContentVersion[]" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

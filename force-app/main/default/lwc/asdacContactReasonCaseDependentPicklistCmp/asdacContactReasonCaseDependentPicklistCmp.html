@@ -1,0 +1,30 @@
+<template>
+    <div>
+        <lightning-input type="text" label="Contact Name" value={contactName} disabled="true"></lightning-input>
+    </div>
+    <lightning-combobox name="Contact Reason Level 1"
+                        label="Contact Reason Level 1"
+                        placeholder="Select"
+                        value={picklistLevel1Value}
+                        options={level1Options}
+                        onchange={handleLevel1Change}
+                        class="level1"
+                        required message-when-value-missing="Please enter required details" >
+    </lightning-combobox>
+    <lightning-combobox name="Contact Reason Level 2"
+                        label="Contact Reason Level 2"
+                        placeholder="Select"
+                        value={picklistLevel2Value}
+                        options={level2Options}
+                        onchange={handleLevel2Change}
+                        class="level2">
+    </lightning-combobox>
+    <lightning-combobox name="Contact Reason Level 3"
+                        label="Contact Reason Level 3"
+                        placeholder="Select"
+                        value={picklistLevel3Value}
+                        options={level3Options}
+                        onchange={handleLevel3Change}
+                        class="level3">
+    </lightning-combobox>
+</template>

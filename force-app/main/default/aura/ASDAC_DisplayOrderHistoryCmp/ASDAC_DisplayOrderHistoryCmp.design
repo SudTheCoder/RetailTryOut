@@ -1,0 +1,5 @@
+<design:component >
+    <!--Design attribute to store Order History's page size -->
+    <design:attribute name="pageSize" label="Order History Page Size" description="" />
+    <design:attribute name="userHasPermission" label="User Access To Release C" description="" />
+</design:component>

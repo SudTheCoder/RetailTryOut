@@ -1,0 +1,22 @@
+<template>
+  <template if:true={isHelpWithAnOrder}>
+  <button class={buttonClass} onclick={openModal} aria-haspopup="dialog" data-button>
+    <span>{label}</span>
+    <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <image x="0" y="0" width="24" height="24"
+        href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADASURBVHgB7ZW9DcMgEEZJwD1lyoyQ0nJlj5INskmykQskRJkRXDAAPT/K0bmIfHAWkgu/BopP9yQ4DsZOEDgWGMdR3gBrrWMErlgghDB3XTf3fX9nBFBBSukJi6RKLiWhYRgenPMZts57PxljFlZIkWCPpFhAlVQJKJJqQa0E7aJ/aK2/McYJtlII8drKkgQrJBYgCVZHtMBD/Gxlj3XJTdu06UNrOir2FM+gXQTF39TiGYEFQJDHtVNKkT6cE5QfkM6CuW3cxbYAAAAASUVORK5CYII=">
+      </image>
+    </svg>
+  </button>
+  </template>
+  <template if:false={isHelpWithAnOrder}>
+    <div class={buttonClass}>
+      <span class="articleLabel">{label}</span>
+      <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image x="0" y="0" width="24" height="24"
+          href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADASURBVHgB7ZW9DcMgEEZJwD1lyoyQ0nJlj5INskmykQskRJkRXDAAPT/K0bmIfHAWkgu/BopP9yQ4DsZOEDgWGMdR3gBrrWMErlgghDB3XTf3fX9nBFBBSukJi6RKLiWhYRgenPMZts57PxljFlZIkWCPpFhAlVQJKJJqQa0E7aJ/aK2/McYJtlII8drKkgQrJBYgCVZHtMBD/Gxlj3XJTdu06UNrOir2FM+gXQTF39TiGYEFQJDHtVNKkT6cE5QfkM6CuW3cxbYAAAAASUVORK5CYII=">
+        </image>
+      </svg>
+    </div>
+  </template>
+</template>

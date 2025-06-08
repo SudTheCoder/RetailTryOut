@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="exitButtonClicked" type="Boolean" role="outputOnly"/>
+            <property name="isGeorge" type="Boolean" label="Pass the isGeorge to LWC"/>
+            <property name="isCancelRequesttoStore" type="Boolean" label="Pass the isCancelRequesttoStore to LWC"/>
+            <property name="itemsFromFlow" type="String" label="Pass Selected Records to LWC" /> 
+            <property name="refundToCreateStr" type="String" label="refundToCreateStr" role="outputOnly"/> 
+            <property name="toastMessage" type="String" label="Toast Message" role="outputOnly"/> 
+            <property name="isSuccess" type="Boolean" role="outputOnly" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

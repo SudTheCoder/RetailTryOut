@@ -1,0 +1,189 @@
+<template>
+	<template if:true={isLoading}>
+		<lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+	</template>
+    <!-- Css to add scroll on refund modal AESR-175 -->
+	<div class="slds-p-around_large scrollable-content">
+		<template if:true={refundedItems}>
+				<div class="slds-card">
+                    <div class="slds-card__header">
+                        <h1 id="card-heading-01" class=" slds-hyphenate slds-text-heading_medium slds-text-align_center">
+                            <template if:false={isGrocery}>
+                                Return details
+                            </template>
+                            <template if:true={isGrocery}>
+                                Refund details
+                            </template>
+                        </h1>
+                        <p class="slds-var-m-top_x-small slds-p-bottom_x-small slds-text-align_center slds-border_bottom">
+                            <template if:false={isGrocery}>
+                                Please choose a reason for return to continue
+                            </template>
+                            <template if:true={isGrocery}>
+                                Please choose a reason for refund to continue
+                            </template>
+                        </p>
+                    </div>
+                    <div class="slds-card__body slds-var-p-around_medium custom-modal" id="card-content-id-1">
+                        <br /><br />
+			<div class="slds-p-bottom_small">   
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" aria-label="Returned Items">
+                            <thead></thead>
+                            <tbody>
+                                <template if:true={moreThanOne}>
+                                    <tr class="slds-hint-parent" style="border-style: none; background-color: #e6eced">
+                                        <th scope="Remove Item">
+                                            <lightning-input type="checkbox" name="applyToAll" class="applyAllCls" label="Apply to all" 
+                                            checked={isApplyAll} onchange={handleApplyAll}></lightning-input>
+                                        </th>
+                                        <th scope="Item ID"></th>
+                                        <th scope="Item Name"></th>
+                                        <th scope="Qty"></th>
+                                        <th scope="Reason">
+                                            <lightning-combobox name="progress" placeholder="Choose" variant="label-hidden" value={value} 
+                                            options={refundReasons} class="oiMultiReasonCls" onchange={handleMultiReasonChange}></lightning-combobox>
+                                        </th>
+                                        <th scope="Notes">
+                                            <lightning-input type="text" placeholder="Notes" class="oiMultiNotesCls notesCls" 
+                                            value={value} onblur={handleMultiNotesChange} variant="label-hidden"></lightning-input>
+                                        </th>
+                                        <th scope="Refund Type"></th>
+                                        <th if:false={isGrocery} scope="Refund amount so far"></th>
+                                        <th scope="Unit price"></th>
+                                        <th scope="Refund amount"></th>
+                                    </tr>
+                                </template>
+                                <tr class="slds-hint-parent">
+                                    <th scope="Remove Item" class="slds-size_1-of-12">
+                                        <div>
+                                          <strong>
+                                            <label class="slds-form-element__label slds-cell-wrap">Remove item</label>
+                                          </strong>
+                                        </div>
+                                    </th>
+                                    <th scope="Item ID" class="slds-size_1-of-12 ">
+                                        <div >
+                                            <strong><label class="slds-form-element__label">Item id</label></strong>
+                                        </div>
+                                    </th>
+                                    <th scope="Item Name" class="slds-size_2-of-12"  style="width: 260px;">
+                                        <div>
+                                            <strong><label class="slds-form-element__label">Item name</label></strong>
+                                        </div>
+                                    </th>
+                                    <th scope="Qty" class="slds-size_1-of-12 ">
+                                        <div>
+                                            <strong><label class="slds-form-element__label">Qty/Wt</label></strong>
+                                        </div>
+                                    </th>
+                                    <th scope="Reason"  class="slds-size_2-of-12">
+                                        <div>
+                                            <strong><label class="slds-form-element__label">Reason</label></strong>
+                                        </div>
+                                    </th>
+                                    <th scope="Notes" class="slds-size_3-of-12 ">
+                                        <div>
+                                            <strong><label class="slds-form-element__label">Notes</label></strong>
+                                        </div>
+                                    </th>
+                                    <th if:false={isGrocery} scope="Return Type"  class="slds-size_2-of-12 ">
+                                        <div>
+                                            <strong><label class="slds-form-element__label">Return type</label></strong>
+                                        </div>
+                                    </th>
+                                    <th if:true={isGrocery} scope="Refund Type"  class="slds-size_2-of-12 ">
+                                        <div>
+                                            <strong><label class="slds-form-element__label">Refund type</label></strong>
+                                        </div>
+                                    </th>
+                                    <th if:false={isGrocery} scope="Refund amount so far"  class="slds-size_1-of-12 ">
+                                        <div class="slds-cell-wrap">
+                                            <strong><label class="slds-form-element__label">Refund amount so far</label></strong>
+                                        </div>
+                                    </th>
+                                    <th scope="Unit price" class="slds-size_1-of-12 ">
+                                        <div>
+                                            <strong><label class="slds-form-element__label">Unit price</label></strong>
+                                        </div>
+                                    </th>
+                                    <th scope="Refund amount" class="slds-size_1-of-12 ">
+                                        <div class="slds-cell-wrap">
+                                            <strong><label class="slds-form-element__label">Refund amount</label></strong>
+                                        </div>
+                                    </th>
+                                </tr> 
+                                <template for:each={refundedItems} for:item="refundItem" for:index="index">
+                                    <tr key={refundItem.productId} data-id={refundItem.lineId}>
+                                        <td>
+                                            <div class="slda-truncate">
+                                              <lightning-button-icon icon-name="utility:clear" alternative-text="Remove" class="slds-var-m-left_xx-small removeIcon" variant="bare"
+                                                  title="Remove" value={refundItem.index} data-index={index} onclick={removeRow} style="color:blue" disabled={removeDisabled}>
+                                              </lightning-button-icon>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div  class="slds-truncate">{refundItem.productId}</div>
+                                        </td>
+                                        <td>
+                                            <div  class="slds-truncate item-width">{refundItem.productDescription}</div>
+                                        </td>
+                                        <td>
+                                            <lightning-combobox variant="label-hidden" class="oiQuantity" name="oiQuantity" options={quantityOptions} 
+                                            data-value={refundItem.refundableQuantity} data-id={refundItem.lineId} onchange={handleQuantityChange}
+                                            data-isuomeach={refundItem.isUomEach}></lightning-combobox>
+                                        </td>
+                                        <td>
+                                            <div class="itemReason">
+                                                <lightning-combobox placeholder="Choose" variant="label-hidden" name="oiReason" 
+                                                    value={value}
+                                                    options={refundReasons} class="oiReasonCls" data-lineid={refundItem.orderLineId}
+                                                    data-id={refundItem.lineId} onchange={handleReasonChange}></lightning-combobox>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="slds-truncate">
+                                                <lightning-input type="text" class="oiNotesCls notesCls" onchange={handleNotesChange} placeholder="Notes" 
+                                                data-id={refundItem.lineId} variant="label-hidden" data-lineid={refundItem.orderLineId}></lightning-input>
+                                            </div>
+                                        </td>
+                                        <td if:false={isGrocery}>
+                                            <div class="refundType slds-cell-wrap">
+                                                <lightning-combobox placeholder="Choose" variant="label-hidden" 
+                                                name="oiType" options={returnTypes} class="oiTypeCls" onchange={handleReturnTypeChange}
+                                                data-id={refundItem.lineId} data-lineid={refundItem.orderLineId}></lightning-combobox>
+                                            </div>
+                                        </td>
+					                    <td if:true={isGrocery}>
+                                            <div class="refundType slds-cell-wrap">
+                                                <lightning-combobox placeholder="Choose" variant="label-hidden" name="oiType" options={refundTypes} class="oiTypeCls" 
+                                                onchange={handlerefundTypeChange} data-id={refundItem.lineId} data-lineid={refundItem.orderLineId} disabled={refundItem.isRefundTypeDisabled}></lightning-combobox>
+                                            </div>
+                                        </td>
+                                        <td if:false={isGrocery}>
+                                            <div class="slds-truncate oiRefundAmtSoFar" data-value={refundItem.refundedAmountSoFar}>{order.currencyISOCode}<lightning-formatted-number value={refundItem.refundedAmountSoFar} minimum-fraction-digits="2" ></lightning-formatted-number></div>
+                                        </td>
+                                        <td>
+                                            <div class="slds-truncate">{order.currencyISOCode}<lightning-formatted-number value={refundItem.unitPrice} minimum-fraction-digits="2" ></lightning-formatted-number></div>
+                                        </td>
+                                        <td>
+                                            <div class="slds-truncate oiLineRefundAmt" data-id={refundItem.lineId} data-unitprice={refundItem.unitPrice} 
+                                            data-value={newAmount}>{order.currencyISOCode}<lightning-formatted-number value={refundItem.refundAmount} minimum-fraction-digits="2" ></lightning-formatted-number></div>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                        <br>
+                        <div class="slds-float_right total-refund" style="font-weight: bold">TOTAL REFUND: {order.currencyISOCode}<lightning-formatted-number value={totalRefundAmount} minimum-fraction-digits="2" ></lightning-formatted-number></div>
+		        </div>		
+                    </div>
+                    <footer class=" slds-m-top_large slds-clearfix  slds-box slds-box_small slds-theme_shade">
+                        <div class="slds-float_right">
+                            <lightning-button variant="neutral" name="cancel" label="Cancel" title="Cancel" onclick={handleCancel} class="slds-var-m-left_x-small"></lightning-button>
+                            <lightning-button variant="brand" name="submit" label="Submit" title="Submit" disabled={isSubmitting} onclick={handleSubmit} class="slds-var-m-left_x-small"></lightning-button>
+                        </div>
+                    </footer>
+				</div>
+		</template>
+	</div>
+</template>

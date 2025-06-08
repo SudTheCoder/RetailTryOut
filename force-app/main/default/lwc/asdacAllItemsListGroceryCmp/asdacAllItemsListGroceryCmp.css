@@ -1,0 +1,116 @@
+.crossed-out {
+	color: red;
+	text-decoration: line-through;
+}
+
+.pillColor{
+	background-color: #e8ac4a !important;
+}
+
+.categoryBox{
+	background-color: rgb(215, 212, 212);
+}
+
+.promopillColorBox{
+	background-color: #007335 !important;
+	color: #ffffff;
+    font-size: 12px;
+	display: inline-block;
+	width: 50px;
+	height: 20px;
+	border: 1px solid rgba(0, 0, 0, 0);
+	text-align: center;
+	border-radius: 4px 4px 4px 4px;
+}
+
+.rectangle-box {
+	display: inline-block;
+	width: 25px;
+	height: 20px;
+	border: 1px solid rgba(0, 0, 0, 0);
+	text-align: center;
+	background-color: #ccc;
+	border-radius: 4px 4px 4px 4px;
+}
+
+.inline-container {
+	display: flex;
+	align-items: center;
+}
+
+.ItemNameRightSapce{
+    padding-right: 10px;
+}
+  
+.ItemNameStyle{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+	
+			
+.para-start {
+	margin-top: 0;
+	margin-left: 0.8rem;
+	word-break: break-word;
+}
+	
+.para-start2 {
+	margin-top: 0;
+	margin-left: 1.7rem;
+}
+.prog-start3 {
+	margin-top: 0;
+	height: 38px;
+	width: 47%;
+	position: absolute;
+	right: 0px;
+	left: 58%;
+}
+
+.heading-space {
+	margin-left: 81px;
+	margin-top: -18px;
+}
+
+.heading-space2 {
+	margin-left: 75%;
+	top: 25px;
+}
+
+.text-container {
+	display: flex;
+	flex-direction: column;
+}
+.heading-container {
+	display: inline-flex;
+	align-items: center;
+	margin-right: 1rem;
+	margin-top: 0.5rem;
+	justify-content: space-between;
+	margin-left: 0.7rem;
+}
+.heading-container3 {
+	display: flex;
+	margin-right: 1rem;
+	margin-top: 0.5rem;
+}
+.icon {
+	padding-top: 0.175rem;
+}
+.not-bold {
+	font-weight: lighter;
+}
+.left {
+	display: flex;
+	align-items: center;
+}
+
+.searchItm{
+    width: 100%;
+    max-width: 50%;
+	margin-left: auto;
+	padding-right: 10px;
+}
+:host {
+    --lwc-spacingXxSmall: 0;
+}

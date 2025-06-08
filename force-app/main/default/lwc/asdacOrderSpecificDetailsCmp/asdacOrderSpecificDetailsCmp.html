@@ -1,0 +1,311 @@
+<!-- sldsValidatorIgnore -->
+<template>
+	<div class="slds-page-header">
+		<lightning-layout>
+			<lightning-layout-item flexibility="auto" padding="around-small">
+				<div class="slds-page-header__col-title">
+					<div class="slds-media">
+						<div class="slds-media__figure slds-p-top_x-small">
+							<template if:true={isGeorge}>
+							   <img src={fulfillmentOrder} alt="FulfillmentOrder" />
+						    </template>
+							<template if:false={isGeorge}>
+								<img src={groceryFulfillmentLogo} alt="GroceryFulfillmentOrder" />
+							 </template>
+						</div>
+						<div class="slds-media__body">
+							<div class="slds-page-header__name">
+								<div class="slds-page-header__name-title">
+									<h1 style="white-space: nowrap;">
+										<template if:true={isGeorge}>
+										   <template if:false={orderWrapper.isExchangeOrder}>
+												<span>George | Order Details</span>
+										   </template>
+										   <template if:true={orderWrapper.isExchangeOrder}>
+												<span>George | Exchange Order Details</span>
+												<button style="margin-left:30px;" class="slds-button parentExchangeClick" aria-describedby="help" aria-disabled="true" onclick={handleParentOrderClick}>{orderWrapper.salesOrderId}</button>
+											</template>
+										</template>
+										<template if:false={isGeorge}><span>Grocery | Order Details</span></template>
+										<span class="slds-page-header__title">{orderWrapper.orderId}</span>
+									</h1>
+								</div>
+							</div>
+							<template if:false={orderWrapper.isExchangeOrder}>
+								<template if:true={isGeorge}>
+									<template if:true={hasYNumbers}>
+										<lightning-button-menu class="slds-dropdown_actions" label={yNumberText} alternative-text="Show Menu" variant="border-filled" onselect={handleNavigateExchangeOrder} >
+											<template for:each={exchangeOrderList} for:item="option">
+												<lightning-menu-item key={option} value={option} label={option}></lightning-menu-item>
+											</template>
+										</lightning-button-menu>
+									</template>
+								</template>
+						   </template>
+						</div>
+					</div>
+				</div>
+			</lightning-layout-item>
+			<template if:false={orderWrapper.isExchangeOrder}>
+				<lightning-layout-item flexibility="auto" class="slds-m-left_large" padding="around-small">
+					<lightning-button-group class="slds-float_right slds-p-right_medium" >
+						<template if:false={caseId}>
+						<template if:false={isGeorge}>
+							<lightning-button variant="Neutral" label="Order Level Refund" class="cancelOrderCls"
+							disabled={orderWrapper.ghsOrderLevelRefundDisabled} onclick={handleOrderLevelRefund}></lightning-button>
+						</template>
+						<template if:true={showCancelButton} >
+							<lightning-button variant="Neutral" label="Cancel Order" disabled={orderWrapper.isCancelDisabled}
+							class="cancelOrderCls" onclick={handleCancelOrderClick}></lightning-button>
+							<lightning-button variant="Neutral" label="Cancel Request to Store" disabled={cancelrequestdisabled}
+							 class="cancelOrderRequesttoStoreCls" onclick={handleCancelRequestOrderClick}></lightning-button>
+						</template>
+						<lightning-button label="Payment Methods" variant="Neutral" class="payCls" onclick={handlePaymentMethodClick}></lightning-button>
+						<template if:false={caseId}>
+							<lightning-button label="Create Case" variant="Brand" class="createCaseCls" onclick={handleCreateCaseClick}></lightning-button>
+						</template>
+						<lightning-button-menu class="slds-dropdown_actions" alternative-text="Show menu" variant="border-filled" menu-alignment="auto">
+							<template if:true={hasGHSAccess}>
+								<lightning-menu-item label={label.ASDAC_Log_Action} variant="Brand" class="logAction" onclick={createTask}></lightning-menu-item>
+							</template>
+							<template if:true={orderWrapper.customerSalesforceAccId}>										
+								<template if:true={hasPFTeamAccess}>
+									<template if:true={hasGHSAccess}>
+										<template if:false={orderWrapper.isAccountSuspended}>
+											<lightning-menu-item label={label.ASDAC_SuspendedAccount} class="handleSuspendAccount" onclick={handleSuspendAccountClick}></lightning-menu-item>
+										</template>
+										<template if:true={orderWrapper.isAccountSuspended}>
+											<lightning-menu-item label={label.ASDAC_Unsuspend_Account} class="handleUnsuspendAccount" onclick={handleUnsuspendAccountClick}></lightning-menu-item>
+										</template>
+										<template if:false={orderWrapper.isUnderAudit}>
+											<lightning-menu-item label={label.ASDAC_UnderAuditLabel} class="handleUnderAudit" onclick={handleUnderAuditClick}></lightning-menu-item>
+										</template>
+										<template if:true={orderWrapper.isUnderAudit}>
+											<lightning-menu-item label={label.ASDAC_Remove_Audit} class="handleRemoveAudit" onclick={handleRemoveAuditClick}></lightning-menu-item>
+										</template>		
+									</template>																															
+								</template>
+							</template>
+							<template if:true={isGeorge}>
+								<lightning-menu-item variant="Neutral" label="Delivery Charge Refund" class="shippingRefundCls" onclick={handleShippingFeeRefundClick} 
+									disabled={isDeliveryChargeRefundButton}></lightning-menu-item>
+							</template>
+							<template if:true={isManualCardDisplayed}>
+								<lightning-menu-item variant="Neutral" label="Manual Card Transaction" class="manCrdCls" onclick={handleManualCardTransaction}></lightning-menu-item>
+							</template>
+							<template if:false={isGeorge}>
+								<lightning-menu-item label="Download VAT  Receipt" variant="Neutral" disabled={isVATRecipetDownloaded} onclick={handleDownloadVAT}></lightning-menu-item>
+							</template>
+						</lightning-button-menu>
+						</template>
+						<template if:true={caseId}>
+								<template if:false={isGeorge}>
+									<lightning-button variant="Neutral" label="Order Level Refund" class="cancelOrderCls"
+									disabled={orderWrapper.ghsOrderLevelRefundDisabled} onclick={handleOrderLevelRefund}></lightning-button>
+								</template>
+								<template if:true={isGeorge}>
+									<lightning-button label="Payment Methods" variant="Neutral" class="payCls" onclick={handlePaymentMethodClick}></lightning-button>
+								</template>
+								<lightning-button-menu class="slds-dropdown_actions" alternative-text="Show menu" variant="border-filled" menu-alignment="auto">
+									<template if:true={showCancelButton} >
+										<lightning-menu-item variant="Neutral" label="Cancel Order" disabled={orderWrapper.isCancelDisabled}
+										class="cancelOrderCls" onclick={handleCancelOrderClick}></lightning-menu-item>
+										<lightning-menu-item variant="Neutral" label="Cancel Request to Store" disabled={cancelrequestdisabled}
+										style="width: 170px;" class="cancelOrderRequesttoStoreCls" onclick={handleCancelRequestOrderClick}></lightning-menu-item>
+									</template>
+									<template if:false={isGeorge}>
+									<lightning-menu-item label="Payment Methods" variant="Neutral" class="payCls" onclick={handlePaymentMethodClick}></lightning-menu-item>
+									</template>
+									<template if:true={hasGHSAccess}>
+										<lightning-menu-item label={label.ASDAC_Log_Action} variant="Brand" class="logAction" onclick={createTask}></lightning-menu-item>
+									</template>
+									<template if:true={orderWrapper.customerSalesforceAccId}>										
+										<template if:true={hasPFTeamAccess}>
+											<template if:true={hasGHSAccess}>
+												<template if:false={orderWrapper.isAccountSuspended}>
+													<lightning-menu-item label={label.ASDAC_SuspendedAccount} class="handleSuspendAccount" onclick={handleSuspendAccountClick}></lightning-menu-item>
+												</template>
+												<template if:true={orderWrapper.isAccountSuspended}>
+													<lightning-menu-item label={label.ASDAC_Unsuspend_Account} class="handleUnsuspendAccount" onclick={handleUnsuspendAccountClick}></lightning-menu-item>
+												</template>
+												<template if:false={orderWrapper.isUnderAudit}>
+													<lightning-menu-item label={label.ASDAC_UnderAuditLabel} class="handleUnderAudit" onclick={handleUnderAuditClick}></lightning-menu-item>
+												</template>
+												<template if:true={orderWrapper.isUnderAudit}>
+													<lightning-menu-item label={label.ASDAC_Remove_Audit} class="handleRemoveAudit" onclick={handleRemoveAuditClick}></lightning-menu-item>
+												</template>		
+											</template>																															
+										</template>
+									</template>
+									<template if:true={isGeorge}>
+										<lightning-menu-item variant="Neutral" label="Delivery Charge Refund" class="shippingRefundCls" onclick={handleShippingFeeRefundClick} 
+											disabled={isDeliveryChargeRefundButton}></lightning-menu-item>
+									</template>
+									<template if:true={isManualCardDisplayed}>
+										<lightning-menu-item variant="Neutral" label="Manual Card Transaction" class="manCrdCls" onclick={handleManualCardTransaction}></lightning-menu-item>
+									</template>
+									<template if:false={isGeorge}>
+										<lightning-menu-item label="Download VAT  Receipt" variant="Neutral" disabled={orderWrapper.isVATEnabled} onclick={handleDownloadVAT}></lightning-menu-item>
+									</template>
+								</lightning-button-menu>
+						</template>
+
+						<template if:true={isSuspendUnsuspendUnderAuditRemoveAudit}>
+							<section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+								class="slds-modal">
+								<div class="slds-modal__container">
+									<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-border-filled closeBtn" onclick={handleCloseModal}>
+										<lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+										<span class="slds-assistive-text">Close</span>
+									</button>
+									<lightning-flow flow-api-name={flowApiName} flow-input-variables={flowInputVariables} onstatuschange={handleFlowStatusChange}></lightning-flow>
+								</div>
+							</section>
+							<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+						</template>
+					</lightning-button-group>
+				</lightning-layout-item>
+		    </template>
+		</lightning-layout>
+	</div>
+	<template if:true={isGeorge}>
+		<div style="overflow-x:auto;">
+			<table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-label="Additional Details">
+				<thead>
+					<tr class="slds-line-height_reset">
+						<th data-label="Order Number" scope="col" class="slds-border_right"><strong>Order number</strong></th>
+						<th data-label="Fulfilment Type" scope="col" class="slds-border_right"><strong>Fulfilment type</strong></th>
+						<template if:false={orderWrapper.isExchangeOrder}>		
+							<th data-label="Delivery Proposition" scope="col" class="slds-border_right"><strong>Delivery proposition</strong></th>
+					    </template>
+						<th data-label="Order Total" scope="col" class="slds-border_right"><strong>Order total</strong>
+						</th>
+						<template if:false={orderWrapper.isExchangeOrder}>	
+							<th data-label="Delivery Charge" scope="col" class="slds-border_right"><strong>Delivery charge</strong></th>
+					    </template>
+						<template if:false={orderWrapper.isExchangeOrder}>
+							<th data-label="Order Placed On" scope="col" class="slds-border_right"><strong>Order placed on</strong></th>
+						</template>
+						<template if:true={orderWrapper.isExchangeOrder}>
+							<th data-label="Order Placed On" scope="col" class="slds-border_right"><strong>Exchange created on</strong></th>
+						</template>
+						<th data-label="Order placed by" scope="col" class="slds-border_right"><strong>Order placed by</strong></th>
+						<template if:false={orderWrapper.isExchangeOrder}>	
+							<th data-label="Fraud status" scope="col" class="slds-border_right"><strong>Fraud status</strong></th>
+						</template>		
+						<th data-label="Customer Type" scope="col" class="slds-border_right"><strong>Customer type</strong></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="slds-hint-parent">
+						<th data-label="Order Number" class="slds-border_right" scope="row">{orderWrapper.orderId}</th>
+						<th data-label="Fulfilment Type" class="slds-border_right" scope="row">{orderWrapper.orderFulfilmentType}</th>
+						<template if:false={orderWrapper.isExchangeOrder}>	
+							<th data-label="Delivery Proposition" class="slds-border_right" scope="row">{orderWrapper.fulfillmentService}</th>
+						</template>
+						<th data-label="Order Total" class="slds-border_right" scope="row">
+							Original: {orderWrapper.currencyISOCode}<lightning-formatted-number value={orderWrapper.originalOrderTotal} minimum-fraction-digits="2"></lightning-formatted-number> <br/>
+							Current: {orderWrapper.currencyISOCode}<lightning-formatted-number value={orderWrapper.totalAmount} minimum-fraction-digits="2"></lightning-formatted-number>
+						</th>
+						<template if:false={orderWrapper.isExchangeOrder}>	
+							<th data-label="Delivery Charge" class="slds-border_right" scope="row">
+								Original: {orderWrapper.currencyISOCode}<lightning-formatted-number value={orderWrapper.originalDeliveryCharge} minimum-fraction-digits="2"></lightning-formatted-number> <br/>
+								Current: {orderWrapper.currencyISOCode}<lightning-formatted-number value={orderWrapper.currentDeliveryCharge} minimum-fraction-digits="2"></lightning-formatted-number>
+							</th>
+						</template>
+						<th data-label="Order Placed On" class="slds-border_right" scope="row">{orderWrapper.formattedOrderDate}</th>
+						<template if:false={orderWrapper.isExchangeOrder}>
+							<th data-label="Order Placed By" class="slds-border_right" scope="row">{orderWrapper.createUser}</th>
+					   </template>
+					   <template if:true={orderWrapper.isExchangeOrder}>
+							<th data-label="Order Placed By" class="slds-border_right" scope="row">Colleague</th>
+				       </template>
+						<template if:false={orderWrapper.isExchangeOrder}>	
+							<th data-label="Fraud Status" class="slds-border_right" scope="row">{orderWrapper.fraudStatus}</th>
+					   </template>
+						<th data-label="Customer Type" class="slds-border_right" scope="row">{orderWrapper.customerType}</th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</template>
+	<template if:false={isGeorge}>
+		<div style="overflow-x:auto;">
+			<table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-label="Additional Details">
+				<thead>
+					<tr class="slds-line-height_reset">
+						<th data-label="Order Number" scope="col" class="slds-border_right"><strong>Order number</strong></th>
+						<th data-label="Fulfilment Type" scope="col" class="slds-border_right"><strong>Fulfilment type</strong></th>
+						<th data-label="Order Total" scope="col" class="slds-border_right"><strong>Order total</strong></th>
+						<th data-label="Order Placed On" scope="col" class="slds-border_right"><strong>Order placed on</strong></th>
+												<th data-label="Order status" scope="col" class="slds-border_right"><strong>Order status</strong></th>
+						<template if:true={showCancelledFields}>
+							<th data-label="Order Cancelled By" scope="col" class="slds-border_right">Order cancelled by<strong></strong></th>
+							<th data-label="Order cancelled on" scope="col" class="slds-border_right"><strong>Order cancelled on</strong></th>
+					    </template>
+						<th data-label="Delivery Pass used" scope="col" class="slds-border_right"><strong>Delivery pass used</strong></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="slds-hint-parent">
+						<th data-label="Order Number" class="slds-border_right" scope="row">{orderWrapper.orderId}</th>
+						<th data-label="Fulfilment Type" class="slds-border_right" scope="row">{orderWrapper.orderFulfilmentTypeGrocery}</th>
+						<th data-label="Order Total" class="slds-border_right" scope="row">
+							Original: {orderWrapper.currencyISOCode}<lightning-formatted-number value={orderWrapper.originalOrderTotal} minimum-fraction-digits="2"></lightning-formatted-number><br/>
+							Current: {orderWrapper.currencyISOCode}<lightning-formatted-number value={orderWrapper.totalAmount} minimum-fraction-digits="2"></lightning-formatted-number>
+						</th>
+						<th data-label="Order Placed On" class="slds-border_right" scope="row">{orderWrapper.formattedOrderDate}</th>
+												<th data-label="Order Status" class="slds-border_right" scope="row">
+							<div>
+								{orderWrapper.orderLevelStatus}
+								<template if:true={showCancelHelpText}>
+									<lightning-helptext class="helptextClass" content={cancelledStatusHelpText}>
+									</lightning-helptext>
+								</template>
+							</div>
+						</th>
+						<template if:true={showCancelledFields}>
+							<th data-label="Order Cancelled By" class="slds-border_right" scope="row">{orderWrapper.orderCancelledBy}</th>
+							<th data-label="Order Cancelled On" class="slds-border_right" scope="row">{orderWrapper.formattedOrderCancelledOn}</th>
+						</template>
+						<th data-label="Delivery Pass Used" class="slds-border_right" scope="row">{isDeliveryPass}</th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</template>
+		<template if:true={showManualTransModal}>
+		<c-asdac-manual-card-transaction-cmp order-wrapper={orderWrapper} onclosemodal={handleCloseModal}></c-asdac-manual-card-transaction-cmp>
+	</template>
+	<template if:true={showPaymentMethod}>
+		<c-asdac-payment-method-modal-cmp order-wrapper={orderWrapper} is-george={isGeorge} onclosemodal={handleCloseModal}></c-asdac-payment-method-modal-cmp>
+	</template>
+	<template if:true={isShowCancelModal}>
+		<c-asdac-cancellation-modal-cmp cancelled-items={cancelledLineItems} total-items={numOfCancelElgItems} onclosemodal={handleCloseModal}></c-asdac-cancellation-modal-cmp>
+	</template>
+	<template if:true={showRefundGeorgeModal}>
+		<section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+			class="slds-modal slds-fade-in-open slds-modal_large">
+			<div class="slds-modal__container">
+				<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-border-filled closeBtn" onclick={handleCloseModal}>
+					<lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+					<span class="slds-assistive-text">Close</span>
+				</button>
+				<lightning-flow flow-api-name={flowApiName} flow-input-variables={flowInputVariables} onstatuschange={handleFlowStatusChange}></lightning-flow>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+	</template>
+	<template if:true={showRefundGroceryModal}>
+		<section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+			class="slds-modal slds-fade-in-open slds-modal_small">
+			<div class="slds-modal__container">
+				<lightning-flow flow-api-name={flowApiName} flow-input-variables={flowInputVariables} onstatuschange={handleFlowStatusChange}></lightning-flow>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+	</template>
+	<template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </template>
+</template>

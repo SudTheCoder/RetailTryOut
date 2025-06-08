@@ -1,0 +1,33 @@
+<template>
+    <div if:true={showQuickTip} class="slds-var-p-top_medium">
+        <div class="borderBox">
+            <div class="slds-var-p-around_medium">
+                <div class="iconTitle">
+                    <svg width="34" class="" height="35" viewBox="0 0 34 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M26.1644 17.6211C26.1644 22.7273 22.0099 26.8711 16.8796 26.8711C11.7492 26.8711 7.59473 22.7273 7.59473 17.6211C7.59473 12.5149 11.7492 8.37109 16.8796 8.37109C22.0099 8.37109 26.1644 12.5149 26.1644 17.6211Z" fill="white" stroke="#538316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <ellipse cx="16.8797" cy="31.2578" rx="2.83828" ry="2" fill="white" stroke="#538316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16.8795 1V4.649" stroke="#F7CC00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M32.7592 16.8242H29.0975" stroke="#F7CC00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M30.4742 24.7911L27.3689 22.8574" stroke="#F7CC00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M24.8469 3.26074L22.9609 6.38855" stroke="#F7CC00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M30.4394 8.80469L27.4037 10.8452" stroke="#F7CC00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4.66171 16.8242H1" stroke="#F7CC00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.28519 24.7911L6.3905 22.8574" stroke="#F7CC00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8.91217 3.26074L10.7981 6.38855" stroke="#F7CC00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.32001 8.80469L6.35571 10.8452" stroke="#F7CC00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16.1357 25.621L15.876 19.121" stroke="#538316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M18.2812 25.6209L18.6793 21.1209" stroke="#538316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <mask id="path-14-inside-1_6678_9741" fill="white">
+                    <rect x="12.3639" y="25.6211" width="9.03136" height="5" rx="1"/>
+                    </mask>
+                    <rect x="12.3639" y="25.6211" width="9.03136" height="5" rx="1" fill="white" stroke="#949494" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" mask="url(#path-14-inside-1_6678_9741)"/>
+                    </svg>
+                    <h1 class="title">{title}</h1>
+                </div>
+                <div class="slds-var-p-top_medium">
+                    <div class="quickTip"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

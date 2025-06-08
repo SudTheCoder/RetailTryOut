@@ -1,0 +1,195 @@
+<template>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+      <div class="slds-modal__container">
+        <template if:false={isgeorge}>
+          <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-border-filled" onclick={closeModal}>
+            <lightning-icon icon-name="utility:close"
+              alternative-text="close"
+              size="small" ></lightning-icon>
+            <span class="slds-assistive-text">Close</span>
+          </button>
+        </template>
+        <header class="slds-modal__header">
+          <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Tracking details</h2>
+        </header>
+
+        <div class="slds-modal__content slds-p-around_x-small slds-modal_medium" id="modal-content-id-1">
+          <template if:true={isgeorge}>
+          <table class="slds-table slds-table_cell-buffer slds-table_header-hidden slds-table_fixed-layout slds-no-row-hover" aria-label="tracking order details">
+            <tbody>
+              <tr>
+                <th scope="row"><b>Item name</b></th>
+                <td class="overflow-wrap">{lineitemname}</td>
+              </tr>
+            </tbody>
+              <template if:false={isMultiShipment}>
+                <tbody>
+                <tr>
+                  <th scope="row">Quantity</th>
+                  <td>{shipmentDetails.shipmentQuantity}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Promised delivery date</th>
+                  <td>{shipmentDetails.promiseDeliveryDate}</td>
+                </tr>
+                <template if:false={isexchangeorder}>
+                  <tr>
+                    <td>Current estimate delivery date (EDD)</td>
+                    <td>{shipmentDetails.estimateDeliveryDate}</td>
+                  </tr>
+                </template>
+                <tr>
+                  <td>Actual ship date</td>
+                  <td>{shipmentDetails.shipDate}</td>
+                </tr>
+                <tr>
+                  <td>Address</td>
+                  <td class="overflow-wrap">{shippingaddress}</td>
+                </tr>
+                <tr>
+                  <td>Fulfilment centre</td>
+                  <td>{shipmentDetails.fulfillmentCentreName}</td>
+                </tr>
+                <tr>
+                  <td>Carrier name</td>
+                  <td>{shipmentDetails.carrierName}</td>
+                </tr>
+                <tr>
+                  <td>Carrier service</td>
+                  <td>{shipmentDetails.carrierService}</td>
+                </tr>
+                <tr>
+                  <td>Tracking #</td>
+                  <td>{shipmentDetails.trackingId}</td>
+                </tr>
+                <tr>
+                  <td>Tracking URL</td>
+                  <td class="slds-cell-wrap"><a href={shipmentDetails.trackingUrl} tabindex="-1"
+                      class="detail">{shipmentDetails.trackingUrl}</a>
+                  </td>
+                </tr>
+              </tbody>
+              <br/>
+              <tfoot>
+                <tr>
+                  <td>Purchase order number</td>
+                  <td>{shipmentDetails.poNumber}</td>
+                </tr>
+                <tr>
+                  <td>Fulfilment type</td>
+                  <td>{shipmentDetails.fulfilledBy}</td>
+                </tr>
+              </tfoot>
+            </template>
+          </table>
+        </template>
+
+          <template if:true={isMultiShipment}>
+            <lightning-accordion>
+              <template for:each={lstshipmentdetails} for:item="ordItm">
+                <lightning-accordion-section name={ordItm.trackingId} label={ordItm.trackingId} key={ordItm.trackingId}>
+                  <table class="slds-table slds-table_cell-buffer slds-table_header-hidden slds-table_fixed-layout slds-no-row-hover" aria-label="tracking order details">
+                    <tbody>
+                      <tr>
+                        <th scope="row">Quantity</th>
+                        <td>{ordItm.shipmentQuantity}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Promised delivery date</th>
+                        <td>{ordItm.promiseDeliveryDate}</td>
+                      </tr>
+                      <template if:false={isexchangeorder}>
+                        <tr>
+                          <td>Current estimate delivery date (EDD)</td>
+                          <td>{ordItm.estimateDeliveryDate}</td>
+                        </tr>
+                      </template>
+                      <tr>
+                        <td>Actual ship date</td>
+                        <td>{ordItm.shipDate}</td>
+                      </tr>
+                      <tr>
+                        <td>Address</td>
+                        <td class="overflow-wrap">{shippingaddress}</td>
+                      </tr>
+                      <tr>
+                        <td>Fulfillment centre</td>
+                        <td>{ordItm.fulfillmentCentreName}</td>
+                      </tr>
+                      <tr>
+                        <td>Carrier name</td>
+                        <td>{ordItm.carrierName}</td>
+                      </tr>
+                      <tr>
+                        <td>Carrier service</td>
+                        <td>{ordItm.carrierService}</td>
+                      </tr>
+                      <tr>
+                        <td>Tracking #</td>
+                        <td>{ordItm.trackingId}</td>
+                      </tr>
+                      <tr>
+                        <td>Tracking URL</td>
+                        <td class="slds-cell-wrap"><a href={shipmentDetails.trackingUrl} tabindex="-1"
+                            class="detail">{ordItm.trackingUrl}</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td>Purchase order number</td>
+                        <td>{ordItm.poNumber}</td>
+                      </tr>
+                      <tr>
+                        <td>Fulfilment type</td>
+                        <td>{ordItm.fulfilledBy}</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </lightning-accordion-section>
+              </template>
+            </lightning-accordion>
+          </template>        
+          <template if:false={isgeorge}> 
+            <table class="slds-table slds-table_cell-buffer slds-table_header-hidden slds-no-row-hover" aria-label="tracking order details">
+              <tbody>
+                <tr>
+                  <th class="custom-th-width">Delivery window</th>
+                  <td class="padding-td">{orderwrapper.deliveryWindow}</td>
+                </tr>
+                <tr>
+                  <th class="custom-th-width">Planned arrival time</th>
+                  <td class="padding-td">{orderwrapper.formattedPlannedArrivalTimeInTrack}</td>
+                </tr>
+                <template if:true={orderwrapper.formattedActualArrivalTime}>
+                  <tr>
+                      <th class="custom-th-width">Actual arrival time</th>
+                      <td class="padding-td">{orderwrapper.formattedActualArrivalTime}
+                      <div class="icon-container">
+                        <lightning-icon icon-name="utility:clock" alternative-text="Clock" variant="inverse" size="small"></lightning-icon>
+                    </div>
+                    </td>
+                  </tr>
+                </template>
+                <tr>
+                  <th class="custom-th-width">Departure time</th>
+                  <td class="padding-td">{orderwrapper.formattedDepartureTime}</td>
+                </tr>
+                <template if:true={orderwrapper.wismoURL}>
+                  <tr>
+                    <th class="custom-th-width">Track order</th>
+                    <td class="padding-td"><a href={orderwrapper.wismoURL}  target="_blank" rel="noopener">{orderwrapper.orderId}</a></td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>                           
+          </template>
+        </div>
+    <footer class="slds-modal__footer">
+      <button class=" slds-button slds-button_neutral" data-id="closeModal" onclick={closeModal} title="Close">Close</button>
+    </footer>
+
+      </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

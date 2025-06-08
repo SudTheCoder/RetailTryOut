@@ -1,0 +1,28 @@
+<template>
+<div class={sectionClass}>
+    <h3 class="slds-section__title">
+        <span class="slds-truncate slds-p-left_x-small accordion-title slds-p-right_xx-large" title={menuItem.label}>{menuItem.label}</span>
+        <button  onclick={handleClick}  >
+            <lightning-icon
+                icon-name={accordionIcon}
+                size="x-small">
+            </lightning-icon>
+        </button>
+    </h3>
+<div class="slds-section__content">
+    <slot>
+        <lightning-card>
+            <p class="slds-p-left_medium slds-p-top_xx-small title-style">{menuItem.label}</p>
+            <template for:each={menuItem.subMenu} for:item="subMenuItem">
+            <div key={subMenuItem.Id} class="slds-p-left_x-small">
+            <a href={subMenuItem.actionValue}  style="text-decoration: none;" target={subMenuItem.target} onclick={handleNavigation}>
+            <lightning-formatted-rich-text class="menu-style" value={subMenuItem.label} data-title={subMenuItem.label} data-url={subMenuItem.actionValue}>{subMenuItem.label}
+            </lightning-formatted-rich-text>  
+            </a> 
+            </div>
+            </template>
+        </lightning-card>
+    </slot>
+</div>
+</div>
+</template>

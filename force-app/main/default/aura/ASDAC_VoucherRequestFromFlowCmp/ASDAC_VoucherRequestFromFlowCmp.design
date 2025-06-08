@@ -1,0 +1,6 @@
+<design:component>
+    <design:attribute name="accountId" label="Account ID" />
+	<design:attribute name="caseId" label="Case ID" />
+    <design:attribute name="recordsToCreate" label="GoodWill Records to Create" />
+    <design:attribute name="customerName" label="Customer Name" /> 
+</design:component>

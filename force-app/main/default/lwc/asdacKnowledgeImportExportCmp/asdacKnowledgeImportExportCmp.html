@@ -1,0 +1,83 @@
+<template>
+  <lightning-card>
+      <lightning-button-group class="slds-align_absolute-center">
+        <lightning-button label="Import" variant={importVariant} onclick={handleButtonClick}></lightning-button>
+        <lightning-button label="Export" variant={exportVariant} onclick={handleButtonClick}></lightning-button>     
+        <lightning-button label="Download Sample File" variant={downloadVariant} icon-name="utility:download" title="Download" value="FAQ" onclick={downloadSampleFAQ}></lightning-button>     
+      </lightning-button-group>
+    <div class="slds-align_absolute-center">  
+      <lightning-layout-item size="10" small-device-size="8" medium-device-size="6" large-device-size="3">
+        <lightning-combobox
+          name="recordType"
+          class="slds-var-p-around_small"
+          label="Record Type"
+          value={recordType}
+          options={recordTypes}
+          onchange={handleChange}
+          required="true"
+        ></lightning-combobox>
+      </lightning-layout-item>
+    </div>
+    <div if:false={isExport}>
+      <lightning-layout class="slds-var-p-bottom_small" horizontal-align="center" multiple-rows>
+        <lightning-layout-item>
+          <c-asdac-file-input-cmp value={files} accept=".csv" onchange={handleFileChange}></c-asdac-file-input-cmp>
+        </lightning-layout-item>
+        <template if:true={showData}>
+          <lightning-layout-item size="12" class="slds-align_absolute-center">
+            <lightning-button class="slds-var-p-around_small" variant="brand" label="Import" onclick={importArticles}></lightning-button>
+          </lightning-layout-item>
+          <lightning-layout-item size="12" class="slds-var-p-around_small">
+            <div class="slds-grid slds-grid_vertical-align-center">
+              Show &nbsp;<lightning-combobox
+                name="pageSize"
+                class="slds-col"
+                style="width: 80px"
+                variant="label-hidden"
+                value={pageSize}
+                options={pageSizes}
+                onchange={handleChange}
+              ></lightning-combobox
+              >&nbsp; records
+            </div>
+          </lightning-layout-item>
+          <lightning-layout-item>
+            <lightning-datatable key-field="answerId" data={pageData} columns={columns} hide-checkbox-column="true"> </lightning-datatable>
+          </lightning-layout-item>
+          <lightning-layout-item size="12" class="slds-var-p-around_small">
+            <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-spread">
+              <div>Showing {pageStart} - {pageEnd} of {data.length} records</div>
+              <div class="slds-grid slds-grid_vertical-align-center">
+                <lightning-button name="-1" variant="base" label="Previous" disabled={disablePrevious} onclick={handlePageChange}></lightning-button>
+                &nbsp; {pageNumber} &nbsp;
+                <lightning-button name="+1" variant="base" label="Next" disabled={disableNext} onclick={handlePageChange}></lightning-button>
+              </div>
+            </div>
+          </lightning-layout-item>
+        </template>
+      </lightning-layout>
+    </div>
+    <div if:true={isExport}>
+      <lightning-layout class="slds-var-p-bottom_small" horizontal-align="center" multiple-rows>
+        <lightning-layout-item size="10" small-device-size="8" medium-device-size="6" large-device-size="3">
+          <lightning-combobox
+            name="publishStatus"
+            class="slds-var-p-around_small"
+            label="Publish Status"
+            value={publishStatus}
+            options={publishStatuses}
+            onchange={handleChange}
+            required="true"
+          ></lightning-combobox>
+        </lightning-layout-item>
+        <lightning-layout-item if:true={exportValid} size="12" class="slds-align_absolute-center">
+          <lightning-button class="slds-var-p-around_small" variant="brand" label="Export" onclick={exportArticles}></lightning-button>
+        </lightning-layout-item>
+      </lightning-layout>
+    </div>
+    <div if:true={isDownloadable}>
+      <a style="display: none">Download CSV</a>
+    </div>
+    <lightning-spinner if:true={loading} variant="brand" size="medium" alternative-text="Loading..."></lightning-spinner>
+  </lightning-card>
+</template>

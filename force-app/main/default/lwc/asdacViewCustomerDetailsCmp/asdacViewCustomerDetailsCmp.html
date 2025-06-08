@@ -1,0 +1,99 @@
+<template>
+	<template if:true={isLoading}>
+		<lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+	</template>
+	<template if:true={orderWrapper}>
+		<template if:true={orderWrapper.isUnderAudit}>
+			<template if:false={orderWrapper.isAccountSuspended}>
+				<div class="slds-var-p-bottom_medium">
+					<lightning-card variant="narrow" style = "font-family : 'Arial','Helvetica',sans-serif;">
+					<div class="suspended-reason-container">
+						<span class="suspended-reason">{label.UnderAuditLabel}
+						</span>
+					 </div>
+					 <br/>
+					 <template if:true={orderWrapper.underAuditDate}>
+						<span class="suspension-date">
+							{label.UnderAuditDate} {orderWrapper.underAuditDate} due to {orderWrapper.underAuditInformation}
+						</span>
+					 </template>
+					</lightning-card>
+				</div>
+			</template>			
+		</template>
+		<template if:true={orderWrapper.isAccountSuspended}>
+			<div class="slds-var-p-bottom_medium">
+			<lightning-card variant="narrow" style = "font-family : 'Arial','Helvetica',sans-serif;">
+			    <div class="suspended-reason-container">
+				<span class="suspended-reason">{label.AccountSuspend}
+					<template if:true={orderWrapper.suspensionReason}>({orderWrapper.suspensionReason})</template>
+				</span>
+				</div>
+				<br/>
+				<template if:true={orderWrapper.suspensionDate}>
+				<span class="suspension-date">
+					{label.AccountSuspendDate} {orderWrapper.suspensionDate}
+				</span>
+			    </template>
+			</lightning-card>
+		</div>
+		</template>
+			<div class="slds-page-header">
+				<div class="slds-page-header__row">
+					<div class="slds-page-header__col-title">
+						<div class="slds-media">
+							<div class="slds-media__figure">
+								<lightning-icon icon-name="standard:account">
+								</lightning-icon>
+							</div>
+							<div class="slds-media__body">
+								<div class="slds-page-header__name">
+									<div class="slds-page-header__name-title">
+										<h1>
+											<a class="slds-page-header__title slds-truncate customerClick" onclick={handleCustomerOnClick}>{orderWrapper.billToContact.name}</a><span class="customerHeaderCls"></span>
+										</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<lightning-card variant="narrow">
+				<div class="acc-container">
+					<div style="margin-left: 30px;">
+						<span class="textColor">{orderWrapper.billToContact.email}</span>
+						<span class="customerDetailsCls"></span>
+						<span class="textColor">{orderWrapper.billToContact.phone}</span>
+						<template if:true={isGeorge}>
+							<span class="customerDetailsCls"></span>
+							<span class="textColor">{orderWrapper.shippingAddress}</span>
+						</template>
+					</div>
+				</div>
+				<br />
+			</lightning-card>
+		<br />
+		<template if:true={orderWrapper}>
+			<c-asdac-order-specific-details-cmp order-wrapper={orderWrapper} is-george={isGeorge}
+				onshippingfeerefund={handleShippingFeeRefund} oncancelorder={handleCancelOrder}
+				oncreatecase={handleCreateCase} case-id={caseId}
+				onrefreshorder={handleRefreshOrder}
+				ontimeout={handleTimeout}
+			></c-asdac-order-specific-details-cmp>
+			<br />
+		</template>
+		<template if:true={orderWrapper}>
+			<lightning-card>
+				<c-asdac-order-details-cmp order-wrapper={orderWrapper} case-id={caseId}
+					onrefreshorder={handleRefreshOrder} ontimeout={handleTimeout}
+				></c-asdac-order-details-cmp>
+			</lightning-card>
+		</template>
+	</template>
+	<template if:true={casePageError}>
+		<lightning-card>
+			<div class="slds-text-title_bold slds-var-p-horizontal_small">{casePageError}</div>
+		</lightning-card>
+	</template>
+</template>

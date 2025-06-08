@@ -1,0 +1,45 @@
+<!--**************************************************************************
+Name: ASDAC_DisplayOrderHistoryCmp
+===============================================================================
+Req: 
+ASDAC-820 Search and View Customer Orders
+ASDAC-3033 BUILD Order History UI
+===============================================================================
+Purpose: This Aura component will be hosted on Account Record page which in turn 
+will host Order History LWC Component which shows list of Orders for the account
+===============================================================================
+History                                                                                                                       
+VERSION   AUTHOR                DATE         	DETAIL
+1.0       Amey Priolkar    		10 Aug 2022     Initial Development
+2.0       Sanskriti    		    23 August 2022    Initial Development
+******************************************************************************-->
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,lightning:isUrlAddressable" access="global" >
+    <!-- Stores Account Record Id -->
+    <aura:attribute name="recordId" type="String"/>
+
+    <aura:attribute name="userHasPermission" type="Boolean" default="false"/>
+
+    <!-- Stores the size of the records -->
+    <aura:attribute name="pageSize" type="Integer"/>
+
+    <!-- Invoke Workspace API to manage opening in Tabs, Sub-tabs -->
+    <lightning:workspaceAPI aura:id="workspace" />
+    
+    <!-- Invoke Navigation in order to navigate to different tabs-->
+    <lightning:navigation aura:id="navService"/>
+    
+    <!-- Accommodate the Order history LWC Component -->
+    <lightning:tabset>
+        <!-- First tab -->
+        <lightning:tab label="George">
+            <c:asdacOrderHistoryListCmp recordId="{!v.recordId}" onopenorder="{!c.handleEvent}" pageSize="{!v.pageSize}" sellingChannel="GEORGE.COM"></c:asdacOrderHistoryListCmp>
+        </lightning:tab>
+
+        <!-- Second tab -->
+    <aura:if isTrue="{!v.userHasPermission}">
+        <lightning:tab label="Grocery">
+            <c:asdacOrderHistoryListCmp recordId="{!v.recordId}" onopenorder="{!c.handleEvent}" pageSize="{!v.pageSize}" sellingChannel="ASDA_GROCERIES"></c:asdacOrderHistoryListCmp>
+        </lightning:tab>
+    </aura:if>
+    </lightning:tabset>
+</aura:component>

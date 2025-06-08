@@ -1,0 +1,696 @@
+{
+    "customerId": "0038E00001LQpMtQAL",
+    "orderType": "SalesOrder",
+    "orderId": "FCA-BUN-005",
+    "orderFulfilmentType": "Delivery",
+    "totalAmount": 1012.00,
+    "originalOrderTotal": 0.0,
+    "orderDate": "2023-02-24T05:34:44Z",
+    "sellingChannel": "GEORGE.COM",
+    "hasColleagueDiscount": false,
+    "colleagueDiscount": 0,
+    "source": "Desktop",
+    "fraudStatus": null,
+    "createUser": "SFSC",
+    "storeNumber": 0,
+    "orderSubTotal": 0,
+    "originalOrderDiscount": 0.0,
+    "fulfillmentService": null,
+    "billingCurrency": "GBP",
+    "originalVAT": 0.0,
+    "originalDeliveryCharge": 0.0,
+    "promotionCodes": null,
+    "promotionalDiscount": 0.0,
+    "partialRefund": 0,
+    "goodwillRefund": 0,
+    "deliveryChargeRefund": 0,
+    "productRefund": 0,
+    "refundTotal": 0,
+    "isDeliveryChargeRefunded": true,
+    "giftCardAmount": 0,
+    "voucherAmount": 0,
+    "billToContact": {
+        "firstName": "Mohit",
+        "lastName": "Gupta",
+        "middleName": null,
+        "phone": "11234567890",
+        "email": "examplecompany.com"
+    },
+    "billToAddress": {
+        "addressLine1": "1234 Spicy Street",
+        "addressLine2": "yza",
+        "city": "Winnipeg",
+        "state": "GB",
+        "country": "GB",
+        "zipCode": "R3B 0P4",
+        "latitude": 49.898498728223224,
+        "longitude": 97.13560152293131
+    },
+    "orderLines": [
+        {
+            "orderLineId": 1,
+            "productId": "T-Bun2",
+            "productLink": null,
+            "productDescription": "Bundle 1",
+            "upc": null,
+            "orderLineType": "Delivery",
+            "uom": "EACH",
+            "productType": null,
+            "size": null,
+            "colour": null,
+            "lastUpdatedTime": null,
+            "warrantyInfo": null,
+            "isPartiallyRefunded": null,
+            "refundedAmountSoFar": 0.0,
+            "status": "EXCHANGE_CREATED",
+            "unitPrice": 0.0,
+            "unitDiscount": 0.0,
+            "exchangeReason": null,
+            "unitTax": 0.0,
+            "isBundle": true,
+            "parentId": null,
+            "stateToQty": [
+                {
+                    "state": "EXCHANGE_CREATED",
+                    "quantity": 1,
+                    "discountText": null,
+                    "stateUpdatedTime": "1970-01-01T00:00:00Z"
+                }
+            ],
+            "shipments": [],
+            "storeNumber": 0,
+            "shipToContact": {
+                "firstName": "Mohit",
+                "lastName": "Gupta",
+                "middleName": null,
+                "phone": "11234567890",
+                "email": "examplecompany.com"
+            },
+            "shipToAddress": {
+                "addressLine1": "1234 Spicy Street",
+                "addressLine2": "yza",
+                "city": "Winnipeg",
+                "state": "GB",
+                "country": "GB",
+                "zipCode": "R3B 0P4",
+                "latitude": 49.898498728223224,
+                "longitude": 97.13560152293131
+            }
+        },
+        {
+            "orderLineId": 2,
+            "productId": "T-Bun2_Ch1",
+            "productLink": null,
+            "productDescription": "Bundle Item 1.1",
+            "upc": null,
+            "orderLineType": "Delivery",
+            "uom": "EACH",
+            "productType": "Regular",
+            "size": null,
+            "colour": null,
+            "lastUpdatedTime": null,
+            "warrantyInfo": null,
+            "isPartiallyRefunded": null,
+            "refundedAmountSoFar": 0.0,
+            "status": "EXCHANGE_CREATED",
+            "unitPrice": 40.00,
+            "unitDiscount": 1.00,
+            "exchangeReason": null,
+            "unitTax": 5.00,
+            "isBundle": null,
+            "parentId": 1,
+            "stateToQty": [
+                {
+                    "state": "EXCHANGE_CREATED",
+                    "quantity": 1,
+                    "discountText": "PROMOTION: £1.00",
+                    "stateUpdatedTime": "2023-11-24T11:00:46Z"
+                }
+            ],
+            "shipments": [
+                {
+                    "promisedDeliveryDate": "2023-04-28T05:34:44Z",
+                    "currentEstimatedDeliveryDate": null,
+                    "actualShipDate": null,
+                    "carrierService": "ToYou",
+                    "carrierName": "ToYou",
+                    "trackingId": "93003135",
+                    "trackingUrl": "https://asda.com",
+                    "shipmentQuantity": 1,
+                    "poNumber": "B000001317",
+                    "fulfillmentCentre": "5902",
+                    "fulfilledBy": "ASDA"
+                }
+            ],
+            "storeNumber": 0,
+            "shipToContact": {
+                "firstName": "John",
+                "lastName": "Smith",
+                "middleName": null,
+                "phone": "11234567890",
+                "email": "examplecompany.com"
+            },
+            "shipToAddress": {
+                "addressLine1": "1234 Spicy Street",
+                "addressLine2": "yza",
+                "city": "Winnipeg",
+                "state": "GB",
+                "country": "GB",
+                "zipCode": "R3B 0P4",
+                "latitude": 49.898498728223224,
+                "longitude": 97.13560152293131
+            }
+        },
+        {
+            "orderLineId": 3,
+            "productId": "T-Bun2_Ch2",
+            "productLink": null,
+            "productDescription": "Bundle Item 1.2",
+            "upc": null,
+            "orderLineType": "Delivery",
+            "uom": "EACH",
+            "productType": "Regular",
+            "size": null,
+            "colour": null,
+            "lastUpdatedTime": null,
+            "warrantyInfo": null,
+            "isPartiallyRefunded": null,
+            "refundedAmountSoFar": 0.0,
+            "status": "EXCHANGE_CREATED",
+            "unitPrice": 40.00,
+            "unitDiscount": 1.00,
+            "exchangeReason": null,
+            "unitTax": 5.00,
+            "isBundle": null,
+            "parentId": 1,
+            "stateToQty": [
+                {
+                    "state": "EXCHANGE_CREATED",
+                    "quantity": 4,
+                    "discountText": "PROMOTION: £4.00",
+                    "stateUpdatedTime": "2023-11-24T11:00:46Z"
+                }
+            ],
+            "shipments": [
+                {
+                    "promisedDeliveryDate": "2023-04-28T05:34:44Z",
+                    "currentEstimatedDeliveryDate": null,
+                    "actualShipDate": null,
+                    "carrierService": "ToYou",
+                    "carrierName": "ToYou",
+                    "trackingId": "93003135",
+                    "trackingUrl": "https://asda.com",
+                    "shipmentQuantity": 4,
+                    "poNumber": "B000001317",
+                    "fulfillmentCentre": "5902",
+                    "fulfilledBy": "ASDA"
+                }
+            ],
+            "storeNumber": 0,
+            "shipToContact": {
+                "firstName": "John",
+                "lastName": "Smith",
+                "middleName": null,
+                "phone": "11234567890",
+                "email": "examplecompany.com"
+            },
+            "shipToAddress": {
+                "addressLine1": "1234 Spicy Street",
+                "addressLine2": "yza",
+                "city": "Winnipeg",
+                "state": "GB",
+                "country": "GB",
+                "zipCode": "R3B 0P4",
+                "latitude": 49.898498728223224,
+                "longitude": 97.13560152293131
+            }
+        },
+        {
+            "orderLineId": 4,
+            "productId": "T-Bun3",
+            "productLink": null,
+            "productDescription": "Bundle 2",
+            "upc": null,
+            "orderLineType": "Delivery",
+            "uom": "EACH",
+            "productType": null,
+            "size": null,
+            "colour": null,
+            "lastUpdatedTime": null,
+            "warrantyInfo": null,
+            "isPartiallyRefunded": null,
+            "refundedAmountSoFar": 0.0,
+            "status": "DELIVERED",
+            "unitPrice": 0.0,
+            "unitDiscount": 0.0,
+            "exchangeReason": null,
+            "unitTax": 0.0,
+            "isBundle": true,
+            "parentId": null,
+            "stateToQty": [
+                {
+                    "state": "DELIVERED",
+                    "quantity": 1,
+                    "discountText": null,
+                    "stateUpdatedTime": "1970-01-01T00:00:00Z"
+                }
+            ],
+            "shipments": [],
+            "storeNumber": 0,
+            "shipToContact": {
+                "firstName": "Mohit",
+                "lastName": "Gupta",
+                "middleName": null,
+                "phone": "11234567890",
+                "email": "examplecompany.com"
+            },
+            "shipToAddress": {
+                "addressLine1": "1234 Spicy Street",
+                "addressLine2": "yza",
+                "city": "Winnipeg",
+                "state": "GB",
+                "country": "GB",
+                "zipCode": "R3B 0P4",
+                "latitude": 49.898498728223224,
+                "longitude": 97.13560152293131
+            }
+        },
+        {
+            "orderLineId": 5,
+            "productId": "T-Bun3_Ch1",
+            "productLink": null,
+            "productDescription": "Bundle Item 2.1",
+            "upc": null,
+            "orderLineType": "Delivery",
+            "uom": "EACH",
+            "productType": "Regular",
+            "size": null,
+            "colour": null,
+            "lastUpdatedTime": null,
+            "warrantyInfo": null,
+            "isPartiallyRefunded": null,
+            "refundedAmountSoFar": 0.0,
+            "status": "DELIVERED",
+            "unitPrice": 40.00,
+            "unitDiscount": 1.00,
+            "exchangeReason": null,
+            "unitTax": 5.00,
+            "isBundle": null,
+            "parentId": 4,
+            "stateToQty": [
+                {
+                    "state": "DELIVERED",
+                    "quantity": 2,
+                    "discountText": "PROMOTION: £2.00",
+                    "stateUpdatedTime": "2023-05-03T13:03:05Z"
+                }
+            ],
+            "shipments": [
+                {
+                    "promisedDeliveryDate": "2023-04-28T05:34:44Z",
+                    "currentEstimatedDeliveryDate": null,
+                    "actualShipDate": null,
+                    "carrierService": "ToYou",
+                    "carrierName": "ToYou",
+                    "trackingId": "93003135",
+                    "trackingUrl": "https://asda.com",
+                    "shipmentQuantity": 2,
+                    "poNumber": "B000001317",
+                    "fulfillmentCentre": "5902",
+                    "fulfilledBy": "ASDA"
+                }
+            ],
+            "storeNumber": 0,
+            "shipToContact": {
+                "firstName": "John",
+                "lastName": "Smith",
+                "middleName": null,
+                "phone": "11234567890",
+                "email": "examplecompany.com"
+            },
+            "shipToAddress": {
+                "addressLine1": "1234 Spicy Street",
+                "addressLine2": "yza",
+                "city": "Winnipeg",
+                "state": "GB",
+                "country": "GB",
+                "zipCode": "R3B 0P4",
+                "latitude": 49.898498728223224,
+                "longitude": 97.13560152293131
+            }
+        },
+        {
+            "orderLineId": 6,
+            "productId": "T-Bun3_Ch2",
+            "productLink": null,
+            "productDescription": "Bundle Item 2.2",
+            "upc": null,
+            "orderLineType": "Delivery",
+            "uom": "EACH",
+            "productType": "Regular",
+            "size": null,
+            "colour": null,
+            "lastUpdatedTime": null,
+            "warrantyInfo": null,
+            "isPartiallyRefunded": null,
+            "refundedAmountSoFar": 0.0,
+            "status": "DELIVERED",
+            "unitPrice": 40.00,
+            "unitDiscount": 1.00,
+            "exchangeReason": null,
+            "unitTax": 5.00,
+            "isBundle": null,
+            "parentId": 4,
+            "stateToQty": [
+                {
+                    "state": "DELIVERED",
+                    "quantity": 6,
+                    "discountText": "PROMOTION: £6.00",
+                    "stateUpdatedTime": "2023-05-03T13:03:05Z"
+                }
+            ],
+            "shipments": [
+                {
+                    "promisedDeliveryDate": "2023-04-28T05:34:44Z",
+                    "currentEstimatedDeliveryDate": null,
+                    "actualShipDate": null,
+                    "carrierService": "ToYou",
+                    "carrierName": "ToYou",
+                    "trackingId": "93003135",
+                    "trackingUrl": "https://asda.com",
+                    "shipmentQuantity": 6,
+                    "poNumber": "B000001317",
+                    "fulfillmentCentre": "5902",
+                    "fulfilledBy": "ASDA"
+                }
+            ],
+            "storeNumber": 0,
+            "shipToContact": {
+                "firstName": "John",
+                "lastName": "Smith",
+                "middleName": null,
+                "phone": "11234567890",
+                "email": "examplecompany.com"
+            },
+            "shipToAddress": {
+                "addressLine1": "1234 Spicy Street",
+                "addressLine2": "yza",
+                "city": "Winnipeg",
+                "state": "GB",
+                "country": "GB",
+                "zipCode": "R3B 0P4",
+                "latitude": 49.898498728223224,
+                "longitude": 97.13560152293131
+            }
+        },
+        {
+            "orderLineId": 7,
+            "productId": "testfc1",
+            "productLink": "ABC",
+            "productDescription": "Normal Item",
+            "upc": "ABC",
+            "orderLineType": "Delivery",
+            "uom": "EACH",
+            "productType": "REGULAR",
+            "size": null,
+            "colour": "ABC",
+            "lastUpdatedTime": null,
+            "warrantyInfo": "ABC",
+            "isPartiallyRefunded": null,
+            "refundedAmountSoFar": 0.0,
+            "status": "DELIVERED",
+            "unitPrice": 20.00,
+            "unitDiscount": 0.0,
+            "exchangeReason": null,
+            "unitTax": 2.00,
+            "isBundle": null,
+            "parentId": null,
+            "stateToQty": [
+                {
+                    "state": "DELIVERED",
+                    "quantity": 19,
+                    "discountText": "Product_Promotion: £0.00",
+                    "stateUpdatedTime": "2023-05-03T13:03:05Z"
+                },
+                {
+                    "state": "EXCHANGE_CREATED",
+                    "quantity": 1,
+                    "discountText": "Product_Promotion: £0.00",
+                    "stateUpdatedTime": "2023-05-03T13:30:04Z"
+                }
+            ],
+            "shipments": [
+                {
+                    "promisedDeliveryDate": "2023-12-31T05:34:44Z",
+                    "currentEstimatedDeliveryDate": null,
+                    "actualShipDate": null,
+                    "carrierService": "ToYou",
+                    "carrierName": "ToYou",
+                    "trackingId": "93003135",
+                    "trackingUrl": "https://asda.com",
+                    "shipmentQuantity": 20,
+                    "poNumber": "B000001317",
+                    "fulfillmentCentre": "5902",
+                    "fulfilledBy": "ASDA"
+                }
+            ],
+            "storeNumber": 0,
+            "shipToContact": {
+                "firstName": "John",
+                "lastName": "Smith",
+                "middleName": null,
+                "phone": "11234567890",
+                "email": "examplecompany.com"
+            },
+            "shipToAddress": {
+                "addressLine1": "1234 Spicy Street",
+                "addressLine2": "yza",
+                "city": "Winnipeg",
+                "state": "GB",
+                "country": "GB",
+                "zipCode": "R3B 0P4",
+                "latitude": 49.898498728223224,
+                "longitude": 97.13560152293131
+            }
+        }
+    ],
+    "paymentDetails": [
+        {
+            "paymentMethodId": 1,
+            "paymentType": "CREDIT_CARD",
+            "cardType": "VISA",
+            "tokenizedCard": "4111111111113311",
+            "expirationMonth": "12",
+            "expirationYear": "2025",
+            "totalInvoiced": 1012.00,
+            "authorizationId": "ABM569276205YU",
+            "transactionsDetails": [
+                {
+                    "processType": "AUTHORIZATION",
+                    "amount": 1012.00,
+                    "transactionId": "15a6b00f-40fa-4a14-982c-a7a4d1a36e74-asda-ad-jan-25",
+                    "updatedTime": "2023-02-13T04:54:22Z",
+                    "approvalCode": "SUCCESS",
+                    "arnNumber": null
+                }
+            ]
+        }
+    ],
+    "returnOrders": [
+        {
+            "orderDate": "2023-05-03T13:30:04Z",
+            "orderId": "RETURN_FCA-BUN-005_KcrfUYnd",
+            "source": "SFSC",
+            "returnAddress": "5902 NEC",
+            "sellingChannel": "GEORGE.COM",
+            "orderLines": [
+                {
+                    "orderLineId": 1,
+                    "productId": "testfc1",
+                    "productDescription": "Normal Item",
+                    "productLink": "ABC",
+                    "returnReason": "Poor quality or faulty",
+                    "refundedAmount": 22.00,
+                    "isCreatedFromExchange": true,
+                    "returnType": "Blind Return",
+                    "receiptedUserName": null,
+                    "dateTimeReceived": null,
+                    "unitPrice": 20.00,
+                    "unitDiscount": 0.0,
+                    "unitTax": 2.00,
+                    "stateToQty": [
+                        {
+                            "state": "RECEIVED",
+                            "quantity": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "orderDate": "2023-05-03T13:10:07Z",
+            "orderId": "RETURN_FCA-BUN-005_VnEsAR4g",
+            "source": "SFSC",
+            "returnAddress": "5902 NEC",
+            "sellingChannel": "GEORGE.COM",
+            "orderLines": [
+                {
+                    "orderLineId": 1,
+                    "productId": "T-Bun2_Ch1",
+                    "productDescription": "Bundle Item 1.1",
+                    "productLink": null,
+                    "returnReason": "Damaged in transit",
+                    "refundedAmount": 44.00,
+                    "isCreatedFromExchange": true,
+                    "returnType": null,
+                    "receiptedUserName": null,
+                    "dateTimeReceived": null,
+                    "unitPrice": 40.00,
+                    "unitDiscount": 1.00,
+                    "unitTax": 5.00,
+                    "stateToQty": [
+                        {
+                            "state": "CREATED",
+                            "quantity": 1
+                        }
+                    ]
+                },
+                {
+                    "orderLineId": 2,
+                    "productId": "T-Bun2_Ch2",
+                    "productDescription": "Bundle Item 1.2",
+                    "productLink": null,
+                    "returnReason": "Damaged in transit",
+                    "refundedAmount": 176.00,
+                    "isCreatedFromExchange": true,
+                    "returnType": null,
+                    "receiptedUserName": null,
+                    "dateTimeReceived": null,
+                    "unitPrice": 40.00,
+                    "unitDiscount": 1.00,
+                    "unitTax": 5.00,
+                    "stateToQty": [
+                        {
+                            "state": "CREATED",
+                            "quantity": 4
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "exchangeOrders": [
+        {
+            "createUser": "SFSC",
+            "orderId": "EXCHANGE_FCA-BUN-005_KcrfUYnd",
+            "orderDate": "2023-05-03T13:30:04Z",
+            "orderCategory": "exchange",
+            "sellingChannel": "GEORGE.COM",
+            "orderLines": [
+                {
+                    "productId": "testfc1",
+                    "productLink": "ABC",
+                    "productDescription": "Normal Item",
+                    "exchangeReason": "Poor quality or faulty",
+                    "quantity": 1,
+                    "totalAmount": 22.00,
+                    "unitPrice": 20.00,
+                    "unitDiscount": 0.0,
+                    "unitTax": 2.00,
+                    "shipToAddress": {
+                        "addressLine1": "1234 Spicy Street",
+                        "addressLine2": "yza",
+                        "city": "Winnipeg",
+                        "state": "GB",
+                        "country": "GB",
+                        "zipCode": "R3B 0P4",
+                        "latitude": 49.898498728223224,
+                        "longitude": 97.13560152293131
+                    },
+                    "shipments": [
+                        {
+                            "promisedDeliveryDate": "2023-05-03T22:59:00Z",
+                            "shipmentQuantity": 1,
+                            "poNumber": "B000001420",
+                            "currentEstimatedDeliveryDate": "2023-05-03T22:59:00Z",
+                            "carrierService": null,
+                            "fulfillmentCentre": "5902",
+                            "fulfilledBy": "ASDA"
+                        }
+                    ],
+                    "stateToQty": [
+                        {
+                            "state": "RELEASED",
+                            "quantity": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "createUser": "SFSC",
+            "orderId": "EXCHANGE_FCA-BUN-005_VnEsAR4g",
+            "orderDate": "2023-05-03T13:10:07Z",
+            "orderCategory": "exchange",
+            "sellingChannel": "GEORGE.COM",
+            "orderLines": [
+                {
+                    "productId": "T-Bun2_Ch1",
+                    "productLink": null,
+                    "productDescription": "Bundle Item 1.1",
+                    "exchangeReason": "Damaged in transit",
+                    "quantity": 1,
+                    "totalAmount": 44.00,
+                    "unitPrice": 40.00,
+                    "unitDiscount": 1.00,
+                    "unitTax": 5.00,
+                    "shipToAddress": {
+                        "addressLine1": "1234 Spicy Street",
+                        "addressLine2": "yza",
+                        "city": "Winnipeg",
+                        "state": "GB",
+                        "country": "GB",
+                        "zipCode": "R3B 0P4",
+                        "latitude": 49.898498728223224,
+                        "longitude": 97.13560152293131
+                    },
+                    "shipments": [],
+                    "stateToQty": [
+                        {
+                            "state": "CREATED",
+                            "quantity": 1
+                        }
+                    ]
+                },
+                {
+                    "productId": "T-Bun2_Ch2",
+                    "productLink": null,
+                    "productDescription": "Bundle Item 1.2",
+                    "exchangeReason": "Damaged in transit",
+                    "quantity": 4,
+                    "totalAmount": 176.00,
+                    "unitPrice": 40.00,
+                    "unitDiscount": 1.00,
+                    "unitTax": 5.00,
+                    "shipToAddress": {
+                        "addressLine1": "1234 Spicy Street",
+                        "addressLine2": "yza",
+                        "city": "Winnipeg",
+                        "state": "GB",
+                        "country": "GB",
+                        "zipCode": "R3B 0P4",
+                        "latitude": 49.898498728223224,
+                        "longitude": 97.13560152293131
+                    },
+                    "shipments": [],
+                    "stateToQty": [
+                        {
+                            "state": "CREATED",
+                            "quantity": 4
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

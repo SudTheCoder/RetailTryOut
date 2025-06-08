@@ -1,0 +1,33 @@
+<template>
+    <template if:true={isLoading}>
+		<lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+	</template>
+	<div class="slds-modal__container">
+		<div class="slds-modal__header">
+		<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Unlink Rewards Account</h2>
+		</div>
+		
+		<table class="slds-table slds-table_cell-buffer slds-table_header-hidden  slds-no-row-hover .slds-no-cell-focus" aria-describedby="enter-accountid">
+			<tbody>
+				<tr class="slds-hint-parent modalContent">
+					<th data-label="Profile Search" style="padding-left: 5%;">
+						<label class="slds-form-element__label"><abbr class="slds-required">*</abbr>Enter CRM Id</label>
+					</th>
+					<td data-label="Profile Search" style="padding-right: 5%; padding-left: 2%;">
+						<lightning-input type="text" label="" name="crmId" class="crmId" variant="label-hidden" onblur={handleProfileChange} required></lightning-input>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+	</div>
+	<footer class="slds-modal__footer">
+		<lightning-button variant="neutral" name="cancel" label={label.cancelButtonLabel} title="Cancel" onclick={handleCancelClick}
+			class="slds-var-m-left_x-small cancelCls"></lightning-button>
+		<lightning-button variant="brand" name="save" label="Submit" title="Submit"
+			onclick={handleSubmitClick} class="slds-var-m-left_x-small submitCls"></lightning-button>
+	</footer>
+    <template if:true={isLoading}>
+		<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+	</template>
+</template>

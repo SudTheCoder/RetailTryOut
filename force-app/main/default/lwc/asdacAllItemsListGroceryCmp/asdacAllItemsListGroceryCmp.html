@@ -1,0 +1,267 @@
+<template>
+	<!-- changes start-->
+	
+	<div class="header-column">
+		<lightning-layout>
+		<lightning-layout-item class="slds-var-m-left_large">
+		<h1 class="heading" style="white-space: nowrap;">
+			<p class="deliveryOrPickUp"> <b>{deliveryOrPickupLabel}</b> on <b> {orderWrapper.formattedPlannedArrivalTime} {orderWrapper.deliveryWindow}</b> </p>
+			<div class="slds-p-top_xx-small"><b>Cancellation Cut-Off: {orderWrapper.formattedcutOffDate}</b></div>
+		</h1>
+		</lightning-layout-item>
+		<lightning-layout-item size="6">
+		<div class="slds-truncate prog-start3" style="height: auto;">
+			
+				<template if:true={flagBoolean}>
+					<lightning-progress-indicator current-step="AllDone">
+						<lightning-progress-step label={progressStep1} value="1" ></lightning-progress-step>
+						<lightning-progress-step label={progressStep2} value="2"></lightning-progress-step>
+						<lightning-progress-step label="All Done" value="AllDone" class="slds-hide"></lightning-progress-step>
+					</lightning-progress-indicator>
+				</template>
+				<template if:false={flagBoolean}>
+					<lightning-progress-indicator current-step="2">
+						<lightning-progress-step label={progressStep1} value="1"></lightning-progress-step>
+						<lightning-progress-step label={progressStep2} value="2"></lightning-progress-step>												
+					</lightning-progress-indicator>
+				</template>
+		
+			<div class="slds-progress slds-grid slds-grid_align-spread">
+				<b class="slds-col">{progressStep1}</b>
+				<b class="slds-col">{progressStep2}</b>
+			</div>
+		</div>
+	</lightning-layout-item>
+	</lightning-layout>
+		<div class="heading-container">
+			<lightning-icon icon-name="utility:checkin" size="xx-small"></lightning-icon>
+			<p class="para-start">{orderWrapper.shippingAddress}</p>
+			<span class="slds-m-left_large addressClass" style="cursor: pointer; color: rgb(64, 147, 249);" onclick={handleOpenModalHeader}> More </span>
+		</div>
+		<br>
+		<div class="heading-container slds-p-bottom_large">
+			<lightning-icon icon-name="utility:company" size="xx-small"></lightning-icon>
+			<p class="para-start">{orderWrapper.fulfilmentStore}</p>
+		</div>
+		<br>
+	</div>
+<lightning-layout>
+	<lightning-layout-item class="" style="padding-top: 4px;">
+		<div class="header-column slds-var-m-left_medium slds-var-m-right_xx-small left"> 
+			<lightning-input label="Select All" class="selectAllCls" type="checkbox" onchange={selectallGHS}></lightning-input>
+		</div>
+	</lightning-layout-item>
+	<lightning-layout-item class="slds-m-right_x-small" alignment-bump="right">
+		<div class="header-column"> 
+			<lightning-button label="Refund" title="Refund"  onclick={handleMultiRefund} class="multiRefundCls" disabled={isAllItemsRefundable}></lightning-button>
+		</div>
+	</lightning-layout-item>
+	<lightning-layout-item>
+		<div class="header-column slds-m-left_medium" style="padding-top: 5px;"> 
+			<span class= "trackingDetails" style="cursor: pointer; color: rgb(64, 147, 249);" onclick={handleTrackingDetailsGHS}> Tracking details </span>
+		</div>
+	</lightning-layout-item>
+		<div class="searchItm" style="--lwc-varSpacingXxSmall: 0rem;">
+			<div class="slds-form_horizontal slds-form slds-truncate">
+				<div>
+					<lightning-input name="enter-search" label="" type="search" class="searchItemCls" placeholder="Search for items.." pattern="/^[ A-Za-z0-9_@./#&+-]*$/.+"
+						message-when-pattern-mismatch="Special Characters not allowed" onchange={handleSearchItemsGHS}></lightning-input>
+				</div>
+			</div>
+		</div>
+</lightning-layout>
+	<!--tracking started-->
+	<template if:true={isModalVisible}>
+		<c-asdac-tracking-details-modal-cmp isgrocery={isGrocery} orderwrapper={orderWrapper}
+			onclosetrackingdetailsmodal={handleCloseTrackingDetailsModal}></c-asdac-tracking-details-modal-cmp>	
+	</template>
+	<!--end-->
+	<template if:true={isModalOpenFullFillmentHeader}>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+		<section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-border-filled" title="Close" onclick={closeModal}>
+					<lightning-icon icon-name="utility:close"  alternative-text="close"
+						size="small" ></lightning-icon>
+					<span class="slds-assistive-text">Close</span>
+				</button>
+				<div class="slds-modal__header slds-border_bottom ">
+					<h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Location details</h1>
+				</div>
+				<div class="slds-modal__content slds-p-around_x-large">
+					<div class="slds-grid slds-gutters">
+						<div class="slds-col slds-size_1-of-2">
+							<h3 class="heading">{shippingAddressLabel}</h3>
+							<div class="heading-container3">
+								<lightning-icon class="icon" icon-name="utility:checkin" size="xx-small"></lightning-icon>
+								<p class="para-start">{orderWrapper.shippingAddress}</p>
+							</div>
+							<div class="heading-container3">
+								<lightning-icon class="icon" icon-name="utility:truck" size="x-small"></lightning-icon>
+								<p class="para-start">{orderWrapper.deliveryNote}</p>
+							</div>
+						</div>
+						<div class="slds-col slds-size_1-of-2 slds-border_left">
+							<h3 class="heading">{fulfilmentStoreLabel}</h3>
+							<div class="heading-container3">
+								<lightning-icon class="icon" icon-name="utility:checkin" size="xx-small"></lightning-icon>
+								<p class="para-start">{orderWrapper.fulfilmentStore}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<footer class="slds-modal__footer">
+					<lightning-button variant="standard" label="Close" onclick={closeModal} class="slds-text-align_right"></lightning-button>
+				</footer>
+			</div>
+		</section>
+	</template>
+	<!--end-->
+	
+	<template for:each={categoryMap} for:item="mapItem">
+		<div class="slds-m-top_large" key={mapItem.key}>
+			<div class="slds-box slds-box_x-small slds-theme_shade categoryBox" key={mapItem.key}>
+				<strong>{mapItem.key}</strong>
+			</div>
+			<div style="overflow-x:auto;" key={mapItem.key}>
+				<table class="slds-table slds-table_bordered slds-wrap" aria-describedby="ghs-orderItem-details" style="border-collapse: collapse">
+					<thead>
+						<tr class="slds-line-height_reset">
+							<th  class="slds-col slds-cell-shrink" scope="col">
+								<div class="slds-truncate" title="Select Item"></div>
+							</th>
+							<th class="" scope="col">
+								<div class="slds-truncate slds-var-m-left_xx-large" title="Possible Actions">Possible actions</div>
+							</th>
+							<th class="slds-size_1.75-of-12" scope="col">
+								<div class="slds-truncate" title="Item Id">Item id</div>
+							</th>
+							<th class="slds-size_3-of-12" scope="col">
+								<div class="slds-truncate" title="Item Name">Item name</div>
+							</th>
+							<th class="slds-size_1.75-of-12" style="text-align: right;" scope="col">
+								<div class="slds-truncate" title="Qty/Wt">Qty/Wt</div>
+							</th>
+							<th class="slds-size_1.75-of-12" style="text-align: right;" scope="col">
+								<div class="slds-truncate" title="Unit Price">Unit price</div>
+							</th>
+							<th class="slds-size_1.75-of-12" style="text-align: right;" scope="col">
+								<div class="slds-truncate" title="Total Price">Total price</div>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<template for:each={mapItem.value} for:item="ordItm" for:index="index">
+									<tr key={ordItm.index}>
+										<th scope="col" class="slds-truncate">
+											<div if:true={ordItm.isGhsRefundVisible} class="slds-truncate" style="width: 62%;">
+												<lightning-input data-id="toggle" data-value={index} type="checkbox" id={ordItm.lineId} name="input1"
+													onclick={handleItemLevelCheckbox} value={ordItm.lineId} class="oiCheckCls" disabled={isOrderCancelled}>
+												</lightning-input>
+											</div>
+										</th>
+										<th scope="col" class="slds-truncate" style="overflow: auto">
+											<div if:true={ordItm.isGhsRefundVisible} class="slds-truncate slds-var-m-left_x-large" style="padding-left: 8%;">
+												<lightning-button value={ordItm.lineId} variant="brand" id={ordItm.lineId} label="Refund" title="Refund" data-value={index} onclick={handleRefund}
+													class="slds-var-m-left_large refundGCls" disabled={ordItm.isGhsRefundDisabled}></lightning-button>
+											</div>
+										</th>
+										<th scope="col" class="slds-truncate">
+											<div if:true={ordItm.isSubstitutedLine} class="slds-truncate">{ordItm.productId}</div>
+											<div if:false={ordItm.isSubstitutedLine}><a href={ordItm.productLink} target="_blank" rel="noopener">{ordItm.productId}</a>
+											</div>
+										</th>
+										<th scope="col" class="slds-truncate">
+											<div class="inline-container slds-truncate">
+												<template if:true={ordItm.showTags}>
+													<div class="ItemNameRightSapce">
+														<template if:true={ordItm.isNilPick}>
+															<span class="rectangle-box slds-m-right_x-small">Nil</span>
+														</template>
+														<template if:true={ordItm.isSubstitutedLine}>
+															<span class="rectangle-box pillColor slds-m-right_x-small">Sub</span>
+														</template>
+														<template if:true={ordItm.isPersonalisedPromotion}>
+															<span class="promopillColorBox slds-m-right_xx-small">PROMO</span>
+														</template>
+													</div>
+												</template>
+												<div class="ItemNameStyle" title={ordItm.productDescription}>{ordItm.productDescription}</div>
+											</div>
+										</th>
+										<th scope="col" class="slds-truncate" style="text-align: right;">
+											<div class="slds-truncate">{ordItm.quantity}</div>
+										</th>
+										<th scope="col" class="slds-truncate" style="text-align: right;">
+											<div class="slds-truncate">{orderWrapper.currencyISOCode}
+												<lightning-formatted-number value={ordItm.unitPrice} minimum-fraction-digits="2" ></lightning-formatted-number>
+											</div>
+										</th>
+										<th scope="col" class="slds-truncate" style="text-align: right;">
+											<template if:true={ordItm.isDiscounted}>
+												<div class="crossed-out slds-truncate">
+													{orderWrapper.currencyISOCode}
+													<lightning-formatted-number value={ordItm.totalPrice} minimum-fraction-digits="2" ></lightning-formatted-number>
+												</div>
+											</template>
+											<div style="text-align: right;">
+												{orderWrapper.currencyISOCode}
+												<lightning-formatted-number value={ordItm.discountedPrice} minimum-fraction-digits="2" ></lightning-formatted-number>
+											</div>
+										</th>
+									</tr>
+						</template>
+					</tbody>
+				</table>
+			</div>
+		</div>	
+	</template>
+
+<br/>
+<template if:true={orderItemsSearchNotFound}>
+	<div style="overflow-x:auto;">
+		<table class="slds-table slds-table_bordered" aria-describedby="ghs-orderItem-details">
+			<thead>
+				<tr class="slds-line-height_reset">
+					<th scope="col">
+						<div class="slds-truncate" title="Select Item"></div>
+					</th>
+					<th scope="col">
+						<div class="slds-truncate slds-var-m-left_xx-large" title="Possible Actions">Possible actions</div>
+					</th>
+					<th scope="col">
+						<div class="slds-truncate" title="Item Id">Item id</div>
+					</th>
+					<th scope="col">
+						<div class="slds-truncate" title="Item Name">Item name</div>
+					</th>
+					<th style="text-align: right;" scope="col">
+						<div class="slds-truncate" title="Qty/Wt">Qty/Wt</div>
+					</th>
+					<th style="text-align: right;" scope="col">
+						<div class="slds-truncate" title="Unit Price">Unit price</div>
+					</th>
+					<th style="text-align: right;" scope="col">
+						<div class="slds-truncate" title="Total Price">Total price</div>
+					</th>
+				</tr>
+			</thead>
+			</table>
+			</div>
+</template>
+	<!-- refund modal popoup -->
+	<template if:true={showRefundGeorgeModal}>
+		<section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+			class="slds-modal slds-fade-in-open slds-modal_large">
+			<div class="slds-modal__container">
+				<!-- sldsValidatorIgnoreNextLine -->
+				<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-border-filled clsModalCls" onclick={handleCloseModal}>
+					<lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+					<span class="slds-assistive-text">Close</span>
+                </button>
+				<lightning-flow flow-api-name={flowApiName} flow-input-variables={flowInputVariables} onstatuschange={handleFlowStatusChange}></lightning-flow>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+	</template>
+</template>

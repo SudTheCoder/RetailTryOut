@@ -1,0 +1,25 @@
+<!--**************************************************************************
+Name: ASDAC_DisplayOrdersCmp
+===============================================================================
+Req: 
+ASDAC-820 Search and View Customer Orders
+===============================================================================
+Purpose: This Aura component shows individual Order details screen which
+ encompasses LWC Component inside it
+===============================================================================
+History                                                                                                                       
+VERSION   AUTHOR                DATE         	DETAIL
+1.0       Amey Priolkar    		10 Aug 2022     Initial Development
+******************************************************************************-->
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,lightning:isUrlAddressable" access="global">
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!-- Invoke Workspace API to manage opening in Tabs, Sub-tabs -->
+    <lightning:workspaceAPI aura:id="workspace" />
+
+    <!-- Invoke Navigation in order to navigate to different tabs-->
+    <lightning:navigation aura:id="navService"/>
+
+    <!-- Open Order Details LWC Component -->
+    <c:asdacViewCustomerDetailsCmp onopenorderdetail="{!c.handleEvent}" oncloseordertab="{!c.closeTab}"></c:asdacViewCustomerDetailsCmp>
+</aura:component>

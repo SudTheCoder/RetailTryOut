@@ -1,0 +1,62 @@
+.card-style{
+    --slds-c-card-color-background: #F6F6F6;
+    --slds-c-card-shadow: 0 0 0 0;
+}
+.buttonIcon{
+    --sds-c-button-radius-border:0px 4px 4px 0px;
+    --slds-c-button-color-background:rgb(83, 131, 22);
+    --slds-c-button-color-border:rgb(83, 131, 22);
+    --slds-c-button-color-background-hover:rgb(83, 131, 22);
+    --slds-c-button-color-background-active:rgb(83, 131, 22);
+    --slds-c-icon-color-foreground:white;
+    --dxp-g-neutral-3: white;
+}
+
+.layout-item-style{ 
+    margin-right: 50px;
+} 
+
+.searchString{
+    --sds-c-input-radius-border: 4px 0px 0px 4px;
+    margin-bottom: 0px;
+}   
+
+.title-style{
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.5rem;
+    font-size: 1.25rem;
+    color: #3D3D3D;
+}
+
+@media screen and (min-width: 320px){
+    .searchString{
+        width: 215.87px;
+        height: 40px;
+    }
+    .buttonIcon{
+        width: 40.13px;
+        height: 40px;
+    }
+}
+
+@media screen and (max-width: 319px){
+    .searchString{
+        width: 166.67px;
+        height: 32px;
+    }
+    .buttonIcon{
+        width: 32px;
+        height: 32px;
+    }
+}
+
+.description-style{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    color: #3D3D3D; 
+}

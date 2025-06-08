@@ -1,0 +1,23 @@
+<template>
+  <h1 class="page-title">{labels.title}</h1>
+  <lightning-layout multiple-rows="true" class="slds-gutters_direct-x-small">
+    <lightning-layout-item size="12" medium-device-size="6" class="cta-container slds-var-p-horizontal_x-small slds-var-p-vertical_small">
+			<c-asdac-contact-us-buttons-cmp></c-asdac-contact-us-buttons-cmp>
+    </lightning-layout-item>
+    <lightning-layout-item size="12" medium-device-size="6" class="slds-var-p-horizontal_x-small slds-var-p-vertical_small">
+      <div class="social-card">
+        <h2 class="social-title">{labels.socialTitle}</h2>
+        <div for:each={socialsMenu} for:item="menuItem" key={menuItem.label}>
+          <div class="social-label">{menuItem.label}</div>
+          <div class="social-icon-container">
+            <a for:each={menuItem.socials} for:item="social" key={social.icon} href={social.link} target="_blank" rel="noopener">
+            <div class="social-icon-div" data-title={social.icon} data-menu={menuItem.label} data-url={social.link} onclick={trackData}> 
+              <c-asdac-svg-utility-cmp class="social-icon" svgname={social.icon}></c-asdac-svg-utility-cmp>
+            </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </lightning-layout-item>
+  </lightning-layout>
+</template>

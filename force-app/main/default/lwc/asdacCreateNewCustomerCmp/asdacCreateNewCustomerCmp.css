@@ -1,0 +1,8 @@
+.pc-button{
+    display: flex;
+    justify-content: center;
+}
+
+.pc-error{
+    color: red;
+}

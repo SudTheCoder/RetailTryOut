@@ -1,0 +1,75 @@
+<template>
+    <lightning-layout>
+        <lightning-layout-item padding="around-small" size="6"></lightning-layout-item>
+        <lightning-layout-item alignment-bump="right" size="6">
+            <div class="slds-form_horizontal slds-form">
+                <lightning-input name="enter-search" label="" type="search" class="searchItemCls"
+                    placeholder="Search for items.." pattern="/^[ A-Za-z0-9_@./#&+-]*$/.+"
+                    message-when-pattern-mismatch="Special Characters not allowed" onchange={handleSearchUnavItemsGHS}>
+                </lightning-input>
+            </div>
+        </lightning-layout-item>
+    </lightning-layout>
+    <table class="slds-table slds-table_fixed-layout slds-table_cell-buffer slds-table_bordered" aria-describedby="ghs-orderItem-details">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th class="slds-size_1-of-8" scope="col">
+                    <div class="slds-truncate" title="Item Id">Item id</div>
+                </th>
+                <th class="slds-size_3-of-8" scope="col">
+                    <div class="slds-truncate" title="Item Id">Item name</div>
+                </th>
+                <th class="slds-size_1-of-8" scope="col" style="text-align: right;">
+                    <div class="slds-truncate" title="Qty/Wt">Qty/Wt</div>
+                </th>
+                <th class="slds-size_1-of-8" scope="col" style="text-align: right;">
+                    <div class="slds-truncate" title="Unit Price">Unit price</div>
+                </th>
+                <th class="slds-size_1-of-8" scope="col" style="text-align: right;">
+                    <div class="slds-truncate" title="Total Price">Total price</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <template for:each={orderItems} for:item="unAvItm">
+                <tr key={unAvItm.productId}>
+                    <th scope="col">
+                        <div>
+                            <a href={unAvItm.productLink} target="_blank" rel="noopener">{unAvItm.productId}</a>
+                        </div>
+                    </th>
+                    <th scope="col">
+                        <div class="inline-container">
+                            <template if:true={unAvItm.showTags}>
+                                <div class="ItemNameRightSapce">
+                                    <template if:true={unAvItm.isNilPick}>
+                                        <span class="rectangle-box slds-m-right_xx-small">Nil</span>
+                                    </template>
+                                    <template if:true={unAvItm.isPersonalisedPromotion}>
+                                        <span class="promopillColorBox slds-m-right_xx-smal">PROMO</span>
+                                    </template>
+                                </div>
+                            </template>
+                            <div class="ItemNameStyle">{unAvItm.productDescription}</div>
+                        </div>
+                    </th>
+                    <th scope="col" style="text-align: right;">
+                        <div>
+                            {unAvItm.nilPickQty}
+                        </div>
+                    </th>
+                    <th scope="col" class="slds-truncate" style="text-align: right;">
+                        <div class="slds-truncate">{orderWrapper.currencyISOCode}
+                            <lightning-formatted-number value={unAvItm.unitPrice} minimum-fraction-digits="2" ></lightning-formatted-number>
+                        </div>
+                    </th>
+                    <th scope="col">
+                        <div style="text-align: right;">{orderWrapper.currencyISOCode}
+                            <lightning-formatted-number value={unAvItm.nilPickTotal} minimum-fraction-digits="2" ></lightning-formatted-number>
+                        </div>
+                    </th>
+                </tr>
+            </template>
+        </tbody>
+    </table>
+</template>

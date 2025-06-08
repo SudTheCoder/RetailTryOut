@@ -1,0 +1,15 @@
+<template>
+  <lightning-layout if:true={article} multiple-rows="true" class="slds-gutters_direct-x-small">
+    <lightning-layout-item size="12" medium-device-size="6" class="slds-var-p-horizontal_x-small slds-var-p-vertical_small">
+      <h1 class="title slds-var-p-bottom_medium">{article.Title}</h1>
+      <div  class=" slds-rich-text-editor__output answer"></div>
+      <c-asdac-quick-tip-cmp quick-tip={article.QuickTip__c} title="Quick tip..." onquicktiplinkclick={handleQuickTipLinkClick}></c-asdac-quick-tip-cmp>
+    </lightning-layout-item>
+    <lightning-layout-item size="12" medium-device-size="6" class="slds-var-p-horizontal_x-small slds-var-p-vertical_small">
+      <c-asdac-exit-feedback-cmp article-id={article.Id} show-call-channel={article.Show_Call_Channel__c} show-message-channel={article.Show_Message_Channel__c}></c-asdac-exit-feedback-cmp>
+    </lightning-layout-item>
+    <lightning-layout-item size="12" medium-device-size="6" class="slds-var-p-horizontal_x-small slds-var-p-vertical_small">
+      <c-asdac-related-help-cmp article-id={article.Id} max-results="5"></c-asdac-related-help-cmp>
+    </lightning-layout-item>
+  </lightning-layout>
+</template>

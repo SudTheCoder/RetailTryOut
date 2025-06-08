@@ -1,0 +1,176 @@
+<template>
+	<template if:true={isLoading}>
+		<lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+	</template>
+	<div class="slds-var-p-around_large">
+		<template if:true={exchangeItems}>
+      <div class="slds-card">
+        <div class="slds-card__header">
+          <h1 id="card-heading-01" class="slds-hyphenate slds-text-heading_medium slds-text-align_center"> Exchange details </h1>
+          <p class="slds-var-m-top_x-small slds-var-p-bottom_x-small slds-text-align_center slds-border_bottom"> Please choose a reason for Exchange and add a note to continue </p>
+        </div>
+        <div class="slds-card__body slds-var-p-around_medium custom-modal" id="card-content-id-1">
+          <template if:true={showQuantityorStockError}>
+            <div style="border-style: none; background-color: #ffddd7" class="slds-var-p-around_medium">
+              <lightning-icon icon-name="utility:warning" alternative-text="Warning!" variant="error"></lightning-icon> Please remove out of stock items or adjust quantity to continue.
+            </div>
+          </template>
+            <br /><br />
+            <table class="itemsTable slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" aria-label="Cancelled Items" style="border-collapse: collapse">
+              <tbody>
+                <template if:true={moreThanOne}>
+                  <tr class="slds-hint-parent" style="border-style: none; background-color: #e6eced">
+                    <th scope="Item ID">
+                      <lightning-input type="checkbox" class="applyToAll" name="applyToAll" label=" Apply to all" onchange={handleApplyAll}></lightning-input>
+                    </th>
+                    <th scope="Item Name"></th>
+                    <th scope="Qty"></th>
+                    <th scope="Last Status"></th>
+                    <th scope="Reason">
+                      <lightning-combobox name="progress" placeholder="Choose" variant="label-hidden" options={cancelReasons} class="oiMultiReasonCls" onchange={handleMultiReasonChange}></lightning-combobox>
+                    </th>
+                    <th scope="Notes">
+                      <div>
+                        <lightning-input type="text" placeholder="Notes" class="oiMultiNotesCls notesCls" onblur={handleMultiNotesChange} variant="label-hidden"></lightning-input>
+                      </div>
+                    </th>
+                    <th scope="Last Status"></th>
+                    <th scope="Item Price"></th>
+                    <th scope="Last Status"></th>
+                  </tr>
+                </template>
+                <tr class="slds-hint-parent">
+                  <th scope="Remove Items" class="slds-size_1-of-12">
+                    <div >
+                      <strong>
+                        <label class="slds-form-element__label">Remove Items </label>
+                      </strong>
+                    </div>
+                  </th>
+                  <th scope="Item ID" class="slds-size_1-of-12">
+                    <div>
+                      <strong>
+                        <label class="slds-form-element__label">Item ID</label>
+                      </strong>
+                    </div>
+                  </th>
+                  <th scope="Item Name" class="slds-size_2-of-12">
+                    <div>
+                      <strong>
+                        <label class="slds-form-element__label">Item name</label>
+                      </strong>
+                    </div>
+                  </th>
+                  <th scope="Qty" class="slds-size_1-of-12">
+                    <div>
+                      <strong>
+                        <label class="slds-form-element__label">Qty/Wt</label>
+                      </strong>
+                    </div>
+                  </th>
+                  <th scope="Reason" class="slds-size_2-of-12">
+                    <div>
+                      <strong>
+                        <label class="slds-form-element__label">Reason</label>
+                      </strong>
+                    </div>
+                  </th>
+                  <th scope="Notes" class="slds-size_2-of-12">
+                    <div>
+                      <strong>
+                        <label class="slds-form-element__label">Notes</label>
+                      </strong>
+                    </div>
+                  </th>
+                  <th scope="Return Type" class="slds-size_1-of-12">
+                    <div>
+                      <strong>
+                        <label class="slds-form-element__label">Return Type</label>
+                      </strong>
+                    </div>
+                  </th>
+                  <th scope="Shipping" class="slds-size_1-of-12">
+                    <div>
+                      <strong>
+                        <label class="slds-form-element__label"> Date/shipping</label>
+                      </strong>
+                    </div>
+                  </th>
+                  <th scope="delivery address" class="slds-size_1-of-12">
+                    <div>
+                      <strong>
+                        <label class="slds-form-element__label"> Delivery address</label>
+                      </strong>
+                    </div>
+                  </th>
+                </tr>
+                <template for:each={exchangeItems} for:item="canItem" for:index="index">
+                  <tr style={canItem.style} key={canItem.lineId}>
+                    <td>
+                      <div class="slda-truncate">
+                        <lightning-button-icon icon-name="utility:clear" alternative-text="Remove" class="slds-var-m-left_xx-small removeIcon" variant="bare"
+                            title="Remove" value={canItem.index} data-index={index} onclick={removeRow} style="color:blue" disabled={removeDisabled}>
+                        </lightning-button-icon>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="slds-truncate">{canItem.productId}</div>
+                    </td>
+                    <td>
+                      <div class="slds-truncate">{canItem.productDescription}</div>
+                    </td>
+                    <td>
+                      <template if:false={canItem.isOutofStock}>
+                        <div if:true={canItem.quantity}>
+                          <lightning-combobox variant="label-hidden" class="Quantity" name="Quantity" data-index={index} data-value={canItem.quantity} data-id={canItem.lineId} onchange={quantityChange} disabled=false></lightning-combobox>
+                        </div>
+                      </template>
+                      <div style="color: red" if:true={canItem.isOutofStock}>
+                        <lightning-icon icon-name="utility:error" size="xx-small" alternative-text="Out Of Stock" title="Out Of Stock" class="slds-icon-text-error outOfStockCls" style="--lwc-colorTextIconDefault: #F62217;"></lightning-icon> Out of Stock
+                      </div>
+                      <div style="color: red" if:true={canItem.showStockWaring}>
+                        Only {canItem.availableQuantity} Left
+                      </div>
+                    </td>
+                    <td>
+                      <div class="itemReason">
+                        <lightning-combobox placeholder="Choose" variant="label-hidden" name="oiReason" options={cancelReasons} class="oiReasonCls" data-id={canItem.lineId} onchange={handleReasonChange}></lightning-combobox>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="slds-truncate slds-cell-wrap">
+                        <lightning-input type="text" class="oiNotesCls notesCls" placeholder="Notes" onblur={handleNotesChange} data-id={canItem.lineId} variant="label-hidden"></lightning-input>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="itemReason">
+                        <lightning-combobox required placeholder="Choose" variant="label-hidden" name="actionType" options={returnTypes} class="oiReturnTypeCls" data-index={index} onchange={handleChange}></lightning-combobox>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="slds-truncate slds-cell-wrap">{order.fulfillmentService}</div>
+                    </td>
+                    <td>
+                      <div class="slds-truncate slds-cell-wrap">
+                        <p>{canItem.shippingAddress}</p>
+                      </div>
+                    </td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+        </div>
+             
+        <footer class=" slds-var-m-top_large slds-clearfix  slds-box slds-box_small slds-theme_shade">
+          <div class="slds-float_right">
+            <lightning-button variant="neutral" name="cancel" label="Cancel" title="Cancel"
+                onclick={handleCancel} class="slds-var-m-left_x-small"></lightning-button>
+              <lightning-button variant="brand" name="submit" label="Submit" title="Submit"
+                onclick={handleSubmit} class="slds-var-m-left_x-small submit cancel" disabled={showQuantityorStockError}>
+              </lightning-button>
+          </div>
+        </footer>
+      </div>
+		</template>
+	</div>
+</template>

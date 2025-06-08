@@ -1,0 +1,129 @@
+<template>
+  <lightning-layout>
+    <lightning-layout-item size="6">
+      <lightning-layout>
+        <lightning-layout-item class="slds-p-top_xx-small">
+          <lightning-input label="Select All" type="checkbox" onchange={all} class="selectAllCls" disabled={isOrderCancelled}></lightning-input>
+        </lightning-layout-item>
+        <lightning-layout-item>
+          <lightning-button label="Refund" title="Refund" onclick={handleMultiRefund} disabled={isAllItemsRefundable} class="slds-var-m-left_x-small multiRefundCls"></lightning-button>
+        </lightning-layout-item>
+     </lightning-layout>
+    </lightning-layout-item>
+    <lightning-layout-item size="6">
+      <div class="slds-form_horizontal slds-form">
+        <lightning-input name="enter-search" label="" type="search" class="searchItemCls"
+          placeholder="Search for items.." pattern="/^[ A-Za-z0-9_@./#&+-]*$/.+"
+          message-when-pattern-mismatch="Special Characters not allowed" onchange={handleSearchSubItemsGHS}>
+        </lightning-input>
+      </div>
+    </lightning-layout-item>
+  </lightning-layout>
+  <div style="overflow-x:auto;">
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-describedby="ghs-orderItem-details">
+      <thead>
+        <tr class="slds-line-height_reset">
+          <th class="slds-size_1-of-11" scope="col">
+            <div class="slds-truncate" title="Select Item"></div>
+          </th>
+          <th class="slds-size_1-of-11" scope="col">
+            <div class="slds-truncate" title="Possible Actions">Possible actions</div>
+          </th>
+          <th class="slds-size_1-of-11" scope="col">
+            <div class="slds-truncate" title="Item Id">Item id</div>
+          </th>
+          <th class="slds-size_3-of-11" scope="col">
+            <div class="slds-truncate" title="Item Id">Item name</div>
+          </th>
+          <th class="slds-size_1-of-11" scope="col" style="text-align: right;">
+            <div class="slds-truncate" title="Qty/Wt">Qty/Wt</div>
+          </th>
+          <th class="slds-size_1-of-11" scope="col" style="text-align: right;">
+            <div class="slds-truncate" title="Unit Price">Unit price</div>
+          </th>
+          <th class="slds-size_1-of-11" scope="col" style="text-align: right;">
+            <div class="slds-truncate" title="Total Price">Total price</div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>            
+        <template for:each={orderItems} for:item="orderItem" >                              
+          <tr key={orderItem.orderLineId}>
+            <th scope="col" class="slds-truncate">
+              <div if:true={orderItem.isGhsRefundVisible} class="slds-truncate">
+                <lightning-input data-id="toggle" data-value={orderItem.lineId} type="checkbox" id={orderItem.lineId} name="input1"
+                  onclick={handleItemLevelCheckbox} value={orderItem.lineId} class="oiCheckCls" disabled={isOrderCancelled}>
+                </lightning-input>
+              </div>
+            </th>
+            <th scope="col" class="slds-truncate" style="overflow: auto; text-align: left;">
+              <div if:true={orderItem.isGhsRefundVisible} class="slds-truncate">
+                <lightning-button value={orderItem.lineId} variant="brand" id={orderItem.lineId} label="Refund" title="Refund" onclick={handleRefund}
+                  class="slds-var-m-left_x-small refundGCls" disabled={orderItem.isGhsRefundDisabled}></lightning-button>
+              </div>
+            </th>
+            <th scope="col" class="slds-truncate" style="text-align: left;">
+              <div if:true={orderItem.isSubstitutedLine} class="slds-truncate">{orderItem.productId}</div>
+              <div if:false={orderItem.isSubstitutedLine}><a href={orderItem.productLink} target="_blank" rel="noopener">{orderItem.productId}</a>
+            </div>
+            </th>
+            <th scope="col" class="slds-truncate" style="text-align: left;">
+              <div class="inline-container slds-truncate">
+                <template if:true={orderItem.showTags}>
+                  <div class="ItemNameRightSapce">
+                    <template if:true={orderItem.isNilPick}>
+                      <span class="rectangle-box">Nil</span>
+                    </template>
+                    <template if:true={orderItem.isSubstitutedLine}>
+                      <span class="rectangle-box pillColor slds-m-right_xx-small">Sub</span>
+                    </template>
+                    <template if:true={orderItem.isPersonalisedPromotion}>
+                      <span class="promopillColorBox slds-m-right_xx-small">PROMO</span>
+                    </template> 
+                  </div>
+                </template>
+
+                <div class="ItemNameStyle">{orderItem.productDescription}</div>
+              </div>
+            </th>
+            <th scope="col" class="slds-truncate" style="text-align: right;">
+              <div class="slds-truncate">{orderItem.quantity}</div>
+            </th>
+            <th scope="col" class="slds-truncate" style="text-align: right;">
+              <div class="slds-truncate">{orderWrapper.currencyISOCode}
+                <lightning-formatted-number value={orderItem.unitPrice} minimum-fraction-digits="2" ></lightning-formatted-number>
+              </div>
+            </th>
+            <th scope="col" class="slds-truncate" style="text-align: right;">
+<template if:true={orderItem.isDiscounted}>
+              <div class="crossed-out slds-truncate">
+                  {orderWrapper.currencyISOCode}
+                  <lightning-formatted-number value={orderItem.totalPrice} minimum-fraction-digits="2" ></lightning-formatted-number>
+                </div>
+             </template>
+              <div class style="text-align: right;">
+                 {orderWrapper.currencyISOCode} 
+                <lightning-formatted-number value={orderItem.discountedPrice} minimum-fraction-digits="2" ></lightning-formatted-number>
+              </div>
+                          </th>
+          </tr>
+          </template>  
+      </tbody>
+    </table>
+  </div>
+    <!-- refund modal popoup -->
+    <template if:true={showRefundGroceryModal}>
+      <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+          class="slds-modal slds-fade-in-open slds-modal_large">
+          <div class="slds-modal__container">
+              <!-- sldsValidatorIgnoreNextLine -->
+              <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-border-filled clsModalCls" onclick={handleCloseModal}>
+                  <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                  <span class="slds-assistive-text">Close</span>
+              </button>
+              <lightning-flow flow-api-name={flowApiName} flow-input-variables={flowInputVariables} onstatuschange={handleFlowStatusChange}></lightning-flow>
+          </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+  </template>
+</template>

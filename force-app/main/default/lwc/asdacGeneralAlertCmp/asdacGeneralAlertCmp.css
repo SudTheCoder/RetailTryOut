@@ -1,0 +1,124 @@
+.asdac-general-alert-placement-container {
+  display: flex;
+  justify-content: center;
+}
+
+.asdac-general-alert-placement-container-inline {
+  margin: 16px 16px;
+}
+
+.asdac-general-alert-placement-container-navigation {
+  margin: 8px 0px 0px 0px;
+}
+
+.asdac-general-alert-placement-container-bottom {
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  width: 100%;
+  padding: 16px 16px;
+  left: 0;
+}
+
+@media screen and (min-width: 480px) {
+  .asdac-general-alert-placement-container-inline {
+    margin: 24px 16px;
+  }
+  
+  .asdac-general-alert-placement-container-navigation {
+    margin: 8px 0px 0px 0px;
+  }
+  
+  .asdac-general-alert-placement-container-bottom {
+    padding: 24px 16px;
+  }  
+}
+
+.asdac-general-alert-container {
+  --asdac-general-alert-color: #000000;
+  --asdac-general-alert-color-informative: #0073B1;
+  --asdac-general-alert-color-warning: #F7CC00;
+  --asdac-general-alert-color-crisis: #D43030;
+  --asdac-general-alert-color-close: #3D3D3D;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: #FFFFFF;
+  background-image: none;
+  background-size: auto;
+  border: 1px solid #CCCCCC;
+  border-left: 8px solid var(--asdac-general-alert-color);
+  border-radius: 4px;
+  padding: 12px 12px 12px 8px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 768px;
+}
+
+.asdac-general-alert-container-variant-informative {
+  --asdac-general-alert-color: var(--asdac-general-alert-color-informative);
+}
+
+.asdac-general-alert-container-variant-warning {
+  --asdac-general-alert-color: var(--asdac-general-alert-color-warning);
+}
+
+.asdac-general-alert-container-variant-crisis {
+  --asdac-general-alert-color: var(--asdac-general-alert-color-crisis);
+}
+
+.asdac-general-alert-container-placement-inline {
+  visibility: visible;
+}
+
+.asdac-general-alert-container-placement-navigation {
+  max-width: 100%;
+}
+
+.asdac-general-alert-container-placement-bottom {
+  visibility: visible;
+}
+
+.asdac-general-alert-container-dismissable {
+  padding-right: 48px;
+}
+
+.asdac-general-alert-message {
+  font-family: Source Sans Pro, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.asdac-general-alert-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+  fill: var(--asdac-general-alert-color);
+}
+
+.asdac-general-alert-icon-informative {
+  visibility: visible;
+}
+
+.asdac-general-alert-icon-warning {
+  visibility: visible;
+}
+
+.asdac-general-alert-icon-crisis {
+  visibility: visible;
+}
+
+.asdac-general-alert-close-button-container {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+}
+
+.asdac-general-alert-icon-close {
+  fill: var(--asdac-general-alert-color-close);
+}
+.text-style{
+  color:#3D3D3D;
+}

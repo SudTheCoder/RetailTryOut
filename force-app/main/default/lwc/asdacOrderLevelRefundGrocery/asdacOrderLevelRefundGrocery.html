@@ -1,0 +1,122 @@
+<template>
+    <template if:true={isLoading}>
+       <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </template>
+       <template if:false={isLoading}>
+          <lightning-card>
+             <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                   <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-border-filled" onclick={handleCloseModal}>
+                      <lightning-icon icon-name="utility:close"
+                         alternative-text="close"
+                         size="small" ></lightning-icon>
+                      <span class="slds-assistive-text">Close</span>
+                   </button>
+                   <div class="slds-modal__header">
+                      <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Order Level Refund - {orderWrapper.orderId}
+                      </h1>
+                   </div>
+                   <div class="slds-modal__content slds-var-p-around_small" id="modal-content-id-1">
+                      <div class="slds-box slds-clearfix slds-m-horizontal_medium">
+                        <h1><strong class="slds-modal__title slds-m-left_small">Payment Summary</strong></h1>
+                              <br>
+                              <br>
+                        <div class="slds-grid">
+                           <div class="slds-col slds-size_1-of-2 slds-p-right_medium slds-border_right">
+                              <span class="slds-m-left_small">Sub Total:</span>
+                              <span class="slds-float_right slds-m-right_x-small">{orderWrapper.currencyISOCode}
+                                 <lightning-formatted-number value={orderWrapper.currentSubtotal} minimum-fraction-digits="2" ></lightning-formatted-number>
+                              </span>
+                              <br>
+                              <div class="slds-border_top slds-m-around_x-small"></div>
+                              <span class="slds-m-left_small">Delivery/Collect Fee:</span>
+                              <span class="slds-float_right slds-m-right_x-small">{orderWrapper.currencyISOCode}
+                                 <lightning-formatted-number value={orderWrapper.originalDeliveryCharge} minimum-fraction-digits="2" ></lightning-formatted-number>
+                              </span>
+                              <br>
+                              <div class="slds-border_top slds-m-around_x-small"></div>
+                              <span class="slds-m-left_small">Minimum Basket Charge:</span>
+                              <span class="slds-float_right slds-m-right_x-small">{orderWrapper.currencyISOCode}
+                                 <lightning-formatted-number value={orderWrapper.minimumBasketCharge} minimum-fraction-digits="2" ></lightning-formatted-number>
+                              </span>
+                              <br>
+                              <div class="slds-border_top slds-m-around_x-small"></div>
+                              <span class="slds-m-left_small">Charitable Donation:</span>
+                              <span class="slds-float_right slds-m-right_x-small">{orderWrapper.currencyISOCode}
+                                 <lightning-formatted-number value={orderWrapper.charitableDonation} minimum-fraction-digits="2" ></lightning-formatted-number>
+                              </span>
+                              <br>
+                           </div>
+                           <div class="slds-col slds-size_1-of-2">
+                              <br>
+                              <span class="slds-m-left_small">Refunds:</span>
+                              <span class="slds-float_right slds-m-right_x-small">{orderWrapper.currencyISOCode}
+                                 <lightning-formatted-number value={orderWrapper.refundAmount} minimum-fraction-digits="2" ></lightning-formatted-number>
+                              </span>
+                              <br>
+                              <div class="slds-border_top slds-m-around_x-small"></div>
+                              <span class="slds-m-left_small">E-Voucher Discounts:</span>
+                              <span class="slds-float_right slds-m-right_x-small">{orderWrapper.currencyISOCode}
+                                 <lightning-formatted-number value={orderWrapper.eVoucherAmount} minimum-fraction-digits="2" ></lightning-formatted-number>
+                              </span>
+                              <br>
+                              <div class="slds-border_top slds-m-around_x-small"></div>
+                              <span class="slds-m-left_small">Multisave Discounts:</span>
+                              <span class="slds-float_right slds-m-right_x-small">{orderWrapper.currencyISOCode}
+                                 <lightning-formatted-number value={orderWrapper.multisaveDiscount} minimum-fraction-digits="2" ></lightning-formatted-number>
+                              </span>
+                              <br>
+                              <div class="slds-border_top slds-m-around_x-small"></div>
+                              <span class="slds-m-left_small">Colleague discount:</span>
+                              <span class="slds-float_right slds-m-right_x-small">{orderWrapper.currencyISOCode}
+                                 <lightning-formatted-number value={orderWrapper.colleagueDiscount} minimum-fraction-digits="2" ></lightning-formatted-number>
+                              </span>
+                              <br>
+                              <div class="slds-border_top slds-m-around_x-small"></div>
+                              <span class="slds-m-left_small">Marketing coupon discounts:</span>
+                              <span class="slds-float_right slds-m-right_x-small">{orderWrapper.currencyISOCode}
+                                 <lightning-formatted-number value={orderWrapper.marketingCouponAmount} minimum-fraction-digits="2" ></lightning-formatted-number>
+                              </span>
+                              <br>
+                              <br>
+                              <br>
+                              <strong class="slds-m-left_small">Current Total:</strong>
+                              <strong class="slds-float_right slds-m-right_x-small">{orderWrapper.currencyISOCode}
+                                 <lightning-formatted-number value={orderWrapper.totalAmount} minimum-fraction-digits="2" ></lightning-formatted-number>
+                              </strong>
+                              <br>
+                           </div>
+                       </div>
+                      </div>
+                      <lightning-layout multiple-rows>
+                         <lightning-layout-item class="slds-p-horizontal_medium" flexibility="auto" padding="around-x_small" size="12">
+                            <lightning-combobox placeholder="Select" label="Reason"
+                               name="Reason" options={refundReasons} class="oiReasonCls" onchange={handleReasonChange} >
+                            </lightning-combobox>
+                         </lightning-layout-item>
+                         <lightning-layout-item class="slds-p-horizontal_medium" flexibility="auto" padding="around-x_small" size="12">
+                            <div class="input-wrapper">
+                               <lightning-input type="text" class="oiAmountCls" onchange={amountOnChange} placeholder={placeHolderValue}
+                                  label="Amount" onblur={handleAmountChange}  maxlength="16" value={refundAmount} disabled={amountDisabled}>
+                               </lightning-input>
+                            </div>
+                         </lightning-layout-item>
+                         <lightning-layout-item class="slds-p-horizontal_medium" flexibility="auto" padding="around-x_small" size="12">
+                            <lightning-textarea class="oiNotesCls" onblur={handleNotesChange} 
+                               placeholder="Please write a note before submitting" label="Notes">
+                            </lightning-textarea>
+                         </lightning-layout-item>
+                      </lightning-layout>
+                   </div>
+                   <footer class="slds-modal__footer">
+                      <lightning-button variant="neutral" name="cancel" label="Cancel" title="Cancel"
+                         onclick={handleCloseModal} class="slds-var-m-left_x-small cancelModalCls"></lightning-button>
+                         <lightning-button variant="brand" name="Submit" label="Submit" title="Submit"
+                         onclick={handleSubmit} disabled ={isSubmitDisabeld} class="slds-var-m-left_x-small cancelModalCls"></lightning-button>
+                   </footer>
+                </div>
+             </section>
+          </lightning-card>
+      </template>
+ </template>

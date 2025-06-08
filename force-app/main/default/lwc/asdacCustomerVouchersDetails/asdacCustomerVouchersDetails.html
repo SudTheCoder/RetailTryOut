@@ -1,0 +1,45 @@
+<template>
+    <lightning-datatable
+        key-field="merchantId"
+        data={response}
+        hide-checkbox-column="true"
+        columns={COLUMNS}
+        sorted-by={sortedBy}
+        sorted-direction={sortDirection}
+        onheaderaction={handleHeaderAction}
+        onrowaction={handleConfirmClick}>
+    </lightning-datatable>
+     <template if:true={showSecondModal}>
+        <div class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header header">
+                    <h2 class="slds-text-heading_medium">{label.enterNotes}</h2>
+                </div>
+                <div class="slds-modal__content">
+                    <lightning-textarea
+                        label={label.notesLabel}
+                        name="notes"
+                        value={notes}
+                        class="ModalNotes slds-p-left_large slds-p-right_large"
+                        onchange={handleOnChange}
+                    ></lightning-textarea>
+                    <div if:true={isNotesError} class="error-message slds-p-left_large">{label.ASDACNOTESERROR}</div>
+                </div>
+                <div class="slds-modal__footer">
+                    <lightning-button
+                        variant="brand"
+                        label={label.submitButtonLabel}
+                        onclick={handleSecondModalOK}
+                        class="OkButton"
+                    ></lightning-button>
+                    <lightning-button
+                        variant="neutral"
+                        label={label.cancelButtonLabel}
+                        onclick={handleSecondModalCancel}
+                    ></lightning-button>
+                </div>
+            </div>
+        </div>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template> 
+</template>

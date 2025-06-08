@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+	<apiVersion>57.0</apiVersion>
+	<isExposed>true</isExposed>
+	<masterLabel>Order Details</masterLabel>
+	<targets>
+		<target>lightningCommunity__Page</target>
+		<target>lightningCommunity__Default</target>
+		<target>lightning__FlowScreen</target>
+	</targets>
+ <targetConfigs>
+      <targetConfig targets="lightning__FlowScreen">
+      <property name="orderNumberLabel" label="Order Number" role="inputOnly" type="String"/>
+      <property name="orderDateLabel" label="Order Date" role="inputOnly" type="String"/>
+      <property name="orderValueLabel" label="Order Value" role="inputOnly" type="String"/>
+      <property name="orders" type="String" />
+	  <property name="casesOrderDetails" type="String[]" role="outputOnly"/>
+    </targetConfig>
+</targetConfigs>
+</LightningComponentBundle>

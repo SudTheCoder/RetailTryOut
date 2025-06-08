@@ -1,0 +1,84 @@
+<template>
+    <!--Custom datatable start-->
+    <lightning-card title="Customer's Order History" icon-name="standard:account">
+        <div class="slds-var-m-around_medium">
+            <template if:true={orders}>
+                <div class="slds-var-m-bottom_large">Displaying {startingRecord}-{endingRecord} results out of {totalRecCount}</div>
+                <table class="slds-table slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols cTable" role="grid" aria-describedby="order-history-details">
+                    <thead>
+                        <tr>
+                            <td for:each={columns} for:item="col" key={col.filterId}>
+                                <template if:true={col.filterDate}>
+                                    <div class="slds-grid">
+                                        <div class="slds-col"><lightning-input label="From" type="date" data-field={col.filterField} data-op="=>" onchange={onFilterChange}></lightning-input> </div>
+                                        <div class="slds-col"><lightning-input label="To" type="date" data-field={col.filterField} data-op="=<" onchange={onFilterChange}></lightning-input></div>
+                                    </div>    
+                                </template>
+                                <template if:true={col.filterText}>
+                                    <lightning-input type="text" data-field={col.filterField} data-op="=" onchange={onFilterChange}></lightning-input> 
+                                </template>
+                            </td>
+                        </tr>
+                        <tr class="slds-line-height_reset">
+                            <template for:each={columns} for:item="col" for:index="index">
+                                <th key={col.id} class="slds-is-resizable slds-cell_action-mode slds-border_right link" scope="col">
+                                    <div class="slds-grid slds-gutters slds-wrap slds-grid_vertical-align-center slds-var-m-around_xx-small slds-grid_align-spread slds-has-flexi-truncate">
+                                        <div onclick={onSort} data-index={index} class={col.class}>
+                                            <span class="slds-truncate slds-col" title={col.label}>{col.label}</span>
+                                            <template if:true={col.sortable}>
+                                                <template if:true={isAscSort}>
+                                                    <lightning-button-icon class="slds-col showIcon" icon-name="utility:arrowdown" alternative-text="sort desc" variant="bare"></lightning-button-icon>
+                                                </template>
+                                                <template if:false={isAscSort}>
+                                                    <lightning-button-icon class="slds-col showIcon" icon-name="utility:arrowup" alternative-text="sort asc" variant="bare"></lightning-button-icon>
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </th>
+                            </template>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <template for:each={data} for:item="row" for:index="rowIndex">
+                            <tr class="table" key={row.id}>
+                                <template for:each={row.data} for:item="cell" for:index="cellIndex">
+                                    <td class={cell.class} key={cell.id}>
+                                        <template if:true={cell.isIdField}>
+                                            <a href={cell.url} data-name={cell.value} data-index={rowIndex} onclick={onOrderNumClick}>{cell.value}</a>
+                                        </template>
+                                        <template if:false={cell.isIdField}>{cell.value}</template>
+                                    </td>
+                                </template>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+                <div class="slds-var-p-horizontal_small slds-var-p-vertical_x-small">
+                    <span class="no-orders" if:true={noOrders}>No Orders To Display.</span>
+                    <span class="error" if:true={error}>Please retry again after some time</span>
+                </div>
+
+                <!--add pagination to the datatable-->
+                <div class="slds-var-m-top_medium">
+                    <lightning-layout horizontal-align="space">
+                        <lightning-layout-item flexibility="auto">
+                            <lightning-button label="Previous" icon-name="utility:chevronleft" onclick={onPrev} disabled={disablePrevious}></lightning-button>
+                        </lightning-layout-item>
+                        <lightning-layout-item flexibility="auto">
+                            Page {pageNumber} of {totalPage}
+                        </lightning-layout-item>
+                        <lightning-layout-item flexibility="auto">
+                            <lightning-button label="Next" icon-name="utility:chevronright" icon-position="right" onclick={onNext} disabled={disableNext}></lightning-button>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+            </template>
+            <template if:true={loading}>
+                <lightning-spinner alternative-text="Loading..." variant="brand" size="small"></lightning-spinner>
+            </template>
+        </div>
+    </lightning-card>
+    <!--Custom datatable end-->
+</template>

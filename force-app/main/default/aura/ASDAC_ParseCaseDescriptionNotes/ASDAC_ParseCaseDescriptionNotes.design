@@ -1,0 +1,6 @@
+<design:component>
+	<design:attribute name="itemDescription" label="itemDescription" />
+    <design:attribute name="itemReason" label="itemReason" />
+    <design:attribute name="refundToCreateStr" label="refundToCreateStr" />
+    <design:attribute name="actionName" label="actionName" />
+</design:component>

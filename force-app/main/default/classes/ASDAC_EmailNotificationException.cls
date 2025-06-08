@@ -1,0 +1,1 @@
+public class ASDAC_EmailNotificationException extends Exception { }

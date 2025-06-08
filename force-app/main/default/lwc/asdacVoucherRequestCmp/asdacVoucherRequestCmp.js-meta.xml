@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">   
+            <property name="recordId" type="String" label="Record Id" description="Selected Account Record Id"/>  
+            <property name="caseRecordId" type="String" label="Pass Case Record Id" /> 
+            <property name="goodwillRecVariable" type="String" label="Goodwill Rec Variable" role="outputOnly" />
+            <property name="customerName" type="String" label="customerName" role="outputOnly" />
+            <property name="strBusinessArea" type="String" label="strBusinessArea" role="outputOnly" />
+            <property name="exitButtonClicked" type="Boolean" role="outputOnly"/> 
+            <property name="Notes" type="String" label="Notes" role="outputOnly"/> 
+            <property name="hasTechnicalErrorOccurred" type="Boolean" label="hasTechnicalErrorOccurred" role="outputOnly"/> 
+            <property name="refundToCreateStr" type="String" label="refundToCreateStr" role="outputOnly"/> 
+            <property name="voucherCode" type="String" label="voucherCode" role="outputOnly"/> 
+            <property name="reason" type="String" label="reason" role="outputOnly"/>  
+            <property name="voucherValue" type="String" label="voucherValue" role="outputOnly"/>  
+        </targetConfig>
+    </targetConfigs>    
+</LightningComponentBundle>

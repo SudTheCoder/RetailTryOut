@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="helloWorld">
+    <apiVersion>49.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>ASDA announcements</masterLabel>
+    <description>ASDA announcements List</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="cmsContentType"  type="String"  label ="Select Content Type" default="{cmsContentType}"/>
+            <property name="maxPageSize" type="Integer" label="Maximum numbers of Contents allowed"  default="3" min="0" max="3"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

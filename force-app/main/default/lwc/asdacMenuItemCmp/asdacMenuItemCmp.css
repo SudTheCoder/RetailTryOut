@@ -1,0 +1,35 @@
+:host {
+  --sds-c-button-text-color: #3d3d3d;
+  --sds-c-button-text-color-hover: #3d3d3d;
+  --sds-c-button-text-color-focus: #3d3d3d;
+  --sds-c-button-text-color-active: #3d3d3d;
+  --sds-c-button-outline-brand-color-background-hover: #f4f4f4;
+  --sds-c-button-outline-brand-color-background-focus: #f4f4f4;
+  --sds-c-button-outline-brand-color-background-active: #f4f4f4;
+  --sds-c-button-outline-brand-color-border: #3d3d3d;
+  --sds-c-button-outline-brand-color-border-hover: #3d3d3d;
+  --sds-c-button-outline-brand-color-border-focus: #3d3d3d;
+  --sds-c-button-outline-brand-color-border-active: #3d3d3d;
+  --dxp-s-button-color-focus: transparent;
+  --dxp-s-button-font-size: 1rem;
+  --dxp-s-button-line-height: 1.25rem;
+  --sds-c-button-radius-border: 0.25rem;
+  --slds-c-button-spacing-block-start: 0.75rem;
+  --slds-c-button-spacing-block-end: 0.75rem;
+  --slds-c-button-outline-brand-spacing-inline-start: 0.75rem;
+  --slds-c-button-outline-brand-spacing-inline-end: 0.75rem;
+}
+
+.no-border {
+  --slds-c-button-sizing-border: 0px;
+}
+
+.menu-button {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.articleLabel{
+  text-align: left;
+  max-width: 90%;
+}

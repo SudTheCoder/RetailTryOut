@@ -1,0 +1,47 @@
+<!--/*************************************************************************
+Name: asdacPaymentRefundsCmp
+===============================================================================
+Req: 
+ASDAC-1641 George - Payments & Refunds - Fields
+ASDAC-1642 Order Management - Fields
+ASDAC-1860 George - Product / Technical Support - Fields
+===============================================================================
+Purpose: This LWC Component is built to show UI for Payment and Refunds as
+         Contact Reason Level 1.
+===============================================================================
+History                                                                                                                       
+VERSION   AUTHOR                DATE         	DETAIL
+1.0       Nitish Yadav    		15 July 2022    Initial Development
+******************************************************************************/-->
+<template>
+    <template if:true={panelRenderObj.isGeorge}>
+        <lightning-card>
+            <lightning-layout multiple-rows>
+                <lightning-layout-item size="12" class="slds-var-p-around_medium">
+                    <lightning-input type="text" label="Delivery Date" disabled read-only></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="slds-var-p-around_medium">
+                    <lightning-input type="text" label="Order Total" disabled read-only></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="slds-var-p-around_medium">
+                    <lightning-input type="text" label="Order Status" disabled read-only></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="slds-var-p-around_medium">
+                    <lightning-input type="text" label="Order Number" disabled read-only></lightning-input>
+                </lightning-layout-item>
+                
+                <template if:true={panelRenderObj.showRefunedAmount}>
+                    <lightning-layout-item size="12" class="slds-var-p-around_medium">
+                        <lightning-input type="text" label="Refund Amount" disabled read-only></lightning-input>
+                    </lightning-layout-item>
+                </template>
+                
+                <template if:true={panelRenderObj.showRefunedDate}>
+                    <lightning-layout-item size="12" class="slds-var-p-around_medium">
+                        <lightning-input type="text" label="Refund Issued Date" disabled read-only></lightning-input>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </lightning-card>
+    </template>
+</template>

@@ -1,0 +1,643 @@
+<template>
+	<lightning-tabset variant="scoped">
+		<lightning-tab label="Transaction details">
+			<div if:false={hasPaymentTransactions} class="slds-align_absolute-center">
+				{noGhsPaymentTransactionMessage}
+			</div>
+
+			<template if:true={isGeorge}>			
+				<template if:true={isPaypal}>
+					<div class="slds-text-heading_medium"><strong>Paypal</strong></div>
+					<div style="overflow-x: auto;">
+						<table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-label="Paypal-table">
+							<thead>
+								<tr class="slds-line-height_reset">
+									<th scope="col">
+										<div class="slds-truncate" style="text-align: left;" title="Transaction type">{label.ASDAC_TransactionType}</div>
+									</th>
+									<th scope="col">
+										<div class="slds-truncate" style="text-align: right;" title="Amount">{label.ASDAC_Amount}</div>
+									</th>
+									<th scope="col">
+										<div class="slds-truncate" style="text-align: left;" title="Status">{label.ASDAC_Status}</div>
+									</th>
+									<th scope="col">
+										<div class="slds-truncate" style="text-align: left;" title="DateTime">{label.ASDAC_DateTimeBSTGMT}</div>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<template for:each={paypalList} for:item="payment">
+									<template for:each={payment.transactionsDetails} for:item="transaction">
+										<tr class="slds-hint-parent" key={transaction.transactionId}>
+											<td data-label="TransactionType" style="text-align: left;">{transaction.processType}<br />
+												<template if:true={transaction.arnNumber}>
+													<strong><span class="customPill" style="text-align: left;">ARN</span></strong>{transaction.arnNumber}
+												</template>
+											</td>
+											<td data-label="Amount"> 
+												<div class="slds-truncate" style="text-align: right;">{orderWrapper.currencyISOCode}
+													<lightning-formatted-number value={transaction.amount} minimum-fraction-digits="2"></lightning-formatted-number>
+												</div>
+											</td>
+											<template if:false={transaction.isSuccess}>
+												<td data-label="Status">
+													<div class="fail-container">
+													   <span class="fail-text">Fail</span>
+													</div>
+												 </td>
+											</template>
+											<template if:true={transaction.isSuccess}>
+												<td data-label="Status">
+													<div class="success-container">
+													   <span class="success-text">Success</span>
+													</div>
+												 </td>
+											</template>
+											<td data-label="DateTime" style="text-align: left;">{transaction.transactionDateTime}</td>
+										</tr>
+									</template>
+								</template>
+							</tbody>
+						</table>
+					</div>
+				</template>
+		    </template>
+			<br/>
+			<template if:true={isCreditCard}>
+				<div class="slds-text-heading_medium"><strong>Payment card</strong></div>
+				<div style="overflow-x:auto;">
+					<table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-label="Paypal-table">
+						<thead>
+							<tr class="slds-line-height_reset">
+								<th scope="col" class="slds-size_1-of-12">
+									<div class="slds-truncate" style="text-align: left;" title="Card type">{label.ASDAC_CardType}</div>
+								</th>
+								<th scope="col" class="slds-size_2-of-12">
+									<div class="slds-truncate" style="text-align: left;" title="Card details">{label.ASDAC_CardDetails}</div>
+								</th>
+								<th scope="col" class="slds-size_3-of-12">
+									<div class="slds-truncate" style="text-align: left;" title="Transaction type">{label.ASDAC_TransactionType}</div>
+								</th>
+								<th scope="col" class="slds-size_1-of-12">
+									<div class="slds-truncate" style="text-align: right;" title="Amount">{label.ASDAC_Amount}</div>
+								</th>
+								<th scope="col" class="slds-size_1-of-12">
+									<div class="slds-truncate" style="text-align: left;" title="Status">{label.ASDAC_Status}</div>
+								</th>
+								<template if:false={isGeorge}>	
+									<th scope="col" class="slds-size_2-of-12">
+										<div class="slds-truncate" style="text-align: left;" title="Transaction number">{label.ASDAC_TransactionNumber}</div>
+									</th>
+								</template>
+								<th scope="col" class="slds-size_2-of-12">
+									<div class="slds-truncate" style="text-align: left;" title="DateTime">{label.ASDAC_DateTimeBSTGMT}</div>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<template for:each={crediCardList} for:item="payment">
+								<template for:each={payment.transactionsDetails} for:item="transaction">
+									<tr class="slds-hint-parent" key={transaction.transactionId}>
+										<td data-label="CardType" style="text-align: left;">{payment.cardType}</td>
+										<td data-label="CardDetails" style="text-align: left;">{payment.cardNumber}</td>
+										<td data-label="TransactionType" style="text-align: left;">{transaction.processType}<br/>
+											<template if:true={transaction.arnNumber}>
+												<strong><span class="customPill" style="text-align: left;">ARN</span></strong>{transaction.arnNumber}
+											</template>
+										</td>
+										<td data-label="Amount"> 
+											<div class="slds-truncate" style="text-align: right;">{orderWrapper.currencyISOCode}
+												<lightning-formatted-number value={transaction.amount} minimum-fraction-digits="2"></lightning-formatted-number>
+											</div>
+										</td>
+										<template if:true={isGeorge}>
+											<template if:false={transaction.isSuccess}>
+												<td data-label="Status">
+													<div class="fail-container">
+														<span class="fail-text">Fail</span>
+													</div>
+												</td>
+											</template>
+											<template if:true={transaction.isSuccess}>
+												<td data-label="Status">
+													<div class="success-container">
+														<span class="success-text">Success</span>
+													</div>
+												</td>
+											</template>
+										</template>
+										<template if:false={isGeorge}>
+											<td data-label="Status">
+												<template if:true={transaction.isGhsSuccess}>
+														<div class="success-container">
+															<span class="success-text">{transaction.status}</span>
+														</div>
+												</template>
+												<template if:true={transaction.isGhsPending}>
+													<div class="pending-container">
+														<span class="success-text">{transaction.status}</span>
+													</div>
+											</template>
+											<template if:true={transaction.isGhsError}>
+													<div class="fail-container">
+														<span class="fail-text">{transaction.status}</span>
+													</div>
+											</template>
+											</td>
+										</template>
+										<template if:false={isGeorge}>	
+											<td data-label="TransactionNumber" style="text-align: left;">{transaction.transactionId}</td>
+										</template>
+										<td data-label="DateTime" style="text-align: left;">{transaction.transactionDateTime}</td>
+									</tr>
+								</template>
+							</template>
+						</tbody>
+					</table>
+				</div>
+			</template>
+			<br/>
+			<template if:true={isGiftCard}>
+				<div class="slds-text-heading_medium"><strong>Gift card</strong></div>
+				<div style="overflow-x:auto;">
+					<table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-label="Paypal-table">
+						<thead>
+							<tr class="slds-line-height_reset">
+								<th scope="col" class="slds-size_1-of-12">
+									<div class="slds-truncate" style="text-align: left;" title="Card type">{label.ASDAC_CardType}</div>
+								</th>
+								<th scope="col" class="slds-size_2-of-12">
+									<div class="slds-truncate" style="text-align: left;" title="Card details">{label.ASDAC_CardDetails}</div>
+								</th>
+								<th scope="col" class="slds-size_3-of-12">
+									<div class="slds-truncate" style="text-align: left;" title="Transaction type">{label.ASDAC_TransactionType}</div>
+								</th>
+								<th scope="col" class="slds-size_1-of-12">
+									<div class="slds-truncate" style="text-align: right;" title="Amount">{label.ASDAC_Amount}</div>
+								</th>
+								<th scope="col" class="slds-size_1-of-12">
+									<div class="slds-truncate" style="text-align: left;" title="Status">{label.ASDAC_Status}</div>
+								</th>
+								<template if:false={isGeorge}>	
+									<th scope="col" class="slds-size_2-of-12">
+										<div class="slds-truncate" style="text-align: left;" title="Transaction number">{label.ASDAC_TransactionNumber}</div>
+									</th>
+								</template>
+								<th scope="col" class="slds-size_2-of-12">
+									<div class="slds-truncate" style="text-align: left;" title="DateTime">{label.ASDAC_DateTimeBSTGMT}</div>
+								</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							<template for:each={giftCardList} for:item="payment">
+								<template for:each={payment.transactionsDetails} for:item="transaction">
+									<tr class="slds-hint-parent" key={transaction.authorizationId}>
+										<td data-label="CardType" style="text-align: left;">{payment.cardType}</td>
+										<td data-label="CardDetails" style="text-align: left;">{payment.cardNumber}</td>
+										<td data-label="TransactionType" style="text-align: left;">{transaction.processType}<br/>
+											<template if:true={transaction.arnNumber}>
+												<strong><span class="customPill" style="text-align: left;">ARN</span></strong>{transaction.arnNumber}
+											</template>
+										</td>
+										<td data-label="Amount">
+											<div class="slds-truncate" style="text-align: right;">{orderWrapper.currencyISOCode}
+												<lightning-formatted-number value={transaction.amount} minimum-fraction-digits="2"></lightning-formatted-number>
+											</div>										
+										</td>
+										<template if:true={isGeorge}>
+											<template if:false={transaction.isSuccess}>
+												<td data-label="Status">
+													<div class="fail-container">
+													   <span class="fail-text">Fail</span>
+													</div>
+												 </td>
+											</template>
+											<template if:true={transaction.isSuccess}>
+												<td data-label="Status">
+													<div class="success-container">
+													   <span class="success-text">Success</span>
+													</div>
+												 </td>
+											</template>
+										</template>
+										<template if:false={isGeorge}>
+											<td data-label="Status">
+												<template if:true={transaction.isGhsSuccess}>
+														<div class="success-container">
+															<span class="success-text">{transaction.status}</span>
+														</div>
+												</template>
+												<template if:true={transaction.isGhsPending}>
+													<div class="pending-container">
+														<span class="success-text">{transaction.status}</span>
+													</div>
+											</template>
+											<template if:true={transaction.isGhsError}>
+													<div class="fail-container">
+														<span class="fail-text">{transaction.status}</span>
+													</div>
+											</template>
+											</td>
+										</template>
+										<template if:false={isGeorge}>	
+											<td data-label="TransactionNumber" style="text-align: left;">{transaction.transactionId}</td>
+										</template>	
+										<td data-label="DateTime" style="text-align: left;">{transaction.transactionDateTime}</td>
+									</tr>
+								</template>
+							</template>
+						</tbody>
+					</table>
+				</div>
+			</template>
+			<br/>
+			<template if:true={isGeorge}>	
+				<template if:true={isVoucher}>
+					<div class="slds-text-heading_medium"><strong>Voucher</strong></div>
+					<div style="overflow-x:auto;">
+						<table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-label="Paypal-table">
+							<thead>
+								<tr class="slds-line-height_reset">
+									<th scope="col" class="slds-size_1-of-12">
+										<div class="slds-truncate" style="text-align: left;" title="Card type">{label.ASDAC_CardType}</div>
+									</th>
+									<th scope="col" class="slds-size_2-of-12">
+										<div class="slds-truncate" style="text-align: left;" title="Card details">{label.ASDAC_CardDetails}</div>
+									</th>
+									<th scope="col" class="slds-size_3-of-12">
+										<div class="slds-truncate" style="text-align: left;" title="Transaction type">{label.ASDAC_TransactionType}</div>
+									</th>
+									<th scope="col" class="slds-size_1-of-12">
+										<div class="slds-truncate" style="text-align: right;" title="Amount">{label.ASDAC_Amount}</div>
+									</th>
+									<th scope="col" class="slds-size_1-of-12">
+										<div class="slds-truncate" style="text-align: left;" title="Status">{label.ASDAC_Status}</div>
+									</th>
+									<th scope="col" class="slds-size_2-of-12">
+										<div class="slds-truncate" style="text-align: left;" title="DateTime">{label.ASDAC_DateTimeBSTGMT}</div>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<template for:each={voucherList} for:item="payment">
+									<template for:each={payment.transactionsDetails} for:item="transaction">
+										<tr class="slds-hint-parent" key={transaction.authorizationId}>
+											<td data-label="CardType" style="text-align: left;">{payment.cardType}</td>
+											<td data-label="CardDetails" style="text-align: left;">{payment.cardNumber}</td>
+											<td data-label="TransactionType" style="text-align: left;">{transaction.processType}<br/>
+												<template if:true={transaction.arnNumber}>
+													<strong><span class="customPill" style="text-align: left;">ARN</span></strong>{transaction.arnNumber}
+												</template>
+											</td>
+											<td data-label="Amount">
+												<div class="slds-truncate" style="text-align: right;">{orderWrapper.currencyISOCode}
+													<lightning-formatted-number value={transaction.amount} minimum-fraction-digits="2"></lightning-formatted-number>
+												</div>
+											</td>
+											<template if:false={transaction.isSuccess}>
+												<td data-label="Status">
+													<div class="fail-container">
+														<span class="fail-text">Fail</span>
+													</div>
+												</td>
+											</template>
+											<template if:true={transaction.isSuccess}>
+												<td data-label="Status">
+													<div class="success-container">
+														<span class="success-text">Success</span>
+													</div>
+												</td>
+											</template>
+											<td data-label="DateTime" style="text-align: left;">{transaction.transactionDateTime}</td>
+										</tr>
+									</template>
+								</template>
+							</tbody>
+						</table>
+					</div>
+				</template>
+			</template>
+		</lightning-tab>
+	  <template if:false={orderWrapper.isExchangeOrder}>
+		<lightning-tab label="Payment summary">
+			<template if:true={isGeorge}>
+				<div class="acc-container" style="overflow-x:auto;">
+					<lightning-layout vertical-align="stretch" multiple-rows="true" class="x-large">
+						<lightning-layout-item flexibility="auto" size="2" padding="around-small" class="custom-box" style="overflow-x: auto;">
+							<div class="slds-text-heading_medium"><strong>Original payment summary</strong></div>
+						</lightning-layout-item>
+						<lightning-layout-item flexibility="auto" size="4" padding="around-small" class="custom-box" style="overflow-x: auto;">
+							<table class="slds-table slds-table_cell-buffer slds-table_header-hidden" aria-describedby="original-payments">
+								<tbody>
+									<tr class="slds-border_bottom">
+										<th scope="col" data-label="subTotal" class="slds-truncate"><strong>Sub total</strong></th>
+										<td data-label="subTotal">{orderWrapper.currencyISOCode} 
+											<lightning-formatted-number value={orderWrapper.orderSubTotal} minimum-fraction-digits="2"></lightning-formatted-number>
+										</td>
+									</tr>
+									<tr>
+										<td data-label="totalDiscounts" class="slds-truncate"><strong>Total discounts</strong></td>
+										<td data-label="totalDiscounts">{orderWrapper.currencyISOCode} 
+											<lightning-formatted-number value={orderWrapper.originalOrderDiscount} minimum-fraction-digits="2"></lightning-formatted-number>
+										</td>
+									</tr>
+									<tr>
+										<td data-label="promotions" class="subPayType">Promotions</td>
+										<td data-label="promotions">{orderWrapper.currencyISOCode} 
+											<lightning-formatted-number value={orderWrapper.promotionalDiscount} minimum-fraction-digits="2"></lightning-formatted-number>
+										</td>
+									</tr>
+									<template if:true={orderWrapper.hasColleagueDiscount}>
+										<tr class="slds-border_bottom">
+											<td data-label="collDiscount" class="slds-truncate subPayType">ASDA colleague discount</td>
+											<td data-label="collDiscount">{orderWrapper.currencyISOCode} 
+												<lightning-formatted-number value={orderWrapper.colleagueDiscount} minimum-fraction-digits="2"></lightning-formatted-number>
+											</td>
+										</tr>
+									</template>
+									<tr>
+										<td data-label="prodTax" class="slds-truncate"><strong>Product taxes</strong></td>
+										<td data-label="prodTax">{orderWrapper.currencyISOCode}
+											<lightning-formatted-number value={orderWrapper.originalVAT} minimum-fraction-digits="2"></lightning-formatted-number>
+										</td>
+									</tr>
+									<tr class="slds-border_bottom">
+										<td data-label="vat" class="slds-truncate subPayType">VAT</td>
+										<td data-label="vat">{orderWrapper.currencyISOCode}
+											<lightning-formatted-number value={orderWrapper.originalVAT} minimum-fraction-digits="2"></lightning-formatted-number>
+										</td>
+									</tr>
+									<tr>
+										<td data-label="shipCharges" class="slds-truncate"><strong>Delivery charges</strong></td>
+										<td data-label="shipCharges">{orderWrapper.currencyISOCode}
+											<lightning-formatted-number value={orderWrapper.originalDeliveryCharge} minimum-fraction-digits="2"></lightning-formatted-number>
+										</td>
+									</tr>
+									<tr class="slds-border_bottom">
+										<td data-label="indShipCharge" class="slds-truncate subPayType">Delivery charge</td>
+										<td data-label="indShipCharge">{orderWrapper.currencyISOCode}
+											<lightning-formatted-number value={orderWrapper.originalDeliveryCharge} minimum-fraction-digits="2"></lightning-formatted-number>
+										</td>
+									</tr>
+									<tr>
+										<td data-label="blankRow"></td>
+										<td data-label="blankRow"></td>
+									</tr>
+									<tr class="totalTop">
+										<td data-label="blankRow"></td>
+										<td data-label="blankRow"></td>
+									</tr>
+									<tr>
+										<td data-label="totalAmount" class="slds-truncate"><strong>Total Amount</strong></td>
+										<td data-label="totalAmount">{orderWrapper.currencyISOCode} 
+											<lightning-formatted-number value={orderWrapper.originalOrderTotal} minimum-fraction-digits="2"></lightning-formatted-number>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</lightning-layout-item>
+						<lightning-layout-item flexibility="auto" size="2" padding="around-small" class="custom-box" style="overflow-x: auto;">
+							<div class="slds-text-heading_medium"><strong>Current payment summary</strong></div>
+						</lightning-layout-item>
+						<lightning-layout-item flexibility="auto" size="4" padding="around-small" class="custom-box" style="overflow-x: auto;">
+							<table class="slds-table slds-table_cell-buffer slds-table_header-hidden"
+								aria-describedby="current-payments">
+								<tbody>
+									<tr class="slds-border_bottom">
+										<th scope="col" data-label="origOrderTotal" class="slds-truncate"><strong>Original order total</strong>
+										</th>
+										<th scope="col" data-label="origOrderTotal">{orderWrapper.currencyISOCode}
+											<lightning-formatted-number value={orderWrapper.originalOrderTotal} minimum-fraction-digits="2"></lightning-formatted-number>
+										</th>
+									</tr>
+									<tr>
+										<td data-label="refunds" class="slds-truncate"><strong>Refund</strong></td>
+										<td data-label="refunds">{orderWrapper.currencyISOCode} 
+											<lightning-formatted-number value={orderWrapper.refundTotal} minimum-fraction-digits="2"></lightning-formatted-number>
+										</td>
+									</tr>
+									<tr>
+										<td data-label="productRefund" class="slds-truncate subPayType">Product refund</td>
+										<td data-label="productRefund">{orderWrapper.currencyISOCode} 
+											<lightning-formatted-number value={orderWrapper.productRefund} minimum-fraction-digits="2"></lightning-formatted-number>
+										</td>
+									</tr>
+									<tr class="slds-border_bottom">
+										<td data-label="shippingRefund" class="slds-truncate subPayType">Delivery charge refund</td>
+										<td data-label="shippingRefund">{orderWrapper.currencyISOCode} 
+											<lightning-formatted-number value={orderWrapper.deliveryChargeRefund} minimum-fraction-digits="2"></lightning-formatted-number>
+										</td>
+									</tr>
+									<tr class="slds-border_bottom">
+										<td data-label="partialRefund" class="slds-truncate subPayType">Partial refund</td>
+										<td data-label="partialRefund">{orderWrapper.currencyISOCode} 
+										<lightning-formatted-number value={orderWrapper.partialRefund} minimum-fraction-digits="2"></lightning-formatted-number>
+									</td>
+									</tr>
+									<tr>
+										<td data-label="blankRow"></td>
+										<td data-label="blankRow"></td>
+									</tr>
+									<tr class="totalTop">
+										<td data-label="blankRow"></td>
+										<td data-label="blankRow"></td>
+									</tr>
+									<tr>
+										<td data-label="totalAmount" class="slds-truncate"><strong>Current order total</strong></td>
+										<td data-label="totalAmount">{orderWrapper.currencyISOCode} 
+										<lightning-formatted-number value={orderWrapper.totalAmount} minimum-fraction-digits="2"></lightning-formatted-number>
+										</td>
+										
+									</tr>
+								</tbody>
+							</table>
+						</lightning-layout-item>
+					</lightning-layout>
+					<hr />
+					<lightning-layout>
+						<lightning-layout-item flexibility="auto" size="2" padding="around-small" class="custom-box" style="overflow-x: auto;">
+							<div class="slds-text-heading_medium"><strong>Payment method breakdown</strong></div>
+						</lightning-layout-item>
+						<lightning-layout-item flexibility="auto" size="4" padding="around-small" class="custom-box" style="overflow-x: auto;">
+							<lightning-layout-item flexibility="auto" size="4" padding="around-small" class="custom-box">
+								<table class="slds-table slds-table_cell-buffer slds-table_header-hidden" aria-describedby="current-payments">
+									<tbody>
+										<tr class="slds-border_bottom">
+											<th scope="col" data-label="totalAmount" class="slds-truncate"><strong>Total amount</strong></th>
+											<th scope="col" data-label="totalAmount">{orderWrapper.currencyISOCode} 
+												<lightning-formatted-number value={orderWrapper.totalAmount} minimum-fraction-digits="2"></lightning-formatted-number>
+											</th>
+										</tr>
+										<tr>
+											<td data-label="payMethods" class="slds-truncate"><strong>Payment methods</strong></td>
+											<td data-label="payMethods"></td>
+										</tr>
+										<template if:true={isPaypal}>
+											<tr>
+												<td data-label="Paypal" class="slds-truncate subPayType">Paypal</td>
+												<td data-label="Paypal">{orderWrapper.currencyISOCode} 
+													<lightning-formatted-number value={totalPaypal} minimum-fraction-digits="2"></lightning-formatted-number>
+												</td>
+											</tr>
+										</template>
+										<template if:true={isCreditCard}>
+											<tr class="slds-border_bottom">
+												<td data-label="masterCard" class="slds-truncate subPayType">Payment card</td>
+												<td data-label="masterCard">{orderWrapper.currencyISOCode} 
+													<lightning-formatted-number value={totalCreditCard} minimum-fraction-digits="2"></lightning-formatted-number>
+												</td>
+											</tr>
+										</template>
+										<template if:true={isGiftCard}>
+											<tr>
+												<td data-label="Paypal" class="slds-truncate subPayType">Gift card</td>
+												<td data-label="Paypal">{orderWrapper.currencyISOCode} 
+													<lightning-formatted-number value={totalGiftCard} minimum-fraction-digits="2"></lightning-formatted-number>
+												</td>
+											</tr>
+										</template>
+										<template if:true={isVoucher}>
+											<tr>
+												<td data-label="Paypal" class="slds-truncate subPayType">Voucher</td>
+												<td data-label="Paypal">{orderWrapper.currencyISOCode} 
+													<lightning-formatted-number value={totalVoucher} minimum-fraction-digits="2"></lightning-formatted-number>
+												</td>
+											</tr>
+										</template>
+									</tbody>
+								</table>
+							</lightning-layout-item>
+						</lightning-layout-item>
+					</lightning-layout>
+				</div>
+			</template>
+			<template if:false={isGeorge}>
+				<div class="acc-container" style="overflow-x:auto;">
+					<lightning-layout vertical-align="stretch" multiple-rows="true" class="x-large">
+						<lightning-layout-item flexibility="auto" size="4" padding="around-small" class="custom-box" style="overflow-x: auto;">
+							<table class="slds-table slds-table_cell-buffer slds-table_header-hidden" aria-describedby="original-payments">
+								<tbody>
+									<tr>
+										<th scope="col" data-label="paymentSummary" class="slds-text-heading_medium"><strong>Payment summary</strong></th>
+										<th scope="col" data-label="paymentSummary"></th>
+									</tr>
+									<tr>
+										<td data-label="subTotal" class="slds-truncate" >Sub total</td>
+										<td data-label="subTotal">{orderWrapper.currencyISOCode}
+											<lightning-formatted-number value={orderWrapper.currentSubtotal} minimum-fraction-digits="2" ></lightning-formatted-number>
+										</td>										
+									</tr>
+									<tr>
+										<td data-label="deliveryCollectFee" class="slds-truncate">Delivery / Collect fee</td>
+										<td data-label="deliveryCollectFee">{orderWrapper.currencyISOCode}
+											<lightning-formatted-number value={orderWrapper.currentDeliveryCharge} minimum-fraction-digits="2" ></lightning-formatted-number>
+										</td>
+									</tr>
+												
+									<tr>
+										<td data-label="minimumBasketCharge" class="slds-truncate" >Minimum basket charge</td>
+										<td data-label="minimumBasketCharge">{orderWrapper.currencyISOCode}
+											<lightning-formatted-number value={orderWrapper.currentMinimumBasketCharge} minimum-fraction-digits="2" ></lightning-formatted-number>
+										</td>
+									</tr>		
+									<tr>
+										<td data-label="charitableDonation" class="slds-truncate" >Charitable donation</td>
+										<td data-label="charitableDonation">{orderWrapper.currencyISOCode}
+											<lightning-formatted-number value={orderWrapper.currentCharitableDonation} minimum-fraction-digits="2" ></lightning-formatted-number>
+										</td>
+									</tr>
+									<tr>
+										<td data-label="blankRow"></td>
+										<td data-label="blankRow"></td>
+									</tr>
+									<tr class="totalTop">
+										<td data-label="blankRow"></td>
+										<td data-label="blankRow"></td>
+									</tr>
+									<tr>
+										<td data-label="totalAmount" class="slds-truncate"><strong>Total amount</strong></td>
+										<td data-label="totalAmount">
+											<div class="slds-truncate">{orderWrapper.currencyISOCode}
+												<lightning-formatted-number value={orderWrapper.totalAmount} minimum-fraction-digits="2" ></lightning-formatted-number>
+											</div>
+										</td>
+								    </tr>									
+								</tbody>
+							</table>
+						</lightning-layout-item>		
+						<lightning-layout-item flexibility="auto" size="4" padding="around-small" class="custom-box" style="overflow-x: auto;">
+							<table class="slds-table slds-table_cell-buffer slds-table_header-hidden" aria-describedby="current-payments">
+								<tbody>
+									<tr><th></th></tr>
+									<tr>
+										<td data-label="refunds" class="slds-truncate">Refunds</td>
+										<td data-label="refunds">{orderWrapper.currencyISOCode}
+											<lightning-formatted-number value={orderWrapper.refundAmount} minimum-fraction-digits="2" ></lightning-formatted-number>
+										</td>
+									</tr>
+									<tr>
+										<td data-label="asdaRewardsDiscount" class="slds-truncate rewardDiscount">
+										<a onclick={handleRewardsDiscount}>ASDA rewards discount </a>
+										</td>
+										<td data-label="asdaRewardsDiscount">
+											<div class="slds-truncate">{orderWrapper.currencyISOCode}
+												<lightning-formatted-number value={orderWrapper.asdaRewardDiscount} minimum-fraction-digits="2"></lightning-formatted-number>
+											</div>
+										</td>										
+									</tr>
+									<tr>
+										<td data-label="giftCardDiscounts" class="slds-truncate">Gift card discounts</td>
+										<td data-label="giftCardDiscounts">
+											<div class="slds-truncate">{orderWrapper.currencyISOCode}
+												<lightning-formatted-number value={orderWrapper.giftcardAmount} minimum-fraction-digits="2"></lightning-formatted-number>
+											</div>											
+										</td>
+									</tr>
+									<tr>
+										<td data-label="eVoucherDiscounts" class="slds-truncate">E-Voucher discounts</td>
+										<td data-label="eVoucherDiscounts">
+											<div class="slds-truncate">{orderWrapper.currencyISOCode}
+												<lightning-formatted-number value={orderWrapper.eVoucherAmount} minimum-fraction-digits="2"></lightning-formatted-number>
+											</div>							
+										</td>
+									</tr>
+									<tr>
+										<td data-label="multipleDiscounts" class="slds-truncate">Multisave discounts</td>
+										<td data-label="multipleDiscounts">
+											<div class="slds-truncate">{orderWrapper.currencyISOCode}
+												<lightning-formatted-number value={orderWrapper.multisaveDiscount} minimum-fraction-digits="2"></lightning-formatted-number>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td data-label="colleagueDiscount" class="slds-truncate">Colleague discount</td>
+										<td data-label="colleagueDiscount">
+											<div class="slds-truncate">{orderWrapper.currencyISOCode}
+												<lightning-formatted-number value={orderWrapper.colleagueDiscount} minimum-fraction-digits="2"></lightning-formatted-number>
+											</div>
+										</td>
+									</tr>	
+									<tr>
+										<td data-label="colleagueDiscount" class="slds-truncate">Marketing coupon discounts</td>
+										<td data-label="colleagueDiscount">
+											<div class="slds-truncate">{orderWrapper.currencyISOCode}
+												<lightning-formatted-number value={orderWrapper.marketingCouponAmount} minimum-fraction-digits="2"></lightning-formatted-number>
+											</div>
+										</td>
+									</tr>			
+								</tbody>
+							</table>
+						</lightning-layout-item> 
+					</lightning-layout>
+					<template if:true={isRewardDiscountModalVisible}>
+						<c-asdac-rewards-discount-modal-cmp onclosemodal={handleCloseModal} orderwrapper={orderWrapper}></c-asdac-rewards-discount-modal-cmp>
+					</template>
+					<hr/>
+				</div>
+			</template>
+		</lightning-tab>
+	  </template>
+	</lightning-tabset>
+</template>

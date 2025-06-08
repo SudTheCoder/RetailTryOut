@@ -1,0 +1,22 @@
+<template>
+  <template for:each={alerts} for:item="alert">
+    <c-asdac-general-alert-cmp
+      key={alert.id}
+      id={alert.id}
+      message={alert.message}
+      variant={alert.variant}
+      placement={alert.placement}
+      dismissable={alert.dismissable}
+    >
+    </c-asdac-general-alert-cmp>
+  </template>
+  <template if:true={error}>
+    <c-asdac-general-alert-cmp
+      message={error}
+      variant="crisis"
+      placement="navigation"
+      dismissable
+    >
+    </c-asdac-general-alert-cmp>
+  </template>
+</template>

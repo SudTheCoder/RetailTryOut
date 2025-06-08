@@ -1,0 +1,48 @@
+.groceries {
+  --sds-c-button-line-height: 24px;
+  --sds-c-button-brand-text-color: #ffffff;
+  --sds-c-button-text-color: #ffffff;
+  --slds-c-button-brand-text-color-active: #ffffff;
+  --sds-c-button-brand-color-border: rgba(66, 66, 66, 0.984856);
+  --sds-c-button-brand-color-background-hover: rgba(66, 66, 66, 0.984856);
+  --sds-c-button-brand-color-border-hover: rgba(66, 66, 66, 0.984856);
+  --sds-c-button-brand-color-background-focus: rgba(66, 66, 66, 0.984856);
+  --sds-c-button-brand-color-border-focus: rgba(66, 66, 66, 0.984856);
+  --sds-c-button-brand-color-background-active: rgba(66, 66, 66, 0.984856);
+  --sds-c-button-brand-color-border-active: rgba(66, 66, 66, 0.984856);
+  --dxp-s-button-color: rgba(66, 66, 66, 0.984856);
+  --dxp-s-button-font-weight: 700;
+  --dxp-s-button-font-size: 19px;
+  --dxp-s-button-letter-spacing: 0.002em;
+}
+
+@media screen and (min-width: 1025px) {
+  .groceries {
+    width: 400px !important;
+  }
+}
+
+.help-section-style {
+  line-height: 24px;
+  font-size: 18px;
+  color: #3D3D3D;
+}
+
+li {
+  display: flex;
+}
+
+li::before {
+  content: '\2022\00a0';
+  padding-left: 0.52em;
+  padding-right: 0.4em;
+}
+
+:host {
+  --dxp-c-link-text-color: #0073B1;
+
+}
+
+.underlineLink {
+  text-decoration: underline !important;
+}

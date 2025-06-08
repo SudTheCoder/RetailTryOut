@@ -1,0 +1,70 @@
+<template>
+    <template if:true={isLoading}>
+		<lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+	</template>
+    <template if:false={isLoading}>
+        <div class="slds-card">
+            <div class="slds-card__header">
+                <h1 id="card-heading-01" class=" slds-hyphenate slds-text-heading_medium slds-text-align_center">Delivery Charge Refund Details
+                </h1>
+                <p class="slds-var-m-top_x-small slds-p-bottom_x-small slds-text-align_center slds-border_bottom">Please choose a reason for delivery charge refund to continue
+                </p>
+            </div>
+
+            <div class="slds-card__body slds-var-p-around_medium " id="card-content-id-1">
+                <br /><br />
+                <lightning-layout vertical-align="center" class="x-large">
+                    <lightning-layout-item flexibility="auto" padding="around-small">
+                        <div class="slds-box slds-clearfix">
+                            <strong class="slds-m-left_small">Payment Summary</strong>
+                            <br>
+                            <div class="slds-border_top slds-m-around_medium"></div>
+                            <span class="slds-m-left_small">Order Total(Original)</span>
+                            <span class="slds-float_right slds-m-right_x-small">{orderWrapper.currencyISOCode}<lightning-formatted-number value={orderWrapper.originalOrderTotal} minimum-fraction-digits="2"></lightning-formatted-number></span>
+                            <br>
+                            <div class="slds-border_top slds-m-around_medium"></div>
+                            <span class="slds-m-left_small">Order Total(Current)</span>
+                            <span class="slds-float_right slds-m-right_x-small">{orderWrapper.currencyISOCode}<lightning-formatted-number value={orderTotal} minimum-fraction-digits="2"></lightning-formatted-number>
+                            </span>
+                            <br>
+                            <div class="slds-border_top slds-m-around_medium"></div>
+                            <span class="slds-m-left_small">Delivery Charge(Original)</span>
+                            <span class="slds-float_right slds-m-right_x-small">{orderWrapper.currencyISOCode}{orderWrapper.originalDeliveryCharge}</span>
+                            <br>
+                            <div class="slds-border_top slds-m-around_medium"></div>
+                            <span class="slds-m-left_small">Delivery Charge(Refunded)</span>
+                            <span class="slds-float_right slds-m-right_x-small">{orderWrapper.currencyISOCode}{orderWrapper.deliveryChargeRefund}</span>
+                            <br>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" padding="around-small">
+                        <lightning-combobox placeholder="Select" label="Refund Type"
+                            name="refundType" options={refundTypes} class="oiTypeCls" value={selectedValue} onchange={handleTypeChange} disabled={isRefundTypeDisabled}>
+                        </lightning-combobox>
+                        <br>
+                        <lightning-combobox placeholder="Select" label="Reason"
+                            name="reason" options={refundReasons} class="oiReasonCls" onchange={handleReasonChange} required>
+                        </lightning-combobox>
+                        <br>
+                        <lightning-input type="text" class="oiAmountCls" data-totalfee={shippingFee} onchange={amountOnChange}
+                         label="Amount(£)" onblur={handleAmountChange} disabled={isAmountDisabled} maxlength="16" value={currentDeliveryCharge}>
+                        </lightning-input>
+                        <br>
+                        <lightning-textarea class="oiNotesCls" onchange={handleNotesChange}
+                        placeholder="Please write a note before submitting" label="Notes" required>
+                    </lightning-textarea>
+                    </lightning-layout-item>
+                </lightning-layout>
+            
+            </div>
+            <footer class=" slds-m-top_large slds-clearfix  slds-box slds-box_small slds-theme_shade">
+                <div class="slds-float_right">
+                <lightning-button variant="neutral" name="cancel" label="Cancel" title="Cancel"
+                    onclick={handleCancel} class="slds-var-m-left_x-small"></lightning-button>
+                <lightning-button variant="brand" name="submit" label="Submit" title="Submit"
+                    onclick={handleSubmit} class="slds-var-m-left_x-small"></lightning-button>
+                </div>
+            </footer>
+        </div>
+    </template>
+</template>

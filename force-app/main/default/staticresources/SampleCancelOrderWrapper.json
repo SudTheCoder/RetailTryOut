@@ -1,0 +1,24 @@
+{
+  "updateUser": "SFSC", 
+  "orgId": "ASDA",
+  "sellingChannel": "ASDA_GROCERIES",
+  "orderType": "  SalesOrder",
+  "orderId":"0000000020009",
+  "orderDate": null,
+  "partialFillAllowed": null,
+  "reason": "testing",
+  "orderLines": [
+    {
+      "orderLineId": 1,
+      "updateUser": "SFSC", 
+      "quantity": 5,
+      "partialFillAllowed": null  
+    },
+    {
+      "orderLineId": "2",
+      "updateUser": "SFSC", 
+      "quantity": 1,
+      "partialFillAllowed": null  
+    }
+  ]
+}

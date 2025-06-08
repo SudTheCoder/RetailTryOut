@@ -1,0 +1,201 @@
+<template>
+	<template if:true={isLoading}>
+		<lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+	</template>
+	<div>
+		<template if:false={isLoading}>
+			<div class="slds-card">
+				<div class="slds-card__header">
+					<h1 id="card-heading-01" class=" slds-hyphenate slds-text-heading_medium slds-text-align_center">
+						Partial Refund details
+					</h1>
+					<p class="slds-var-m-top_x-small slds-p-bottom_xx-small slds-text-align_center slds-border_bottom">
+						Please choose a reason for Partial Refund to continue
+					</p>
+					<div> </div>
+				</div>
+				<div class="slds-card__body slds-var-p-around_xxx-small" id="modal-content-id-1"
+					style="margin-top:-15px; max-height: 350px; overflow: auto">
+					<br /><br />
+					<div>
+					    <div if:true={showRefundLimitExceededMessage}>
+							<div class="slds-p-bottom_x-small slds-align_absolute-center refundLimitErrorMsg">{partialRefundLimitExceedMessage}</div>
+						</div>
+						<template if:true={moreThanOne}>
+							<div class="slds-grid slds-grid_align-space"
+								style="border-style: none; background-color: #e6eced;">
+								<div class="slds-col slds-size_2-of-12 slds-m-around_xxx-small slds-align-middle">
+									<lightning-input type="checkbox" name="applyToAll" class="applyAll"
+										label=" Apply to all" onchange={handleApplyAll}>
+									</lightning-input>
+								</div>
+								<div
+									class="slds-col slds-grid slds-size_9-of-12 slds-grid_vertical-align-center slds-grid_align-center">
+									<div class="slds-col slds-size_3-of-9 slds-m-around_x-small">
+										<lightning-combobox name="progress" placeholder="Choose" variant="label-hidden"
+											options={discountReasons} class="oiMultiReasonCls"
+											onchange={handleMultiReasonChange}>
+										</lightning-combobox>
+									</div>
+									<div class="slds-col slds-size_3-of-9 slds-m-around_x-small">
+										<lightning-input type="text" placeholder="Notes" class="oiMultiNotesCls"
+											onblur={handleMultiNotesChange} variant="label-hidden">
+										</lightning-input>
+									</div>
+								</div>
+							</div>
+						</template>
+						<table
+							class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered cTable"
+							aria-label="Discounted Items" aria-describedby="discounted items">
+							<thead>
+								<tr class="slds-hint-parent">
+									<th scope="col" class="slds-size_1-of-12">
+										<div>
+											<strong><label class="slds-form-element__label">Item ID</label></strong>
+										</div>
+									</th>
+									<th scope="col" class="slds-size_2-of-12">
+										<div>
+											<strong><label class="slds-form-element__label">Item name</label></strong>
+										</div>
+									</th>
+									<th scope="col" class="slds-size_1-of-12">
+										<div>
+											<strong><label class="slds-form-element__label">Qty/Wt</label></strong>
+										</div>
+									</th>
+									<th scope="col" class="slds-size_1-of-12">
+										<div>
+											<strong><label class="slds-form-element__label">Total price</label></strong>
+										</div>
+									</th>
+									<th scope="col" class="slds-size_1-of-12">
+										<div class="slds-cell-wrap">
+											<strong><label class="slds-form-element__label">Refund amount so
+													far</label></strong>
+										</div>
+									</th>
+									<th scope="col" class="slds-size_2-of-12">
+										<div>
+											<strong><label class="slds-form-element__label">Reason</label></strong>
+										</div>
+									</th>
+									<th scope="col" class="slds-size_2-of-12">
+										<div>
+											<strong><label class="slds-form-element__label">Notes</label></strong>
+										</div>
+									</th>
+									<th scope="col" class="slds-size_1-of-12">
+										<div>
+											<strong><label class="slds-form-element__label">Refund %</label></strong>
+										</div>
+									</th>
+									<th scope="col" class="slds-size_1-of-12">
+										<div class="slds-cell-wrap">
+											<strong><label class="slds-form-element__label">Refund
+													amount</label></strong>
+										</div>
+									</th>
+									<th scope="col" class="slds-size_1-of-12">
+										<div class="slds-cell-wrap">
+											<strong><label class="slds-form-element__label">Updated line
+													amount</label></strong>
+										</div>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<template for:each={discountedItems} for:item="discItem" for:index="index">
+									<tr key={discItem.lineId} data-id={discItem.lineId} class="slds-scrollable">
+										<td style="padding: -4px">
+											<div class="slds-truncate slds-cell-wrap">{discItem.productId}</div>
+										</td>
+										<td>
+											<div class="slds-truncate slds-cell-wrap">{discItem.productDescription}</div>
+										</td>
+										<td>
+											<div class="slds-truncate">
+												<lightning-combobox options={discItem.qtyOptions} value={discItem.selectedQty} variant="label-hidden" disabled={discItem.disabledCombobox} onchange={handleQuantityChange} data-index={index}></lightning-combobox>
+											</div>
+										</td>
+										<td>
+											<div class="slds-truncate">{poundSymbol}<lightning-formatted-number value={discItem.totalPrice} minimum-fraction-digits="2" ></lightning-formatted-number></div>
+										</td>
+										<td>
+											<div class="slds-truncate">{poundSymbol}<lightning-formatted-number value={discItem.refundedAmountSoFar} minimum-fraction-digits="2" ></lightning-formatted-number></div>
+										</td>
+
+										<td>
+											<div class="itemReason">
+												<lightning-combobox placeholder="Choose" variant="label-hidden"
+													name="oiReason" options={discountReasons}
+													class="oiReasonCls combobox" data-id={discItem.lineId}
+													onchange={handleReasonChange}>
+												</lightning-combobox>
+											</div>
+										</td>
+										<td>
+											<div class="slds-truncate">
+												<lightning-input type="text" class="oiNotesCls"
+													data-id={discItem.lineId} placeholder="Notes"
+													variant="label-hidden">
+												</lightning-input>
+											</div>
+										</td>
+										<td>
+											
+											<div class="slds-truncate refundPercentage">
+												<lightning-combobox placeholder="Choose" variant="label-hidden"
+													data-line-total={discItem.lineTotal} name="oiType"
+													options={refundPercentage} class="oiPercentageCls refund-combobox"
+													data-id={discItem.lineId} value={defaultPercentage} 
+													data-total-price={discItem.totalPrice}
+													data-percent-index={index}
+													onchange={handleRefundPercentageChange}>
+												</lightning-combobox>
+												<template if:true={discItem.isEscalated}>
+													<div class="escalate isEscl">Escalate</div>
+												</template>
+											</div>
+										</td>
+										<td>
+											<div class="slds-truncate" style="position: relative;">
+												<span style="position: absolute; top: 7px; z-index:2; left: 13px;">{poundSymbol}</span>
+												<lightning-input type="text" class="oiRefundAmt"
+													data-id={discItem.lineId} placeholder=""
+													onchange={handleRefundAmtChange} data-line-total={discItem.lineTotal}
+													data-total-price={discItem.totalPrice} variant="label-hidden" data-val={discItem.discountValue} value={discItem.discountValue} style="white-space: pre-wrap; --lwc-spacingSmall: 20px; z-index:1;">
+												</lightning-input>
+											</div>
+										</td>
+										<td>
+											<div class="slds-truncate oiupdatedLineAmt" data-id={discItem.lineId}
+											data-line-total={discItem.lineTotal} data-total-price={discItem.totalPrice}>
+													{discItem.updatedLineAmount}
+											</div>
+										</td>
+									</tr>
+								</template>
+							</tbody>
+						</table>
+					</div>
+					<br>
+					<div>
+						<div class="slds-float_right slds-border_top slds-m-top_xx-small" style="font-weight: bold">
+							TOTAL REFUND: {poundSymbol}{totalRefund}
+						</div>
+					</div>
+				</div>
+				<footer class=" slds-m-top_large slds-clearfix  slds-box slds-box_small slds-theme_shade">
+					<div class="slds-float_right">
+						<lightning-button variant="neutral" name="cancel" label="Cancel" title="Cancel"
+							onclick={handleCancel} class="slds-var-m-left_x-small"></lightning-button>
+						<lightning-button variant="brand" name="submit" label="Submit" title="Submit"
+							onclick={handleSubmit} disabled={disableSubmit} class="slds-var-m-left_x-small"></lightning-button>
+					</div>
+				</footer>
+			</div>
+		</template>
+	</div>
+</template>

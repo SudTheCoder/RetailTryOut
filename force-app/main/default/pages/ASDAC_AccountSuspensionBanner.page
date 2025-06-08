@@ -1,0 +1,38 @@
+<apex:page standardController="Account" extensions="ASDAC_AccountBanner">
+     
+    <style>
+        html {
+            overflow: hidden;
+        }
+        .suspended-reason {
+            font-size: 36px;
+            color: rgb(255, 0, 0);
+             background-color: rgb(255, 255, 255);
+	         font-weight: bold;
+        }
+        .suspension-date {
+           font-size: 14px;
+           color: rgb(0, 0, 0);
+	       text-align: center;
+           display: block;
+        }
+        .suspended-reason-container{
+          text-align: center;
+        }
+        
+    </style>
+     
+        <div class="suspended-reason-container">
+        <span class="suspended-reason">{!$Label.AccountSuspendLabel} 
+            <apex:outputText value="{!IF(ISBLANK(Account.SuspensionReason__c), '', ' (' + accObj.SuspensionReason__c + ')')}"/>
+        </span>
+        </div>
+        <br/>
+       <apex:outputPanel rendered="{!NOT(ISBLANK(SuspendedDateFormatted))}">
+        <span class="suspension-date">
+       {!$Label.AccountSuspendedDateLabel} {!SuspendedDateFormatted}
+        
+        </span>
+        </apex:outputPanel>
+    
+</apex:page>

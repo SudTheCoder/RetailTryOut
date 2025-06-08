@@ -1,0 +1,74 @@
+<template>
+    <lightning-layout>
+        <lightning-layout-item size="12">
+            <table aria-describedby="mywebform">
+                <thead>
+                    <tr>
+                        <th scope="col" class="slds-size_1-of-5 slds-p-left_small">
+                            <div class="slds-truncate"><span class="orderrequired">* </span>{orderNumberLabel}</div>
+                        </th>
+                        <th scope="col" class="slds-size_1-of-5 slds-p-left_small">
+                            <div class="slds-truncate"><span class="orderrequired">* </span>{orderDateLabel}</div>
+                        </th>
+                        <th scope="col" class="slds-size_1-of-5 slds-p-left_small">
+                            <div class="slds-truncate"><span class="orderrequired">* </span>{orderValueLabel}</div>
+                        </th>
+                        <th scope="col" class="slds-size_1-of-5 slds-p-left_small">
+                            <div class="slds-truncate"><span class="orderrequired">* </span>{labels.DELIVERYPASSLABEL}</div>
+                        </th>
+                        <th scope="col" class="slds-size_1-of-5 slds-p-left_small">
+                         
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="slds-table" for:each={_orders} for:item="order" for:index="index" key={order.id}>
+                    <tr>
+                        <td>
+                            <template if:false={hasDisableOrderNumberValidationPermission}>
+                                <lightning-input type="text" name="order-number" data-index={index} value={order.number} onchange={handleChange} class="large-textbox ordernumber" required variant="label-hidden" pattern="^\d{13,14}$" message-when-pattern-mismatch="Please check the order format"></lightning-input>
+                            </template>
+                            <template if:true={hasDisableOrderNumberValidationPermission}>
+                                <lightning-input type="text" name="order-number" data-index={index} value={order.number} onchange={handleChange} class="large-textbox ordernumber" required variant="label-hidden"></lightning-input>
+                            </template>
+                        </td>
+                        <td>
+                            <lightning-input type="date" name="order-date" data-index={index} value={order.date} onchange={handleChange} max={todaysDate} date-style="short"  class="large-textbox orderdate" required variant="label-hidden"></lightning-input>
+                        </td>
+                        <td>
+                            <lightning-input type="number" formatter="currency" step = "any" name="order-value" data-index={index} value={order.value} onchange={handleChange} class="large-textbox ordervalue" min="0.1" required variant="label-hidden"></lightning-input>
+                        </td>
+                        <td>
+                                    <lightning-combobox
+                                        name="order-deliveryPassOrder"
+                                        value={order.deliveryPassOrder}
+                                        options={deliveryPassOptions}
+                                        data-index={index}
+                                        onchange={handleChange}
+                                        class="deliverypassorder"
+                                        required
+                                        data-id={order.id}
+                                        variant="label-hidden"
+                                    ></lightning-combobox>
+                                    <template if:true={order.deliveryPassOrderErrorMsg}>
+                                        <div style="color: #c23934; font-size:0.75rem;" class="slds-m-left_xx-small">{labels.DELIVERYPASSERRORMSG}</div> 
+                                        </template>
+                        </td>
+                        <td>
+                            <div class="slds-p-top_xx-small" if:true={order.removable}>
+                                <lightning-button-icon icon-name="utility:delete" data-index={index}
+                                    onclick={removeOrder}>
+                                </lightning-button-icon>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="slds-p-around_small">
+                <button class="button-text slds-button slds-button_brand" onclick={addOrder}
+                    disabled={disableAddOrders}>
+                    Add another Order
+                </button>
+            </div>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

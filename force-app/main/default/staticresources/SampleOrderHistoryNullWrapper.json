@@ -1,0 +1,21 @@
+{
+    "totalCount": 1,
+    "count": 1,
+    "startIndex": 1,
+    "data": [
+        {
+            "orderId": "AP-202205160031",
+            "orderDate": null,
+            "updateTime": null,
+            "sellingChannel": "GEORGE.COM",
+            "numberOfItems": "1",
+            "orderStatus": "SHIPPED",
+            "orderFulfilmentType": "DELIVERY",
+			"fulfillmentType": "GHS_DELIVERY",
+			"fulfillmentService": "STANDARD",
+			"storeAddress": "4401-Leeds HSC",
+			"totalAmount": null,
+			"deliveryDate":null
+        }
+    ]
+}

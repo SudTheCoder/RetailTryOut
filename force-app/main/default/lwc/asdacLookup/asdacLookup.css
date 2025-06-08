@@ -1,0 +1,53 @@
+:host {
+  --slds-c-input-spacing-horizontal-end: 2rem;
+  --slds-c-input-spacing-horizontal-start: 1rem;
+  --dxp-g-spacing-medium: 0;
+}
+
+.lookup-option-button {
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: start;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #3d3d3d;
+}
+
+.search-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  --sds-c-button-radius-border: 0px 4px 4px 0px;
+  --slds-c-button-color-background: rgb(83, 131, 22);
+  --slds-c-button-color-background-hover: rgb(83, 131, 22);
+  --slds-c-button-color-background-active: rgb(83, 131, 22);
+  --slds-c-button-color-border: rgb(83, 131, 22);
+  --slds-c-button-color-border-hover: rgb(83, 131, 22);
+  --slds-c-button-color-border-active: rgb(83, 131, 22);
+  --slds-c-icon-color-foreground: white;
+  --dxp-g-neutral-3: white;
+  zoom: 123%;
+}
+
+.searchtext {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #767676;
+  height: 40px;
+}
+
+.searchresult {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 22px;
+  color: #3d3d3d;
+  padding-left: 0.25rem;
+}
+
+.search-result-focus {
+  background-color: #e5e5e5;
+  cursor: pointer;
+}

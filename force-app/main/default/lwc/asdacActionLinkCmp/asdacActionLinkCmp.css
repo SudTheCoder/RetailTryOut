@@ -1,0 +1,8 @@
+:host {
+  --dxp-c-link-text-color: #3D3D3D;
+  --dxp-s-link-text-decoration-hover: "none";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  display: inline-flex;
+}

@@ -1,0 +1,22 @@
+tfoot {
+    border-top: solid rgb(180, 179, 179) 1px; 
+  }
+  .icon-container {
+    background-color: red;
+    border-radius: 50%;
+    height: 1rem;
+    width: 1.3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.custom-th-width {
+  width: 25px;  
+  overflow: hidden;  
+}
+.padding-td{
+  padding-left: 50px;
+}
+.overflow-wrap{
+  white-space: normal;
+}

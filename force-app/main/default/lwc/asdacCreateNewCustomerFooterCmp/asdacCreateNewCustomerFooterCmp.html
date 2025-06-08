@@ -1,0 +1,24 @@
+<!--/*************************************************************************
+Name: asdacCreateNewCustomerFooterCmp
+===============================================================================
+Req: 
+ASDAC-895 No Results Returned from Search / Create New Customer Account
+ASDAC-892 Customer Account Creation Duplication Checks
+===============================================================================
+Purpose: This LWC Component is built to show Footer for lightning:overlayLibrary
+         in ASDAC_CustomerSearchCmp Aura.
+===============================================================================
+History                                                                                                                       
+VERSION   AUTHOR                DATE         	DETAIL
+1.0       Nitish Yadav    		06 July 2022    Initial Development
+******************************************************************************/-->
+<template>
+    <lightning-button variant="brand" name="cancel" label="Cancel" onclick={handleClick} class="slds-var-p-around_medium"></lightning-button>
+    <lightning-button variant="brand" name="submit" label="Submit" onclick={handleClick} disabled={showCreateNewAndResetButton} class="slds-var-p-around_medium"></lightning-button>
+    <template if:true={showCreateNew}>
+        <lightning-button variant="brand" name="createnew" label="Create New" onclick={handleClick} class="slds-var-p-around_medium"></lightning-button>
+    </template>
+    <template if:true={showModifyInputs}>
+        <lightning-button variant="brand" name="update" label="Modify Inputs" onclick={handleClick} class="slds-var-p-around_medium"></lightning-button>
+    </template>
+</template>
